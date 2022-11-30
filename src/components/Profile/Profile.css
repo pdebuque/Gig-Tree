@@ -1,12 +1,14 @@
 .profile-main {
     padding: 2rem;
-    outline: 1px solid red;
+    margin: 0 10%;
+    height: 80vh;
 }
 
 .profile-header {
     display: flex;
     align-items: flex-end;
-    margin-bottom: 1rem;
+    margin: .5rem;
+    padding: 1rem;
 }
 
 .prof-pic {
@@ -25,6 +27,16 @@ h1 {
     grid-template-columns: 30% 70%;
 }
 
-.temp-col {
-    outline: 1px solid red;
+.profile-projects {
+    padding: 1rem;
+    margin: .5rem;
+}
+
+.profile-cal {
+    padding: 1rem;
+    margin: .5rem;
+}
+
+.calendar {
+    height: 28rem;
 }
