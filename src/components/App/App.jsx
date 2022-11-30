@@ -2,6 +2,7 @@ import CreateProject from '../CreateProject/CreateProject';
 import DisplayProjects from '../DisplayProjects/DisplayProjects';
 import './App.css';
 
+
 function App() {
   return (
     <main>
