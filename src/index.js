@@ -5,8 +5,9 @@ import App from './components/App/App';
 import { Provider } from 'react-redux';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import logger from 'redux-logger';
+import { BrowserRouter } from 'react-router-dom'
 
-const temp = (state='', action) =>{
+const temp = (state = '', action) => {
   return state
 }
 
@@ -19,7 +20,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </Provider>
   </React.StrictMode>
 );

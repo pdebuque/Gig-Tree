@@ -1,7 +1,11 @@
 import { Button, AppBar, Box, Toolbar, Typography, IconButton } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu'
+import MenuIcon from '@mui/icons-material/Menu';
+import { useNavigate } from 'react-router-dom';
 
 export default function Nav() {
+
+    const navigate = useNavigate();
+
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
@@ -18,9 +22,9 @@ export default function Nav() {
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                         Gig manager
                     </Typography>
-                    <Button color="inherit">Create Project</Button>
-                    <Button color="inherit">My Projects</Button>
-                    <Button color="inherit">Login</Button>
+                    <Button color="inherit" onClick = {()=>navigate('/create')}>Create Project</Button>
+                    <Button color="inherit" onClick = {()=>navigate('/display')}>My Projects</Button>
+                    <Button color="inherit" onClick = {()=>navigate('/login')}>Login</Button>
                 </Toolbar>
             </AppBar>
         </Box>
