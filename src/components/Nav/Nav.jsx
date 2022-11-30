@@ -22,6 +22,7 @@ export default function Nav() {
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                         Gig manager
                     </Typography>
+                    <Button color="inherit" onClick = {()=>navigate('/profile')}>My Profile</Button>
                     <Button color="inherit" onClick = {()=>navigate('/create')}>Create Project</Button>
                     <Button color="inherit" onClick = {()=>navigate('/display')}>My Projects</Button>
                     <Button color="inherit" onClick = {()=>navigate('/login')}>Login</Button>
