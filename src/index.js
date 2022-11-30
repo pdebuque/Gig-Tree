@@ -6,8 +6,12 @@ import { Provider } from 'react-redux';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import logger from 'redux-logger';
 
-const store = createStore(combineReducers({
+const temp = (state='', action) =>{
+  return state
+}
 
+const store = createStore(combineReducers({
+  temp
 }), applyMiddleware(logger)
 );
 
