@@ -25,6 +25,7 @@ export default function Nav() {
                     <Button color="inherit" onClick = {()=>navigate('/profile')}>My Profile</Button>
                     <Button color="inherit" onClick = {()=>navigate('/create')}>Create Project</Button>
                     <Button color="inherit" onClick = {()=>navigate('/display')}>My Projects</Button>
+                    <Button color="inherit" onClick = {()=>navigate('/about')}>About</Button>
                     <Button color="inherit" onClick = {()=>navigate('/login')}>Login</Button>
                 </Toolbar>
             </AppBar>
