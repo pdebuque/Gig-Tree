@@ -1,0 +1,42 @@
+.profile-main {
+    padding: 2rem;
+    margin: 0 10%;
+    height: 80vh;
+}
+
+.profile-header {
+    display: flex;
+    align-items: flex-end;
+    margin: .5rem;
+    padding: 1rem;
+}
+
+.prof-pic {
+    height: 100px;
+}
+
+h1 {
+    margin: 0 1rem;
+    font-size: 3rem;
+}
+
+/* ------------------- PROFILE DATA --------------- */
+
+.profile-data {
+    display: grid;
+    grid-template-columns: 30% 70%;
+}
+
+.profile-projects {
+    padding: 1rem;
+    margin: .5rem;
+}
+
+.profile-cal {
+    padding: 1rem;
+    margin: .5rem;
+}
+
+.calendar {
+    width: 100%;
+}
