@@ -7,8 +7,9 @@ import Home from '../Home/Home'
 import CreateProject from '../CreateProject/CreateProject';
 import DisplayProjects from '../DisplayProjects/DisplayProjects';
 import Nav from '../Nav/Nav';
-import Profile from '../Profile/Profile'
+import Profile from '../Profile/Profile';
 import Login from '../Login/Login';
+import About from '../About/About';
 import './App.css';
 
 //styles
@@ -25,6 +26,7 @@ function App() {
         <Route exact path='/create' element={<CreateProject />}> </Route>
         <Route exact path='/display' element={<DisplayProjects />}></Route>
         <Route exact path='/login' element={<Login />}></Route>
+        <Route exact path='/about' element = {<About />}></Route>
       </Routes>
     </ThemeProvider>
   );
