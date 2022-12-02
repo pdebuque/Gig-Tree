@@ -14,9 +14,7 @@ export default function About() {
             <Grid container spacing={2}>
                 <Grid item>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat maiores quas natus doloremque esse, dolorem saepe omnis repellendus odit odio sunt atque vitae totam dignissimos a blanditiis nemo est quisquam?
                     Reprehenderit adipisci optio dolorum quod iste distinctio atque, iure nostrum temporibus pariatur, esse ea soluta totam perferendis quisquam porro maiores incidunt repellendus. Optio sint eligendi modi maxime, ad debitis. Explicabo.
-                    Fugiat porro temporibus deserunt iste officia ab inventore eligendi natus quo incidunt, praesentium adipisci, vero aliquid illum nisi! Nam dolorum esse numquam asperiores, sunt quo expedita natus architecto nulla unde.
-                    Placeat facilis, beatae repellat illum id a quam corporis eveniet, voluptas neque ullam, dolor totam ab iste hic voluptates qui consequatur non nihil. Soluta saepe magnam illum rem eos! Maxime!
-                    Sequi quia cum nihil, doloribus mollitia architecto! Placeat in laudantium qui facilis harum nam, tempore, soluta non voluptatem blanditiis praesentium incidunt neque, doloribus odit ullam! Deleniti corrupti temporibus ullam adipisci?</Grid>
+                    Fugiat porro temporibus deserunt iste officia ab inventore eligendi natus quo incidunt, praesentium adipisci, vero aliquid illum nisi! Nam dolorum esse numquam asperiores, sunt quo expedita natus architecto nulla unde.</Grid>
                 <Grid item xs={4}>
                     <Box sx={{ ml: 2 }}>
                         <h3>technologies</h3>
