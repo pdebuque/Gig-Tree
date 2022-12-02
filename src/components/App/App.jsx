@@ -1,7 +1,6 @@
 // react router
 import { Routes, Route } from 'react-router-dom';
 
-
 // component import
 import Home from '../Home/Home'
 import CreateProject from '../CreateProject/CreateProject';
@@ -21,12 +20,12 @@ function App() {
     <ThemeProvider theme={theme}>
       <Nav />
       <Routes>
-        <Route exact path='/' element={<Home />}></Route>
-        <Route exact path = '/profile' element = {<Profile />}></Route> 
-        <Route exact path='/create' element={<CreateProject />}> </Route>
-        <Route exact path='/display' element={<DisplayProjects />}></Route>
-        <Route exact path='/login' element={<Login />}></Route>
-        <Route exact path='/about' element = {<About />}></Route>
+        <Route path='/' element={<Home />}></Route>
+        <Route path = '/profile' element = {<Profile />}></Route> 
+        <Route path='/create' element={<CreateProject />}> </Route>
+        <Route path='/display' element={<DisplayProjects />}></Route>
+        <Route path='/login' element={<Login />}></Route>
+        <Route path='/about' element = {<About />}></Route>
       </Routes>
     </ThemeProvider>
   );

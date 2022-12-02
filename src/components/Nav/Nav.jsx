@@ -8,7 +8,8 @@ export default function Nav() {
 
     const navigate = useNavigate();
 
-    const [openSidebar, setOpen] = useState(false)
+    const [openSidebar, setOpen] = useState(false);
+
     const toggleSidebar = () => {
         console.log('in toggleSidebar');
         setOpen(!openSidebar);
@@ -33,14 +34,13 @@ export default function Nav() {
                         Gig manager
                     </Typography>
                     <Button color="inherit" onClick={() => navigate('/profile')}>My Profile</Button>
-                    <Button color="inherit" onClick={() => navigate('/create')}>Create Project</Button>
-                    <Button color="inherit" onClick={() => navigate('/display')}>My Projects</Button>
                     <Button color="inherit" onClick={() => navigate('/about')}>About</Button>
                     <Button color="inherit" onClick={() => navigate('/login')}>Login</Button>
                 </Toolbar>
             </AppBar>
             <Sidebar
                 openSidebar={openSidebar}
+                setOpen = {setOpen}
             />
         </Box>
     )
