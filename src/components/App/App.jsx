@@ -19,6 +19,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Nav />
+      <main className = 'main-content'>
       <Routes>
         <Route path='/' element={<Home />}></Route>
         <Route path = '/profile' element = {<Profile />}></Route> 
@@ -27,6 +28,7 @@ function App() {
         <Route path='/login' element={<Login />}></Route>
         <Route path='/about' element = {<About />}></Route>
       </Routes>
+      </main>
     </ThemeProvider>
   );
 }

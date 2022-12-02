@@ -9,13 +9,14 @@ export default function Profile() {
         <div className="profile-main">
             <Paper
                 elevation={3}
-                className="profile-header">
+                className="profile-header"
+            >
                 <img className="prof-pic" src='./prof-images/Paolo-prof-pic.png' alt="my profile pic" />
                 <h1>Paolo Debuque</h1>
 
             </Paper >
             <div className="profile-data">
-                <Paper 
+                <Paper
                     elevation={3}
                     className="profile-projects">
                     <h2>My Projects</h2>
@@ -24,10 +25,10 @@ export default function Profile() {
                     <ProfileProject />
                     <ProfileProject />
                 </Paper>
-                <Paper 
+                <Paper
                     elevation={3} className="profile-cal">
                     <h2>My Calendar</h2>
-                    <img className = "calendar" src="./assets/calendar.png" alt="calendar" />
+                    <img className="calendar" src="./assets/calendar.png" alt="calendar" />
                 </Paper>
                 {/* first column: list of projects */}
 
