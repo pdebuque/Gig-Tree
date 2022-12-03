@@ -1,18 +1,37 @@
-/* Profile project contains info for each project. collapse component shows more info */
-import { useState } from 'react'
-import { Collapse, Button } from '@mui/material'
+/* Profile project contains info for each project. collapse component shows more info 
 
-export default function ProfileProject() {
+currently, project data looks like 
+    {
+        id: 2,
+        name: 'Requiem',
+        ensemble: '',
+        location: 'Hamline University Methodist Church',
+        owner: 'Paolo Debuque'
+    }
+
+*/
+
+import { useState } from 'react'
+import { Collapse, Button, Link } from '@mui/material'
+
+export default function ProfileProject({project}) {
     const [collapsed, setCollapsed] = useState(true)
     return (
         <div>
-            <span className="prof-proj-name">Project Name</span> with <span className="prof-proj-ens">ensemble</span>
+            <Link
+                onClick={() => alert('eventually, link to the project page')}
+            >{project.name}</Link> with&nbsp; 
+            <Link
+                onClick={() => alert('eventually, link to ensemble page')}
+            >{project.ensemble}</Link>
             <Button
+                sx={{ maxWidth: 2, ml: 2 }}
+                size='small'
                 variant='outlined'
-                color="secondary"
+                color="inherit"
                 onClick={() => setCollapsed(!collapsed)}
             >
-                see more</Button>
+                +</Button>
             <Collapse
                 in={!collapsed}
             >rehearsal, rehearsal, rehearsal</Collapse>

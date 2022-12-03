@@ -14,6 +14,7 @@ export default function ProfileInfo() {
 
     return (
         <div className="profile-data">
+            {JSON.stringify(projects)}
             <Grid container spacing={2}>
                 <Grid item xs={8}>
                     <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
@@ -43,7 +44,7 @@ export default function ProfileInfo() {
                         </TabPanel>
                         <TabPanel value={tabValue} index={2}>
                             {/* eventually: collaborators.map(collaborator=>return(<profilecollaborator collaborator = {collaborator}/>)) */}
-                            COLLABORATORS
+                            {JSON.stringify(collaborators)}
                         </TabPanel>
                     </Paper>
                 </Grid>
