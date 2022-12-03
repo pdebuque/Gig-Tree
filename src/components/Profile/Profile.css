@@ -3,17 +3,17 @@
     margin: 0 10%;
     height: 80vh;
 } */
-
+/* 
 .profile-header {
     display: flex;
     align-items: flex-end;
     margin: .5rem;
     padding: 1rem;
-}
+} */
 
-.prof-pic {
+/* .prof-pic {
     height: 100px;
-}
+} */
 
 h1 {
     margin: 0 1rem;
@@ -26,7 +26,7 @@ h1 {
     display: grid;
     grid-template-columns: 30% 70%;
 } */
-
+/* 
 .profile-projects {
     padding: 1rem;
     margin: .5rem;
@@ -39,4 +39,4 @@ h1 {
 
 .calendar {
     width: 100%;
-}
+} */

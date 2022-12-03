@@ -19,13 +19,22 @@ import ProfileHeader from './ProfileHeader/ProfileHeader';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
 import './Profile.css';
 import { Paper } from '@mui/material'
+import {useState} from 'react'
 
 
 export default function Profile() {
+
+    const [tabValue,setTab] = useState(0);
+
     return (
         <div className="profile-main">
-            <ProfileHeader />
-            <ProfileInfo />
+            <ProfileHeader 
+                tabValue = {tabValue}
+                setTab = {setTab}
+            />
+            <ProfileInfo 
+                tabValue = {tabValue}
+            />
         </div >
     )
 }

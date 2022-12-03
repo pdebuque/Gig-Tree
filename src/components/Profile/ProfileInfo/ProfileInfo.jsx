@@ -5,35 +5,33 @@ import { useState } from 'react';
 import TabPanel from '../TabPanel/TabPanel';
 import { projects, collaborators } from './temp-prof-info';
 
-export default function ProfileInfo() {
+export default function ProfileInfo({tabValue}) {
 
-    const [tabValue, setTab] = useState(0)
-    const changeTab = (e, value) => {
-        setTab(value);
-    }
+    // const [tabValue, setTab] = useState(0)
+    // const changeTab = (e, value) => {
+    //     setTab(value);
+    // }
 
     return (
         <div className="profile-data">
-            {JSON.stringify(projects)}
-            <Grid container spacing={2}>
-                <Grid item xs={8}>
-                    <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+            {/* {JSON.stringify(projects)} */}
+                    {/* <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                         <Tabs
                             value={tabValue}
                             onChange={changeTab}
                         >
-                            <Tab label="all" />
+                            <Tab label="about" />
                             <Tab label="projects" />
                             <Tab label="collaborators" />
                         </Tabs>
 
-                    </Box>
+                    </Box> */}
 
                     <Paper
                         elevation={1}
                     >
                         <TabPanel value={tabValue} index={0}>
-                            hello
+                            about
                         </TabPanel>
                         <TabPanel value={tabValue} index={1}>
                             {projects.map(project => {
@@ -47,8 +45,7 @@ export default function ProfileInfo() {
                             {JSON.stringify(collaborators)}
                         </TabPanel>
                     </Paper>
-                </Grid>
-            </Grid>
+                
 
 
         </div>
