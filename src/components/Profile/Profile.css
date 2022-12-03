@@ -22,10 +22,10 @@ h1 {
 
 /* ------------------- PROFILE DATA --------------- */
 
-.profile-data {
+/* .profile-data {
     display: grid;
     grid-template-columns: 30% 70%;
-}
+} */
 
 .profile-projects {
     padding: 1rem;
