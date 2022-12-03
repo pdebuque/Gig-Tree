@@ -31,7 +31,7 @@ export default function Nav() {
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                        Gig manager
+                        gig tree
                     </Typography>
                     <Button color="inherit" onClick={() => navigate('/profile')}>My Profile</Button>
                     <Button color="inherit" onClick={() => navigate('/about')}>About</Button>
