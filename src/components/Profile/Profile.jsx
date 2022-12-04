@@ -22,17 +22,19 @@ import { Paper } from '@mui/material'
 import {useState} from 'react'
 
 
-export default function Profile() {
+export default function Profile({user}) {
 
     const [tabValue,setTab] = useState(0);
 
     return (
         <div className="profile-main">
             <ProfileHeader 
+                user = {user}
                 tabValue = {tabValue}
                 setTab = {setTab}
             />
             <ProfileInfo 
+                user = {user}
                 tabValue = {tabValue}
             />
         </div >
