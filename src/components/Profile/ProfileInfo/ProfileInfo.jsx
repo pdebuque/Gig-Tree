@@ -1,11 +1,10 @@
-import { Paper, Box, Tabs, Tab, Typography } from '@mui/material';
-import { Grid } from '@mui/material'
+import { Paper, Box, Tabs, Tab, Typography, Grid } from '@mui/material';
 import ProfileProject from '../ProfileProject/ProfileProject';
 import { useState } from 'react';
 import TabPanel from '../TabPanel/TabPanel';
 import { projects, collaborators } from './temp-prof-info';
 
-export default function ProfileInfo({tabValue}) {
+export default function ProfileInfo({ tabValue }) {
 
     // const [tabValue, setTab] = useState(0)
     // const changeTab = (e, value) => {
@@ -15,7 +14,7 @@ export default function ProfileInfo({tabValue}) {
     return (
         <div className="profile-data">
             {/* {JSON.stringify(projects)} */}
-                    {/* <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+            {/* <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                         <Tabs
                             value={tabValue}
                             onChange={changeTab}
@@ -27,9 +26,16 @@ export default function ProfileInfo({tabValue}) {
 
                     </Box> */}
 
-                    <Paper
-                        elevation={1}
-                    >
+            <Paper
+                elevation={1}
+                sx={{ mt: 2}}
+            >
+                <Grid container spacing={1} >
+                    <Grid item xs={3}>
+                        
+                        
+                        placeholder</Grid>
+                    <Grid itm xs={9}>
                         <TabPanel value={tabValue} index={0}>
                             about
                         </TabPanel>
@@ -44,8 +50,10 @@ export default function ProfileInfo({tabValue}) {
                             {/* eventually: collaborators.map(collaborator=>return(<profilecollaborator collaborator = {collaborator}/>)) */}
                             {JSON.stringify(collaborators)}
                         </TabPanel>
-                    </Paper>
-                
+                    </Grid>
+                </Grid>
+            </Paper>
+
 
 
         </div>
