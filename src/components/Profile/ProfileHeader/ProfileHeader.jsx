@@ -21,7 +21,10 @@ export default function ProfileHeader({tabValue, setTab}) {
                         <h2 className='name'>Paolo Debuque</h2>
                         <p className='subtitle'>conductor, tenor</p>
                     </div>
-                    <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                    <Box 
+                        sx={{ borderBottom: 1, borderColor: 'divider' }}
+                        className="tabs-container"
+                        >
                         <Tabs
                             value={tabValue}
                             onChange={(e,value)=>setTab(value)}
