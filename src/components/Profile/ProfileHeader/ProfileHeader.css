@@ -64,6 +64,7 @@ breakpoints:
 .prof-pic {
     height: 20vw;
     max-height: 200px;
+    border-radius: 50%;
 }
 
 .prof-name-subtitle {

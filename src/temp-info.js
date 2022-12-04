@@ -44,7 +44,7 @@ const _collaborators = [
     },
     {
         id: 2,
-        collabs: 15, 
+        collabs: 15,
         name: 'Scarlett Johannsen',
         instrument: 'Black Widow',
         prof_pic: 'images/prof-pics/scarjo.jpeg'
@@ -74,10 +74,56 @@ const _collaborators = [
         id: 6,
         collabs: 6,
         name: 'Abel Selacoe',
-        instrument: 'Cellist', 
+        instrument: 'Cellist',
         prof_pic: 'images/prof-pics/abel-selacoe.jpeg'
+    }
+]
+
+const _users = [
+    {
+        id: 0,
+        name: 'Paolo Debuque',
+        instrument: 'Conductor, Tenor',
+        prof_pic: '/images/prof-pics/Paolo-prof-pic.png'
+    },
+    {
+        id: 1,
+        name: 'Jason Momoa',
+        instrument: 'Aquaman',
+        prof_pic: '/images/prof-pics/jason-momoa.jpeg'
+    },
+    {
+        id: 2,
+        name: 'Scarlett Johannsen',
+        instrument: 'Black Widow',
+        prof_pic: '/images/prof-pics/scarjo.jpeg'
+    },
+    {
+        id: 3,
+        name: 'Chadwick Boseman',
+        instrument: 'Black Panther',
+        prof_pic: '/images/prof-pics/chadwick-boseman.jpeg'
+    },
+    {
+        id: 4,
+        name: 'Gustav Mahler',
+        instrument: 'Conductor, Composer',
+        prof_pic: '/images/prof-pics/gustav-mahler.jpeg'
+    },
+    {
+        id: 5,
+        name: 'Yuja Wang',
+        instrument: 'Pianist',
+        prof_pic: '/images/prof-pics/yuja-wang.jpeg'
+    },
+    {
+        id: 6,
+        name: 'Abel Selacoe',
+        instrument: 'Cellist',
+        prof_pic: '/images/prof-pics/abel-selacoe.jpeg'
     }
 ]
 
 export { _projects as projects };
 export { _collaborators as collaborators }
+export { _users as users }

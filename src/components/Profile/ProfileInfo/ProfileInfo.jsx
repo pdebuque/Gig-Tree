@@ -2,7 +2,7 @@ import { Paper, Box, Tabs, Tab, Typography, Grid } from '@mui/material';
 import ProfileProject from '../ProfileProject/ProfileProject';
 import { useState } from 'react';
 import TabPanel from '../TabPanel/TabPanel';
-import { projects, collaborators } from './temp-prof-info';
+import { projects, collaborators } from '../../../temp-info';
 import Collaborator from '../Collaborator/Collaborator';
 import './ProfileInfo.css'
 
