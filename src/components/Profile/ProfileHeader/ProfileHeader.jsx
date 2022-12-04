@@ -10,13 +10,13 @@ export default function ProfileHeader({tabValue, setTab}) {
             sx={{ p: 0 }}
         >
             <div className="cover-photo-container">
-                <img className='cover-photo' style={{ width: '100%' }} src='./prof-images/cover-photo.jpeg' alt="cover photo" />
+                <img className='cover-photo' style={{ width: '100%' }} src='images/cover-photos/cover-photo.jpeg' alt="cover photo" />
             </div>
             <div className="profile-header-info">
                 <div className="info-container">
                     <div className="pre-pic-spacer"></div>
                     <div className="prof-pic-container">
-                        <img className="prof-pic" src='./prof-images/Paolo-prof-pic.png' alt="my profile pic" /></div>
+                        <img className="prof-pic" src='images/prof-pics/Paolo-prof-pic.png' alt="my profile pic" /></div>
                     <div className="prof-name-subtitle">
                         <h2 className='name'>Paolo Debuque</h2>
                         <p className='subtitle'>conductor, tenor</p>

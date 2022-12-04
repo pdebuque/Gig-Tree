@@ -3,6 +3,8 @@ import ProfileProject from '../ProfileProject/ProfileProject';
 import { useState } from 'react';
 import TabPanel from '../TabPanel/TabPanel';
 import { projects, collaborators } from './temp-prof-info';
+import Collaborator from '../Collaborator/Collaborator';
+import './ProfileInfo.css'
 
 export default function ProfileInfo({ tabValue }) {
 
@@ -28,14 +30,14 @@ export default function ProfileInfo({ tabValue }) {
 
             <Paper
                 elevation={1}
-                sx={{ mt: 2}}
+                sx={{ mt: 2 }}
             >
                 <Grid container spacing={1} >
                     <Grid item xs={3}>
-                        
-                        
+
+
                         placeholder</Grid>
-                    <Grid itm xs={9}>
+                    <Grid item xs={9}>
                         <TabPanel value={tabValue} index={0}>
                             about
                         </TabPanel>
@@ -47,8 +49,16 @@ export default function ProfileInfo({ tabValue }) {
                             })}
                         </TabPanel>
                         <TabPanel value={tabValue} index={2}>
-                            {/* eventually: collaborators.map(collaborator=>return(<profilecollaborator collaborator = {collaborator}/>)) */}
-                            {JSON.stringify(collaborators)}
+                            <div className="collaborators-container">
+                            {collaborators.map(collaborator => {
+                                return (
+                                    <Collaborator
+                                        key = {collaborator.id}
+                                        collaborator = {collaborator}
+                                    />
+                                )
+                            })}
+                            </div>
                         </TabPanel>
                     </Grid>
                 </Grid>

@@ -34,22 +34,48 @@ const _projects = [
     }
 ]
 
-
 const _collaborators = [
     {
         id: 1,
-        name: 'Kathy Romey',
-        about_blurb: 'Director of Choirs, University of Minnesota'
+        collabs: 2,
+        name: 'Jason Momoa',
+        instrument: 'Aquaman',
+        prof_pic: 'images/prof-pics/jason-momoa.jpeg'
     },
     {
         id: 2,
-        name: 'Jerry Blackstone',
-        about_blurb: 'Emeritus Director of Choirs, University of Michigan'
+        collabs: 15, 
+        name: 'Scarlett Johannsen',
+        instrument: 'Black Widow',
+        prof_pic: 'images/prof-pics/scarjo.jpeg'
     },
     {
         id: 3,
-        name: 'Carina Debuque',
-        about_blurb: 'alto and lover of musical theater'
+        collabs: 3,
+        name: 'Chadwick Boseman',
+        instrument: 'Black Panther',
+        prof_pic: 'images/prof-pics/chadwick-boseman.jpeg'
+    },
+    {
+        id: 4,
+        collabs: 40,
+        name: 'Gustav Mahler',
+        instrument: 'Conductor, Composer',
+        prof_pic: 'images/prof-pics/gustav-mahler.jpeg'
+    },
+    {
+        id: 5,
+        collabs: 1,
+        name: 'Yuja Wang',
+        instrument: 'Pianist',
+        prof_pic: 'images/prof-pics/yuja-wang.jpeg'
+    },
+    {
+        id: 6,
+        collabs: 6,
+        name: 'Abel Selacoe',
+        instrument: 'Cellist', 
+        prof_pic: 'images/prof-pics/abel-selacoe.jpeg'
     }
 ]
 
