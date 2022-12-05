@@ -15,6 +15,9 @@ import './App.css';
 import { ThemeProvider } from '@mui/material/styles';
 import { theme } from '../../theme';
 
+// temporary info
+import {users} from '../../temp-info'
+
 function App() {
   return (
     <ThemeProvider theme={theme}>
@@ -22,7 +25,14 @@ function App() {
       <main className = 'main-content'>
       <Routes>
         <Route path='/' element={<Home />}></Route>
-        <Route path = '/profile' element = {<Profile />}></Route> 
+
+        {/* create use profiles */}
+        {users.map(user=>{
+          return(
+            <Route key={user.id} path = {`/${user.name.toLowerCase().split(' ').join('-')}`} element = {<Profile user={user}/>}></Route>
+          )
+        })}
+        {/* <Route path = '/profile' element = {<Profile />}></Route>  */}
         <Route path='/create' element={<CreateProject />}> </Route>
         <Route path='/display' element={<DisplayProjects />}></Route>
         <Route path='/login' element={<Login />}></Route>
