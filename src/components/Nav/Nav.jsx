@@ -33,7 +33,7 @@ export default function Nav() {
                     <Link variant="h6" component="div" sx={{ flexGrow: 1 }}>
                         gig tree
                     </Link>
-                    <Button color="inherit" onClick={() => navigate('/profile')}>My Profile</Button>
+                    <Button color="inherit" onClick={() => navigate('/paolo-debuque')}>My Profile</Button>
                     <Button color="inherit" onClick={() => navigate('/about')}>About</Button>
                     <Button color="inherit" onClick={() => navigate('/login')}>Login</Button>
                 </Toolbar>

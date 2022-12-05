@@ -25,6 +25,8 @@ function App() {
       <main className = 'main-content'>
       <Routes>
         <Route path='/' element={<Home />}></Route>
+
+        {/* create use profiles */}
         {users.map(user=>{
           return(
             <Route key={user.id} path = {`/${user.name.toLowerCase().split(' ').join('-')}`} element = {<Profile user={user}/>}></Route>
