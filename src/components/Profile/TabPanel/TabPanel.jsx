@@ -8,7 +8,7 @@ export default function TabPanel ({children, value, index}) {
           id={`simple-tabpanel-${index}`}
         >
           {value === index && (
-            <Box sx={{ p: 3 }}>
+            <Box sx={{ p: 3, ml: 0 }}>
               {children}
             </Box>
           )}

@@ -1,5 +1,25 @@
 /* placeholder data pre-database */
 
+const _me = {
+    first: 'Paolo',
+    last: 'Debuque',
+    bio: 'Hello! I am a conductor and tenor born and raised in the Twin Cities. I am currently the Chancel Choir Director at Good Samaritan UMC in Edina, and sing with a range of ensembles, primarily MNChorale and Border Crossing these days. Always down to chat about interesting projects. Also, hit me up if you have any web dev projects you\'d like a hand on!',
+    location: 'Minneapolis, MN',
+    available: 'Weekday evenings, especially Tuesday and Thursday',
+    top_collab: ['collab-1', 'collab-2'],
+    jobs: [
+        {
+            name: 'Chancel Choir Director',
+            location: 'Good Samaritan UMC'
+        },
+        {
+            name: 'Freelance singer',
+            location: 'Twin Cities, MN'
+        }
+    ],
+    member_since: 'Dec. 1, 2022'
+}
+
 const _projects = [
     {
         id: 1,
@@ -127,3 +147,4 @@ const _users = [
 export { _projects as projects };
 export { _collaborators as collaborators }
 export { _users as users }
+export {_me as me}
