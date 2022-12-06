@@ -2,7 +2,7 @@ import './Collaborator.css'
 
 export default function Collaborator({ collaborator }) {
     return (
-        <a class="collaborator-link" href={`/${collaborator.name}/profile`}>
+        <a class="collaborator-link" href={`/${collaborator.name.toLowerCase().split(' ').join('-')}`}>
             <div className='collaborator-container'>
                 <div className="collab-color-code"></div>
                 <div className='collab-all-info'>
