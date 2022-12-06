@@ -6,7 +6,6 @@ const _me = {
     bio: 'Hello! I am a conductor and tenor born and raised in the Twin Cities. I am currently the Chancel Choir Director at Good Samaritan UMC in Edina, and sing with a range of ensembles, primarily MNChorale and Border Crossing these days. Always down to chat about interesting projects. Also, hit me up if you have any web dev projects you\'d like a hand on!',
     location: 'Minneapolis, MN',
     available: 'Weekday evenings, especially Tuesday and Thursday',
-    top_collab: ['collab-1', 'collab-2'],
     jobs: [
         {
             name: 'Chancel Choir Director',
@@ -25,13 +24,31 @@ const _projects = [
         id: 1,
         name: 'Voices Rising: A Choral Affirmation of Black Lives',
         ensemble: 'Chorus America',
+        past: true,
         location: 'Orchestra Hall',
         owner: 'Philip Shoultz',
         description: 'Voices Rising: A Choral Affirmation of Black Lives is a collaboration of 200 singers from 12 local choral organizations delivering a united artistic response to the murders of George Floyd and Daunte Wright that have placed the Twin Cities at the heart of our nation’s racial reckoning.',
         repertoire: [
-
+            {
+                name: '',
+                composer: ''
+            },
         ],
-        video_path: 'https://www.youtube.com/watch?v=Q4GYbMXS_DU&t=1417s&ab_channel=ChorusAmerica'
+        rehearsals: [
+            {
+                date: '',
+                location: '',
+                notes: ''
+            }
+        ],
+        performances: [
+            {
+                date: '',
+                location: '',
+            }
+        ],
+        video_path: 'https://www.youtube.com/watch?v=Q4GYbMXS_DU&t=1417s&ab_channel=ChorusAmerica',
+        scores_path: '',
     },
     {
         id: 2,
