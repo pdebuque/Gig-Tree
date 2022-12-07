@@ -1,4 +1,3 @@
-
 -- primary tables: user, project, ensemble, date, piece
 
 CREATE TABLE "user" (
