@@ -1,13 +1,18 @@
 /* 
-create project takes inputs for project name, ensemble, dates, poster
+create project takes inputs for project name, ensemble, dates, owner, repertoire, general notes
+
+multitab layout
+    - tab 1: general info: project name, ensemble, notes
+    - tab 2: create rehearsal schedule
+    - tab 3: invite collaborators
+    - tab 4: review/submit
 
 possible features:
     - use project templates
     - 
-
+);
 
 */
-
 
 import { useState } from 'react'
 import Calendar from 'react-calendar';
@@ -25,7 +30,6 @@ export default function CreateProject() {
         console.log(value)
         setDate(value)
     }
-
 
     return (
         <main>
