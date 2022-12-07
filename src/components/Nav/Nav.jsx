@@ -1,4 +1,4 @@
-import { Button, AppBar, Box, Toolbar, Typography, IconButton } from '@mui/material';
+import { Button, AppBar, Box, Toolbar, Link, Typography, IconButton } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate } from 'react-router-dom';
 import Sidebar from '../Sidebar/Sidebar';
@@ -30,10 +30,10 @@ export default function Nav() {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                        Gig manager
-                    </Typography>
-                    <Button color="inherit" onClick={() => navigate('/profile')}>My Profile</Button>
+                    <Link variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                        gig tree
+                    </Link>
+                    <Button color="inherit" onClick={() => navigate('/paolo-debuque')}>My Profile</Button>
                     <Button color="inherit" onClick={() => navigate('/about')}>About</Button>
                     <Button color="inherit" onClick={() => navigate('/login')}>Login</Button>
                 </Toolbar>

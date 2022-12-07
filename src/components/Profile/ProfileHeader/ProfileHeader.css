@@ -1,0 +1,89 @@
+/* 
+eventually, will need lots of media queries
+
+breakpoints: 
+    - small: 480px
+    - medium: 480-800px
+    - large: 800+
+
+*/
+
+.profile-header {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    min-height: 260px;
+    height: 50vw;
+    max-height: 400px;
+    overflow: hidden;
+}
+
+/* ----------- cover photo ------------ */
+
+.cover-photo-container {
+    height: 70%;
+}
+
+.cover-photo {
+    width: 100%;
+    object-fit: cover;
+}
+
+/* -------------- profile header - default style for large -------------- */
+
+.profile-header-info {
+    width: 100%;
+    height: 50%;
+    background-color: white;
+}
+
+.info-container {
+    display: flex;
+    align-items: flex-end;
+    height: 100%;
+    padding-bottom: 0;
+
+}
+
+.pre-pic-spacer {
+    width: 50px;
+}
+
+.prof-pic-container {
+    margin-top: -10vw;
+    padding-bottom: 1rem;
+}
+
+@media (min-width: 1000px) {
+
+    .prof-pic-container {
+        margin-top: -100px;
+    }
+}
+
+.prof-pic {
+    height: 20vw;
+    max-height: 200px;
+    border-radius: 50%;
+}
+
+.prof-name-subtitle {
+    margin-left: 10px;
+    margin-right: 30px;
+    padding-bottom: 1rem;
+}
+
+.name {
+    margin: .2rem;
+    font-size: 30px;
+}
+
+.subtitle {
+    margin: .3em;
+}
+
+/* --------- tabs ---------- */
+
+.tabs-container {
+    margin-left: 2rem;
+}
