@@ -7,8 +7,7 @@ multitab layout
     - tab 3: invite collaborators
     - tab 4: review/submit
 
-possible features:
-    - use project templates
+save all into redux store as newProject
     - 
 );
 
@@ -16,25 +15,31 @@ possible features:
 
 import { useState } from 'react'
 import Calendar from 'react-calendar';
-import { Box } from '@mui/material';
-import './calendar.css'
+import { Box, Tabs, Tab, Grid, Paper } from '@mui/material';
+import './calendar.css';
+import { useDispatch } from 'react-redux';
+import TabPanel from '../assets/TabPanel/TabPanel'
 
 export default function CreateProject() {
 
-    const sampleDates = ['12/5/2022'];
+    // const sampleDates = ['12/5/2022'];
+    const [tabValue, setTab] = useState(0);
 
-    const [newProject, setProject] = useState({})
-    const [date, setDate] = useState('')
+    const [newProject, setProject] = useState({});
+    const [date, setDate] = useState('');
 
     const handleClick = (value) => {
         console.log(value)
         setDate(value)
     }
 
+    // render a tabgroup component and several tab pages, each corresponding to a separate step in the event creation process
+
+
     return (
         <main>
             <h1>Create new project</h1>
-            <form className="new-project-form">
+            {/* <form className="new-project-form">
                 <label htmlFor="name-input">project name</label>
                 <input
                     type="text"
@@ -49,13 +54,32 @@ export default function CreateProject() {
                 />
                 <label htmlFor="name-input">project name</label>
                 <button type='submit'>submit project</button>
-            </form>
-            <Box sx={{ marginY: 2, marginX: 5 }} className='calendar'>
+            </form> */}
+            {/* <Box sx={{ marginY: 2, marginX: 5 }} className='calendar'>
                         <Calendar
                             onClickDay={(value) => handleClick(value)}
                             value={date}
                         />
-            </Box>
+            </Box> */}
+            <Paper sx={{paddingX:3, mt: 2}}>
+                <Box>
+                    <Tabs
+                        value={tabValue}
+                        onChange={(e, value) => setTab(value)}
+                    >
+                        <Tab label="overview" />
+                        <Tab label="schedule" />
+                        <Tab label="invite" />
+                        <Tab label="review" />
+                    </Tabs>
+                    <TabPanel
+                        value={tabValue}
+                        index={0}
+                    >
+                        hello
+                    </TabPanel>
+                </Box>
+            </Paper>
 
         </main>
     )
