@@ -27,7 +27,9 @@ function App() {
         <Route path='/login' element={<Login />}></Route>
         <Route path='/' element={<Home />}></Route>
 
-        {/* create use profiles */}
+        {/* create use profiles
+        //todo: use route params instead of map to get the user info
+        */}
         {users.map(user => {
           return (
             <Route key={user.id} path={`/${user.name.toLowerCase().split(' ').join('-')}`} element={<Profile user={user} />}></Route>
