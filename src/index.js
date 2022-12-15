@@ -5,23 +5,9 @@ import App from './components/App/App';
 import { Provider } from 'react-redux';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import logger from 'redux-logger';
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom';
 
-const newProject = (state = {
-    name: '',
-    ensemble: '',
-    owner: '',
-    dates: [],
-    repertoire: [],
-    notes: '',
-}, action) => {
-  return state
-}
-
-const store = createStore(combineReducers({
-  newProject
-}), applyMiddleware(logger)
-);
+import store from './redux/store';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
