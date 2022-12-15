@@ -8,7 +8,7 @@ const sessionMiddleware = require('./modules/session-middleware');
 const passport = require('./strategies/user.strategy');
 
 //routes
-const projects = require('./routes/projects.router.js');
+const project = require('./routes/project.router.js');
 
 
 /** ---------- MIDDLEWARE ---------- **/
@@ -20,7 +20,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 /** ---------- EXPRESS ROUTES ---------- **/
-app.use('/projects', projects);
+app.use('/api/project', project);
 
 // static files
 app.use(express.static('build'));

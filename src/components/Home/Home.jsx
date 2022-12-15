@@ -7,7 +7,7 @@ export default function Home() {
   /* 
   some backend mapping here...
 
-  projects will exist in projects.reducer.js, in src/redux/reducers
+  projects will exist in projects.reducer.js, in src/redux/reducers. axios calls will be handled in projects.saga.js
 
   */
 
