@@ -7,12 +7,19 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import logger from 'redux-logger';
 import { BrowserRouter } from 'react-router-dom'
 
-const temp = (state = '', action) => {
+const newProject = (state = {
+    name: '',
+    ensemble: '',
+    owner: '',
+    dates: [],
+    repertoire: [],
+    notes: '',
+}, action) => {
   return state
 }
 
 const store = createStore(combineReducers({
-  temp
+  newProject
 }), applyMiddleware(logger)
 );
 

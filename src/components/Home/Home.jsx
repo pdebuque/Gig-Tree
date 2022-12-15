@@ -1,10 +1,42 @@
-import './Home.css'
+import './Home.css';
+import { Grid, Typography, Paper, Avatar, Box } from '@mui/material'
 
 export default function Home() {
-    return(
-        <>
-        <h1 className="home-title">HOME PAGE</h1>
-        <object id="svg-tree" data="assets/Abstract-Tree-Silhouette.svg" type="image/svg+xml"></object>
-        </>
-    )
+  return (
+
+
+    <Box sx={{ width: '90%', marginX: 'auto', p: 1 }}>
+      <Paper sx={{ p: 2, marginY: 1 }}>
+        <Grid container spacing={1}>
+          <Grid item xs={1}>
+            <Avatar src='images/prof-pics/Paolo-prof-pic.png' alt='Paolo profile pic' sx={{width: '100%', height: '100%'}}/>
+          </Grid>
+          <Grid item xs={7}>
+            <Typography variant='h2'>User Name</Typography>
+            <Typography variant='subtitle1'>instrument 1, instrument 2</Typography>
+          </Grid>
+          <Grid item xs={4}>
+            <Typography variant='body2'>Lorem ipsum dolor sit, amet consectetur adipisicing elit. A quas dicta labore commodi maxime magni voluptatum officiis laboriosam alias?
+            </Typography>
+
+          </Grid>
+        </Grid >
+      </Paper>
+      <Grid container spacing={1}>
+        <Grid item xs={4}>
+          <Paper sx={{ p: 2, mY: 1 }}>
+            projects go here
+          </Paper>
+        </Grid>
+        <Grid item xs={8}>
+          <Paper sx={{ p: 2, mY: 1 }}>
+            calendar goes here
+          </Paper>
+        </Grid></Grid>
+    </Box>
+
+
+
+
+  )
 }
