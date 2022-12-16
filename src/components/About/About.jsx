@@ -21,7 +21,7 @@ export default function About() {
                         <List>
                             {technologies.map(item => {
                                 return (
-                                    <ListItem sx={{ paddingY: 0 }}>
+                                    <ListItem key = {item} sx={{ paddingY: 0 }}>
                                         <ListItemText primary={item} />
                                     </ListItem>
                                 )

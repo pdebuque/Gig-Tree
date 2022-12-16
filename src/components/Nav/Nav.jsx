@@ -17,7 +17,7 @@ export default function Nav() {
 
   const handleLogout = () =>{
     console.log('logout here');         //todo: modal popout for logout information
-    navigate('/login') 
+    navigate('/login'); 
   }
 
   return (

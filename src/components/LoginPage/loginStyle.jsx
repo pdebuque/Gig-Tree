@@ -17,3 +17,10 @@ export const inputStyle = {
 export const buttonStyle = {
 
 }
+
+export const formStyle = {
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent:'center',
+  alignItems:'center',
+}
