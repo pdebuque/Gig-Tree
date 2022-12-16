@@ -8,6 +8,7 @@ this form should allow user to update
   jobs/job locations, 
   profile picture
 */
+//todo: improve the spacing/layout of the edit modal
 
 import { Typography, Box, Button, TextField } from '@mui/material'
 import modalStyle from './modalStyle'
