@@ -1,7 +1,7 @@
 import { Paper, Box, Tabs, Tab, Typography, Grid, Item } from '@mui/material';
 import ProfileProject from '../ProfileProject/ProfileProject';
 import { useState } from 'react';
-import TabPanel from '../../assets/TabPanel/TabPanel';
+import TabPanel from '../../_Assets/TabPanel/TabPanel';
 import { projects, collaborators } from '../../../temp-info';
 import Collaborator from '../Collaborator/Collaborator';
 import './ProfileInfo.css'
@@ -20,7 +20,7 @@ export default function ProfileInfo({ tabValue }) {
         <Grid item xs={5}>
           <Paper sx={{ p: 3, mt: 1 }}>
             <AboutSidebar />
-          </Paper>    
+          </Paper>
         </Grid>
         <Grid item xs={7}>
           <Paper sx={{ p: 1, mt: 1 }}>
