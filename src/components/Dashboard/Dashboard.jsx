@@ -44,10 +44,11 @@ useEffect(()=>{
           </Grid>
           <Grid item xs={5}>
             <Typography variant='h2'>{user.first_name} {user.last_name}</Typography>
-            <Typography variant='subtitle1'>instrument 1, instrument 2</Typography>
+            <Typography variant='subtitle1'>{user.instrument_1}, {user.instrument_2}</Typography>
           </Grid>
           <Grid item xs={4}>
-            <Typography variant='body2'>Lorem ipsum dolor sit, amet consectetur adipisicing elit. A quas dicta labore commodi maxime magni voluptatum officiis laboriosam alias?
+            <Typography variant='body2'>
+              {user.bio}
             </Typography>
 
           </Grid>

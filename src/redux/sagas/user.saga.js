@@ -25,7 +25,7 @@ function* fetchUser() {
 }
 
 function* editUserInfo(action) {
-  console.log('editing info for user');
+  console.log('editing info for user: ', action.payload);
   yield axios.put('/api/user', action.payload);
   yield put({type: 'FETCH_USER'})
 

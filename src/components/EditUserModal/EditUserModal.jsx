@@ -27,8 +27,9 @@ export default function EditUserModal({ setEditOpen }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(newInfo)
-    dispatch({ type: 'EDIT_USER_INFO', payload: newInfo })
+    console.log('user info to send: ', newInfo)
+    dispatch({ type: 'EDIT_USER_INFO', payload: newInfo });
+    setEditOpen(false);
   }
 
   return (
@@ -47,7 +48,16 @@ export default function EditUserModal({ setEditOpen }) {
             onChange={e => setNewInfo({ ...newInfo, [inputType.split(' ').join('_')]: e.target.value })}
           />
         )
+        
       })}
+      <TextField
+        type='text'
+        id = 'bio input'
+        placeholder={newInfo.bio}
+        multiline
+        rows = {4}
+        onChange={e=>setNewInfo({...newInfo, bio: e.target.value})}
+        />
       <Button onClick={() => setEditOpen(false)}>cancel</Button>
       <Button type='submit'>submit</Button>
     </Box>
