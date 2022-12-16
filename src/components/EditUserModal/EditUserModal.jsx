@@ -11,7 +11,7 @@ this form should allow user to update
 //todo: improve the spacing/layout of the edit modal
 
 import { Typography, Box, Button, TextField } from '@mui/material'
-import modalStyle from './modalStyle'
+import modalStyle from '../../_style/modalStyle'
 
 //redux
 import { useSelector, useDispatch } from 'react-redux';

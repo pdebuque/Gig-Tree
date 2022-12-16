@@ -18,10 +18,10 @@ const dispatch = useDispatch()
 const user = useSelector(store=>store.user)
 const [editModalOpen, setEditOpen] = useState(false)
 
-useEffect(()=>{
-  console.log('fetching projects');
-  // dispatch({type: 'FETCH_PROJECTS})
-},[])
+// useEffect(()=>{
+//   console.log('fetching projects');
+//   // dispatch({type: 'FETCH_PROJECTS})
+// },[])
 
 
   /* 
@@ -36,7 +36,6 @@ useEffect(()=>{
 
   return (
     <Box sx={{ width: '90%', marginX: 'auto', p: 1 }}>
-      {JSON.stringify(user)}
       <Paper sx={{ p: 2, marginY: 1 }}>
         <Grid container spacing={1}>
           <Grid item xs={.5}>

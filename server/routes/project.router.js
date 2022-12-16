@@ -6,14 +6,21 @@ const bodyParser = require('body-parser');
 
 // routes
 
-// GET - get all projects associated with the user
+// GET - get all projects associated with the user.
+
+// we need to know project name, ensemble name, description, and owner name
 
 router.get('/', (req,res)=>{
-  const query=`SELECT project.* FROM project
+  console.log('getting projects for user no.', req.user.id)
+  const query=`SELECT project.*, "user".first_name AS owner_first, "user".last_name AS owner_last FROM project
                 JOIN user_project ON user_project.project_id = project.id
+                JOIN "user" ON "user".id=project.owner_id
                 WHERE user_id = $1`
   pool.query(query,[req.user.id])
-    .then(result=>res.send(result.rows))
+    .then(result=>{
+      console.log('got projects', result.rows)
+      res.send(result.rows)
+    })
     .catch(err=>console.log('could not get projects!', err))
 })
 

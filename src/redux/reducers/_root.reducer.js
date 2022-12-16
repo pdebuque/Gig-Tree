@@ -2,7 +2,6 @@ import { combineReducers } from 'redux';
 import errors from './errors.reducer';
 import user from './user.reducer';
 
-
 //todo: import all other reducers here
 import project from './project.reducer';
 

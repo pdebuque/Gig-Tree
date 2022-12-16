@@ -7,8 +7,10 @@ function* projectsSaga() {
 
 function* getProjects(action) {
   try{
-    const projects = yield axios.get('/api/projects')
-    put({type: 'SET_PROJECTS', payload: projects.data})
+    console.log('getting projects in project reducer')
+    const projects = yield axios.get('/api/project')
+    console.log('projects from server;', projects)
+    yield put({type: 'SET_PROJECTS', payload: projects.data})
   }
   catch(err) {
     console.log('could not get projects!', err)
