@@ -1,4 +1,6 @@
 import EditUserModal from '../EditUserModal/EditUserModal';
+import DashboardProjects from '../DashboardProjects/DashboardProjects';
+import DashboardCalendar from '../DashboardCalendar/DashboardCalendar'
 
 import './Dashboard.css';
 import { Grid, Typography, Paper, Avatar, Box, Modal, IconButton } from '@mui/material';
@@ -62,12 +64,12 @@ useEffect(()=>{
       <Grid container spacing={1}>
         <Grid item xs={4}>
           <Paper sx={{ p: 2, mY: 1 }}>
-            projects go here
+            <DashboardProjects/>
           </Paper>
         </Grid>
         <Grid item xs={8}>
           <Paper sx={{ p: 2, mY: 1 }}>
-            calendar goes here
+           <DashboardCalendar/>
           </Paper>
         </Grid></Grid>
         <Modal open={editModalOpen}><EditUserModal setEditOpen={setEditOpen}/></Modal>
