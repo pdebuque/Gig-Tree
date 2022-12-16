@@ -24,8 +24,16 @@ function* fetchUser() {
   }
 }
 
+function* editUserInfo(action) {
+  console.log('editing info for user');
+  yield axios.put('/api/user', action.payload);
+  yield put({type: 'FETCH_USER'})
+
+}
+
 function* userSaga() {
   yield takeLatest('FETCH_USER', fetchUser);
+  yield takeLatest('EDIT_USER_INFO', editUserInfo)
 }
 
 export default userSaga;

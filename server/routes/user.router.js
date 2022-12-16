@@ -51,4 +51,18 @@ router.post('/logout', (req, res) => {
   res.sendStatus(200);
 });
 
+// edit user information
+router.put('/', rejectUnauthenticated, (req,res)=>{
+  console.log('request body: ', req.body, 'request user:', req.user)
+  const query = `UPDATE "user" 
+                  SET first_name=$1, last_name=$2, bio=$3, location=$4, instrument_1=$5, instrument_2=$6, instrument_3=$7, job_1=$8, job_1_location = $9, job_2=$9, job_2_location=$10
+                  WHERE id = $11;`
+  const values = [req.body.first_name, req.body.last_name, req.body.bio, req.body.location,req.body.instrument_1, req.body.instrument_3, req.body.job_1, req.body.job_1_location, req.body.job_2, req.body.job_2_location, req.user.id];
+
+  pool.query(query, values)
+    .then(()=>res.sendStatus(201))
+    .catch(err=> console.log('could not edit', err))
+})
+
+
 module.exports = router;

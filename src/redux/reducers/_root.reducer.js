@@ -3,7 +3,7 @@ import errors from './errors.reducer';
 import user from './user.reducer';
 
 
-//todo: import all other reucers here
+//todo: import all other reducers here
 import project from './project.reducer';
 
 // rootReducer is the primary reducer for our entire project

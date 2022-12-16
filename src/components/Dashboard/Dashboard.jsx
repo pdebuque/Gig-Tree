@@ -1,5 +1,8 @@
+import EditUserModal from '../EditUserModal/EditUserModal';
+
 import './Dashboard.css';
-import { Grid, Typography, Paper, Avatar, Box } from '@mui/material';
+import { Grid, Typography, Paper, Avatar, Box, Modal, IconButton } from '@mui/material';
+import EditIcon from '@mui/icons-material/Edit';
 
 //react stuff
 import {useState, useEffect} from 'react';
@@ -9,15 +12,16 @@ import {useSelector, useDispatch} from 'react-redux'
 
 export default function Home() {
 
+const dispatch = useDispatch()
 const user = useSelector(store=>store.user)
+const [editModalOpen, setEditOpen] = useState(false)
 
 useEffect(()=>{
-  fetchProjects()
+  console.log('fetching projects');
+  // dispatch({type: 'FETCH_PROJECTS})
 },[])
 
-const fetchProjects = () =>{
-  console.log('in fetchProjects')
-}
+
   /* 
   some backend mapping here...
 
@@ -38,14 +42,19 @@ const fetchProjects = () =>{
           <Grid item xs={1}>
             <Avatar src='images/prof-pics/Paolo-prof-pic.png' alt='Paolo profile pic' sx={{ width: 100, height: 100 }} />
           </Grid>
-          <Grid item xs={6}>
-            <Typography variant='h2'>{user.username}</Typography>
+          <Grid item xs={5}>
+            <Typography variant='h2'>{user.first_name} {user.last_name}</Typography>
             <Typography variant='subtitle1'>instrument 1, instrument 2</Typography>
           </Grid>
           <Grid item xs={4}>
             <Typography variant='body2'>Lorem ipsum dolor sit, amet consectetur adipisicing elit. A quas dicta labore commodi maxime magni voluptatum officiis laboriosam alias?
             </Typography>
 
+          </Grid>
+          <Grid item xs={1}>
+            <IconButton aria-label='edit' onClick ={()=>setEditOpen(true)}>
+              <EditIcon/>
+            </IconButton>
           </Grid>
         </Grid >
       </Paper>
@@ -60,10 +69,8 @@ const fetchProjects = () =>{
             calendar goes here
           </Paper>
         </Grid></Grid>
+        <Modal open={editModalOpen}><EditUserModal setEditOpen={setEditOpen}/></Modal>
     </Box>
-
-
-
 
   )
 }
