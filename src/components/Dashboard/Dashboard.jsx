@@ -15,7 +15,9 @@ useEffect(()=>{
   fetchProjects()
 },[])
 
-const fetchProjects = ()
+const fetchProjects = () =>{
+  console.log('in fetchProjects')
+}
   /* 
   some backend mapping here...
 
