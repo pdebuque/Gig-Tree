@@ -5,16 +5,9 @@ import App from './components/App/App';
 import { Provider } from 'react-redux';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import logger from 'redux-logger';
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom';
 
-const temp = (state = '', action) => {
-  return state
-}
-
-const store = createStore(combineReducers({
-  temp
-}), applyMiddleware(logger)
-);
+import store from './redux/store';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

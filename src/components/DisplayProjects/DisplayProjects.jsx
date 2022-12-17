@@ -93,7 +93,7 @@ export default function DisplayProjects() {
             </Box>
 
             <Grid container spacing={3}>
-                <Grid item xs={3}>hello</Grid>
+                <Grid item xs={3}>list of projects will go here</Grid>
                 <Grid item xs={9}>
                     <Box sx={{ height: 700 }} >
                         <DnDCalendar

@@ -1,5 +1,12 @@
+import {Typography, Box} from '@mui/material'
+
 export default function Home() {
-    return(
-        <h1>HOME PAGE</h1>
-    )
+
+
+
+  return(
+<Box>
+      <Typography variant = 'h3'>Welcome to Gig Tree</Typography>
+</Box>
+  )
 }
