@@ -7,21 +7,21 @@ import { Grid, Typography, Paper, Avatar, Box, Modal, IconButton } from '@mui/ma
 import EditIcon from '@mui/icons-material/Edit';
 
 //react stuff
-import {useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 
 // react-redux
-import {useSelector, useDispatch} from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 export default function Home() {
 
-const dispatch = useDispatch()
-const user = useSelector(store=>store.user)
-const [editModalOpen, setEditOpen] = useState(false)
+  const dispatch = useDispatch()
+  const user = useSelector(store => store.user)
+  const [editModalOpen, setEditOpen] = useState(false)
 
-// useEffect(()=>{
-//   console.log('fetching projects');
-//   // dispatch({type: 'FETCH_PROJECTS})
-// },[])
+  // useEffect(()=>{
+  //   console.log('fetching projects');
+  //   // dispatch({type: 'FETCH_PROJECTS})
+  // },[])
 
 
   /* 
@@ -39,7 +39,7 @@ const [editModalOpen, setEditOpen] = useState(false)
       <Paper sx={{ p: 2, marginY: 1 }}>
         <Grid container spacing={1}>
           <Grid item xs={.5}>
-            </Grid>
+          </Grid>
           <Grid item xs={1}>
             <Avatar src='images/prof-pics/Paolo-prof-pic.png' alt='Paolo profile pic' sx={{ width: 100, height: 100 }} />
           </Grid>
@@ -54,8 +54,8 @@ const [editModalOpen, setEditOpen] = useState(false)
 
           </Grid>
           <Grid item xs={1}>
-            <IconButton aria-label='edit' onClick ={()=>setEditOpen(true)}>
-              <EditIcon/>
+            <IconButton aria-label='edit' onClick={() => setEditOpen(true)}>
+              <EditIcon />
             </IconButton>
           </Grid>
         </Grid >
@@ -63,15 +63,15 @@ const [editModalOpen, setEditOpen] = useState(false)
       <Grid container spacing={1}>
         <Grid item xs={4}>
           <Paper sx={{ p: 2, mY: 1 }}>
-            <DashboardProjects/>
+            <DashboardProjects />
           </Paper>
         </Grid>
         <Grid item xs={8}>
           <Paper sx={{ p: 2, mY: 1 }}>
-           <DashboardCalendar/>
+            <DashboardCalendar />
           </Paper>
         </Grid></Grid>
-        <Modal open={editModalOpen}><EditUserModal setEditOpen={setEditOpen}/></Modal>
+      <Modal open={editModalOpen}><EditUserModal setEditOpen={setEditOpen} /></Modal>
     </Box>
 
   )

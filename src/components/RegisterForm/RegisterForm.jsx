@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Container, TextField, Paper, Box, Typography, Button } from '@mui/material';
 import { loginStyle, formStyle } from '../../_style/loginStyle'
 
+//todo: feedback for successful register
 
 function RegisterForm() {
   const [username, setUsername] = useState('');
