@@ -25,7 +25,6 @@ const projects = useSelector(store=>store.project)
 
   return(
     <Box >
-      {JSON.stringify(projects[0])}
       <Typography variant='h5'>Projects</Typography>
       <Box sx={insetStyle}>
       {projects.map(project=>{
