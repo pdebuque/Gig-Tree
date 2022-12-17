@@ -1,6 +1,14 @@
 /* 
 This component is a single project displayed within the dashboard projects sidebar
 */
+
+//todo: item colors
+//todo: background colors conditional on date: past-grey; upcoming: light yellow; current: light green
+
+//todo: avatars
+
+//todo: sort by date
+
 import { listItemStyle } from '../../_style/listItemStyle.jsx'
 import { Box, Typography, Collapse, Button} from '@mui/material';
 import { useState } from 'react';

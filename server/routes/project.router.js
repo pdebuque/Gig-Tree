@@ -8,7 +8,7 @@ const bodyParser = require('body-parser');
 
 // GET - get all projects associated with the user.
 
-// we need to know project name, ensemble name, description, and owner name
+// we need to know project name, ensemble name, description, owner name, and other users on the project
 
 router.get('/', (req,res)=>{
   console.log('getting projects for user no.', req.user.id)
