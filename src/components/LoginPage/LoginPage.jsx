@@ -36,7 +36,7 @@ export default function Login() {
   }
 
   return (
-    <Paper style={loginStyle}>
+    <Paper sx={loginStyle}>
       {errors.loginMessage && (
         <h3 className="alert" role="alert">
           {errors.loginMessage}
@@ -46,7 +46,7 @@ export default function Login() {
         component='form'
         className='login-form'
         onSubmit={login}
-        style = {formStyle}
+        sx = {formStyle}
       >
         <Typography style={{textAlign: 'center', width: 300}} variant='h3' sx={{ mb: 2 }}>Welcome to Gig Tree</Typography>
         <Box>

@@ -9,18 +9,6 @@ function RegisterPage() {
   return (
     <div>
       <RegisterForm />
-
-      <center>
-        <button
-          type="button"
-          className="btn btn_asLink"
-          onClick={() => {
-            navigate('/login');
-          }}
-        >
-          Login
-        </button>
-      </center>
     </div>
   );
 }
