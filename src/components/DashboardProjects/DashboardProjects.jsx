@@ -4,13 +4,14 @@ this component is the projects sidebar in the dashboard.
 it will get all of the projects that user is on and that user owns from the server and map them into individual project components
 */
 import { insetStyle } from '../../_style/projectStyle'
-import DashboardProjectItem from '../DashboardProjectItem/DashboardProjectItem'
+import DashboardProjectItem from '../DashboardProjectItem/DashboardProjectItem';
+import CreateProject from '../CreateProject/CreateProject';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { Box, Typography, IconButton, Modal, Container, Button } from '@mui/material';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import { useEffect, useState } from 'react';
-import {largeModal} from '../../_style/modalStyle'
+import { largeModal } from '../../_style/modalStyle'
 
 export default function DashboardProjects() {
 
@@ -46,9 +47,7 @@ export default function DashboardProjects() {
         open={createOpen}
       >
         <Box sx={largeModal}>
-          <Button
-            onClick={() => setCreateOpen(false)}
-          >close</Button>
+          <CreateProject />
 
 
         </Box>
