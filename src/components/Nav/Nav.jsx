@@ -17,7 +17,7 @@ export default function Nav() {
 
   const handleLogout = () =>{
     console.log('logout here');         //todo: modal popout for logout information
-    navigate('/login') 
+    navigate('/login'); 
   }
 
   return (
@@ -33,12 +33,17 @@ export default function Nav() {
             onClick={toggleSidebar}
           >
             <MenuIcon />
-          </IconButton>
+
+    {/* //todo: logo icon should nav to login if user is not logged in */}
+
+          </IconButton>     
             <Typography component='a' href='/' variant="h4" color="inherit" sx={{ textDecoration: 'none', flexGrow: 1 }}>
               Gig Tree
             </Typography>
           <Button color="inherit" onClick={() => navigate('/about')}>About</Button>
           <Button color="inherit" onClick={handleLogout}>Logout</Button>
+
+{/* //todo: icon destination and source come from database, depending on user */}
           <IconButton onClick={()=>navigate('/paolo-debuque')}>
             <Avatar size={16} alt="Paolo's profile picture" src="images/prof-pics/Paolo-prof-pic.png"/>
           </IconButton>
