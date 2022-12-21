@@ -3,19 +3,25 @@ this component is the calendar sidebar in the dashboard.
 
 it will get all of the user's project dates from the server and render a react-big-calendar
 */
+
+//calendar imports
 import { Calendar } from 'react-big-calendar'
 import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop'
 import 'react-big-calendar/lib/addons/dragAndDrop/styles.css'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import { momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
+
 import { Box, Grid, Typography } from '@mui/material';
-import { useState, useCallback } from 'react'
+import { useState, useCallback } from 'react';
+import {useSelector, useDispatch} from 'react-redux'
 
-
-import events from '../../events';
+// import events from '../../events';
 
 export default function DashboardCalendar() {
+
+  const events = useSelector(store=>store.events);
+  const dispatch = useDispatch();
 
   const DnDCalendar = withDragAndDrop(Calendar);
   const localizer = momentLocalizer(moment);
@@ -79,9 +85,6 @@ export default function DashboardCalendar() {
 
 
   return (
-
-
-
     <Box>
       <Typography variant='h5' sx={{mb: 2}}>Upcoming</Typography>
       <Box sx={{height:500}}>

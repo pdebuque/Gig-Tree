@@ -9,7 +9,8 @@ const passport = require('./strategies/user.strategy');
 
 //routes
 const projectRouter = require('./routes/project.router.js');
-const userRouter = require('./routes/user.router.js')
+const userRouter = require('./routes/user.router.js');
+const eventRouter = require('./routes/event.router.js');
 
 
 /** ---------- MIDDLEWARE ---------- **/
@@ -23,6 +24,7 @@ app.use(passport.session());
 /** ---------- EXPRESS ROUTES ---------- **/
 app.use('/api/project', projectRouter);
 app.use('/api/user', userRouter)
+app.use('/api/event', eventRouter)
 
 // static files
 app.use(express.static('build'));
