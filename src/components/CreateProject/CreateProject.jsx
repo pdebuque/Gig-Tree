@@ -21,7 +21,7 @@ save all into redux store as newProject
 
 import { useState } from 'react'
 import Calendar from 'react-calendar';
-import { Box, Tabs, Tab, Grid, Paper, Typography } from '@mui/material';
+import { Box, Tabs, Tab, Grid, Paper, Typography, Container } from '@mui/material';
 import './calendar.css';
 import { useDispatch } from 'react-redux';
 
@@ -46,16 +46,18 @@ export default function CreateProject() {
 
   // render a tabgroup component and several tab pages, each corresponding to a separate step in the event creation process
 
-  const steps = [<CreateGeneral/>, <CreateSchedule/>, <CreateInvite/>, <CreateReview/>]
+  const steps = [<CreateGeneral />, <CreateSchedule />, <CreateInvite />, <CreateReview />]
 
   return (
-    <main>
-      <Typography variant='h4'>Create new project</Typography>
+    <Container>
+      <Typography variant='h5'>Create new project</Typography>
       <Box sx={{ paddingX: 3, mt: 2 }}>
 
         <Tabs
           value={tabValue}
           onChange={(e, value) => setTab(value)}
+          size='small'
+          centered
         >
           <Tab label="general" />
           <Tab label="schedule" />
@@ -64,15 +66,15 @@ export default function CreateProject() {
         </Tabs>
       </Box>
 
-      {steps.map((step,i)=>{
-        return(
-          <TabPanel value = {tabValue} index={i}>
+      {steps.map((step, i) => {
+        return (
+          <TabPanel key ={i} value={tabValue} index={i}>
             {step}
           </TabPanel>
         )
       })}
 
 
-    </main>
+    </Container>
   )
 }

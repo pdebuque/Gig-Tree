@@ -2,6 +2,6 @@ import {Typography} from '@mui/material'
 
 export default function CreateSchedule() {
   return(
-    <Typography variant = 'h5'>Schedule</Typography>
+    <Typography variant = 'h6'>add dates</Typography>
   )
 }

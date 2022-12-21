@@ -5,6 +5,7 @@ import user from './user.reducer';
 //todo: import all other reducers here
 import project from './project.reducer';
 import events from './event.reducer'
+import newEvent from './newEvent.reducer'
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
   errors, // contains registrationMessage and loginMessage
   user, // will have an id and username if someone is logged in
   project,
-  events
+  events,
+  newEvent
 });
 
 export default rootReducer;
