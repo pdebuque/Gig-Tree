@@ -1,5 +1,10 @@
 import { Container, TextField, Button } from '@mui/material'
-import { useState } from 'react'
+import { useState } from 'react';
+
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 
 
 export default function DateInput({ dates, setDates }) {
@@ -35,62 +40,66 @@ export default function DateInput({ dates, setDates }) {
 
   return (
 
-    <Container>
-      <form onSubmit={handleSubmit}>
-        <TextField
-          name='title-input'
-          label='title'
-          size='small'
-          value={dateInfo.name}
-          onChange={e => setDateInfo({ ...dateInfo, name: e.target.value })}
-        />
-        <TextField
+    <Container component='form' onSubmit={handleSubmit}>
+      {JSON.stringify(dateInfo)}
+      <TextField
+        name='title-input'
+        label='title'
+        size='small'
+        value={dateInfo.name}
+        onChange={e => setDateInfo({ ...dateInfo, name: e.target.value })}
+      />
+
+      <LocalizationProvider dateAdapter={AdapterMoment} >
+        <DatePicker
           name='date-input'
           label='date'
-          size='small'
-          value={dateInfo.date}
-          onChange={e => setDateInfo({ ...dateInfo, date: e.target.value })}
+          value={dateInfo.date || null}
+          onChange={value => {
+            console.log(value._d.toDateString())
+            setDateInfo({ ...dateInfo, date: value._d.toLocaleDateString() })
+          }}
+          renderInput={(params) => <TextField size='small' {...params} />}
         />
-        <TextField
-          name='start-input'
-          label='start'
-          size='small'
-          value={dateInfo.start}
-          onChange={e => setDateInfo({ ...dateInfo, start: e.target.value })}
+        <TimePicker
+          label="start"
+          value={dateInfo.start || null}
+          onChange={value => setDateInfo({ ...dateInfo, start: value._d.toLocaleTimeString() })}
+          renderInput={(params) => <TextField size='small' {...params} />}
         />
-        <TextField
-          name='end-input'
-          label='end'
-          size='small'
-          value={dateInfo.end}
-          onChange={e => setDateInfo({ ...dateInfo, end: e.target.value })}
-        />
-        <TextField
-          name='location-input'
-          label='location'
-          size='small'
-          value={dateInfo.location}
-          onChange={e => setDateInfo({ ...dateInfo, location: e.target.value })}
-        />
-        <TextField
-          name='type-input'
-          label='type'
-          size='small'
-          value={dateInfo.type}
-          onChange={e => setDateInfo({ ...dateInfo, type: e.target.value })}
-        />
-        <TextField
-          name='notes-input'
-          label='notes'
-          size='small'
-          value={dateInfo.notes}
-          onChange={e => setDateInfo({ ...dateInfo, notes: e.target.value })}
-          multiline
-          rows={3}
-        />
-        <Button type='submit'>add</Button>
-      </form>
 
+        <TimePicker
+          label="end"
+          value={dateInfo.end || null}
+          onChange={value => setDateInfo({ ...dateInfo, end: value._d.toLocaleTimeString() })}
+          renderInput={(params) => <TextField size='small' {...params} />}
+        />
+
+      </LocalizationProvider>
+      <TextField
+        name='location-input'
+        label='location'
+        size='small'
+        value={dateInfo.location}
+        onChange={e => setDateInfo({ ...dateInfo, location: e.target.value })}
+      />
+      <TextField
+        name='type-input'
+        label='type'
+        size='small'
+        value={dateInfo.type}
+        onChange={e => setDateInfo({ ...dateInfo, type: e.target.value })}
+      />
+      <TextField
+        name='notes-input'
+        label='notes'
+        size='small'
+        value={dateInfo.notes}
+        onChange={e => setDateInfo({ ...dateInfo, notes: e.target.value })}
+        multiline
+        rows={3}
+      />
+      <Button type='submit'>add</Button>
     </Container>
   )
 }
