@@ -3,7 +3,7 @@ import {useState} from 'react'
 
 export default function RepertoireItem({ setGeneral, generalInfo }) {
 
-const [thisPiece, setThisPiece] = useState({title:'', composer: ''})
+const [thisPiece, setThisPiece] = useState({name:'', composer: ''})
 
   return (
     <Container>
@@ -12,8 +12,8 @@ const [thisPiece, setThisPiece] = useState({title:'', composer: ''})
         name='title-input'
         label='title'
         size='small'
-        value = {thisPiece.title}
-        onChange = {(e)=>setThisPiece({...thisPiece, title: e.target.value})}
+        value = {thisPiece.name}
+        onChange = {(e)=>setThisPiece({...thisPiece, name: e.target.value})}
       />
       <TextField
         name='composer-input'

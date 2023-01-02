@@ -9,7 +9,7 @@ export default function DateInput({ dates, setDates }) {
   // todo: align date info data names with database columns
   const [dateInfo, setDateInfo] =
     useState({
-      title: '',
+      name: '',
       date: '',
       start: '',
       end: '',
@@ -23,7 +23,7 @@ export default function DateInput({ dates, setDates }) {
     console.log('adding date info to array: ', dateInfo)
     setDates([...dates, dateInfo])
     setDateInfo({
-      title: '',
+      name: '',
       date: '',
       start: '',
       end: '',
@@ -41,8 +41,8 @@ export default function DateInput({ dates, setDates }) {
           name='title-input'
           label='title'
           size='small'
-          value={dateInfo.title}
-          onChange={e => setDateInfo({ ...dateInfo, title: e.target.value })}
+          value={dateInfo.name}
+          onChange={e => setDateInfo({ ...dateInfo, name: e.target.value })}
         />
         <TextField
           name='date-input'
