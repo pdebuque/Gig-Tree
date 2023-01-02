@@ -1,27 +1,40 @@
 import { Typography, Button, Container, Grid, TextField, InputAdornment } from '@mui/material'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import SearchIcon from '@mui/icons-material/Search';
 import CollaboratorItem from '../CollaboratorItem/CollaboratorItem';
 
 export default function CreateInvite({ setTab }) {
 
+  // todo: need to find all available collaborators. do this through a redux-saga call
+
+  useEffect(() => {
+    console.log('useEffect: dispatch all users')
+    dispatch({ type: 'FETCH_ALL_USERS' })
+  }, [])
+
   const dispatch = useDispatch();
   const newProject = useSelector(store => store.newProject);
+
+  // initialize search results with all users. future actions will filter
+  const [searchResults, setSearchResults] = useState(useSelector(store => store.allUsers));
+
+  // use local state to handle filtered searches
+  // const [searchResults, setSearchResults] = useSelector(store=>) 
 
   const [collaborators, setCollaborators] = useState(newProject.collaborators)
 
   const [invited, setInvited] = useState([])
-  const [search, setSearch] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
 
   const handleSearch = (e) => {
-    setSearch(e.target.value)
-    setCollaborators([...collaborators].filter(collaborator => collaborator.name.toLowerCase().includes(search.toLowerCase()) || collaborators.instrument.toLowerCase()).includes(search.toLowerCase()))
+    setSearchTerm(e.target.value)
+    setSearchResults([...searchResults].filter(collaborator => collaborator.name.toLowerCase().includes(searchTerm.toLowerCase()) || collaborator.instrument.toLowerCase()).includes(searchTerm.toLowerCase()))
   }
 
   const handleSubmit = () => {
     console.log('sending collaborators to redux');
-    dispatch({type: 'SET_COLLABORATORS', payload: collaborators})
+    dispatch({ type: 'SET_COLLABORATORS', payload: collaborators })
     setTab(3)
   }
 
@@ -40,14 +53,14 @@ export default function CreateInvite({ setTab }) {
             </InputAdornment>
           ),
         }}
-        value={search}
-        onChange={(e) => handleSearch(e)}
+        value={searchTerm}
+        onChange={handleSearch}
       />
       <Grid container spacing={1}>
         <Grid item xs={8}>
           {/* all collaborators here */}
-          {collaborators.map(collaborator => {
-            return (<CollaboratorItem collaborator={collaborator} />)
+          {searchResults.map(result => {
+            return (<CollaboratorItem collaborator={result} />)
           })}
         </Grid>
         <Grid item xs={4}>

@@ -11,7 +11,8 @@ export default function DateInput({ dates, setDates }) {
 
   // state holds the current data. on submit, push it to the dates array in the container
 
-  // todo: align date info data names with database columns
+  // todo: formatting. check <Stack> component
+
   const [dateInfo, setDateInfo] =
     useState({
       name: '',

@@ -14,7 +14,7 @@ export default function DateDisplay({ date }) {
   return (
     <Container>
       <Paper sx={{ padding: .5 }}>
-        <Typography variant='h5'>{date.title}
+        <Typography variant='h5'>{date.name}
           <IconButton onClick={handleDelete}>
             <DeleteIcon />
           </IconButton>

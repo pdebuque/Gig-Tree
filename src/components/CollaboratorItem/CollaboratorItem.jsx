@@ -1,5 +1,8 @@
+import {Container, Typography, Button} from '@mui/material'
+
 export default function CollaboratorItem({collaborator}) {
+  
   return (
-    <div>collaborator item</div>
+    <div>{JSON.stringify(collaborator)}collaborator item</div>
   )
 }
