@@ -46,7 +46,7 @@ export default function CreateProject() {
 
   // render a tabgroup component and several tab pages, each corresponding to a separate step in the event creation process
 
-  const steps = [<CreateGeneral />, <CreateSchedule />, <CreateInvite />, <CreateReview />]
+  const steps = [<CreateGeneral setTab={setTab} />, <CreateSchedule setTab={setTab} />, <CreateInvite setTab={setTab} />, <CreateReview setTab={setTab} />]
 
   return (
     <Container>
