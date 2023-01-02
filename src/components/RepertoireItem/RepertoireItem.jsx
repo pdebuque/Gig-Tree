@@ -22,6 +22,7 @@ const [thisPiece, setThisPiece] = useState({title:'', composer: ''})
         value = {thisPiece.composer}
         onChange = {(e)=>setThisPiece({...thisPiece, composer: e.target.value})}
       />
+      {/* on clicking this button, send this piece info into the generalInfo state held locally in create general */}
       <Button onClick={()=>setGeneral({...generalInfo, repertoire: [...generalInfo.repertoire, thisPiece]})}>save piece</Button>
     </Container>
   )

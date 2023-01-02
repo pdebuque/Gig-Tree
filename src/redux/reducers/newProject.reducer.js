@@ -1,5 +1,7 @@
 const newProjectReducer = (state = { name: '', ensemble_name: '', description: '',repertoire: [], dates: [], collaborators: [] }, action) => {
   switch (action.type) {
+    case 'SET_NEW_PROJECT':
+      return action.payload
     case 'SET_GENERAL':
       return {...state, name: action.payload.name, ensemble_name: action.payload.ensemble_name, description: action.payload.description, repertoire: action.payload.repertoire};
     case 'SET_SCHEDULE':
