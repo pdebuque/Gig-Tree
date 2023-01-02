@@ -23,7 +23,7 @@ import { useState } from 'react'
 import Calendar from 'react-calendar';
 import { Box, Tabs, Tab, Grid, Paper, Typography, Container } from '@mui/material';
 import './calendar.css';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import TabPanel from '../_Assets/TabPanel/TabPanel'
 import CreateGeneral from '../CreateGeneral/CreateGeneral';
@@ -33,15 +33,18 @@ import CreateReview from '../CreateReview/CreateReview';
 
 export default function CreateProject() {
 
+  const newProject = useSelector(store=>store.newProject)
+
+
   // const sampleDates = ['12/5/2022'];
   const [tabValue, setTab] = useState(0);
 
-  const [newProject, setProject] = useState({});
-  const [date, setDate] = useState('');
+  // const [newProject, setProject] = useState({});
+  // const [date, setDate] = useState('');
 
   const handleClick = (value) => {
     console.log(value)
-    setDate(value)
+    // setDate(value)
   }
 
   // render a tabgroup component and several tab pages, each corresponding to a separate step in the event creation process
@@ -50,6 +53,7 @@ export default function CreateProject() {
 
   return (
     <Container>
+      newProject: {JSON.stringify(newProject)}
       <Typography variant='h5'>Create new project</Typography>
       <Box sx={{ paddingX: 3, mt: 2 }}>
 

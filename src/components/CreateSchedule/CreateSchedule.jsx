@@ -11,9 +11,9 @@ export default function CreateSchedule({ setTab }) {
   const [dates, setDates] = useState(newProject.dates)
 
   const handleSubmit = () => {
+    console.log('submitting dates to redux')
     dispatch({ type: 'SET_SCHEDULE', payload: dates })
-
-    setTab(2)
+    setTab(2);
   }
 
   return (
