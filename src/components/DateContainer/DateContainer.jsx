@@ -3,11 +3,9 @@ import { useState } from 'react'
 import DateInput from '../DateInput/DateInput'
 import DateDisplay from '../DateDisplay/DateDisplay'
 
-export default function DateInputContainer() {
+export default function DateInputContainer({dates,setDates}) {
 
-  // dates is an array of objects. submitting date on the left pushes into the array, which then renders on the right hand side
-  // eventually the initial state should hook up to redux
-  const [dates, setDates] = useState([])
+
 
   return (
     <Container>

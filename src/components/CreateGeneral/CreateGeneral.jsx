@@ -5,35 +5,36 @@ each step of the create project dialogue sends info to the store
 import { Typography, Container, Button, TextField } from '@mui/material';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux';
 
 import RepertoireContainer from '../RepertoireContainer/RepertoireContainer';
 import RepertoireItem from '../RepertoireItem/RepertoireItem';
 
 export default function CreateReview({setTab}) {
 
+  const dispatch = useDispatch();
+
   // when the component renders, fetch the data from redux: newProject. On first render, this should populate empty fields.
 
   // i don't think this needs to use a saga, since the new event is not anywhere in the database. 
 
   // saga will be necessary on the last page to send the info to the server. reducer will then receive an action to clear the state
-  const newEvent = useSelector(store => store.newEvent)
+  const newProject = useSelector(store => store.newProject)
 
   // on submit, save the current state data into newProject. Then, if a user navigates back to the tab their data will be saved
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('in handleSubmit on CreateReview');
-    setTab(1)
-
+    dispatch({type: 'SET_GENERAL', payload: generalInfo})
+    setTab(1);
   }
 
   // local state info to send to redux in handleSubmit
-  const [generalInfo, setGeneral] = useState({ name: newEvent.name, ensemble_name: newEvent.ensemble_name, description: newEvent.description })
+  const [generalInfo, setGeneral] = useState({ name: newProject.name, ensemble_name: newProject.ensemble_name, description: newProject.description })
 
   // this array will receive elements from the add repertoire button, then render
   const [repertoire, setRepertoire] = useState([])
-
 
   // logic for creating new repertoire entry fields
   const addRepertoire = () => {
@@ -78,7 +79,7 @@ export default function CreateReview({setTab}) {
       >add repertoire</Button>
 
 
-      <Button sx={{ textAlign: 'right' }} type='submit'>create schedule</Button>
+      <Button sx={{ textAlign: 'right' }} type='submit'>save and create schedule</Button>
 
     </Container>
   )
