@@ -91,8 +91,8 @@ router.post('/', async (req, res) => {
 
     // insert collaborators into user_project table. collaborator is an array of numbers, each representing the user's id
     await Promise.all(collaborators.map(collaborator => {
-      const insertCollabText = `INSERT INTO "user_project" ("user_id", "project_id) VALUES ($1, $2)`;
-      const insertCollabValues = [collaborator, projectId];
+      const insertCollabText = `INSERT INTO "user_project" ("user_id", "project_id") VALUES ($1, $2)`;
+      const insertCollabValues = [collaborator.id, projectId];
       return client.query(insertCollabText, insertCollabValues);
     }));
 

@@ -3,7 +3,7 @@ import { useState } from 'react'
 import DateInput from '../DateInput/DateInput'
 import DateDisplay from '../DateDisplay/DateDisplay'
 
-export default function DateInputContainer({dates,setDates}) {
+export default function DateInputContainer({ dates, setDates }) {
 
 
 
@@ -13,20 +13,20 @@ export default function DateInputContainer({dates,setDates}) {
       <Grid container spacing={1}>
         <Grid item xs={5}>
           <Paper>
-            <DateInput setDates = {setDates} dates = {dates}/>
+            <DateInput setDates={setDates} dates={dates} />
           </Paper>
         </Grid>
         <Grid item xs={7}>
           <Paper>
 
-          </Paper>
-          {/* date display */}
-          {dates.map(date=>{
-            return (
-              <DateDisplay date = {date}/>
-            )
-          })}
 
+            {/* date display */}
+            {dates.map(date => {
+              return (
+                <DateDisplay date={date} />
+              )
+            })}
+          </Paper>
         </Grid>
       </Grid>
     </Container>

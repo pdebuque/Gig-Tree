@@ -1,4 +1,4 @@
-import { Container, TextField, Button } from '@mui/material'
+import { Container, TextField, Button, Stack } from '@mui/material'
 import { useState } from 'react';
 
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
@@ -43,6 +43,7 @@ export default function DateInput({ dates, setDates }) {
 
     <Container component='form' onSubmit={handleSubmit}>
       {JSON.stringify(dateInfo)}
+      <Stack spacing = {1}>
       <TextField
         name='title-input'
         label='title'
@@ -101,6 +102,7 @@ export default function DateInput({ dates, setDates }) {
         rows={3}
       />
       <Button type='submit'>add</Button>
+      </Stack>
     </Container>
   )
 }

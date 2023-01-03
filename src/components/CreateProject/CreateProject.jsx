@@ -19,7 +19,7 @@ save all into redux store as newProject
 
 */
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Calendar from 'react-calendar';
 import { Box, Tabs, Tab, Grid, Paper, Typography, Container } from '@mui/material';
 import './calendar.css';
@@ -33,7 +33,14 @@ import CreateReview from '../CreateReview/CreateReview';
 
 export default function CreateProject() {
 
-  const newProject = useSelector(store=>store.newProject)
+  const dispatch = useDispatch();
+  const newProject = useSelector(store => store.newProject)
+
+  useEffect(() => {
+    console.log('useEffect: dispatch all users')
+    dispatch({ type: 'FETCH_ALL_USERS' })
+  }, [])
+
 
 
   // const sampleDates = ['12/5/2022'];
@@ -51,9 +58,10 @@ export default function CreateProject() {
 
   const steps = [<CreateGeneral setTab={setTab} />, <CreateSchedule setTab={setTab} />, <CreateInvite setTab={setTab} />, <CreateReview setTab={setTab} />]
 
+
+
   return (
     <Container>
-      newProject: {JSON.stringify(newProject)}
       <Typography variant='h5'>Create new project</Typography>
       <Box sx={{ paddingX: 3, mt: 2 }}>
 
@@ -72,7 +80,7 @@ export default function CreateProject() {
 
       {steps.map((step, i) => {
         return (
-          <TabPanel key ={i} value={tabValue} index={i}>
+          <TabPanel key={i} value={tabValue} index={i}>
             {step}
           </TabPanel>
         )
