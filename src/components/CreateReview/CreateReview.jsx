@@ -1,14 +1,20 @@
 import { Typography, Button, Container } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux'
 
-export default function CreateReview() {
+export default function CreateReview({ createMode, setCreateOpen }) {
 
   const dispatch = useDispatch();
-  const newProject = useSelector(store=>store.newProject)
+  const newProject = useSelector(store => store.newProject)
 
-  const handleSubmit=()=>{
+  const handleSubmit = () => {
     console.log('submitting project');
-    dispatch({type: 'ADD_PROJECT', payload: newProject})
+    if (createMode) {
+      dispatch({ type: 'ADD_PROJECT', payload: newProject })
+    }
+    else {
+      dispatch({ type: 'EDIT_PROJECT', payload: newProject })
+    }
+    setCreateOpen(false);
   }
 
   return (

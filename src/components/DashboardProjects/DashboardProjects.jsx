@@ -26,20 +26,26 @@ export default function DashboardProjects() {
   const projects = useSelector(store => store.project)
   const [createOpen, setCreateOpen] = useState(false)
 
+  // this dictates create or edit mode of the entire project creation modal
+  const [createMode, setCreateMode] = useState(true)
+
   return (
     <Container >
       <Typography variant='h5'>
         Projects
         <IconButton
           aria-label="add-project"
-          onClick={() => setCreateOpen(true)}>
+          onClick={() => {
+            setCreateMode(true)
+            setCreateOpen(true)
+            }}>
           <ControlPointIcon />
         </IconButton>
       </Typography>
       <Box sx={insetStyle}>
         {projects.map(project => {
           return (
-            <DashboardProjectItem key={project.id} project={project} />
+            <DashboardProjectItem key={project.id} project={project} setCreateOpen = {setCreateOpen} setCreateMode={setCreateMode} />
           )
         })}
       </Box>
@@ -47,7 +53,7 @@ export default function DashboardProjects() {
         open={createOpen}
       >
         <Box sx={largeModal}>
-          <CreateProject />
+          <CreateProject createMode={createMode} setCreateOpen={setCreateOpen}/>
 
 
         </Box>

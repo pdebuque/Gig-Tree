@@ -21,7 +21,7 @@ save all into redux store as newProject
 
 import { useState, useEffect } from 'react'
 import Calendar from 'react-calendar';
-import { Box, Tabs, Tab, Grid, Paper, Typography, Container } from '@mui/material';
+import { Box, Tabs, Tab, Grid, Paper, Typography, Container, Button } from '@mui/material';
 import './calendar.css';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -31,7 +31,7 @@ import CreateSchedule from '../CreateSchedule/CreateSchedule';
 import CreateInvite from '../CreateInvite/CreateInvite';
 import CreateReview from '../CreateReview/CreateReview';
 
-export default function CreateProject() {
+export default function CreateProject({ createMode, setCreateOpen }) {
 
   const dispatch = useDispatch();
   const newProject = useSelector(store => store.newProject)
@@ -40,8 +40,6 @@ export default function CreateProject() {
     console.log('useEffect: dispatch all users')
     dispatch({ type: 'FETCH_ALL_USERS' })
   }, [])
-
-
 
   // const sampleDates = ['12/5/2022'];
   const [tabValue, setTab] = useState(0);
@@ -54,15 +52,20 @@ export default function CreateProject() {
     // setDate(value)
   }
 
+  const handleClose = () => {
+    setCreateOpen(false);
+    dispatch({ type: 'SET_NEW_PROJECT', payload: { name: '', ensemble_name: '', description: '', repertoire: [], dates: [], collaborators: [] } })
+  }
+
   // render a tabgroup component and several tab pages, each corresponding to a separate step in the event creation process
 
-  const steps = [<CreateGeneral setTab={setTab} />, <CreateSchedule setTab={setTab} />, <CreateInvite setTab={setTab} />, <CreateReview setTab={setTab} />]
-
+  const steps = [<CreateGeneral setTab={setTab} />, <CreateSchedule setTab={setTab} />, <CreateInvite setTab={setTab} />, <CreateReview createMode={createMode} setCreateOpen = {setCreateOpen} setTab={setTab} />]
 
 
   return (
     <Container>
-      <Typography variant='h5'>Create new project</Typography>
+      {/* {JSON.stringify(newProject)} */}
+      <Typography variant='h5'>{createMode ? 'Create new project' : `Edit project - ${newProject.name}`}</Typography>
       <Box sx={{ paddingX: 3, mt: 2 }}>
 
         <Tabs
@@ -86,7 +89,7 @@ export default function CreateProject() {
         )
       })}
 
-
+      <Button onClick={handleClose}>cancel</Button>
     </Container>
   )
 }

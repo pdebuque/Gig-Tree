@@ -6,7 +6,6 @@ import CollaboratorItem from '../CollaboratorItem/CollaboratorItem';
 
 export default function CreateInvite({ setTab }) {
 
-  // todo: need to find all available collaborators. do this through a redux-saga call
 
 
 
@@ -17,13 +16,12 @@ export default function CreateInvite({ setTab }) {
   // initialize search results with all users. future actions will filter
   const [searchResults, setSearchResults] = useState(useSelector(store => store.allUsers));
   console.log('search results: ', searchResults)
-  //! this is currently not working bc of where the fetch users is being called. move it to parent and pass it as props to fix.
   console.log('allUsers: ', useSelector(store => store.allUsers))
 
   // use local state to handle filtered searches
   // const [searchResults, setSearchResults] = useSelector(store=>) 
 
-  const [invited, setInvited] = useState(newProject.collaborators)
+  const [invited, setInvited] = useState([...newProject.collaborators])
   const [searchTerm, setSearchTerm] = useState('');
 
   const filter = (e) => {

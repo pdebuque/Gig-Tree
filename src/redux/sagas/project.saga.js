@@ -12,6 +12,7 @@ project saga needs to handle:
 function* projectsSaga() {
   yield takeEvery('GET_PROJECTS', getProjects)
   yield takeEvery('ADD_PROJECT', addProject)
+  yield takeEvery('EDIT_PROJECT', editProject)
 };
 
 function* getProjects(action) {
@@ -39,6 +40,19 @@ function* addProject(action) {
   }
   catch (err) {
     console.log('could not add project', err)
+  }
+}
+
+function* editProject(action) {
+  try {
+    console.log('editing project with id', action.payload.id)
+    yield axios.put(`/api/project/${action.payload.id}`, action.payload)
+
+    // empty out newProject
+    yield put({ type: 'SET_NEW_PROJECT', payload: { name: '', ensemble_name: '', description: '', repertoire: [], dates: [], collaborators: [] } })
+  }
+  catch(err) {
+    console.log('could not edit project', err)
   }
 }
 

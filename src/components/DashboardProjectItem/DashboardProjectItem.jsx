@@ -9,18 +9,37 @@ This component is a single project displayed within the dashboard projects sideb
 
 //todo: sort by date
 
+
+import './DashboardProjectItem.css';
 import { listItemStyle } from '../../_style/listItemStyle.jsx'
-import { Box, Typography, Collapse, Button} from '@mui/material';
+import { Box, Typography, Collapse, Button, IconButton } from '@mui/material';
 import { useState } from 'react';
-import {useNavigate} from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';;
 
-import './DashboardProjectItem.css'
 
-export default function DashboardProjectItem({ project }) {
+export default function DashboardProjectItem({ project, setCreateOpen, setCreateMode }) {
 
-  const navigate=useNavigate();
+  const user = useSelector(store => store.user)
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [isCollapsed, setCollapsed] = useState(false)
+
+  // upon clicking edit, load current project info into create project modal
+    // dispatch: set the redux new project equal to project
+    // need to conditionally render the modal for edit vs create, as well as the functionality accordingly
+
+  const handleEditClick = () => {
+    dispatch({type: 'SET_NEW_PROJECT', payload: project});
+    setCreateMode(false);
+    setCreateOpen(true);
+  }
+
+  // delete onclick: confirmation modal
 
   return (
     <Box
@@ -28,10 +47,21 @@ export default function DashboardProjectItem({ project }) {
       sx={listItemStyle}
       onClick={() => setCollapsed(!isCollapsed)}
     >
-      <Box sx = {{ml: 1}}>
+      {/* {JSON.stringify(project)} */}
+      <Box sx={{ ml: 1, display: 'flex', justifyContent: 'space-between' }}>
         <Typography variant='h6'>{project.name}</Typography>
-        <Typography variant='subtitle2'>with {project.ensemble_name}</Typography>
+
+        {project.owner_id === user.id &&
+          <Box>
+            <IconButton
+              sx={{ width: 20, height: 20 }}
+              onClick={handleEditClick}
+            ><EditIcon sx={{ width: 16, height: 16 }} /></IconButton>
+            <IconButton sx={{ width: 20, height: 20 }}><DeleteIcon sx={{ width: 16, height: 16 }} /></IconButton>
+          </Box>
+        }
       </Box>
+      <Typography variant='subtitle2'>with {project.ensemble_name}</Typography>
       <Collapse
         in={isCollapsed}
       >
@@ -43,8 +73,8 @@ export default function DashboardProjectItem({ project }) {
             size='small'
             color='inherit'
             sx={{ textAlign: 'right', typography: 'body2', mr: 1 }}
-            endIcon = {<ArrowForwardIcon />} 
-            onClick={()=>navigate(`/project/${project.id}`)}
+            endIcon={<ArrowForwardIcon />}
+            onClick={() => navigate(`/project/${project.id}`)}
           >view project page</Button>
         </Box>
       </Collapse>
