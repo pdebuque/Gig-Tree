@@ -17,15 +17,13 @@ import { largeModal } from '../../_style/modalStyle'
 export default function DashboardProjects() {
 
   // get the user's projects from the store
-
+  const projects = useSelector(store => store.project)
+  const [createOpen, setCreateOpen] = useState(false)
   const dispatch = useDispatch();
   useEffect(() => {
     console.log('getting user projects in dashboard');
     dispatch({ type: 'GET_PROJECTS' });
-  }, [])
-
-  const projects = useSelector(store => store.project)
-  const [createOpen, setCreateOpen] = useState(false)
+  }, [createOpen])``
 
   // this dictates create or edit mode of the entire project creation modal
   const [createMode, setCreateMode] = useState(true)
@@ -39,19 +37,19 @@ export default function DashboardProjects() {
           onClick={() => {
             setCreateMode(true)
             setCreateOpen(true)
-            }}>
+          }}>
           <ControlPointIcon />
         </IconButton>
       </Typography>
       <Box sx={insetStyle}>
         {projects.map(project => {
           return (
-            <DashboardProjectItem 
-              key={project.id} 
-              project={project} 
-              setCreateOpen = {setCreateOpen} 
+            <DashboardProjectItem
+              key={project.id}
+              project={project}
+              setCreateOpen={setCreateOpen}
               setCreateMode={setCreateMode}
-              />
+            />
           )
         })}
       </Box>
@@ -59,13 +57,13 @@ export default function DashboardProjects() {
         open={createOpen}
       >
         <Box sx={largeModal}>
-          <CreateProject createMode={createMode} setCreateOpen={setCreateOpen}/>
+          <CreateProject createMode={createMode} setCreateOpen={setCreateOpen} />
 
 
         </Box>
       </Modal>
 
-      
+
     </Container>
   )
 }
