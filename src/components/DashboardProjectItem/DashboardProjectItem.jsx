@@ -12,19 +12,23 @@ This component is a single project displayed within the dashboard projects sideb
 
 import './DashboardProjectItem.css';
 import { listItemStyle } from '../../_style/listItemStyle.jsx'
-import { Box, Typography, Collapse, Button, IconButton } from '@mui/material';
+import { Box, Typography, Collapse, Button, IconButton, Modal } from '@mui/material';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';;
+import EditIcon from '@mui/icons-material/Edit';
+import { largeModal } from '../../_style/modalStyle';
+
+import DeleteProjectModal from '../DeleteProjectModal/DeleteProjectModal';
 
 
-export default function DashboardProjectItem({ project, setCreateOpen, setCreateMode }) {
+export default function DashboardProjectItem({ project, setCreateOpen, setCreateMode}) {
 
   const user = useSelector(store => store.user)
-
+  
+  const [deleteOpen, setDeleteOpen] = useState(false)
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isCollapsed, setCollapsed] = useState(false)
@@ -39,6 +43,10 @@ export default function DashboardProjectItem({ project, setCreateOpen, setCreate
     setCreateOpen(true);
   }
 
+  const handleDeleteClick = ()=>{
+    setDeleteOpen(true)
+  }
+
   // delete onclick: confirmation modal
 
   return (
@@ -47,7 +55,7 @@ export default function DashboardProjectItem({ project, setCreateOpen, setCreate
       sx={listItemStyle}
       onClick={() => setCollapsed(!isCollapsed)}
     >
-      {/* {JSON.stringify(project)} */}
+      {JSON.stringify(project)}
       <Box sx={{ ml: 1, display: 'flex', justifyContent: 'space-between' }}>
         <Typography variant='h6'>{project.name}</Typography>
 
@@ -57,7 +65,9 @@ export default function DashboardProjectItem({ project, setCreateOpen, setCreate
               sx={{ width: 20, height: 20 }}
               onClick={handleEditClick}
             ><EditIcon sx={{ width: 16, height: 16 }} /></IconButton>
-            <IconButton sx={{ width: 20, height: 20 }}><DeleteIcon sx={{ width: 16, height: 16 }} /></IconButton>
+            <IconButton sx={{ width: 20, height: 20 }}
+              onClick = {handleDeleteClick}
+              ><DeleteIcon sx={{ width: 16, height: 16 }} /></IconButton>
           </Box>
         }
       </Box>
@@ -78,6 +88,17 @@ export default function DashboardProjectItem({ project, setCreateOpen, setCreate
           >view project page</Button>
         </Box>
       </Collapse>
+      <Modal
+        open={deleteOpen}
+        >
+          <Box sx={largeModal}>
+            <DeleteProjectModal
+              setDeleteOpen={setDeleteOpen}
+              projectID={project.id}
+              />
+          </Box>
+      </Modal>
+      
     </Box>
   )
 

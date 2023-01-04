@@ -34,7 +34,7 @@ router.get('/', async (req, res) => {
 
     // 1. general info
     const generalInfoResults = await client.query(`
-      SELECT * FROM project
+      SELECT project.* FROM project
       JOIN user_project ON user_project.project_id = project.id
       WHERE user_project.user_id = $1
     `, [req.user.id]);
@@ -43,28 +43,34 @@ router.get('/', async (req, res) => {
 
     // 2. collaborators
     const collaboratorResults = await client.query(`
-    SELECT project.id, json_agg(collaborator) AS collaborators FROM project
-    JOIN user_project ON user_project.project_id=project.id
-    JOIN "user" "collaborator" ON "collaborator".id = user_project.user_id
-    GROUP BY project.id; 
+      SELECT project.id, json_agg(collaborator) AS collaborators FROM project
+      JOIN user_project ON user_project.project_id=project.id
+      JOIN "user" "collaborator" ON "collaborator".id = user_project.user_id
+      GROUP BY project.id; 
     `)
 
+    console.log('projects', allProjects)
+    console.log('collaborator results: ', collaboratorResults.rows)
+
     // attach collaborator arrays to corresponding project object by matching project id
-    for (let result of collaboratorResults.rows) {
-      for (let project of allProjects) {
+    for (let project of allProjects) {
+      console.log('matching collaborators for project id:', project.id)
+      for  (let result of collaboratorResults.rows){
+        console.log('collaborators for project: ', result.id)
         if (project.id===result.id) {
           project.collaborators = result.collaborators
         }
       }
+      if (!project.collaborators) project.collaborators = []
     }
 
     // 3. repertoire
     const repertoireResults = await client.query(`
-    SELECT project.id, json_agg(piece.*) AS repertoire FROM project
-    JOIN user_project ON user_project.project_id = project.id
-    JOIN piece ON piece.project_id=project.id
-    WHERE user_project.user_id = $1
-    GROUP BY project.id;
+      SELECT project.id, json_agg(piece.*) AS repertoire FROM project
+      JOIN user_project ON user_project.project_id = project.id
+      JOIN piece ON piece.project_id=project.id
+      WHERE user_project.user_id = $1
+      GROUP BY project.id;
     `, [req.user.id])
 
     // attach repertoire to corresponding projects by matching project id
@@ -276,7 +282,14 @@ router.put('/:id', async (req, res) => {
 
 router.delete('/:id', (req, res) => {
   console.log('deleting project no. ', req.params.id);
-  res.sendStatus(200)
+
+  const deleteQuery = `DELETE FROM project WHERE project.id = $1`
+  pool.query(deleteQuery, [req.params.id])
+    .then(()=>{
+      console.log('successfully deleted')
+      res.sendStatus(200)
+    })
+    .catch(err=> console.log('could not delete!', err))
 }
 )
 

@@ -5,6 +5,7 @@ it will get all of the projects that user is on and that user owns from the serv
 */
 import { insetStyle } from '../../_style/projectStyle'
 import DashboardProjectItem from '../DashboardProjectItem/DashboardProjectItem';
+import DeleteProjectModal from '../DeleteProjectModal/DeleteProjectModal'
 import CreateProject from '../CreateProject/CreateProject';
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -45,7 +46,12 @@ export default function DashboardProjects() {
       <Box sx={insetStyle}>
         {projects.map(project => {
           return (
-            <DashboardProjectItem key={project.id} project={project} setCreateOpen = {setCreateOpen} setCreateMode={setCreateMode} />
+            <DashboardProjectItem 
+              key={project.id} 
+              project={project} 
+              setCreateOpen = {setCreateOpen} 
+              setCreateMode={setCreateMode}
+              />
           )
         })}
       </Box>
@@ -58,6 +64,8 @@ export default function DashboardProjects() {
 
         </Box>
       </Modal>
+
+      
     </Container>
   )
 }

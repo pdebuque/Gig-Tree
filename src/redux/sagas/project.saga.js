@@ -13,6 +13,7 @@ function* projectsSaga() {
   yield takeEvery('GET_PROJECTS', getProjects)
   yield takeEvery('ADD_PROJECT', addProject)
   yield takeEvery('EDIT_PROJECT', editProject)
+  yield takeEvery('DELETE_PROJECT', deleteProject)
 };
 
 function* getProjects(action) {
@@ -53,6 +54,17 @@ function* editProject(action) {
   }
   catch(err) {
     console.log('could not edit project', err)
+  }
+};
+
+function* deleteProject(action) {
+  try{
+    console.log('deleting project with id ', action.payload);
+    yield axios.delete(`/api/project/${action.payload}`);
+
+  }
+  catch(err) {
+    console.log('could not delete project', err)
   }
 }
 

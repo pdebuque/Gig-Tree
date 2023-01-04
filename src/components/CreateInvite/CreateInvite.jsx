@@ -6,22 +6,31 @@ import CollaboratorItem from '../CollaboratorItem/CollaboratorItem';
 
 export default function CreateInvite({ setTab }) {
 
-
-
-
   const dispatch = useDispatch();
   // newProject is temporary holding place for the current project
   const newProject = useSelector(store => store.newProject);
 
+  const [invited, setInvited] = useState([...newProject.collaborators])
+  const invitedIds = invited.map(user=>user.id)
+  console.log('invited ids: ', invitedIds)
   // initialize search results with all users. future actions will filter
-  const [searchResults, setSearchResults] = useState(useSelector(store => store.allUsers));
+  const [searchResults, setSearchResults] = useState(useSelector(store => store.allUsers).filter(user=>!invitedIds.includes(user.id)));
   console.log('search results: ', searchResults)
   console.log('allUsers: ', useSelector(store => store.allUsers))
 
   // use local state to handle filtered searches
   // const [searchResults, setSearchResults] = useSelector(store=>) 
 
-  const [invited, setInvited] = useState([...newProject.collaborators])
+
+  /* 
+  rethink columns of people in create/edit project:
+
+  left side: search results. searchResults initializes as all users that have not been invited.
+
+  right side: invited. initializes as newProject collaborators
+  */
+
+
   const [searchTerm, setSearchTerm] = useState('');
 
   const filter = (e) => {
@@ -68,6 +77,7 @@ export default function CreateInvite({ setTab }) {
             {JSON.stringify(searchResults.map(result=>result.id))}
             {searchResults.map(result => {
               return (<CollaboratorItem
+              key = {result.id}
                 collaborator={result}
                 searchResults={searchResults}
                 setSearchResults={setSearchResults}
@@ -82,6 +92,7 @@ export default function CreateInvite({ setTab }) {
           {JSON.stringify(invited.map(result=>result.id))}
           {invited.map(collaborator => {
             return (<CollaboratorItem
+              key = {collaborator.id}
               collaborator={collaborator}
               searchResults={searchResults}
               setSearchResults={setSearchResults}
