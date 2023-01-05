@@ -4,9 +4,10 @@ import user from './user.reducer';
 
 //todo: import all other reducers here
 import project from './project.reducer';
-import events from './event.reducer'
+import events from './date.reducer'
 import newProject from './newProject.reducer'
 import allUsers from './allUsers.reducer'
+import dates from './date.reducer'
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -20,7 +21,8 @@ const rootReducer = combineReducers({
   project,
   events,
   newProject,
-  allUsers
+  allUsers,
+  dates
 });
 
 export default rootReducer;

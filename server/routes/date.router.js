@@ -10,11 +10,11 @@ const bodyParser = require('body-parser');
 
 router.get('/', (req,res)=>{
   console.log('getting events for user no.', req.user.id)
-  const query = `SELECT event.* FROM event
-                    JOIN project ON event.project_id = project.id
-                    JOIN user_project ON user_project.project_id = project.id
-                    JOIN "user" ON "user".id=user_project.user_id
-                    WHERE "user".id = $1
+  const query = `
+    SELECT "date".* FROM "date"
+    JOIN project ON project.id = "date".project_id
+    JOIN user_project ON project.id=user_project.project_id
+    WHERE user_project.user_id=$1
     `
   pool.query(query,[req.user.id])
     .then(result=>{

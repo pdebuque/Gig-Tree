@@ -13,19 +13,25 @@ import { momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 
 import { Box, Grid, Typography } from '@mui/material';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import {useSelector, useDispatch} from 'react-redux'
 
 // import events from '../../events';
 
 export default function DashboardCalendar() {
 
-  const events = useSelector(store=>store.events);
+// on load, get all dates
+  useEffect(()=>{
+    console.log('in useEffect. getting user dates.')
+    dispatch({type: 'GET_USER_DATES'})
+  },[])
+
+  const dates = useSelector(store=>store.dates);
   const dispatch = useDispatch();
 
   const DnDCalendar = withDragAndDrop(Calendar);
   const localizer = momentLocalizer(moment);
-  const [myEvents, setMyEvents] = useState(events)
+  const [userDates, setUserDates] = useState(dates)
   const moveEvent = useCallback(
     ({ event, start, end, isAllDay: droppedOnAllDaySlot = false }) => {
       const { allDay } = event
@@ -33,24 +39,24 @@ export default function DashboardCalendar() {
         event.allDay = true
       }
 
-      setMyEvents((prev) => {
+      setUserDates((prev) => {
         const existing = prev.find((ev) => ev.id === event.id) ?? {}
         const filtered = prev.filter((ev) => ev.id !== event.id)
         return [...filtered, { ...existing, start, end, allDay }]
       })
     },
-    [setMyEvents]
+    [setUserDate]
   )
 
   const resizeEvent = useCallback(
     ({ event, start, end }) => {
-      setMyEvents((prev) => {
+      setUserDates((prev) => {
         const existing = prev.find((ev) => ev.id === event.id) ?? {}
         const filtered = prev.filter((ev) => ev.id !== event.id)
         return [...filtered, { ...existing, start, end }]
       })
     },
-    [setMyEvents]
+    [setUserDates]
   )
 
   const handleSelectEvent = useCallback(
@@ -62,10 +68,10 @@ export default function DashboardCalendar() {
     ({ start, end }) => {
       const title = window.prompt('New Event name')
       if (title) {
-        setMyEvents((prev) => [...prev, { start, end, title }])
+        setUserDates((prev) => [...prev, { start, end, title }])
       }
     },
-    [setMyEvents]
+    [setUserDates]
   )
 
   const getEventStyles = (event) => {
@@ -90,7 +96,7 @@ export default function DashboardCalendar() {
       <Box sx={{height:600}}>
         <DnDCalendar
           localizer={localizer}
-          events={myEvents}
+          events={userDates}
           onEventDrop={moveEvent}
           onEventResize={resizeEvent}
           onSelectEvent={handleSelectEvent}

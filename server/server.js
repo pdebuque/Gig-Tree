@@ -10,7 +10,7 @@ const passport = require('./strategies/user.strategy');
 //routes
 const projectRouter = require('./routes/project.router.js');
 const userRouter = require('./routes/user.router.js');
-const eventRouter = require('./routes/event.router.js');
+const dateRouter = require('./routes/date.router.js');
 const allUsersRouter = require('./routes/allUsers.router.js')
 
 
@@ -25,7 +25,7 @@ app.use(passport.session());
 /** ---------- EXPRESS ROUTES ---------- **/
 app.use('/api/project', projectRouter);
 app.use('/api/user', userRouter);
-app.use('/api/event', eventRouter);
+app.use('/api/date', dateRouter);
 app.use('/api/allUsers', allUsersRouter)
 
 // static files
