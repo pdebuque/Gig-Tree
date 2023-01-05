@@ -1,4 +1,4 @@
-import { Container, Typography, Button, Paper, Avatar } from '@mui/material'
+import { Container, Typography, Button, Paper, Avatar, Box } from '@mui/material'
 
 export default function CollaboratorItem({ collaborator, searchResults, setSearchResults, invited, setInvited }) {
 
@@ -23,7 +23,8 @@ export default function CollaboratorItem({ collaborator, searchResults, setSearc
     padding: 1,
     marginY: 1,
     backgroundColor: 'grey.50',
-    width: '50%'
+    overflow: 'hidden',
+    overflowX: 'scroll'
   }
 
   // when a collaborator is clicked, move them: if they are remove that user from the 'searchResults array' and put them in the 'invited' array
@@ -40,12 +41,15 @@ export default function CollaboratorItem({ collaborator, searchResults, setSearc
   }
 
   return (
-    <Container>
-      <Paper sx={collabStyle} onClick={handleClick}>
+    <Paper sx={collabStyle} onClick={handleClick}>
+      <Box sx={{ display: 'flex', flexDirection: 'row', }}>
+        {/* {JSON.stringify([collaborator.first_name, collaborator.last_name, collaborator.instrument_1, collaborator.instrument_2, collaborator.instrument_3])} */}
         <Avatar></Avatar>
-        <Typography variant='h6'>{collaborator.first_name} {collaborator.last_name}</Typography>
-        <Typography variant='body2'>{collaborator.instrument_1 || 'musician'}</Typography>
-      </Paper>
-    </Container>
+        <Box sx={{ marginLeft: 1 }}>
+          <Typography variant='h6'>{collaborator.first_name} {collaborator.last_name}</Typography>
+          <Typography variant='body2'>{collaborator.instrument_1 || 'musician'}</Typography>
+        </Box>
+      </Box>
+    </Paper>
   )
 }

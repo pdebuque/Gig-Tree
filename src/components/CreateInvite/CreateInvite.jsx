@@ -1,98 +1,108 @@
-import { Typography, Button, Container, Grid, TextField, InputAdornment, Stack } from '@mui/material'
+import { Typography, Button, Container, Grid, TextField, InputAdornment, Stack, Box } from '@mui/material'
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import SearchIcon from '@mui/icons-material/Search';
 import CollaboratorItem from '../CollaboratorItem/CollaboratorItem';
 
-export default function CreateInvite({ setTab }) {
+export default function CreateInvite({ setTab, invited, setInvited }) {
 
-  const dispatch = useDispatch();
   // newProject is temporary holding place for the current project
   const newProject = useSelector(store => store.newProject);
 
-  const [invited, setInvited] = useState([...newProject.collaborators])
-  const invitedIds = invited.map(user=>user.id)
+  const invitedIds = invited.map(user => user.id)
   console.log('invited ids: ', invitedIds)
   // initialize search results with all users. future actions will filter
-  const [searchResults, setSearchResults] = useState(useSelector(store => store.allUsers).filter(user=>!invitedIds.includes(user.id)));
-  console.log('search results: ', searchResults)
-  console.log('allUsers: ', useSelector(store => store.allUsers))
 
-  // use local state to handle filtered searches
-  // const [searchResults, setSearchResults] = useSelector(store=>) 
+  //! invited: all users already invited to the project
 
+  //! available users is all users who have not been invited
+  const availableUsers = useSelector(store => store.allUsers).filter(user => !invitedIds.includes(user.id))
 
-  /* 
-  rethink columns of people in create/edit project:
+  //! searchResults is available users filtered by the search term (see filter())
+  const [searchResults, setSearchResults] = useState(availableUsers);
+  // console.log('search results: ', searchResults)
+  // console.log('allUsers: ', useSelector(store => store.allUsers))
 
-  left side: search results. searchResults initializes as all users that have not been invited.
-
-  right side: invited. initializes as newProject collaborators
-  */
-
-
+  //! search term is harvested from search field
   const [searchTerm, setSearchTerm] = useState('');
 
+  //! filter function updates search results by filtering available users by the search term
   const filter = (e) => {
-    setSearchTerm(e.target.value)
-    setSearchResults([...searchResults].filter(collaborator => collaborator.name.toLowerCase().includes(searchTerm.toLowerCase()) || collaborator.instrument.toLowerCase()).includes(searchTerm.toLowerCase()))
-  }
+    setSearchTerm(e.target.value);
+    console.log('filtering results by term: ', searchTerm)
 
-  const handleSubmit = () => {
-    console.log('sending collaborators to redux');
-    dispatch({ type: 'SET_COLLABORATORS', payload: invited })
-    setTab(3)
+    setSearchResults(availableUsers.filter(collaborator => {
+      const searchLC = searchTerm.toLowerCase()
+
+      const searchInfo = [
+        collaborator.first_name || '',
+        collaborator.last_name || '',
+        collaborator.instrument_1 || '',
+        collaborator.instrument_2 || '',
+        collaborator.instrument_3 || ''
+      ].map(el => el.toLowerCase())
+
+      for (let info of searchInfo) {
+        if (info.includes(searchLC)) return true
+      }
+      return false
+    }))
+    console.log('searchResults:', searchResults)
   }
 
   const containerStyle = {
     overflow: 'hidden',
     overflowY: 'scroll',
     height: 400,
-    outline: '1px solid red'
-
   }
 
   return (
-    <Container>
-      <Typography variant='h6'>invite collaborators</Typography>
-      <TextField
-        size='small'
-        id="search-collab"
-        placeholder="search by name or instrument"
-        variant='outlined'
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <SearchIcon />
-            </InputAdornment>
-          ),
-        }}
-        value={searchTerm}
-        onChange={filter}
-      />
+    <Container disableGutters>
+      <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+        <Typography variant='h5'>Invite Collaborators</Typography>
+        search term: {JSON.stringify(searchTerm)}
+        <TextField
+          size='small'
+          id="search-collab"
+          placeholder="search by name or instrument"
+          variant='outlined'
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <SearchIcon />
+              </InputAdornment>
+            ),
+          }}
+          value={searchTerm}
+          onChange={filter}
+        />
+      </Box>
       <Grid container spacing={1}>
         <Grid item xs={8}>
-          <Container sx={containerStyle}>
+          <Grid container spacing={1} sx={containerStyle} >
             {/* all collaborators here */}
-            {JSON.stringify(searchResults.map(result=>result.id))}
+            {/* {JSON.stringify(searchResults.map(result=>result.id))} */}
             {searchResults.map(result => {
-              return (<CollaboratorItem
-              key = {result.id}
-                collaborator={result}
-                searchResults={searchResults}
-                setSearchResults={setSearchResults}
-                invited={invited}
-                setInvited={setInvited}
-              />)
+              return (
+                <Grid item xs={4}>
+                  <CollaboratorItem
+                    key={result.id}
+                    collaborator={result}
+                    searchResults={searchResults}
+                    setSearchResults={setSearchResults}
+                    invited={invited}
+                    setInvited={setInvited}
+                  />
+                </Grid>)
             })}
-          </Container>
+          </Grid>
         </Grid>
-        <Grid item xs={4} sx = {containerStyle}>
+        <Grid item xs={4} sx={containerStyle}>
           {/* invited collaborators here */}
-          {JSON.stringify(invited.map(result=>result.id))}
+          {/* {JSON.stringify(invited.map(result=>result.id))} */}
           {invited.map(collaborator => {
             return (<CollaboratorItem
-              key = {collaborator.id}
+              key={collaborator.id}
               collaborator={collaborator}
               searchResults={searchResults}
               setSearchResults={setSearchResults}
@@ -102,7 +112,6 @@ export default function CreateInvite({ setTab }) {
           })}
         </Grid>
       </Grid>
-      <Button onClick={handleSubmit}>save and review</Button>
     </Container>
   )
 }

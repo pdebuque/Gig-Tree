@@ -55,9 +55,9 @@ router.get('/', async (req, res) => {
     // attach collaborator arrays to corresponding project object by matching project id
     for (let project of allProjects) {
       console.log('matching collaborators for project id:', project.id)
-      for  (let result of collaboratorResults.rows){
+      for (let result of collaboratorResults.rows) {
         console.log('collaborators for project: ', result.id)
-        if (project.id===result.id) {
+        if (project.id === result.id) {
           project.collaborators = result.collaborators
         }
       }
@@ -76,11 +76,11 @@ router.get('/', async (req, res) => {
     // attach repertoire to corresponding projects by matching project id
     for (let project of allProjects) {
       for (let result of repertoireResults.rows) {
-        if (project.id===result.id){
+        if (project.id === result.id) {
           project.repertoire = [...result.repertoire];
         }
       }
-      if (!project.repertoire) project.repertoire=[]
+      if (!project.repertoire) project.repertoire = []
     }
 
     // 4. dates
@@ -95,11 +95,11 @@ router.get('/', async (req, res) => {
     // attach dates to corresponding projects by matching project id
     for (let project of allProjects) {
       for (let result of datesResults.rows) {
-        if (project.id===result.id){
+        if (project.id === result.id) {
           project.dates = [...result.dates];
         }
       }
-      if (!project.dates) project.dates=[]
+      if (!project.dates) project.dates = []
     }
     await client.query('COMMIT')
     res.send(allProjects)
@@ -222,20 +222,22 @@ router.put('/:id', async (req, res) => {
 
     // 1. delete existing repertoire, dates, and collaborator data
 
-    await client.query(`
-      DELETE FROM "date"
-      WHERE "date".project_id = $1
-    `, [req.params.id])
+    const deleteDateQuery = client.query(`
+    DELETE FROM "date"
+    WHERE "date".project_id = $1
+  `, [req.params.id])
 
-    await client.query(`
-      DELETE FROM piece
-      WHERE piece.project_id=$1
-    `, [req.params.id])
+    const deletePieceQuery = client.query(`
+    DELETE FROM piece
+    WHERE piece.project_id=$1
+  `, [req.params.id])
 
-    await client.query(`
+    const deleteUserProjectQuery = client.query(`
       DELETE FROM user_project
       WHERE user_project.project_id=$1
     `, [req.params.id])
+
+    await Promise.all([deleteDateQuery, deletePieceQuery, deleteUserProjectQuery])
 
     // 2. update general info (name, ensemble_name, description)
 
@@ -245,27 +247,57 @@ router.put('/:id', async (req, res) => {
       WHERE id = $4
     `, [name, ensemble_name, description, req.params.id])
 
-    // 3. insert repertoire into the piece table
-    await Promise.all(repertoire.map(piece => {
+    /* 
+    const [[repertoire],[dates]]
+    */
+
+    // 3a. assemble promises for repertoire insertion
+    const repPromises = repertoire.map(piece => {
       const insertPieceText = `INSERT INTO "piece" ("name", "composer", "project_id") VALUES ($1, $2, $3)`;
       const insertPieceValues = [piece.name, piece.composer, req.params.id];
-      return client.query(insertPieceText, insertPieceValues);
-    }));
+      return client.query(insertPieceText, insertPieceValues)
+    });
 
-    // 4. insert dates into date table
-    await Promise.all(dates.map(date => {
+    // 3b. assemble promises for date insertion
+    const datePromises = (dates.map(date => {
       const insertDateText = `INSERT INTO "date" ("name", "date", "start", "end", "location", "type", "notes", "project_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`;
       const insertDateValues = [date.name, date.date, date.start, date.end, date.location, date.type, date.notes, req.params.id];
       return client.query(insertDateText, insertDateValues);
-    }));
+    }))
 
-    // 5. insert collaborators into user_project table.
-    await Promise.all(collaborators.map(collaborator => {
+    // 3c. assemble promises for collaboration insertion
+    const collabPromises = (collaborators.map(collaborator => {
       const insertCollabText = `INSERT INTO "user_project" ("user_id", "project_id") VALUES ($1, $2)`;
       const insertCollabValues = [collaborator.id, req.params.id];
       return client.query(insertCollabText, insertCollabValues);
-    }));
+    }))
 
+    // 4. execute promises
+    await Promise.all([...repPromises, ...datePromises, ...collabPromises])
+
+
+    /* 
+        // 3. insert repertoire into the piece table
+        await Promise.all(repertoire.map(piece => {
+          const insertPieceText = `INSERT INTO "piece" ("name", "composer", "project_id") VALUES ($1, $2, $3)`;
+          const insertPieceValues = [piece.name, piece.composer, req.params.id];
+          return client.query(insertPieceText, insertPieceValues);
+        }));
+    
+        // 4. insert dates into date table
+        await Promise.all(dates.map(date => {
+          const insertDateText = `INSERT INTO "date" ("name", "date", "start", "end", "location", "type", "notes", "project_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`;
+          const insertDateValues = [date.name, date.date, date.start, date.end, date.location, date.type, date.notes, req.params.id];
+          return client.query(insertDateText, insertDateValues);
+        }));
+    
+        // 5. insert collaborators into user_project table.
+        await Promise.all(collaborators.map(collaborator => {
+          const insertCollabText = `INSERT INTO "user_project" ("user_id", "project_id") VALUES ($1, $2)`;
+          const insertCollabValues = [collaborator.id, req.params.id];
+          return client.query(insertCollabText, insertCollabValues);
+        }));
+     */
     await client.query('COMMIT')
     res.sendStatus(201);
   } catch (error) {
@@ -285,11 +317,11 @@ router.delete('/:id', (req, res) => {
 
   const deleteQuery = `DELETE FROM project WHERE project.id = $1`
   pool.query(deleteQuery, [req.params.id])
-    .then(()=>{
+    .then(() => {
       console.log('successfully deleted')
       res.sendStatus(200)
     })
-    .catch(err=> console.log('could not delete!', err))
+    .catch(err => console.log('could not delete!', err))
 }
 )
 

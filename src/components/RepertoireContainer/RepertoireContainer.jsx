@@ -1,20 +1,20 @@
-import RepertoireItem from '../RepertoireItem/RepertoireItem'
+import RepertoireInput from '../RepertoireInput/RepertoireInput';
+import { useSelector } from 'react-redux'
+import { Container } from '@mui/material';
+import {useState} from 'react';
+import RepertoireItem from '../RepertoireItem/RepertoireItem';
 
 
-export default function RepertoireContainer ({number}) {
+export default function RepertoireContainer({ generalInfo, setGeneral }) {
 
-const items = []
+  return (
+    <Container disableGutters>
+      <RepertoireInput generalInfo={generalInfo} setGeneral={setGeneral} />
 
-const renderItems = () =>{
-  for (let i=0; i<=number; i++){
-    items.push(<RepertoireItem/>)
-  }
-  return 
-}
+      {generalInfo.repertoire.map((piece,i) => <RepertoireItem piece = {piece} key = {i}/>)}
 
-  return(
-    <div>
-      {renderItems}
-    </div>
+      
+      
+    </Container>
   )
 }

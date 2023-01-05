@@ -55,7 +55,7 @@ export default function DashboardProjectItem({ project, setCreateOpen, setCreate
       sx={listItemStyle}
       onClick={() => setCollapsed(!isCollapsed)}
     >
-      {JSON.stringify(project)}
+      {/* {JSON.stringify(project)} */}
       <Box sx={{ ml: 1, display: 'flex', justifyContent: 'space-between' }}>
         <Typography variant='h6'>{project.name}</Typography>
 

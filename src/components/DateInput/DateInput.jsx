@@ -1,4 +1,4 @@
-import { Container, TextField, Button, Stack } from '@mui/material'
+import { Container, TextField, Button, Stack, FormControl, Select, InputLabel, MenuItem } from '@mui/material'
 import { useState } from 'react';
 
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
@@ -42,7 +42,7 @@ export default function DateInput({ dates, setDates }) {
   return (
 
     <Container component='form' onSubmit={handleSubmit}>
-      {JSON.stringify(dateInfo)}
+      {/* {JSON.stringify(dateInfo)} */}
       <Stack spacing={1}>
         <TextField
           name='title-input'
@@ -88,13 +88,20 @@ export default function DateInput({ dates, setDates }) {
           value={dateInfo.location}
           onChange={e => setDateInfo({ ...dateInfo, location: e.target.value })}
         />
-        <TextField
-          name='type-input'
-          label='type'
-          size='small'
-          value={dateInfo.type}
-          onChange={e => setDateInfo({ ...dateInfo, type: e.target.value })}
-        />
+        <FormControl>
+          <InputLabel id="type-label">type</InputLabel>
+          <Select
+            labelId="type-label"
+            value={dateInfo.type}
+            size = 'small'
+            label="type"
+            onChange={e => setDateInfo({ ...dateInfo, type: e.target.value })}
+          >
+            <MenuItem value={'rehearsal'}>Rehearsal</MenuItem>
+            <MenuItem value={'performance'}>Performance</MenuItem>
+            <MenuItem value={'recording'}>Recording</MenuItem>
+          </Select>
+        </FormControl>
         <TextField
           name='notes-input'
           label='notes'

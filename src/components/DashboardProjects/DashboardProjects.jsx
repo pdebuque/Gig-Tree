@@ -20,10 +20,11 @@ export default function DashboardProjects() {
   const projects = useSelector(store => store.project)
   const [createOpen, setCreateOpen] = useState(false)
   const dispatch = useDispatch();
+
   useEffect(() => {
     console.log('getting user projects in dashboard');
     dispatch({ type: 'GET_PROJECTS' });
-  }, [createOpen])``
+  }, [])
 
   // this dictates create or edit mode of the entire project creation modal
   const [createMode, setCreateMode] = useState(true)

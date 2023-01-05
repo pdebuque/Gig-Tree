@@ -8,8 +8,8 @@ export default function DateInputContainer({ dates, setDates }) {
 
 
   return (
-    <Container>
-      {JSON.stringify(dates)}
+    <Container disableGutters>
+      {/* {JSON.stringify(dates)} */}
       <Grid container spacing={1}>
         <Grid item xs={5}>
           <Paper>

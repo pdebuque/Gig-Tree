@@ -36,8 +36,9 @@ function* addProject(action) {
     console.log('adding a project')
     yield axios.post('/api/project', action.payload)
 
-    // at the end, empty out newProject
+    // at the end, empty out newProject and get projects again
     yield put({ type: 'SET_NEW_PROJECT', payload: { name: '', ensemble_name: '', description: '', repertoire: [], dates: [], collaborators: [] } })
+    yield put({type: 'GET_PROJECTS'})
   }
   catch (err) {
     console.log('could not add project', err)
@@ -49,8 +50,9 @@ function* editProject(action) {
     console.log('editing project with id', action.payload.id)
     yield axios.put(`/api/project/${action.payload.id}`, action.payload)
 
-    // empty out newProject
+    // empty out newProject and get projects again
     yield put({ type: 'SET_NEW_PROJECT', payload: { name: '', ensemble_name: '', description: '', repertoire: [], dates: [], collaborators: [] } })
+    yield put({type: 'GET_PROJECTS'})
   }
   catch(err) {
     console.log('could not edit project', err)
@@ -61,6 +63,10 @@ function* deleteProject(action) {
   try{
     console.log('deleting project with id ', action.payload);
     yield axios.delete(`/api/project/${action.payload}`);
+
+    // get projects again
+
+    yield put({type: 'GET_PROJECTS'})
 
   }
   catch(err) {
