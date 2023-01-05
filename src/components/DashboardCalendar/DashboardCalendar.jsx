@@ -87,7 +87,7 @@ export default function DashboardCalendar() {
   return (
     <Box>
       <Typography variant='h5' sx={{mb: 2}}>Upcoming</Typography>
-      <Box sx={{height:500}}>
+      <Box sx={{height:600}}>
         <DnDCalendar
           localizer={localizer}
           events={myEvents}
