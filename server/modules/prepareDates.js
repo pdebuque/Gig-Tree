@@ -28,5 +28,6 @@ exports.parseDatesFromDB = (projectsArr) => {
       date.end = new Date(date.end)
     })
   }
+  console.log('projects Arr after transformation: ', Object.entries(projectsArr[0].dates[0].start))
   return projectsArr
 }

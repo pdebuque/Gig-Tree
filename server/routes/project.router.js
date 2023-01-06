@@ -109,8 +109,11 @@ router.get('/', async (req, res) => {
       }
     }
     console.log('projects parsed:', prepareDates.parseDatesFromDB(allProjects))
+
     console.log('project dates', (prepareDates.parseDatesFromDB(allProjects))[0]?.dates)
-    // console.log('test type of a date: ', typeof prepareDates.parseDatesFromDB(allProjects)[0].dates[1].date)
+
+    console.log('test type of a date: ', typeof prepareDates.parseDatesFromDB(allProjects)[0].dates[0].date)
+    
     res.send(prepareDates.parseDatesFromDB(allProjects)||[])
   }
   catch (error) {
@@ -128,10 +131,10 @@ router.get('/', async (req, res) => {
 
 // GET - get all info for a specific project
 
-router.get('/:id', (req, res) => {
-  // console.log('getting info for project no. ', req.params.id);
-  res.sendStatus(200)
-})
+// router.get('/:id', (req, res) => {
+//   // console.log('getting info for project no. ', req.params.id);
+//   res.sendStatus(200)
+// })
 
 router.post('/', async (req, res) => {
   console.log('req.body: ', req.body)

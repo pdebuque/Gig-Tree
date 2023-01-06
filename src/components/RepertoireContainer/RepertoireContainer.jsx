@@ -11,7 +11,7 @@ export default function RepertoireContainer({ generalInfo, setGeneral }) {
     <Container disableGutters>
       <RepertoireInput generalInfo={generalInfo} setGeneral={setGeneral} />
       <Grid container spacing={1} sx = {{padding: 1, marginY: 2, backgroundColor: '#fafafa'}}>
-        {generalInfo.repertoire.map((piece, i) => <RepertoireItem piece={piece} key={i} />)}
+        {generalInfo.repertoire.map((piece, i) => <RepertoireItem piece={piece} key={i} gridWidth={6} />)}
       </Grid>
 
 

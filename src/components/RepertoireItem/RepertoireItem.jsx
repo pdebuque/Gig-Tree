@@ -3,13 +3,13 @@ import { Delete } from '@mui/icons-material';
 
 
 
-export default function RepertoireItem({ piece }) {
+export default function RepertoireItem({ piece, gridWidth }) {
 
   const handleDelete = () =>{
     console.log('deleting this piece')
   }
   return (
-    <Grid item xs={6} sx={{}}>
+    <Grid item xs={gridWidth} sx={{}}>
       {JSON.stringify(piece)}
 
       <Paper sx={{ padding: 1, overflow: 'hidden', overflowX: 'scroll' }}>
