@@ -25,7 +25,10 @@ export default function RepertoireItem({ setGeneral, generalInfo }) {
         onChange={(e) => setThisPiece({ ...thisPiece, composer: e.target.value })}
       />
       {/* on clicking this button, send this piece info into the generalInfo state held locally in create general */}
-      <IconButton onClick={() => setGeneral({ ...generalInfo, repertoire: [...generalInfo.repertoire, thisPiece] })}>
+      <IconButton onClick={() => {
+        setGeneral({ ...generalInfo, repertoire: [...generalInfo.repertoire, thisPiece] });
+        setThisPiece({name: '', composer: ''});
+      }}>
         <AddCircleOutlineIcon />
       </IconButton>
     </Container>

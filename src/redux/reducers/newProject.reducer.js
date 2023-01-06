@@ -5,6 +5,7 @@ const newProjectReducer = (state = { name: '', ensemble_name: '', description: '
     case 'SET_GENERAL':
       return {...state, name: action.payload.name, ensemble_name: action.payload.ensemble_name, description: action.payload.description, repertoire: action.payload.repertoire};
     case 'SET_SCHEDULE':
+      console.log('setting dates in new project reducer')
       return {...state, dates: action.payload};
     case 'SET_COLLABORATORS':
       return {...state, collaborators: action.payload};

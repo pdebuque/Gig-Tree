@@ -40,11 +40,35 @@ export default function CollaboratorItem({ collaborator, searchResults, setSearc
     }
   }
 
+  const getInitials = (collaborator) => {
+    return (collaborator.first_name[0] + collaborator.last_name[0]).toUpperCase()
+  }
+
+  // given a username, make a random color associated with it
+
+  const stringToValue = (string) => {
+    let sumValue = 0
+    for (let i = 0; i < 4; i++) {
+      sumValue += string.charCodeAt(string.length-i) || 0
+    }
+    return sumValue
+  }
+
+  const makeRandomColor = (username) => {
+    const index = Math.floor((stringToValue(username) / 500) * 16777215).toString(16);
+    return '#' + index
+  }
+
   return (
     <Paper sx={collabStyle} onClick={handleClick}>
       <Box sx={{ display: 'flex', flexDirection: 'row', }}>
         {/* {JSON.stringify([collaborator.first_name, collaborator.last_name, collaborator.instrument_1, collaborator.instrument_2, collaborator.instrument_3])} */}
-        <Avatar></Avatar>
+        {collaborator.prof_pic_path ?
+          <Avatar alt = {`${collaborator.username}'s avatar`}src={collaborator.prof_pic_path} sx={{}}/>
+          :
+          <Avatar sx={{bgcolor: makeRandomColor(collaborator.username)}}>{getInitials(collaborator)}</Avatar>
+        }
+
         <Box sx={{ marginLeft: 1 }}>
           <Typography variant='h6'>{collaborator.first_name} {collaborator.last_name}</Typography>
           <Typography variant='body2'>{collaborator.instrument_1 || 'musician'}</Typography>

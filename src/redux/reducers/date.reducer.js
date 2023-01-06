@@ -1,6 +1,6 @@
-import events from '../../events'
+// import events from '../../events'
 
-const dateReducer = (state=events,action) => {
+const dateReducer = (state=[],action) => {
   if (action.type==='SET_USER_DATES') return action.payload
   return state
 }

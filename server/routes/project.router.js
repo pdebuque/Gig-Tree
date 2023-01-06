@@ -3,6 +3,7 @@ const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware')
 const pool = require('../modules/pool');
 const bodyParser = require('body-parser');
+const prepareDates = require('../modules/prepareDates')
 
 // routes
 
@@ -102,7 +103,15 @@ router.get('/', async (req, res) => {
       if (!project.dates) project.dates = []
     }
     await client.query('COMMIT')
-    res.send(allProjects)
+    for (let project of allProjects) {
+      for (let date of project.dates) {
+        date.title = date.name || 'unnamed date'
+      }
+    }
+    console.log('projects parsed:', prepareDates.parseDatesFromDB(allProjects))
+    console.log('project dates', (prepareDates.parseDatesFromDB(allProjects))[0]?.dates)
+    // console.log('test type of a date: ', typeof prepareDates.parseDatesFromDB(allProjects)[0].dates[1].date)
+    res.send(prepareDates.parseDatesFromDB(allProjects)||[])
   }
   catch (error) {
     await client.query('ROLLBACK')
@@ -124,30 +133,13 @@ router.get('/:id', (req, res) => {
   res.sendStatus(200)
 })
 
-// POST - create new project
-// any user can do this; the project will be stored with their user id
-
-// req.body looks like {
-//   name: 'asdfasdf',
-//   ensemble_name: '',
-//   description: '',
-//   repertoire: [ { title: 'adsf', composer: 'asdf' } ],
-//   dates: [
-//     {
-//       title: 'asdfadsf',
-//       date: '',
-//       start: '',
-//       end: '',
-//       location: '',
-//       type: '',
-//       notes: ''
-//     }
-//   ],
-//   collaborators: [userId, userId, userId, etc.]
-// }
 router.post('/', async (req, res) => {
   console.log('req.body: ', req.body)
   const client = await pool.connect();
+  const bodyDatesPrepped = prepareDates.prepareDatesForDB(req.body)
+
+  console.log('req.body: ', req.body)
+  console.log('bodyDatesPrepped: ', bodyDatesPrepped)
 
   try {
     const {
@@ -157,7 +149,7 @@ router.post('/', async (req, res) => {
       repertoire,
       dates,
       collaborators,
-    } = req.body;
+    } = bodyDatesPrepped;
 
     await client.query('BEGIN')
 
@@ -208,6 +200,8 @@ router.put('/:id', async (req, res) => {
   console.log('editing project. req.body: ', req.body)
   const client = await pool.connect();
 
+  const bodyDatesPrepped = prepareDates.prepareDatesForDB(req.body)
+
   try {
     const {
       name,
@@ -216,7 +210,7 @@ router.put('/:id', async (req, res) => {
       repertoire,
       dates,
       collaborators,
-    } = req.body;
+    } = bodyDatesPrepped;
 
     await client.query('BEGIN')
 

@@ -4,7 +4,6 @@ import registrationSaga from './registration.saga';
 import userSaga from './user.saga';
 import projectSaga from './project.saga';
 import allUsersSaga from './allUsers.saga';
-import dateSaga from './date.saga';
 
 //todo: import all other sagas here
 
@@ -21,7 +20,6 @@ export default function* rootSaga() {
     registrationSaga(),
     userSaga(),
     allUsersSaga(),
-    projectSaga(),
-    dateSaga()
+    projectSaga()
   ]);
 }

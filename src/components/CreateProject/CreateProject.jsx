@@ -141,10 +141,11 @@ export default function CreateProject({ createMode, setCreateOpen }) {
           <Tab label="review" />
         </Tabs>
       </Box>
+      
       {steps.map((step) => {
         return (
           <TabPanel key={step.tabValue} value={tabValue} index={step.tabValue}>
-            <Box id={`${step.name}-container`} sx={{ height: 500, padding: 0}}>
+            <Box id={`${step.name}-container`} sx={{ height: 500, padding: 0, overflow: 'hidden', overflowY: 'scroll'}}>
               {step.tabComponent}
             </Box>
             <Button textAlign='right' onClick={step.buttonFunction}>

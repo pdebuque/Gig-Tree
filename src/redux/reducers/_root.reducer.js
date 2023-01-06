@@ -4,7 +4,6 @@ import user from './user.reducer';
 
 //todo: import all other reducers here
 import project from './project.reducer';
-import events from './date.reducer'
 import newProject from './newProject.reducer'
 import allUsers from './allUsers.reducer'
 import dates from './date.reducer'
@@ -19,10 +18,9 @@ const rootReducer = combineReducers({
   errors, // contains registrationMessage and loginMessage
   user, // will have an id and username if someone is logged in
   project,
-  events,
   newProject,
   allUsers,
-  dates
+  dates,
 });
 
 export default rootReducer;
