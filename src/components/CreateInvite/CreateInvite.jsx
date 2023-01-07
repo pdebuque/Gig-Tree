@@ -10,7 +10,7 @@ export default function CreateInvite({ setTab, invited, setInvited }) {
   const newProject = useSelector(store => store.newProject);
 
   const invitedIds = invited.map(user => user.id)
-  console.log('invited ids: ', invitedIds)
+  // console.log('invited ids: ', invitedIds)
   // initialize search results with all users. future actions will filter
 
   //! invited: all users already invited to the project
@@ -26,17 +26,19 @@ export default function CreateInvite({ setTab, invited, setInvited }) {
   //! search term is harvested from search field
   const [searchTerm, setSearchTerm] = useState('');
 
-  //! filter function updates search results by filtering available users by the search term
-  const filter = (e) => {
-    setSearchTerm(e.target.value);
+  // execute filter whenever the search term changes
+  useEffect(()=>{
+    filter(searchTerm)
+  },[searchTerm])
+
+  const filter = (searchTerm) => {
     console.log('filtering results by term: ', searchTerm)
 
     setSearchResults(availableUsers.filter(collaborator => {
       const searchLC = searchTerm.toLowerCase()
 
       const searchInfo = [
-        collaborator.first_name || '',
-        collaborator.last_name || '',
+        `${collaborator.first_name || ''} ${collaborator.last_name ||''}`,
         collaborator.instrument_1 || '',
         collaborator.instrument_2 || '',
         collaborator.instrument_3 || ''
@@ -53,7 +55,6 @@ export default function CreateInvite({ setTab, invited, setInvited }) {
   const containerStyle = {
     overflow: 'hidden',
     overflowY: 'scroll',
-    height: 400,
   }
 
   return (
@@ -74,7 +75,9 @@ export default function CreateInvite({ setTab, invited, setInvited }) {
             ),
           }}
           value={searchTerm}
-          onChange={filter}
+          onChange={(e) => {
+            setSearchTerm(e.target.value);
+          }}
         />
       </Box>
       <Grid container spacing={1}>

@@ -9,19 +9,19 @@ import {put, takeEvery} from 'redux-saga/effects';
 
 */
 
-function* eventsSaga() {
-  yield takeEvery('GET_EVENTS', getEvents);
+function* dateSaga() {
+  yield takeEvery('GET_USER_DATES', getUserDates);
   yield takeEvery('ADD_EVENT', addEvent);
   yield takeEvery('EDIT_EVENT', editEvent);
   yield takeEvery('DELETE_EVENT', deleteEvent)
-
 };
 
-function* getEvents(action) {
+function* getUserDates(action) {
   try{
-    console.log('getting events in event reducer')
-    const events = yield axios.get('/api/event')
-    yield put({type: 'SET_EVENTS', payload: events.data})
+    console.log('getting dates in date saga')
+    const userDates = yield axios.get('/api/date')
+    console.log(userDates.data)
+    yield put({type: 'SET_USER_DATES', payload: userDates.data})
   }
   catch(err) {
     console.log('could not get projects!', err)
@@ -56,4 +56,4 @@ function* deleteEvent(action) {
 }
 
 
-export default projectsSaga;
+export default dateSaga;

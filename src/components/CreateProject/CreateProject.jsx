@@ -63,9 +63,9 @@ export default function CreateProject({ createMode, setCreateOpen }) {
   // local state info to send to redux in handleSubmit
   const [generalInfo, setGeneral] = useState({ name: newProject.name, ensemble_name: newProject.ensemble_name, description: newProject.description, repertoire: newProject.repertoire || [] })
 
-  const [dates, setDates] = useState([...newProject.dates])
+  const [dates, setDates] = useState([...newProject.dates] || [])
 
-  const [invited, setInvited] = useState([...newProject.collaborators])
+  const [invited, setInvited] = useState([...newProject.collaborators] || [])
 
   // steps array allows us to iterate through the steps of project creation
   const steps = [{
@@ -141,10 +141,11 @@ export default function CreateProject({ createMode, setCreateOpen }) {
           <Tab label="review" />
         </Tabs>
       </Box>
+
       {steps.map((step) => {
         return (
           <TabPanel key={step.tabValue} value={tabValue} index={step.tabValue}>
-            <Box id={`${step.name}-container`} sx={{ height: 500, padding: 0}}>
+            <Box id={`${step.name}-container`} sx={{ height: 500, padding: 0, overflow: 'hidden', overflowY: 'scroll' }}>
               {step.tabComponent}
             </Box>
             <Button textAlign='right' onClick={step.buttonFunction}>

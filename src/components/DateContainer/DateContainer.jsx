@@ -18,12 +18,11 @@ export default function DateInputContainer({ dates, setDates }) {
         </Grid>
         <Grid item xs={7}>
           <Paper>
-
-
             {/* date display */}
-            {dates.map(date => {
+            dates: {JSON.stringify(dates)}
+            {dates.map((date,i) => {
               return (
-                <DateDisplay date={date} />
+                <DateDisplay key = {i} date={date}/>
               )
             })}
           </Paper>

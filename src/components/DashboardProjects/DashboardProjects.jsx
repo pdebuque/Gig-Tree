@@ -11,10 +11,11 @@ import CreateProject from '../CreateProject/CreateProject';
 import { useSelector, useDispatch } from 'react-redux';
 import { Box, Typography, IconButton, Modal, Container, Button } from '@mui/material';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
-import { useEffect, useState } from 'react';
+import { useEffect, useState} from 'react';
 import { largeModal } from '../../_style/modalStyle'
 
 export default function DashboardProjects() {
+
 
   // get the user's projects from the store
   const projects = useSelector(store => store.project)

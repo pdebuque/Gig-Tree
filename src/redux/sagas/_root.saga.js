@@ -3,7 +3,7 @@ import loginSaga from './login.saga';
 import registrationSaga from './registration.saga';
 import userSaga from './user.saga';
 import projectSaga from './project.saga';
-import allUsersSaga from './allUsers.saga'
+import allUsersSaga from './allUsers.saga';
 
 //todo: import all other sagas here
 
