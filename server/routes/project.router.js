@@ -108,13 +108,15 @@ router.get('/', async (req, res) => {
         date.title = date.name || 'unnamed date'
       }
     }
-    console.log('projects parsed:', prepareDates.parseDatesFromDB(allProjects))
+    // console.log('projects parsed:', prepareDates.parseDatesFromDB(allProjects))
 
-    console.log('project dates', (prepareDates.parseDatesFromDB(allProjects))[0]?.dates)
+    // console.log('project dates', (prepareDates.parseDatesFromDB(allProjects))[0]?.dates)
 
-    console.log('test type of a date: ', typeof prepareDates.parseDatesFromDB(allProjects)[0].dates[0].date)
-    
-    res.send(prepareDates.parseDatesFromDB(allProjects)||[])
+    // console.log('test type of a date: ', typeof prepareDates.parseDatesFromDB(allProjects)[0].dates[0].date)
+
+    // res.send(prepareDates.parseDatesFromDB(allProjects)||[])
+
+    res.send(allProjects)
   }
   catch (error) {
     await client.query('ROLLBACK')
@@ -139,10 +141,10 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
   console.log('req.body: ', req.body)
   const client = await pool.connect();
-  const bodyDatesPrepped = prepareDates.prepareDatesForDB(req.body)
+  // const bodyDatesPrepped = prepareDates.prepareDatesForDB(req.body)
 
   console.log('req.body: ', req.body)
-  console.log('bodyDatesPrepped: ', bodyDatesPrepped)
+  // console.log('bodyDatesPrepped: ', bodyDatesPrepped)
 
   try {
     const {
@@ -152,7 +154,7 @@ router.post('/', async (req, res) => {
       repertoire,
       dates,
       collaborators,
-    } = bodyDatesPrepped;
+    } = req.body;
 
     await client.query('BEGIN')
 
@@ -203,7 +205,7 @@ router.put('/:id', async (req, res) => {
   console.log('editing project. req.body: ', req.body)
   const client = await pool.connect();
 
-  const bodyDatesPrepped = prepareDates.prepareDatesForDB(req.body)
+  // const bodyDatesPrepped = prepareDates.prepareDatesForDB(req.body)
 
   try {
     const {
@@ -213,7 +215,7 @@ router.put('/:id', async (req, res) => {
       repertoire,
       dates,
       collaborators,
-    } = bodyDatesPrepped;
+    } = req.body;
 
     await client.query('BEGIN')
 

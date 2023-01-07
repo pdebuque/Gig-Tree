@@ -6,15 +6,33 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 
-import {convertTime} from '../../modules/convertTime'
+import { convertTime } from '../../modules/convertTime'
 
 export default function DateInput({ dates, setDates }) {
 
-  // state holds the current data. on submit, push it to the dates array in the container
+  /* 
+  three sources of state:
+  
+  broad: newProject. exists in redux. updated piecemeal through dispatches on submissions at each create tab (buttonFunction)
+  
+  middle: [dates, setDates]. initialized as newProject.dates (for edit project functionality). updates when user clicks add date button in DateInput
+  
+  low: [dateTemp, setDateTemp]. initialized as empty. updates onChange of inputs in DateInput.
+  */
 
-  // dates are held as objects here. these need to be converted to locale string in the server, then back to objects
+  // dateTemp is local staging area (only in this component). it holds dates as objects for proper MUI usage.
+  // 
 
-  const [dateInfo, setDateInfo] =
+  // little function for pre-setting end date
+  const setTwoHoursLater = (date) => {
+    const twoHoursInMillis = 1000 * 60 * 120
+    const newDate = new Date();
+    newDate.setTime(date.getTime())
+    newDate.setTime(newDate.getTime() + twoHoursInMillis)
+    return newDate
+  }
+
+  const [dateTemp, setDateTemp] =
     useState({
       tempID: null,
       name: '',
@@ -27,11 +45,22 @@ export default function DateInput({ dates, setDates }) {
     })
 
   const handleSubmit = (e) => {
+
+    // submit moves the date info from the very local staging area (dateTemp) to the dates staging area, dates. This will be pushed to newProject when user clicks save and invite button.
+
+    // dates live as strings in newProject
+
     e.preventDefault();
-    // save converted time info into the dateInfo object
-    console.log('adding date info to array: ', dateInfo)
-    setDates([...dates, dateInfo])
-    setDateInfo({
+    // save converted time info into the dateTemp object
+    console.log('adding date info to array: ', dateTemp)
+    const dateFormatted = {
+      ...dateTemp,
+      date: dateTemp.date.toLocaleString(),
+      start: dateTemp.start.toLocaleString(),
+      end: dateTemp.end.toLocaleString()
+    }
+    setDates([...dates, dateFormatted])
+    setDateTemp({
       tempID: null,
       name: '',
       date: new Date(),
@@ -49,43 +78,54 @@ export default function DateInput({ dates, setDates }) {
   return (
 
     <Container component='form' onSubmit={handleSubmit}>
-      date info: {JSON.stringify(dateInfo)}
-      
-<br/>
-    
+      date info: {JSON.stringify(dateTemp)}
+
+      <br />
+
       <Stack spacing={1}>
         <TextField
           name='title-input'
           label='title'
           size='small'
-          value={dateInfo.name}
-          onChange={e => {setDateInfo({ ...dateInfo, name: e.target.value })}}
+          value={dateTemp.name}
+          onChange={e => { setDateTemp({ ...dateTemp, name: e.target.value }) }}
         />
 
         <LocalizationProvider dateAdapter={AdapterMoment} >
           <DatePicker
             name='date-input'
             label='date'
-            value={dateInfo.date || null}
+            value={dateTemp.date || null}
             onChange={value => {
-              if (value) setDateInfo({ ...dateInfo, date: value._d })
+              if (value) setDateTemp({ ...dateTemp, date: value._d })
             }}
             renderInput={(params) => <TextField size='small' {...params} />}
           />
+
+          {/*//todo: setting start time automatically sets the end time to 2 hours later */}
           <TimePicker
             label="start"
-            value={dateInfo.start || null}
+            value={dateTemp.start || null}
             onChange={value => {
-              if (value) setDateInfo({ ...dateInfo, start: convertTime(dateInfo.date,value._d)})
+              if (value) {
+                setDateTemp({
+                  ...dateTemp,
+                  start: convertTime(dateTemp.date, value._d)
+                })
+                // setDateTemp({
+                //   ...dateTemp,
+                //   end: setTwoHoursLater(dateTemp.start)
+                // })
+              }
             }}
             renderInput={(params) => <TextField size='small' {...params} />}
           />
 
           <TimePicker
             label="end"
-            value={dateInfo.end || null}
+            value={dateTemp.end || null}
             onChange={value => {
-              if (value) setDateInfo({ ...dateInfo, end: convertTime(dateInfo.date, value._d) })
+              if (value) setDateTemp({ ...dateTemp, end: convertTime(dateTemp.date, value._d) })
             }}
             renderInput={(params) => <TextField size='small' {...params} />}
           />
@@ -95,17 +135,17 @@ export default function DateInput({ dates, setDates }) {
           name='location-input'
           label='location'
           size='small'
-          value={dateInfo.location}
-          onChange={e => setDateInfo({ ...dateInfo, location: e.target.value })}
+          value={dateTemp.location}
+          onChange={e => setDateTemp({ ...dateTemp, location: e.target.value })}
         />
         <FormControl>
           <InputLabel id="type-label">type</InputLabel>
           <Select
             labelId="type-label"
-            value={dateInfo.type}
+            value={dateTemp.type}
             size='small'
             label="type"
-            onChange={e => setDateInfo({ ...dateInfo, type: e.target.value })}
+            onChange={e => setDateTemp({ ...dateTemp, type: e.target.value })}
           >
             <MenuItem value={'rehearsal'}>Rehearsal</MenuItem>
             <MenuItem value={'performance'}>Performance</MenuItem>
@@ -116,8 +156,8 @@ export default function DateInput({ dates, setDates }) {
           name='notes-input'
           label='notes'
           size='small'
-          value={dateInfo.notes}
-          onChange={e => setDateInfo({ ...dateInfo, notes: e.target.value })}
+          value={dateTemp.notes}
+          onChange={e => setDateTemp({ ...dateTemp, notes: e.target.value })}
           multiline
           rows={3}
         />
