@@ -32,6 +32,7 @@ export default function DashboardProjects() {
 
   return (
     <Container >
+      {/* {JSON.stringify(projects)} */}
       <Typography variant='h5'>
         Projects
         <IconButton

@@ -35,7 +35,7 @@ router.get('/', async (req, res) => {
 
     // 1. general info
     const generalInfoResults = await client.query(`
-      SELECT project.* FROM project
+      SELECT project.id, project.name, project.ensemble_name, project.owner_id, project.description, project.backgroundcolor AS "backgroundColor", project.color FROM project
       JOIN user_project ON user_project.project_id = project.id
       WHERE user_project.user_id = $1
     `, [req.user.id]);
@@ -115,7 +115,7 @@ router.get('/', async (req, res) => {
     // console.log('test type of a date: ', typeof prepareDates.parseDatesFromDB(allProjects)[0].dates[0].date)
 
     // res.send(prepareDates.parseDatesFromDB(allProjects)||[])
-
+    console.log(allProjects)
     res.send(allProjects)
   }
   catch (error) {

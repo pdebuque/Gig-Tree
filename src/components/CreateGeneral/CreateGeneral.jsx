@@ -6,6 +6,7 @@ import { Typography, Container, Button, TextField, Stack, Box, Grid } from '@mui
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createContainerStyle } from '../../_style/modalStyle'
+import { SketchPicker } from 'react-color';
 
 import RepertoireContainer from '../RepertoireContainer/RepertoireContainer';
 
@@ -21,6 +22,7 @@ export default function CreateReview({ setTab, generalInfo, setGeneral }) {
 
   // on submit, save the current state data into newProject. Then, if a user navigates back to the tab their data will be saved
 
+  const [thisColor,setThisColor] = useState('#fff')
 
 
   return (
@@ -32,6 +34,7 @@ export default function CreateReview({ setTab, generalInfo, setGeneral }) {
         </Grid>
         <Grid item xs={10}>
           <Stack direction='column' spacing={2} sx={{ marginBottom: 1 }}>
+            {thisColor}
             <Box sx={{ display: 'flex', flexDirection: 'row', width: '100%', }}>
               <TextField
                 name='title-input'
@@ -48,6 +51,13 @@ export default function CreateReview({ setTab, generalInfo, setGeneral }) {
                 size='small'
                 value={generalInfo.ensemble_name}
                 onChange={e => setGeneral({ ...generalInfo, ensemble_name: e.target.value })}
+              />
+              <SketchPicker
+                color = {thisColor}
+                onChangeComplete = {(color)=>{
+                  console.log(color.hex)
+                  setThisColor(color.hex)
+                }}
               />
             </Box>
             <TextField

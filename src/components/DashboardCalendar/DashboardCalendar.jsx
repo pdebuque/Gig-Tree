@@ -87,10 +87,10 @@ export default function DashboardCalendar() {
   const getEventStyles = (event) => {
 
     const style = {
-      backgroundColor: '#fb8500',
+      backgroundColor: event.backgroundColor,
       borderRadius: '6px',
       opacity: 0.8,
-      color: '#fffff',
+      color: event.color,
       border: '0px',
       display: 'block'
     };
