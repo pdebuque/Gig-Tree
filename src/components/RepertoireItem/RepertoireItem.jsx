@@ -3,14 +3,16 @@ import { Delete } from '@mui/icons-material';
 
 
 
-export default function RepertoireItem({ piece, gridWidth }) {
+export default function RepertoireItem({ piece, gridWidth, generalInfo, setGeneral }) {
 
   const handleDelete = () =>{
-    console.log('deleting this piece')
+    console.log('deleting this piece');
+    setGeneral({...generalInfo, repertoire: generalInfo.repertoire.filter(el=>el.tempId!=piece.tempId)})
   }
+
   return (
-    <Grid item xs={gridWidth} sx={{}}>
-      {JSON.stringify(piece)}
+    <Grid item xs={gridWidth}>
+      {/* {JSON.stringify(piece)} */}
 
       <Paper sx={{ padding: 1, overflow: 'hidden', overflowX: 'scroll' }}>
         <Box sx = {{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>

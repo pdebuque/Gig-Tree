@@ -78,9 +78,8 @@ export default function DateInput({ dates, setDates }) {
   return (
 
     <Container component='form' onSubmit={handleSubmit}>
-      date info: {JSON.stringify(dateTemp)}
+      {/* date info: {JSON.stringify(dateTemp)} */}
 
-      <br />
 
       <Stack spacing={1}>
         <TextField

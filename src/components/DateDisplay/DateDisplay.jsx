@@ -1,22 +1,19 @@
 import { Paper, Container, Typography, IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-export default function DateDisplay({ date, dates, thisId, setDates }) {
+export default function DateDisplay({ date, dates, setDates }) {
 
   //todo: logic for default name if not specified
   //todo: make delete work
   //todo: formatting
 
   const handleDelete = () => {
-    // setDates(dates.filter(date=>date.id!==thisId))
+    setDates(dates.filter(element => element.tempId != date.tempId))
   }
 
   return (
     <Container>
-      data types:
-      date: {typeof date.date}
-      start: {typeof date.start}
-      end: {typeof date.end}
+      {/* {JSON.stringify(date)} */}
       <Paper sx={{ padding: .5 }}>
         <Typography variant='h5'>{date.name}
           <IconButton onClick={handleDelete}>

@@ -7,33 +7,37 @@ import DateDisplay from '../DateDisplay/DateDisplay'
 
 export default function CreateSchedule({ setTab, dates, setDates }) {
 
-    // dates is an array of objects. submitting date on the left pushes into the array, which then renders on the right hand side
+  // dates is an array of objects. submitting date on the left pushes into the array, which then renders on the right hand side
+
+  dates?.map((date, i) => {
+    date.tempId = i
+  })
 
   return (
     <Container>
 
       <Typography variant='h6'>add dates</Typography>
       <Container disableGutters>
-      {/* {JSON.stringify(dates)} */}
-      <Grid container spacing={1}>
-        <Grid item xs={5}>
-          <Paper>
-            <DateInput setDates={setDates} dates={dates} />
-          </Paper>
-        </Grid>
-        <Grid item xs={7}>
-          <Stack spacing={1}>
-            {/* date display */}
-            {/* dates: {JSON.stringify(dates)} */}
-            {dates.map((date,i) => {
-              return (
-                <DateDisplay key = {i} thisId = {i} setDates={setDates} date={date}/>
-              )
-            })}
+        {/* {JSON.stringify(dates)} */}
+        <Grid container spacing={1}>
+          <Grid item xs={5}>
+            <Paper>
+              <DateInput setDates={setDates} dates={dates} />
+            </Paper>
+          </Grid>
+          <Grid item xs={7}>
+            <Stack spacing={1}>
+              {/* date display */}
+              {/* dates: {JSON.stringify(dates)} */}
+              {dates.map((date, i) => {
+                return (
+                  <DateDisplay key={date.tempId} setDates={setDates} dates={dates} date={date} />
+                )
+              })}
             </Stack>
+          </Grid>
         </Grid>
-      </Grid>
-    </Container>
+      </Container>
     </Container>
   )
 }
