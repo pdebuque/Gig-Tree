@@ -86,11 +86,14 @@ router.get('/', async (req, res) => {
 
     // 4. dates
     const datesResults = await client.query(`
-      SELECT project.id, json_agg("date".*) AS dates FROM project
-      JOIN user_project ON user_project.project_id = project.id
-      JOIN "date" ON "date".project_id = project.id
-      WHERE user_project.user_id = $1
-      GROUP BY project.id;
+    WITH dates AS
+    (SELECT "date".*, project.backgroundcolor AS "backgroundColor", project.color AS color FROM project
+          JOIN "date" ON "date".project_id = project.id)      	
+  SELECT project.id, json_agg("dates".*) AS dates FROM dates
+        JOIN project ON project.id=dates.project_id
+        JOIN user_project ON user_project.project_id= project.id
+        WHERE user_project.user_id = $1
+        GROUP BY project.id;
     `, [req.user.id])
 
     // attach dates to corresponding projects by matching project id

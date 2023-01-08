@@ -12,7 +12,7 @@ This component is a single project displayed within the dashboard projects sideb
 
 import './DashboardProjectItem.css';
 import { listItemStyle } from '../../_style/listItemStyle.jsx'
-import { Box, Typography, Collapse, Button, IconButton, Modal } from '@mui/material';
+import { Box, Typography, Collapse, Button, IconButton, Modal, Avatar } from '@mui/material';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
@@ -24,26 +24,26 @@ import { largeModal } from '../../_style/modalStyle';
 import DeleteProjectModal from '../DeleteProjectModal/DeleteProjectModal';
 
 
-export default function DashboardProjectItem({ project, setCreateOpen, setCreateMode}) {
+export default function DashboardProjectItem({ project, setCreateOpen, setCreateMode }) {
 
   const user = useSelector(store => store.user)
-  
+
   const [deleteOpen, setDeleteOpen] = useState(false)
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isCollapsed, setCollapsed] = useState(false)
 
   // upon clicking edit, load current project info into create project modal
-    // dispatch: set the redux new project equal to project
-    // need to conditionally render the modal for edit vs create, as well as the functionality accordingly
+  // dispatch: set the redux new project equal to project
+  // need to conditionally render the modal for edit vs create, as well as the functionality accordingly
 
   const handleEditClick = () => {
-    dispatch({type: 'SET_NEW_PROJECT', payload: project});
+    dispatch({ type: 'SET_NEW_PROJECT', payload: project });
     setCreateMode(false);
     setCreateOpen(true);
   }
 
-  const handleDeleteClick = ()=>{
+  const handleDeleteClick = () => {
     setDeleteOpen(true)
   }
 
@@ -52,13 +52,14 @@ export default function DashboardProjectItem({ project, setCreateOpen, setCreate
   return (
     <Box
       className='project-item'
-      sx={listItemStyle}
+      sx={{...listItemStyle, borderTop: 10, borderColor: project.backgroundColor}}
       onClick={() => setCollapsed(!isCollapsed)}
+      
     >
-      {/* {JSON.stringify(project)} */}
       <Box sx={{ ml: 1, display: 'flex', justifyContent: 'space-between' }}>
-        <Typography variant='h6'>{project.name}</Typography>
-
+        <Box sx ={{display: 'flex'}}>
+          <Typography variant='h6'>{project.name}</Typography>
+        </Box>
         {project.owner_id === user.id &&
           <Box>
             <IconButton
@@ -66,8 +67,8 @@ export default function DashboardProjectItem({ project, setCreateOpen, setCreate
               onClick={handleEditClick}
             ><EditIcon sx={{ width: 16, height: 16 }} /></IconButton>
             <IconButton sx={{ width: 20, height: 20 }}
-              onClick = {handleDeleteClick}
-              ><DeleteIcon sx={{ width: 16, height: 16 }} /></IconButton>
+              onClick={handleDeleteClick}
+            ><DeleteIcon sx={{ width: 16, height: 16 }} /></IconButton>
           </Box>
         }
       </Box>
@@ -90,15 +91,15 @@ export default function DashboardProjectItem({ project, setCreateOpen, setCreate
       </Collapse>
       <Modal
         open={deleteOpen}
-        >
-          <Box sx={largeModal}>
-            <DeleteProjectModal
-              setDeleteOpen={setDeleteOpen}
-              projectID={project.id}
-              />
-          </Box>
+      >
+        <Box sx={largeModal}>
+          <DeleteProjectModal
+            setDeleteOpen={setDeleteOpen}
+            projectID={project.id}
+          />
+        </Box>
       </Modal>
-      
+
     </Box>
   )
 
