@@ -55,13 +55,13 @@ export default function CreateProject({ createMode, setCreateOpen }) {
 
   const handleClose = () => {
     setCreateOpen(false);
-    dispatch({ type: 'SET_NEW_PROJECT', payload: { name: '', ensemble_name: '', description: '', repertoire: [], dates: [], collaborators: [] } })
+    dispatch({ type: 'SET_NEW_PROJECT', payload: { name: '', ensemble_name: '', description: '', backgroundColor: '#7e1f89', color: '#ffffff', repertoire: [], dates: [], collaborators: [] } })
   }
 
   // render a tabgroup component and several tab pages, each corresponding to a separate step in the event creation process
 
   // local state info to send to redux in handleSubmit
-  const [generalInfo, setGeneral] = useState({ name: newProject.name, ensemble_name: newProject.ensemble_name, description: newProject.description, repertoire: newProject.repertoire || [] })
+  const [generalInfo, setGeneral] = useState({ name: newProject.name, ensemble_name: newProject.ensemble_name, description: newProject.description, repertoire: newProject.repertoire, backgroundColor: newProject.backgroundColor, color: newProject.color || [] })
 
   const [dates, setDates] = useState([...newProject.dates] || [])
 

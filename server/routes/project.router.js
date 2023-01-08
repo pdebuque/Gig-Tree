@@ -88,8 +88,8 @@ router.get('/', async (req, res) => {
     const datesResults = await client.query(`
     WITH dates AS
     (SELECT "date".*, project.backgroundcolor AS "backgroundColor", project.color AS color FROM project
-          JOIN "date" ON "date".project_id = project.id)      	
-  SELECT project.id, json_agg("dates".*) AS dates FROM dates
+        JOIN "date" ON "date".project_id = project.id)      	
+        SELECT project.id, json_agg("dates".*) AS dates FROM dates
         JOIN project ON project.id=dates.project_id
         JOIN user_project ON user_project.project_id= project.id
         WHERE user_project.user_id = $1
@@ -154,6 +154,8 @@ router.post('/', async (req, res) => {
       name,
       ensemble_name,
       description,
+      backgroundColor,
+      color,
       repertoire,
       dates,
       collaborators,
@@ -162,9 +164,9 @@ router.post('/', async (req, res) => {
     await client.query('BEGIN')
 
     // create project in project table
-    const projectInsertResults = await client.query(`INSERT INTO "project" ("name", "ensemble_name", "owner_id", "description")
-      VALUES ($1, $2, $3, $4)
-      RETURNING id;`, [name, ensemble_name, req.user.id, description]);
+    const projectInsertResults = await client.query(`INSERT INTO "project" ("name", "ensemble_name", "owner_id", "description", "backgroundcolor", "color")
+      VALUES ($1, $2, $3, $4, $5, $6)
+      RETURNING id;`, [name, ensemble_name, req.user.id, description, backgroundColor, color]);
     console.log(projectInsertResults)
     const projectId = projectInsertResults.rows[0].id;
 
@@ -215,6 +217,8 @@ router.put('/:id', async (req, res) => {
       name,
       ensemble_name,
       description,
+      backgroundColor,
+      color,
       repertoire,
       dates,
       collaborators,
@@ -245,9 +249,9 @@ router.put('/:id', async (req, res) => {
 
     await client.query(`
       UPDATE project
-      SET "name" = $1, ensemble_name = $2, description = $3
+      SET "name" = $1, ensemble_name = $2, description = $3, backgroundcolor = $5, color = $6
       WHERE id = $4
-    `, [name, ensemble_name, description, req.params.id])
+    `, [name, ensemble_name, description, req.params.id, backgroundColor, color])
 
     /* 
     const [[repertoire],[dates]]

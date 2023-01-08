@@ -22,7 +22,6 @@ function* getProjects(action) {
     const projects = yield axios.get('/api/project')
     console.log('projects from server;', projects.data)
 
-    //! this is where the problem is. GET at project.router sends dates as objects. once they get here they are strings.
     // console.log('test data type: ', typeof projects.data[0].dates[0].date)
     yield put({ type: 'SET_PROJECTS', payload: projects.data || [] })
     // set dates from the projects
