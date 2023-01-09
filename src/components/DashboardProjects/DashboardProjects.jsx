@@ -61,8 +61,6 @@ export default function DashboardProjects() {
       >
         <Box sx={largeModal}>
           <CreateProject createMode={createMode} setCreateOpen={setCreateOpen} />
-
-
         </Box>
       </Modal>
 

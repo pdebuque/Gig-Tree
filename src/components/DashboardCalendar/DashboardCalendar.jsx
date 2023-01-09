@@ -12,9 +12,11 @@ import 'react-big-calendar/lib/css/react-big-calendar.css'
 import { momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, Modal } from '@mui/material';
 import { useState, useCallback, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
+
+import CalendarTooltip from '../CalendarTooltip/CalendarTooltip';
 
 // import events from '../../events';
 
@@ -30,6 +32,9 @@ export default function DashboardCalendar() {
 
   // extract dates from projects
   const [dates, setDates] = useState(initialDates)
+  const [eventModalOpen, setEventModalOpen] = useState(true)
+  const [mousePos, setMousePos] = useState([0, 0])
+  const [dateClicked, setDateClicked] = useState({})
 
 
   useEffect(() => {
@@ -38,6 +43,7 @@ export default function DashboardCalendar() {
 
   const DnDCalendar = withDragAndDrop(Calendar);
   const localizer = momentLocalizer(moment);
+
 
   // const moveEvent = useCallback(
   //   ({ event, start, end, isAllDay: droppedOnAllDaySlot = false }) => {
@@ -67,12 +73,17 @@ export default function DashboardCalendar() {
   // )
 
   const handleSelectEvent = useCallback(
-    (date) => {
-      const dateObj = new Date(date.date)
-      const startObj = new Date(date.start)
-      const endObj = new Date(date.end)
-      console.log(`${date.title}: ${dateObj.toLocaleDateString()} from ${startObj.toLocaleTimeString()}-${endObj.toLocaleTimeString()}`)
+    (date, event) => {
+      // const dateObj = new Date(date.date)
+      // const startObj = new Date(date.start)
+      // const endObj = new Date(date.end)
+      // console.log(`${date.title}: ${date.date} from ${date.start}-${date.end}`);
+      // console.log(`clientX: ${event.clientX}; clientY: ${event.clientY}`);
+      setMousePos([event.clientX, event.clientY]);
+      setDateClicked(date);
+      setEventModalOpen(true);
     }, [])
+
 
   // const handleSelectSlot = useCallback(
   //   ({ start, end }) => {
@@ -124,6 +135,13 @@ export default function DashboardCalendar() {
           eventPropGetter={getEventStyles}
         />
       </Box>
+      <CalendarTooltip 
+        eventModalOpen = {eventModalOpen} 
+        setEventModalOpen={setEventModalOpen} 
+        dateClicked={dateClicked}
+        mousePos={mousePos}
+        />
+      
     </Box>
   )
 }
