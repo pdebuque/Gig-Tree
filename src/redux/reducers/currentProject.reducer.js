@@ -1,4 +1,4 @@
-const currentProjectReducer = (state = {}, action) => {
+const currentProjectReducer = (state = {dates: [], collaborators: [], repertoire: []}, action) => {
   switch (action.type) {
     case 'SET_CURRENT_PROJECT':
       return action.payload;
