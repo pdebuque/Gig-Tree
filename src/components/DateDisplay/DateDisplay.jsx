@@ -2,6 +2,7 @@ import { Paper, Container, Typography, IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { useState } from 'react';
+import {getDate,getTime} from '../../modules/formatTimes'
 
 export default function DateDisplay({ date, dates, setDates, dateTemp, setDateTemp }) {
 
@@ -17,17 +18,7 @@ export default function DateDisplay({ date, dates, setDates, dateTemp, setDateTe
     console.log('editing')
   }
 
-  const [editMode, setEditMode] = useState(false)
-
-  // date strings look like 1/8/2023, 4:15:00 PM
-  const getDate = (dateString) => {
-    return dateString.split(' ')[0].replace(',', '')
-  }
-
-  const getTime = (dateString) => {
-    const splitArr = dateString.split(' ')
-    return splitArr[1].split(':').splice(0, 2).join(':') + ' ' + splitArr[2]
-  }
+  const [editMode, setEditMode] = useState(false);
 
   return (
     <Container>

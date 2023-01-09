@@ -12,7 +12,7 @@ import 'react-big-calendar/lib/css/react-big-calendar.css'
 import { momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 
-import { Box, Typography, Modal } from '@mui/material';
+import { Dialog, Box, Typography, Modal } from '@mui/material';
 import { useState, useCallback, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 
@@ -32,10 +32,9 @@ export default function DashboardCalendar() {
 
   // extract dates from projects
   const [dates, setDates] = useState(initialDates)
-  const [eventModalOpen, setEventModalOpen] = useState(true)
-  const [mousePos, setMousePos] = useState([0, 0])
+  const [eventModalOpen, setEventModalOpen] = useState(false)
+  const [mousePos, setMousePos] = useState({x: 200, y: 200})
   const [dateClicked, setDateClicked] = useState({})
-
 
   useEffect(() => {
     setDates(initialDates)
@@ -78,8 +77,11 @@ export default function DashboardCalendar() {
       // const startObj = new Date(date.start)
       // const endObj = new Date(date.end)
       // console.log(`${date.title}: ${date.date} from ${date.start}-${date.end}`);
-      // console.log(`clientX: ${event.clientX}; clientY: ${event.clientY}`);
-      setMousePos([event.clientX, event.clientY]);
+      console.log(`selected event: clientX: ${event.clientX}, clientY: ${event.clientY}`)
+      console.log('hello')
+      setMousePos({x: event.clientX, y: event.clientY});
+      console.log(`mousePos:`, mousePos);
+      
       setDateClicked(date);
       setEventModalOpen(true);
     }, [])
@@ -110,8 +112,36 @@ export default function DashboardCalendar() {
     };
   }
 
+  const getTransform = (position) => {
+    // mousePos: [x,y]
+    // bottom right corner
+    if (mousePos[0] > 1200 && mousePos[1] > 900) return 'translate(-95%,-105%)';
+    // bottom
+    if (mousePos[0] > 1200) return 'translate(-5%,-105%)';
+    // right
+    if (mousePos[1] > 900) return 'translate(-95%,5%)';
+    // else
+    return 'translate(-5%,5%)'
+  }
+
+  const calendarModalStyle = {
+    position: 'absolute',
+    transform: getTransform({mousePos}),
+    top: mousePos.y,
+    left: mousePos.x,
+    width: 300,
+    bgcolor: 'background.paper',
+    borderRadius: 2,
+    borderTop: 10,
+    // borderBottom: 10,
+    borderColor: dateClicked.backgroundColor,
+    padding: 1,
+    boxShadow: 5
+  }
+
   return (
     <Box>
+      mousePos: {JSON.stringify(mousePos)}
       {/* {JSON.stringify(dates[0])};
       <br/>
       type of date: {typeof dates[0].date}
@@ -135,12 +165,19 @@ export default function DashboardCalendar() {
           eventPropGetter={getEventStyles}
         />
       </Box>
-      <CalendarTooltip 
+      <Modal
+      open = {eventModalOpen}
+      hideBackdrop={true}
+      >
+        <Box sx = {calendarModalStyle}>
+        <CalendarTooltip 
         eventModalOpen = {eventModalOpen} 
         setEventModalOpen={setEventModalOpen} 
         dateClicked={dateClicked}
         mousePos={mousePos}
         />
+        </Box>
+      </Modal>
       
     </Box>
   )

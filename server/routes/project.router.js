@@ -87,7 +87,7 @@ router.get('/', async (req, res) => {
     // 4. dates
     const datesResults = await client.query(`
     WITH dates AS
-    (SELECT "date".*, project.backgroundcolor AS "backgroundColor", project.color AS color FROM project
+    (SELECT "date".*, project."name" AS project_name, project.ensemble_name, project.backgroundcolor AS "backgroundColor", project.color AS color FROM project
         JOIN "date" ON "date".project_id = project.id)      	
         SELECT project.id, json_agg("dates".*) AS dates FROM dates
         JOIN project ON project.id=dates.project_id

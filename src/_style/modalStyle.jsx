@@ -29,4 +29,5 @@ export const largeModal = {
   padding: 2,
 }
 
+
 export default style

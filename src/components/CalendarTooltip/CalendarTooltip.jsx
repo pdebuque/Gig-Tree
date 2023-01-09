@@ -1,37 +1,67 @@
-import {Modal, Box, Typography} from '@mui/material'
+import { Modal, Box, Typography, IconButton, Button } from '@mui/material'
+import CloseIcon from '@mui/icons-material/Close';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import { useNavigate } from 'react-router-dom'
 
-export default function CalendarTooltip({eventModalOpen, setEventModalOpen, dateClicked, mousePos}) {
+import { getDate, getTime } from '../../modules/formatTimes'
 
-  const getTransform = (position) => {
-    // bottom right corner
-    if (mousePos[0]>1200 && mousePos[1]>900) return 'translate(-95%,-105%)';
-    // bottom
-    if (mousePos[0]>1200) return 'translate(-5%,-105%)';
-    // right
-    if (mousePos[1]>900) return 'translate(-95%,5%)';
-    // else
-    return 'translate(-5%,5%)'
-  }
 
-  const calendarModalStyle = {
-    position: 'abolute',
-    transform: getTransform({mousePos}),
-    top: mousePos[1],
-    left: mousePos[0],
-    width: 300,
-    height: 200
-  }
+export default function CalendarTooltip({ eventModalOpen, setEventModalOpen, dateClicked, mousePos }) {
 
-  return(
-    <Modal
-      open={eventModalOpen}
-      sx = {calendarModalStyle}
-    >
+  const navigate = useNavigate()
+
+  const {
+    name,
+    location,
+    date,
+    start,
+    end,
+    project_id,
+    type,
+    notes,
+    project_name,
+    ensemble_name,
+    backgroundColor,
+    color
+  } = dateClicked
+
+  return (
+    <Box>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
         <Box>
-          {JSON.stringify(dateClicked)}
-          <br/>
-          {JSON.stringify(mousePos)}
+          <Typography variant='h6'>
+            {name || 'unnamed project'}
+          </Typography>
+          {project_name || ensemble_name &&
+            <Box sx = {{marginLeft:1}}>
+              <Typography variant='body2'>
+                {project_name && project_name} {ensemble_name && `with ${ensemble_name}`}
+              </Typography>
+            </Box>
+          }
+        </Box>
+        <IconButton sx={{ paddingTop: 0 }} onClick={() => setEventModalOpen(false)}>
+          <CloseIcon color={dateClicked.backgroundColor} />
+        </IconButton>
       </Box>
-    </Modal>
+      <Box sx={{ marginLeft: .5 }}>
+        <Typography variant='body2'>
+          {location && `at ${location}.`} {getDate(date)}: {getTime(start)}-{getTime(end)}
+        </Typography>
+      </Box>
+      <Box sx={{ display: 'flex', justifyContent: 'flex-end', marginTop: .5 }}>
+        <Button
+          size='small'
+          color='inherit'
+          sx={{ textAlign: 'right', typography: 'body2', mr: 1 }}
+          endIcon={<ArrowForwardIcon />}
+          onClick={() => navigate(`/project/${project_id}`)}
+        >view project page</Button>
+      </Box>
+
+      {/* {JSON.stringify(dateClicked)} */}
+      {/* {JSON.stringify(mousePos)} */}
+
+    </Box>
   )
 }
