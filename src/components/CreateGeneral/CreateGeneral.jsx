@@ -30,7 +30,7 @@ export default function CreateReview({ setTab, generalInfo, setGeneral }) {
 
   return (
     <Container sx={{ display: 'flex', flexDirection: 'column', paddingY: 2 }}>
-      General: {JSON.stringify(generalInfo)}
+      {/* General: {JSON.stringify(generalInfo)} */}
       <Grid container spacing={1}>
         <Grid item xs={2}>
           <Typography>general</Typography>

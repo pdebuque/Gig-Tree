@@ -55,7 +55,7 @@ export default function ColorPicker({generalInfo, setGeneral}) {
 
   return (
     <Box>
-      color: {generalInfo.backgroundColor}
+      {/* color: {generalInfo.backgroundColor} */}
       <Box sx={styles.swatch} onClick={()=>setDisplayPicker(true)}>
         <Box sx={styles.color} />
       </Box>

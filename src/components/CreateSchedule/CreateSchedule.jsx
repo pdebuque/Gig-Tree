@@ -13,6 +13,19 @@ export default function CreateSchedule({ setTab, dates, setDates }) {
     date.tempId = i
   })
 
+  // temporary date holding place for inputs
+  const [dateTemp, setDateTemp] =
+  useState({
+    tempID: null,
+    name: '',
+    date: new Date(),
+    start: new Date(),
+    end: new Date(),
+    location: '',
+    type: '',
+    notes: '',
+  })
+
   return (
     <Container>
 
@@ -22,7 +35,7 @@ export default function CreateSchedule({ setTab, dates, setDates }) {
         <Grid container spacing={1}>
           <Grid item xs={5}>
             <Paper>
-              <DateInput setDates={setDates} dates={dates} />
+              <DateInput dateTemp={dateTemp} setDateTemp={setDateTemp} setDates={setDates} dates={dates} />
             </Paper>
           </Grid>
           <Grid item xs={7}>
@@ -31,7 +44,7 @@ export default function CreateSchedule({ setTab, dates, setDates }) {
               {/* dates: {JSON.stringify(dates)} */}
               {dates.map((date, i) => {
                 return (
-                  <DateDisplay key={date.tempId} setDates={setDates} dates={dates} date={date} />
+                  <DateDisplay key={date.tempId} dateTemp = {dateTemp} setDateTemp = {setDateTemp} setDates={setDates} dates={dates} date={date} />
                 )
               })}
             </Stack>
