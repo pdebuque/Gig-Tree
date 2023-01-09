@@ -4,6 +4,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 const pool = require('../modules/pool');
 const bodyParser = require('body-parser');
 const prepareDates = require('../modules/prepareDates')
+const removeDupById = require('../modules/removeDup')
 
 // routes
 
@@ -130,10 +131,6 @@ router.get('/', async (req, res) => {
   }
 })
 
-
-
-
-
 // GET - get all info for a specific project
 
 router.get('/:id', async (req, res) => {
@@ -148,8 +145,12 @@ router.get('/:id', async (req, res) => {
     GROUP BY project.id;`
   pool.query(queryText, [req.params.id])
     .then(result=>{
-      console.log('got current project', result.rows[0])
-      res.send(result.rows[0])
+      // need to take out duplicates
+      const project = result.rows[0];
+      console.log('project with duplicates:',project)
+      const projectNoDup = {...project,dates: removeDupById(project.dates), repertoire: removeDupById(project.repertoire), collaborators: removeDupById(project.collaborators)}
+      console.log('got current project', projectNoDup)
+      res.send(projectNoDup)
     })
     .catch(err=>console.log('could not get current project', err))
 

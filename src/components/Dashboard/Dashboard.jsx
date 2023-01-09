@@ -61,12 +61,12 @@ export default function Home() {
         </Grid >
       </Paper>
       <Grid container spacing={1} sx={{ height: 500 }}>
-        <Grid item xs={4}>
+        <Grid item xs={3}>
           <Paper sx={{ }}>
             <DashboardProjects />
           </Paper>
         </Grid>
-        <Grid item xs={8}>
+        <Grid item xs={9}>
           <Paper sx={{ p: 2, mY: 1 }}>
             <DashboardCalendar />
           </Paper>

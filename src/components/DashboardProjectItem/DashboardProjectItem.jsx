@@ -61,7 +61,7 @@ export default function DashboardProjectItem({ project, setCreateOpen, setCreate
           <Typography variant='h6'>{project.name}</Typography>
         </Box>
         {project.owner_id === user.id &&
-          <Box>
+          <Box sx = {{display: 'flex'}}>
             <IconButton
               sx={{ width: 20, height: 20 }}
               onClick={handleEditClick}
