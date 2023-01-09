@@ -141,7 +141,7 @@ export default function DashboardCalendar() {
 
   return (
     <Box>
-      mousePos: {JSON.stringify(mousePos)}
+      {/* mousePos: {JSON.stringify(mousePos)} */}
       {/* {JSON.stringify(dates[0])};
       <br/>
       type of date: {typeof dates[0].date}

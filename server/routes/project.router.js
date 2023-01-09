@@ -136,10 +136,24 @@ router.get('/', async (req, res) => {
 
 // GET - get all info for a specific project
 
-// router.get('/:id', (req, res) => {
-//   // console.log('getting info for project no. ', req.params.id);
-//   res.sendStatus(200)
-// })
+router.get('/:id', async (req, res) => {
+  console.log('getting info for project no. ', req.params.id);
+  const queryText = `
+    SELECT project.*, json_agg(piece.*) AS repertoire, json_agg(date.*) AS dates, json_agg("user".*) AS collaborators FROM project
+    LEFT JOIN piece ON piece.project_id = project.id
+    LEFT JOIN date ON date.project_id = project.id
+    LEFT JOIN user_project ON user_project.project_id=project.id
+    JOIN "user" ON "user".id = user_project.user_id
+    WHERE project.id=$1
+    GROUP BY project.id;`
+  pool.query(queryText, [req.params.id])
+    .then(result=>{
+      console.log('got current project', result.rows[0])
+      res.send(result.rows[0])
+    })
+    .catch(err=>console.log('could not get current project', err))
+
+})
 
 router.post('/', async (req, res) => {
   console.log('req.body: ', req.body)

@@ -16,7 +16,8 @@ import Profile from '../Profile/Profile';
 import LoginPage from '../LoginPage/LoginPage';
 import About from '../About/About';
 import Dashboard from '../Dashboard/Dashboard';
-import Register from '../Register/Register'
+import Register from '../Register/Register';
+import ProjectPage from '../ProjectPage/ProjectPage'
 
 
 import './App.css';
@@ -26,7 +27,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import { theme } from '../../theme';
 
 // temporary info
-import { users } from '../../temp-info'
+// import { users } from '../../temp-info'
 
 function App() {
 
@@ -52,15 +53,15 @@ function App() {
 
         <Route path='/dashboard' element={user.id ? <Dashboard /> : <LoginPage />}/>
 
-
+        <Route path = 'project/:projectId' element = {<ProjectPage />} />
         {/* create use profiles
         //todo: use route params instead of map to get the user info
         */}
-        {users.map(user => {
+        {/* {users.map(user => {
           return (
             <Route key={user.id} path={`/${user.name.toLowerCase().split(' ').join('-')}`} element={<Profile user={user} />}/>
           )
-        })}
+        })} */}
         {/* <Route path = '/profile' element = {<Profile />}></Route>  */}
         <Route path='/create' element={<CreateProject />}/> 
         <Route path='/display' element={<DisplayProjects />}/>

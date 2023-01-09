@@ -7,6 +7,7 @@ import project from './project.reducer';
 import newProject from './newProject.reducer'
 import allUsers from './allUsers.reducer'
 import dates from './date.reducer'
+import currentProject from './currentProject.reducer'
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   newProject,
   allUsers,
   dates,
+  currentProject
 });
 
 export default rootReducer;

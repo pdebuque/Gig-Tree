@@ -14,6 +14,7 @@ function* projectsSaga() {
   yield takeEvery('ADD_PROJECT', addProject)
   yield takeEvery('EDIT_PROJECT', editProject)
   yield takeEvery('DELETE_PROJECT', deleteProject)
+  yield takeEvery('GET_CURRENT_PROJECT', getCurrentProject)
 };
 
 function* getProjects(action) {
@@ -76,6 +77,18 @@ function* deleteProject(action) {
   }
   catch (err) {
     console.log('could not delete project', err)
+  }
+}
+
+function* getCurrentProject(action) {
+  try {
+    console.log('getting project with id', action.payload)
+    const currentProject = yield axios.get(`/api/project/${action.payload}`);
+    console.log('got current project', currentProject.data)
+    yield put({type: 'SET_CURRENT_PROJECT', payload: currentProject.data})
+  }
+  catch (err) {
+    console.log('could not get current project', err)
   }
 }
 
