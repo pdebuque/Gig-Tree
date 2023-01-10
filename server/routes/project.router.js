@@ -36,7 +36,7 @@ router.get('/', async (req, res) => {
 
     // 1. general info
     const generalInfoResults = await client.query(`
-      SELECT project.id, project.name, project.ensemble_name, project.owner_id, project.description, project.backgroundcolor AS "backgroundColor", project.color FROM project
+      SELECT project.id, project.name, project.ensemble_name, project.owner_id, project.description, project.backgroundcolor AS "backgroundColor", project.color, user_project.starred FROM project
       JOIN user_project ON user_project.project_id = project.id
       WHERE user_project.user_id = $1
     `, [req.user.id]);
@@ -335,13 +335,16 @@ router.put('/:id', async (req, res) => {
 router.put('/star/:id', (req,res) => {
   console.log('starring project number', req.params.id)
   const queryText = `
-    UPDATE TABLE user_project
+    UPDATE user_project
     SET starred = $1
     WHERE project_id = $2 AND user_id = $3
   `
   pool.query(queryText, [req.body.starred, req.params.id, req.user.id])
     .then(res.sendStatus(201))
-    .catch(err=>console.log('could not update!', err))
+    .catch(err=>{
+      console.log('could not update!', err);
+      res.sendStatus(500)
+    })
 })
 
 // DELETE - delete existing project

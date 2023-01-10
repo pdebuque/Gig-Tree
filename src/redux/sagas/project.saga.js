@@ -15,6 +15,7 @@ function* projectsSaga() {
   yield takeEvery('EDIT_PROJECT', editProject)
   yield takeEvery('DELETE_PROJECT', deleteProject)
   yield takeEvery('GET_CURRENT_PROJECT', getCurrentProject)
+  yield takeEvery('SET_PROJECT_STARRED', setProjectStarred)
 };
 
 function* getProjects(action) {
@@ -89,6 +90,20 @@ function* getCurrentProject(action) {
   }
   catch (err) {
     console.log('could not get current project', err)
+  }
+}
+
+function* setProjectStarred(action) {
+  try{
+    console.log('starring project', action.payload.id)
+    yield axios.put(`/api/project/star/${action.payload.id}`, {starred: action.payload.starred});
+    console.log('starred project');
+    yield put({type: 'GET_PROJECTS'})
+
+
+  }
+  catch(err) {
+    console.log('coudl not set starred', err)
   }
 }
 
