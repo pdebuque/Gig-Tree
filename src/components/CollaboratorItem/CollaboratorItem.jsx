@@ -24,6 +24,9 @@ export default function CollaboratorItem({ collaborator, searchResults, setSearc
   }
 
   const getInitials = (collaborator) => {
+    if (!collaborator.last_name && !collaborator.first_name) return '??'
+    if (!collaborator.last_name) return collaborator.first_name[0].toUpperCase()
+    if (!collaborator.first_name) return collaborator.last_name[0].toUpperCase()
     return (collaborator.first_name[0] + collaborator.last_name[0]).toUpperCase()
   }
 
@@ -54,7 +57,7 @@ export default function CollaboratorItem({ collaborator, searchResults, setSearc
 
         <Box sx={{ marginLeft: 1 }}>
           <Typography variant='h6'>{collaborator.first_name} {collaborator.last_name}</Typography>
-          <Typography variant='body2'>{collaborator.instrument_1 || 'musician'}</Typography>
+          <Typography variant='body2'>{collaborator.instrument_1 || 'musician'}{collaborator.instrument_2 && `, ${collaborator.instrument_2}`}{collaborator.instrumet_3 && `, ${collaborator.instrument_3}`}</Typography>
         </Box>
       </Box>
     </Paper>

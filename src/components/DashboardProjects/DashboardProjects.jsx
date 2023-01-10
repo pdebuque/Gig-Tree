@@ -11,16 +11,22 @@ import CreateProject from '../CreateProject/CreateProject';
 import { useSelector, useDispatch } from 'react-redux';
 import { Box, Typography, IconButton, Modal, Container, Button } from '@mui/material';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
-import { useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import { largeModal } from '../../_style/modalStyle'
+import sortbyStarred from '../../modules/sortFunctions'
 
 export default function DashboardProjects() {
 
 
   // get the user's projects from the store
-  const projects = useSelector(store => store.project)
+  const projects = useSelector(store => store.project);
+  const [projectsDisplayed, setProjectsDisplayed] = useState(projects)
   const [createOpen, setCreateOpen] = useState(false)
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    setProjectsDisplayed(projects)
+  }, [projects])
 
   useEffect(() => {
     console.log('getting user projects in dashboard');
@@ -45,7 +51,7 @@ export default function DashboardProjects() {
         </IconButton>
       </Typography>
       <Box sx={insetStyle}>
-        {projects.map(project => {
+        {projectsDisplayed.map(project => {
           return (
             <DashboardProjectItem
               key={project.id}
@@ -64,7 +70,7 @@ export default function DashboardProjects() {
         </Box>
       </Modal>
 
-
+      <Button onClick={() => setProjectsDisplayed(sortbyStarred(projects))}>sort by starred</Button>
     </Container>
   )
 }

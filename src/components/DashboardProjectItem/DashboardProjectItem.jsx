@@ -20,8 +20,10 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 import StarIcon from '@mui/icons-material/Star';
 import { smallModal } from '../../_style/modalStyle';
+import { placeholderText } from '../../_style/textStyle';
 
 import DeleteProjectModal from '../DeleteProjectModal/DeleteProjectModal';
 
@@ -54,20 +56,32 @@ export default function DashboardProjectItem({ project, setCreateOpen, setCreate
   // delete onclick: confirmation modal
   const handleStarClick = (event) => {
     console.log('handling star click')
-    if (project.starred) dispatch({type: 'SET_PROJECT_STARRED', payload: {id: project.id, starred: false}})
-    else dispatch({type: 'SET_PROJECT_STARRED', payload: {id: project.id, starred: true}})
+    if (project.starred) dispatch({ type: 'SET_PROJECT_STARRED', payload: { id: project.id, starred: false } })
+    else dispatch({ type: 'SET_PROJECT_STARRED', payload: { id: project.id, starred: true } })
   }
 
   return (
     <Box
       className='project-item'
       sx={{ ...listItemStyle, borderTop: 10, borderColor: project.backgroundColor }}
-      onClick={() => setCollapsed(!isCollapsed)}
-
     >
-      <Box sx={{ ml: 1, display: 'flex', justifyContent: 'space-between' }}>
-        <Box sx={{ display: 'flex' }}>
-          <Typography variant='h6'>{project.name}</Typography>
+      <Box sx={{ ml: 0, display: 'flex', justifyContent: 'space-between' }}>
+        <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+          <IconButton
+            sx={{ width: 24, height: 24, mr: 1 }}
+            onClick={() => setCollapsed(!isCollapsed)}
+
+          >
+            <MoreVertIcon sx={{ width: 20, height: 20 }} />
+          </IconButton>
+          <Box sx={{ display: 'flex' }}>
+
+            {project.name ?
+              <Typography variant='h6'>{project.name}</Typography>
+              :
+              <Typography variant='h6' sx={placeholderText}>unnamed project</Typography>
+            }
+          </Box>
         </Box>
         {project.owner_id === user.id &&
           <Box sx={{ display: 'flex' }}>
@@ -75,28 +89,39 @@ export default function DashboardProjectItem({ project, setCreateOpen, setCreate
               sx={{ width: 20, height: 20 }}
               onClick={handleStarClick}
             >
-              
-              {project.starred ? <StarIcon sx = {{fill: '#F6F308', width:16, height: 16}}/> : <StarBorderIcon sx={{ width: 16, height: 16 }} />}
+
+              {project.starred ? <StarIcon sx={{ fill: '#F6F308', width: 16, height: 16 }} /> : <StarBorderIcon sx={{ width: 16, height: 16 }} />}
             </IconButton>
             <IconButton
               sx={{ width: 20, height: 20 }}
               onClick={handleEditClick}
 
-            ><EditIcon sx={{ width: 16, height: 16 }} /></IconButton>
+            >
+              <EditIcon sx={{ width: 16, height: 16 }} />
+            </IconButton>
+
             <IconButton sx={{ width: 20, height: 20 }}
               onClick={handleDeleteClick}
-            ><DeleteIcon sx={{ width: 16, height: 16 }} /></IconButton>
+            >
+              <DeleteIcon sx={{ width: 16, height: 16 }} />
+            </IconButton>
+
           </Box>
         }
       </Box>
-      <Typography variant='subtitle2'>with {project.ensemble_name}</Typography>
+      <Box sx={{ marginLeft: 4 }}>
+        {project.ensemble_name ?
+          <Typography variant='subtitle2'>with {project.ensemble_name}</Typography>
+          : <Typography variant='subtitle2' sx={placeholderText}>with unnamed ensemble</Typography>
+        }</Box>
       <Collapse
         in={isCollapsed}
       >
-        <Box sx={{ ml: 3, pl: 1, marginY: 1, typography: 'body2', borderLeft: 3, borderColor: 'grey.300', backgroundColor: 'grey.50' }}>
+        <Box sx={{ ml: 5, pl: 1, marginY: 1, typography: 'body2', borderLeft: 3, borderColor: 'grey.300', backgroundColor: 'grey.50' }}>
           {project.description}
         </Box>
         <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+
           <AvatarGroup >
             {/* bring in avatars from all collaborators, with owner largest */}
           </AvatarGroup>

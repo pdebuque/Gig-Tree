@@ -25,9 +25,9 @@ projects = [
 ]
 */
 router.get('/', async (req, res) => {
-  console.log('in test GET space')
+  // console.log('in test GET space')
   const client = await pool.connect();
-  console.log('req.user: ', req.user);
+  // console.log('req.user: ', req.user);
 
   try {
     await client.query('BEGIN');
@@ -39,6 +39,7 @@ router.get('/', async (req, res) => {
       SELECT project.id, project.name, project.ensemble_name, project.owner_id, project.description, project.backgroundcolor AS "backgroundColor", project.color, user_project.starred FROM project
       JOIN user_project ON user_project.project_id = project.id
       WHERE user_project.user_id = $1
+      ORDER BY project.id
     `, [req.user.id]);
 
     allProjects = [...generalInfoResults.rows];
@@ -51,14 +52,14 @@ router.get('/', async (req, res) => {
       GROUP BY project.id; 
     `)
 
-    console.log('projects', allProjects)
-    console.log('collaborator results: ', collaboratorResults.rows)
+    // console.log('projects', allProjects)
+    // console.log('collaborator results: ', collaboratorResults.rows)
 
     // attach collaborator arrays to corresponding project object by matching project id
     for (let project of allProjects) {
-      console.log('matching collaborators for project id:', project.id)
+      // console.log('matching collaborators for project id:', project.id)
       for (let result of collaboratorResults.rows) {
-        console.log('collaborators for project: ', result.id)
+        // console.log('collaborators for project: ', result.id)
         if (project.id === result.id) {
           project.collaborators = result.collaborators
         }
@@ -119,12 +120,12 @@ router.get('/', async (req, res) => {
     // console.log('test type of a date: ', typeof prepareDates.parseDatesFromDB(allProjects)[0].dates[0].date)
 
     // res.send(prepareDates.parseDatesFromDB(allProjects)||[])
-    console.log(allProjects)
+    // console.log(allProjects)
     res.send(allProjects)
   }
   catch (error) {
     await client.query('ROLLBACK')
-    console.log('Error GET /api/project/test', error);
+    // console.log('Error GET /api/project/test', error);
     res.sendStatus(500);
   } finally {
     client.release()
@@ -134,7 +135,7 @@ router.get('/', async (req, res) => {
 // GET - get all info for a specific project
 
 router.get('/:id', async (req, res) => {
-  console.log('getting info for project no. ', req.params.id);
+  // console.log('getting info for project no. ', req.params.id);
   const queryText = `
     SELECT project.*, json_agg(piece.*) AS repertoire, json_agg(date.*) AS dates, json_agg("user".*) AS collaborators FROM project
     LEFT JOIN piece ON piece.project_id = project.id
@@ -147,17 +148,19 @@ router.get('/:id', async (req, res) => {
     .then(result=>{
       // need to take out duplicates
       const project = result.rows[0];
-      console.log('project with duplicates:',project)
+      // console.log('project with duplicates:',project)
       const projectNoDup = {...project,dates: removeDupById(project.dates), repertoire: removeDupById(project.repertoire), collaborators: removeDupById(project.collaborators)}
-      console.log('got current project', projectNoDup)
+      // console.log('got current project', projectNoDup)
       res.send(projectNoDup)
     })
     .catch(err=>console.log('could not get current project', err))
 
 })
 
+// POST a new project to the database
+
 router.post('/', async (req, res) => {
-  console.log('req.body: ', req.body)
+  // console.log('req.body: ', req.body)
   const client = await pool.connect();
   // const bodyDatesPrepped = prepareDates.prepareDatesForDB(req.body)
 
@@ -205,6 +208,9 @@ router.post('/', async (req, res) => {
       const insertCollabValues = [collaborator.id, projectId];
       return client.query(insertCollabText, insertCollabValues);
     }));
+
+    // insert user into the user_project table
+    await client.query(`INSERT INTO "user_project" ("user_id", "project_id") VALUES ($1, $2)`, [req.user.id,projectId]);
 
     await client.query('COMMIT')
     res.sendStatus(201);
