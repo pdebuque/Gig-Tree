@@ -24,6 +24,8 @@ projects = [
   },
 ]
 */
+
+
 router.get('/', async (req, res) => {
   // console.log('in test GET space')
   const client = await pool.connect();

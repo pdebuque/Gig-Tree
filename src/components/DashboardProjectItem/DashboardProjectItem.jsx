@@ -11,7 +11,7 @@ This component is a single project displayed within the dashboard projects sideb
 
 
 import './DashboardProjectItem.css';
-import { listItemStyle } from '../../_style/listItemStyle.jsx'
+import { listItemStyle, listItemStylePast, listItemStyleUpcoming } from '../../_style/listItemStyle.jsx'
 import { Box, Typography, Collapse, Button, IconButton, Modal, Avatar, AvatarGroup } from '@mui/material';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
@@ -59,6 +59,8 @@ export default function DashboardProjectItem({ project, setCreateOpen, setCreate
     if (project.starred) dispatch({ type: 'SET_PROJECT_STARRED', payload: { id: project.id, starred: false } })
     else dispatch({ type: 'SET_PROJECT_STARRED', payload: { id: project.id, starred: true } })
   }
+
+
 
   return (
     <Box
