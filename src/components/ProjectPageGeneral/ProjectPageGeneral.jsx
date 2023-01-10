@@ -37,7 +37,9 @@ export default function ProjectPageGeneral() {
         </Typography>
       </Stack>
       <Grid container spacing = {1} sx = {{ marginTop: 1, borderRadius: 2, padding: 1, bgcolor: 'grey.100'}}>
-
+        {!project.repertoire.length && 
+        <RepertoireItem piece = {{name: 'no piece', composer: 'no composer'}} gridWidth = {12}/>
+        }
         {project.repertoire.map(piece => {
           return (
             <RepertoireItem piece={piece} gridWidth = {6} />

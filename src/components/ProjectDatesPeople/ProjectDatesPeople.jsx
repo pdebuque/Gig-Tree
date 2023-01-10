@@ -1,29 +1,37 @@
 import { useSelector } from 'react-redux';
-import { Box, Typography, Paper } from '@mui/material'
+import { Box, Typography, Paper, Tabs, Tab } from '@mui/material'
+import TabPanel from '../_Assets/TabPanel/TabPanel';
+import { useState } from 'react'
+import ProjectPageDates from '../ProjectPageDates/ProjectPageDates';
+import ProjectPagePeople from '../ProjectPagePeople/ProjectPagePeople'
 
 export default function ProjectDatesPeople() {
 
   const project = useSelector(store => store.currentProject)
 
+  const [tabValue, setTab] = useState(0)
+
   return (
-    <Paper sx = {{p: 2, height: 600}}>
-    
-        {project.dates.map(date=>{
-          return (
-            <Box>
-            {JSON.stringify(date)}
-            </Box>
-          )
-        })}
+    <Paper sx={{ p: 2, height: 600 }}>
+      <Box sx={{ paddingX: 3, mt: 0 }}>
 
-        {project.collaborators.map(collab=>{
-          return(
-            <Box>
-              {JSON.stringify(collab)}
-              </Box>
-          )
-        })}
+        <Tabs
+          value={tabValue}
+          onChange={(e, value) => setTab(value)}
+          size='small'
+          centered
+        >
+          <Tab label="dates" />
+          <Tab label="people" />
+        </Tabs>
+      </Box>
 
+      <TabPanel value={tabValue} index={0}>
+        <ProjectPageDates />
+      </TabPanel>
+      <TabPanel value={tabValue} index={1}>
+        <ProjectPagePeople />
+      </TabPanel>
     </Paper>
   )
 }

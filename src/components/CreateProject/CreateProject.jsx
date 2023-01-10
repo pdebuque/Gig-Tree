@@ -148,9 +148,11 @@ export default function CreateProject({ createMode, setCreateOpen }) {
             <Box id={`${step.name}-container`} sx={{ height: 500, padding: 0, overflow: 'hidden', overflowY: 'scroll' }}>
               {step.tabComponent}
             </Box>
+            <Box sx = {{display: 'flex', flexDirection: 'row', justifyContent: 'flex-end'}}>
             <Button textAlign='right' onClick={step.buttonFunction}>
               {step.buttonText}
             </Button>
+            </Box>
           </TabPanel>
         )
       })}

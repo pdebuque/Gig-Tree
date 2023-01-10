@@ -1,8 +1,8 @@
-import { Paper, Container, Typography, IconButton } from '@mui/material';
+import { Paper, Container, Typography, IconButton, Box } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { useState } from 'react';
-import {getDate,getTime} from '../../modules/formatTimes'
+import { getDate, getTime } from '../../modules/formatTimes'
 
 export default function DateDisplay({ date, dates, setDates, dateTemp, setDateTemp }) {
 
@@ -22,17 +22,22 @@ export default function DateDisplay({ date, dates, setDates, dateTemp, setDateTe
 
   return (
     <Container>
-      {JSON.stringify(date)}
-      <Paper sx={{ padding: .5 }}>
-        <Typography variant='h5'>{date.name}
-          <IconButton onClick={handleDelete}>
-            <DeleteIcon />
-          </IconButton>
-          <IconButton onClick={handleEdit}>
-            <EditIcon />
-          </IconButton>
-
-        </Typography>
+      {/* {JSON.stringify(date)} */}
+      <Paper sx={{ padding: 1 }}>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+          <Typography variant='h5'>
+            {date.name}
+          </Typography>
+          {setDates && dateTemp &&
+            <Box>
+              <IconButton sx={{ width: 24, height: 24 }} onClick={handleDelete}>
+                <DeleteIcon sx={{ width: 20, height: 20 }} />
+              </IconButton>
+              <IconButton sx={{ width: 24, height: 24 }} onClick={handleEdit}>
+                <EditIcon sx={{ width: 20, height: 20 }} />
+              </IconButton>
+            </Box>}
+        </Box>
         <Typography variant='body1'>{getDate(date.date)}: {getTime(date.start)}-{getTime(date.end)}</Typography>
         <Typography variant='body2'>{date.notes}</Typography>
       </Paper>

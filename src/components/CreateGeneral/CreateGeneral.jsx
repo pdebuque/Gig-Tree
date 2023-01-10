@@ -11,7 +11,7 @@ import ColorPicker from '../ColorPicker/ColorPicker'
 
 import RepertoireContainer from '../RepertoireContainer/RepertoireContainer';
 
-export default function CreateReview({ setTab, generalInfo, setGeneral }) {
+export default function CreateReview({ generalInfo, setGeneral }) {
 
   const dispatch = useDispatch();
 
@@ -38,7 +38,7 @@ export default function CreateReview({ setTab, generalInfo, setGeneral }) {
         <Grid item xs={10}>
           <Stack direction='column' spacing={2} sx={{ marginBottom: 1 }}>
 
-            <Box sx={{ display: 'flex', flexDirection: 'row', width: '100%', }}>
+            <Stack direction = 'row' spacing = {2} sx={{ display: 'flex', flexDirection: 'row', width: '100%', }}>
               <ColorPicker generalInfo={generalInfo} setGeneral={setGeneral} />
               <TextField
                 name='title-input'
@@ -59,7 +59,7 @@ export default function CreateReview({ setTab, generalInfo, setGeneral }) {
               {/* <Box sx = {{border: 1, borderColor: 'primary', height: 24, width: 24, backgroundColor: '#fff', borderRadius: '50%', margin: 1}}>
                 
               </Box> */}
-            </Box>
+            </Stack>
             <TextField
               name='description-input'
               label='project description'

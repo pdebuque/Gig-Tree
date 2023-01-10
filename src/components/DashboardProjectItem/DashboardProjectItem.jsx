@@ -12,14 +12,14 @@ This component is a single project displayed within the dashboard projects sideb
 
 import './DashboardProjectItem.css';
 import { listItemStyle } from '../../_style/listItemStyle.jsx'
-import { Box, Typography, Collapse, Button, IconButton, Modal, Avatar } from '@mui/material';
+import { Box, Typography, Collapse, Button, IconButton, Modal, Avatar, AvatarGroup } from '@mui/material';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import { largeModal } from '../../_style/modalStyle';
+import { smallModal } from '../../_style/modalStyle';
 
 import DeleteProjectModal from '../DeleteProjectModal/DeleteProjectModal';
 
@@ -32,7 +32,8 @@ export default function DashboardProjectItem({ project, setCreateOpen, setCreate
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isCollapsed, setCollapsed] = useState(false)
-
+  const [mousePos, setMousePos] = useState({x:0, y:0})
+ 
   // upon clicking edit, load current project info into create project modal
   // dispatch: set the redux new project equal to project
   // need to conditionally render the modal for edit vs create, as well as the functionality accordingly
@@ -43,7 +44,8 @@ export default function DashboardProjectItem({ project, setCreateOpen, setCreate
     setCreateOpen(true);
   }
 
-  const handleDeleteClick = () => {
+  const handleDeleteClick = (event) => {
+    setMousePos({x: event.clientX, y: event.clientY})
     setDeleteOpen(true)
   }
 
@@ -52,16 +54,16 @@ export default function DashboardProjectItem({ project, setCreateOpen, setCreate
   return (
     <Box
       className='project-item'
-      sx={{...listItemStyle, borderTop: 10, borderColor: project.backgroundColor}}
+      sx={{ ...listItemStyle, borderTop: 10, borderColor: project.backgroundColor }}
       onClick={() => setCollapsed(!isCollapsed)}
-      
+
     >
       <Box sx={{ ml: 1, display: 'flex', justifyContent: 'space-between' }}>
-        <Box sx ={{display: 'flex'}}>
+        <Box sx={{ display: 'flex' }}>
           <Typography variant='h6'>{project.name}</Typography>
         </Box>
         {project.owner_id === user.id &&
-          <Box sx = {{display: 'flex'}}>
+          <Box sx={{ display: 'flex' }}>
             <IconButton
               sx={{ width: 20, height: 20 }}
               onClick={handleEditClick}
@@ -80,6 +82,9 @@ export default function DashboardProjectItem({ project, setCreateOpen, setCreate
           {project.description}
         </Box>
         <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+          <AvatarGroup >
+            {/* bring in avatars from all collaborators, with owner largest */}
+          </AvatarGroup>
           <Button
             size='small'
             color='inherit'
@@ -92,7 +97,7 @@ export default function DashboardProjectItem({ project, setCreateOpen, setCreate
       <Modal
         open={deleteOpen}
       >
-        <Box sx={largeModal}>
+        <Box sx={{...smallModal, top: mousePos.y, left: mousePos.x}}>
           <DeleteProjectModal
             setDeleteOpen={setDeleteOpen}
             projectID={project.id}

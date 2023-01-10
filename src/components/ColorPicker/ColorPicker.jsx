@@ -24,15 +24,16 @@ export default function ColorPicker({generalInfo, setGeneral}) {
 
   const styles = {
     color: {
-      width: '36px',
-      height: '14px',
-      borderRadius: '2px',
+      margin: '2px',
+      width: '20px',
+      height: '20px',
+      borderRadius: '50%',
       background: `${generalInfo.backgroundColor}`,
     },
     swatch: {
       padding: '5px',
       background: '#ffffff',
-      borderRadius: '1px',
+      borderRadius: '50%',
       boxShadow: '0 0 0 1px rgba(0,0,0,.1)',
       display: 'inline-block',
       cursor: 'pointer',
