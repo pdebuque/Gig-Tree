@@ -60,13 +60,19 @@ export default function DashboardProjectItem({ project, setCreateOpen, setCreate
     else dispatch({ type: 'SET_PROJECT_STARRED', payload: { id: project.id, starred: true } })
   }
 
-
+  const now = new Date()
+  project.past=now > project.last
+  project.upcoming = now<project.first
+  project.ongoing = now<project.last && now>project.first
 
   return (
     <Box
       className='project-item'
       sx={{ ...listItemStyle, borderTop: 10, borderColor: project.backgroundColor }}
     >
+      past? {JSON.stringify(project.past)} / / 
+      upcoming? {JSON.stringify(project.upcoming)} / / 
+      ongoing? {JSON.stringify(project.ongoing)}
       <Box sx={{ ml: 0, display: 'flex', justifyContent: 'space-between' }}>
         <Box sx={{ display: 'flex', flexDirection: 'row' }}>
           <IconButton

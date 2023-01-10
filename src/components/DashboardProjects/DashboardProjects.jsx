@@ -13,7 +13,7 @@ import { Box, Typography, IconButton, Modal, Container, Button } from '@mui/mate
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import { useEffect, useState } from 'react';
 import { largeModal } from '../../_style/modalStyle'
-import sortbyStarred from '../../modules/sortFunctions'
+import {sortByStarred, sortByFirstAsc, sortByFirstDesc} from '../../modules/sortFunctions'
 
 export default function DashboardProjects() {
 
@@ -70,7 +70,10 @@ export default function DashboardProjects() {
         </Box>
       </Modal>
 
-      <Button onClick={() => setProjectsDisplayed(sortbyStarred(projects))}>sort by starred</Button>
+      <Button onClick={() => setProjectsDisplayed(sortByStarred(projects))}>sort by starred</Button>
+      <Button onClick={() => setProjectsDisplayed(sortByFirstAsc(projects))}>sort by date</Button>
+      <Button onClick={() => setProjectsDisplayed(sortByFirstDesc(projects))}>sort by date</Button>
+
     </Container>
   )
 }
