@@ -19,6 +19,8 @@ import { useNavigate } from 'react-router-dom';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import StarBorderIcon from '@mui/icons-material/StarBorder';
+import StarIcon from '@mui/icons-material/Star';
 import { smallModal } from '../../_style/modalStyle';
 
 import DeleteProjectModal from '../DeleteProjectModal/DeleteProjectModal';
@@ -32,8 +34,8 @@ export default function DashboardProjectItem({ project, setCreateOpen, setCreate
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isCollapsed, setCollapsed] = useState(false)
-  const [mousePos, setMousePos] = useState({x:0, y:0})
- 
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
+
   // upon clicking edit, load current project info into create project modal
   // dispatch: set the redux new project equal to project
   // need to conditionally render the modal for edit vs create, as well as the functionality accordingly
@@ -45,11 +47,16 @@ export default function DashboardProjectItem({ project, setCreateOpen, setCreate
   }
 
   const handleDeleteClick = (event) => {
-    setMousePos({x: event.clientX, y: event.clientY})
+    setMousePos({ x: event.clientX, y: event.clientY })
     setDeleteOpen(true)
   }
 
   // delete onclick: confirmation modal
+  const handleStarClick = (event) => {
+    console.log('handling star click')
+    if (project.starred) dispatch({type: 'SET_PROJECT_STARRED', payload: {id: project.id, starred: false}})
+    else dispatch({type: 'SET_PROJECT_STARRED', payload: {id: project.id, starred: true}})
+  }
 
   return (
     <Box
@@ -66,7 +73,15 @@ export default function DashboardProjectItem({ project, setCreateOpen, setCreate
           <Box sx={{ display: 'flex' }}>
             <IconButton
               sx={{ width: 20, height: 20 }}
+              onClick={handleStarClick}
+            >
+              
+              {project.starred ? <StarIcon sx = {{fill: '#F6F308', width:16, height: 16}}/> : <StarBorderIcon sx={{ width: 16, height: 16 }} />}
+            </IconButton>
+            <IconButton
+              sx={{ width: 20, height: 20 }}
               onClick={handleEditClick}
+
             ><EditIcon sx={{ width: 16, height: 16 }} /></IconButton>
             <IconButton sx={{ width: 20, height: 20 }}
               onClick={handleDeleteClick}
@@ -97,7 +112,7 @@ export default function DashboardProjectItem({ project, setCreateOpen, setCreate
       <Modal
         open={deleteOpen}
       >
-        <Box sx={{...smallModal, top: mousePos.y, left: mousePos.x}}>
+        <Box sx={{ ...smallModal, top: mousePos.y, left: mousePos.x }}>
           <DeleteProjectModal
             setDeleteOpen={setDeleteOpen}
             projectID={project.id}

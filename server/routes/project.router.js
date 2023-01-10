@@ -330,6 +330,20 @@ router.put('/:id', async (req, res) => {
   }
 })
 
+// PUT - star a project
+
+router.put('/star/:id', (req,res) => {
+  console.log('starring project number', req.params.id)
+  const queryText = `
+    UPDATE TABLE user_project
+    SET starred = $1
+    WHERE project_id = $2 AND user_id = $3
+  `
+  pool.query(queryText, [req.body.starred, req.params.id, req.user.id])
+    .then(res.sendStatus(201))
+    .catch(err=>console.log('could not update!', err))
+})
+
 // DELETE - delete existing project
 // only allowed by the project owner
 

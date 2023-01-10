@@ -42,7 +42,8 @@ export default function CreateSchedule({ setTab, dates, setDates }) {
             </Paper>
           </Grid>
           <Grid item xs={1}>
-            <Box sx ={{display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
+            <Box sx ={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '100%'}}>
+              <KeyboardDoubleArrowRightIcon color = 'grey.800'/>
               <KeyboardDoubleArrowRightIcon color = 'grey.800'/>
             </Box>
           </Grid>
