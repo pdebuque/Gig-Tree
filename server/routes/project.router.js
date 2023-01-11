@@ -38,7 +38,7 @@ router.get('/', async (req, res) => {
 
     // 1. general info
     const generalInfoResults = await client.query(`
-      SELECT project.id, project.name, project.ensemble_name, project.owner_id, project.description, project.backgroundcolor AS "backgroundColor", project.color, user_project.starred FROM project
+      SELECT user_project.project_accepted AS accepted, project.id, project.name, project.ensemble_name, project.owner_id, project.description, project.backgroundcolor AS "backgroundColor", project.color, user_project.starred FROM project
       JOIN user_project ON user_project.project_id = project.id
       WHERE user_project.user_id = $1
       ORDER BY project.id
@@ -217,11 +217,13 @@ router.post('/', async (req, res) => {
       return client.query(insertCollabText, insertCollabValues);
     }));
 
-    // insert user into the user_project table if not already added
+    // insert user into the user_project table if not already added; set project accepted true
     const userIds = collaborators.map(collaborator => collaborator.id);
     if (!(userIds.includes(req.user.id))) {
-      await client.query(`INSERT INTO "user_project" ("user_id", "project_id") VALUES ($1, $2)`, [req.user.id, projectId]);
+      await client.query(`INSERT INTO "user_project" ("user_id", "project_id", "project_accepted") VALUES ($1, $2, TRUE)`, [req.user.id, projectId]);
     }
+    
+
     await client.query('COMMIT')
     res.sendStatus(201);
   } catch (error) {

@@ -121,7 +121,7 @@ function* setProjectStarred(action) {
 
   }
   catch (err) {
-    console.log('coudl not set starred', err)
+    console.log('could not set starred', err)
   }
 }
 
