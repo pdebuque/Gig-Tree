@@ -37,10 +37,10 @@ export default function Home() {
 
   return (
     <Box sx={{ width: '90%', marginX: 'auto', p: 1 }}>
-      <DashboardHeader/>
-      <Grid container spacing={1} sx={{ height: 500 }}>
+      <DashboardHeader />
+      <Grid container spacing={1} sx={{ height: 600 }}>
         <Grid item xs={4}>
-          <Paper sx={{ }}>
+          <Paper sx={{}}>
             <DashboardProjects />
           </Paper>
         </Grid>
@@ -49,7 +49,7 @@ export default function Home() {
             <DashboardCalendar />
           </Paper>
         </Grid></Grid>
-      
+
     </Box>
 
   )

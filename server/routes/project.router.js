@@ -121,14 +121,6 @@ router.get('/', async (req, res) => {
         }
       }
     }
-    // console.log('projects parsed:', prepareDates.parseDatesFromDB(allProjects))
-
-    // console.log('project dates', (prepareDates.parseDatesFromDB(allProjects))[0]?.dates)
-
-    // console.log('test type of a date: ', typeof prepareDates.parseDatesFromDB(allProjects)[0].dates[0].date)
-
-    // res.send(prepareDates.parseDatesFromDB(allProjects)||[])
-    // console.log(allProjects)
     res.send(allProjects)
   }
   catch (error) {
@@ -222,7 +214,6 @@ router.post('/', async (req, res) => {
     if (!(userIds.includes(req.user.id))) {
       await client.query(`INSERT INTO "user_project" ("user_id", "project_id", "project_accepted") VALUES ($1, $2, TRUE)`, [req.user.id, projectId]);
     }
-    
 
     await client.query('COMMIT')
     res.sendStatus(201);

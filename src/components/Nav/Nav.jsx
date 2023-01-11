@@ -20,7 +20,7 @@ export default function Nav() {
       <AppBar position="static">
         <Toolbar>
 
-          <Typography component='a' href='/' variant="h4" color="inherit" sx={{ textDecoration: 'none', flexGrow: 1 }}>
+          <Typography variant="h4" color="inherit" sx={{ textDecoration: 'none', flexGrow: 1 }}>
             Gig Tree
           </Typography>
           <Button color="inherit" onClick={() => navigate('/about')}>About</Button>

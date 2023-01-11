@@ -3,14 +3,28 @@ import { useSelector } from 'react-redux'
 import { useState } from 'react'
 import EditUserModal from '../EditUserModal/EditUserModal';
 import EditIcon from '@mui/icons-material/Edit';
+import NextEvent from '../NextEvent/NextEvent';
 
 export default function DashboardHeader() {
   const user = useSelector(store => store.user)
   const [editModalOpen, setEditOpen] = useState(false)
 
+
+  // bunch of logic to find the next date
+  function sortDates(a,b) {
+    if (new Date(a.date)>new Date(b.date)) return 1
+    if (new Date(a.date)<new Date(b.date)) return -1
+    return 0
+  }
+
+  const now = new Date()
+  const dates = useSelector(store=>store.dates)
+  const upcomingDates = dates.filter(date=> new Date(date.date)>now)
+  const nextDate = upcomingDates.sort(sortDates)[0]
+
+
   return (
     <Box>
-
       <Grid container spacing={1}>
         <Grid item xs={6}>
           <Paper sx={{ p: 2, marginY: 1, height: 100 }}>
@@ -41,7 +55,7 @@ export default function DashboardHeader() {
 
         <Grid item xs= {3}>
           <Paper sx= {{ p: 2, marginY: 1, height: 100 }}>
-            blah blah blah
+            <NextEvent event={nextDate}/>
           </Paper>
         </Grid>
       </Grid >
