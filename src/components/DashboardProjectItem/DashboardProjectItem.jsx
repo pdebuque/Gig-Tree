@@ -61,61 +61,61 @@ export default function DashboardProjectItem({ project, setCreateOpen, setCreate
   }
 
   const now = new Date()
-  project.past=now > project.last
-  project.upcoming = now<project.first
-  project.ongoing = now<project.last && now>project.first
+  project.past = now > project.last
+  project.upcoming = now < project.first
+  project.ongoing = now < project.last && now > project.first
 
   return (
     <Box
       className='project-item'
       sx={{ ...listItemStyle, borderTop: 10, borderColor: project.backgroundColor }}
     >
-      past? {JSON.stringify(project.past)} / / 
-      upcoming? {JSON.stringify(project.upcoming)} / / 
+      past? {JSON.stringify(project.past)} / /
+      upcoming? {JSON.stringify(project.upcoming)} / /
       ongoing? {JSON.stringify(project.ongoing)}
       <Box sx={{ ml: 0, display: 'flex', justifyContent: 'space-between' }}>
         <Box sx={{ display: 'flex', flexDirection: 'row' }}>
           <IconButton
             sx={{ width: 24, height: 24, mr: 1 }}
             onClick={() => setCollapsed(!isCollapsed)}
-
           >
             <MoreVertIcon sx={{ width: 20, height: 20 }} />
           </IconButton>
-          <Box sx={{ display: 'flex' }}>
 
-            {project.name ?
-              <Typography variant='h6'>{project.name}</Typography>
-              :
-              <Typography variant='h6' sx={placeholderText}>unnamed project</Typography>
-            }
-          </Box>
+          {project.name ?
+            <Typography variant='h6'>{project.name}</Typography>
+            :
+            <Typography variant='h6' sx={placeholderText}>unnamed project</Typography>
+          }
+
         </Box>
-        {project.owner_id === user.id &&
-          <Box sx={{ display: 'flex' }}>
-            <IconButton
-              sx={{ width: 20, height: 20 }}
-              onClick={handleStarClick}
-            >
+        <Box sx={{ display: 'flex' }}>
+          <IconButton
+            sx={{ width: 20, height: 20 }}
+            onClick={handleStarClick}
+          >
 
-              {project.starred ? <StarIcon sx={{ fill: '#F6F308', width: 16, height: 16 }} /> : <StarBorderIcon sx={{ width: 16, height: 16 }} />}
-            </IconButton>
-            <IconButton
-              sx={{ width: 20, height: 20 }}
-              onClick={handleEditClick}
+            {project.starred ? <StarIcon sx={{ fill: '#F6F308', width: 16, height: 16 }} /> : <StarBorderIcon sx={{ width: 16, height: 16 }} />}
+          </IconButton>
+          {project.owner_id === user.id &&
 
-            >
-              <EditIcon sx={{ width: 16, height: 16 }} />
-            </IconButton>
+            <>
+              <IconButton
+                sx={{ width: 20, height: 20 }}
+                onClick={handleEditClick}
 
-            <IconButton sx={{ width: 20, height: 20 }}
-              onClick={handleDeleteClick}
-            >
-              <DeleteIcon sx={{ width: 16, height: 16 }} />
-            </IconButton>
+              >
+                <EditIcon sx={{ width: 16, height: 16 }} />
+              </IconButton>
+              <IconButton sx={{ width: 20, height: 20 }}
+                onClick={handleDeleteClick}
+              >
+                <DeleteIcon sx={{ width: 16, height: 16 }} />
+              </IconButton>
+            </>
 
-          </Box>
-        }
+          }
+        </Box>
       </Box>
       <Box sx={{ marginLeft: 4 }}>
         {project.ensemble_name ?

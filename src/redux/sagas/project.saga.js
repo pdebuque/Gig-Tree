@@ -20,14 +20,15 @@ function* projectsSaga() {
 
 function insertFirstAndLastDates(projects) {
   return projects.map(project => {
-    if (!project.dates.length) return projects
-      const dates = project.dates
-      const datesSorted = dates.map(event => { return { ...event, date: new Date(event.date) } }).sort((a, b) => {
-        if (a.date > b.date) return 1
-        if (b.date > a.date) return -1
-        else return 0
-      })
-      return { ...project, first: datesSorted[0].date, last: datesSorted[datesSorted.length - 1].date }
+    if (!project.dates.length) return project
+    const dates = project.dates
+    const datesSorted = dates.map(event => { return { ...event, date: new Date(event.date) } }).sort((a, b) => {
+      if (a.date > b.date) return 1
+      if (b.date > a.date) return -1
+      else return 0
+    })
+    
+    return { ...project, first: datesSorted[0].date, last: datesSorted[datesSorted.length - 1].date }
   })
 }
 
@@ -38,6 +39,8 @@ function* getProjects(action) {
     console.log('projects from server;', projects.data)
 
     const projectsWithFirstAndLast = insertFirstAndLastDates(projects.data)
+
+    console.log('projects with first and last: ', projectsWithFirstAndLast)
 
     // console.log('test data type: ', typeof projects.data[0].dates[0].date)
     yield put({ type: 'SET_PROJECTS', payload: projectsWithFirstAndLast || [] })
