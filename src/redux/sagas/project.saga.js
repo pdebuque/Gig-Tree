@@ -16,6 +16,7 @@ function* projectsSaga() {
   yield takeEvery('DELETE_PROJECT', deleteProject)
   yield takeEvery('GET_CURRENT_PROJECT', getCurrentProject)
   yield takeEvery('SET_PROJECT_STARRED', setProjectStarred)
+  yield takeEvery('ACCEPT_PROJECT', acceptProject)
 };
 
 function insertFirstAndLastDates(projects) {
@@ -27,7 +28,7 @@ function insertFirstAndLastDates(projects) {
       if (b.date > a.date) return -1
       else return 0
     })
-    
+
     return { ...project, first: datesSorted[0].date, last: datesSorted[datesSorted.length - 1].date }
   })
 }
@@ -46,7 +47,18 @@ function* getProjects(action) {
     yield put({ type: 'SET_PROJECTS', payload: projectsWithFirstAndLast || [] })
     // set dates from the projects
     // console.log(typeof projects.data)
-    yield put({ type: 'SET_USER_DATES', payload: (projects.data ? projects.data.map(project => project.dates) : []).flat() })
+    const dates = (projects.data ? projects.data.map(project => project.dates) : []).flat()
+    const now = new Date()
+
+    function sortDates(a, b) {
+      if (new Date(a.date) > new Date(b.date)) return 1
+      if (new Date(a.date) < new Date(b.date)) return -1
+      return 0
+    }
+
+    const nextDate = dates.filter(date => new Date(date.date) > now).sort(sortDates)[0]
+    yield put({ type: 'SET_USER_DATES', payload: dates })
+    yield put({ type: 'SET_NEXT_DATE', payload: nextDate })
   }
   catch (err) {
     console.log('could not get projects!', err)
@@ -104,7 +116,7 @@ function* getCurrentProject(action) {
     console.log('getting project with id', action.payload)
     const currentProject = yield axios.get(`/api/project/${action.payload}`);
     console.log('got current project', currentProject.data)
-    const currentProjectFixed = {...currentProject.data, backgroundColor: currentProject.data.backgroundcolor}
+    const currentProjectFixed = { ...currentProject.data, backgroundColor: currentProject.data.backgroundcolor }
     yield put({ type: 'SET_CURRENT_PROJECT', payload: currentProjectFixed })
   }
   catch (err) {
@@ -123,6 +135,17 @@ function* setProjectStarred(action) {
   }
   catch (err) {
     console.log('could not set starred', err)
+  }
+}
+
+function* acceptProject(action) {
+  try{
+    yield axios.put(`api/project/accept/${action.payload}`)
+    yield put({type: 'GET_PROJECTS'})
+
+  }
+  catch (err) {
+    console.log('could not accept project', err)
   }
 }
 

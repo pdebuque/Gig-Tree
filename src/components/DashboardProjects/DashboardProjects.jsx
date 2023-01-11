@@ -26,41 +26,27 @@ export default function DashboardProjects() {
 
   // get the user's projects from the store
   const projects = useSelector(store => store.project);
-  const [projectsDisplayed, setProjectsDisplayed] = useState(projects)
+
+// for menu open/close
   const [createOpen, setCreateOpen] = useState(false)
   const dispatch = useDispatch();
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+
   const openFilterMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
-  const closeFilterMenu = (event) => {
+
+  const closeFilterMenu = () => {
     setAnchorEl(null)
   }
 
-
-  const defaultSort = {
+  const [sortMode, setSortMode] = useState({
     ascending: false,
     filter: 'all', // starred, past/upcoming/ongoing, owned
     sortBy: 'date' //starred, date, owned
-  }
-
-  const [sortMode, setSortMode] = useState(defaultSort)
-
-  // whenever the sortMode changes, sort the projects anew
-  useEffect(() => {
-    setProjectsDisplayed(sortProjects(projects, user, sortMode))
-  }, [, sortMode])
-
-  useEffect(() => {
-    setProjectsDisplayed(projects)
-  }, [projects])
-
-  // useEffect(() => {
-  //   console.log('getting user projects in dashboard');
-  //   dispatch({ type: 'GET_PROJECTS' });
-  // }, [])
+  })
 
   // this dictates create or edit mode of the entire project creation modal
   const [createMode, setCreateMode] = useState(true)
@@ -70,34 +56,24 @@ export default function DashboardProjects() {
       type: 'all',
     },
     {
-      type: 'owned',
-    },
-    {
       type: 'starred',
     },
     {
-      type: 'ongoing',
+      type: 'owned',
     },
     {
-      type: 'upcoming',
+      type: 'accepted',
     },
     {
-      type: 'past',
+      type: 'pending',
     },
+    
   ]
 
-  /* 
-  two dimensions of sorting:
-
-  asc/desc: date
-  filter: all, starred
-  */
+let projectsDisplayed = sortProjects(projects, user, sortMode);
 
   return (
     <Container sx={{ paddingBottom: 2 }} >
-      {/* {JSON.stringify(projects)} */}
-      {/* first dates: {JSON.stringify(projects.map(project=>project.first))} */}
-      {/* sort: {JSON.stringify(sortMode)} */}
       <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingY: 1 }}>
         <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
           <Typography variant='h5'>
@@ -114,24 +90,28 @@ export default function DashboardProjects() {
         </Box>
         <Box>
           <Button sx={{ textTransform: 'none', color: 'grey.700' }} endIcon={sortMode.ascending ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-            onClick={() => setSortMode({ ...sortMode, ascending: !sortMode.ascending })}
+            onClick={() => {
+              console.log('changing ascending')
+              sortMode.ascending ?
+              setSortMode({ ...sortMode, ascending: false })
+              :
+              setSortMode({...sortMode, ascending: true})
+            }}
           >
             {sortMode.sortBy}
           </Button>
+
           <Button
             sx={{ textTransform: 'none', color: 'grey.700' }}
             endIcon={<FilterListIcon />}
-            onClick={openFilterMenu}
+            onClick={(e)=>{
+              openFilterMenu(e)
+            }}
           >
             {sortMode.filter}
           </Button>
         </Box>
-        {/* <IconButton
-          aria-label="sort/filter projects"
-          onClick={openFilterMenu}
-        >
-          <FilterListIcon />
-        </IconButton> */}
+    
         <Menu
           anchorEl={anchorEl}
           open={open}
@@ -155,13 +135,6 @@ export default function DashboardProjects() {
           })}
         </Menu>
       </Box>
-      {/* Ascending <Switch /> Descending
-      <Button onClick={() => setProjectsDisplayed(sortByStarred(projects))}>sort by starred</Button>
-      <Button onClick={() => setProjectsDisplayed(sortByFirstAsc(projects))}>sort by date asc</Button>
-      <Button onClick={() => setProjectsDisplayed(sortByFirstDesc(projects))}>sort by date desc</Button>
-      <Button onClick={() => setProjectsDisplayed(projects)}>all</Button>
-      <Button onClick={() => setProjectsDisplayed(projects.filter(project => project.starred))}>starred</Button>
-      <Button onClick={() => setProjectsDisplayed(projects.filter(project => project.upcoming))}>upcoming</Button> */}
       <Box sx={{ ...greyBoxStyle, height: 550 }}>
         {projectsDisplayed.map(project => {
           return (
@@ -173,18 +146,7 @@ export default function DashboardProjects() {
             />
           )
         })}
-        {/*           
-          projectsDisplayed.reverse.map(project => {
-            return (
-              <DashboardProjectItem
-                key={project.id}
-                project={project}
-                setCreateOpen={setCreateOpen}
-                setCreateMode={setCreateMode}
-              />
-            )
-          })
-        } */}
+        
       </Box>
       <Modal
         open={createOpen}

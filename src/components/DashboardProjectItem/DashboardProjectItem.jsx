@@ -12,7 +12,7 @@ This component is a single project displayed within the dashboard projects sideb
 
 import './DashboardProjectItem.css';
 import { listItemStyle, listItemStylePast, listItemStyleUpcoming } from '../../_style/listItemStyle.jsx'
-import { Box, Typography, Collapse, Button, IconButton, Modal, Avatar, AvatarGroup } from '@mui/material';
+import { Box, Typography, Collapse, Button, IconButton, Modal, Avatar, AvatarGroup, Badge } from '@mui/material';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
@@ -26,6 +26,8 @@ import { smallModal } from '../../_style/modalStyle';
 import { placeholderText } from '../../_style/textStyle';
 
 import DeleteProjectModal from '../DeleteProjectModal/DeleteProjectModal';
+import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
+import TaskAltIcon from '@mui/icons-material/TaskAlt';
 
 
 export default function DashboardProjectItem({ project, setCreateOpen, setCreateMode }) {
@@ -53,6 +55,10 @@ export default function DashboardProjectItem({ project, setCreateOpen, setCreate
     setDeleteOpen(true)
   }
 
+  const handleAcceptClick = () =>{
+    dispatch({type: 'ACCEPT_PROJECT', payload: project.id})
+  }
+
   // delete onclick: confirmation modal
   const handleStarClick = (event) => {
     console.log('handling star click')
@@ -65,12 +71,22 @@ export default function DashboardProjectItem({ project, setCreateOpen, setCreate
   project.upcoming = now < project.first
   project.ongoing = now < project.last && now > project.first
 
+  const getTransform = (position) => {
+    // mousePos: [x,y]
+    // bottom right corner
+    if (position.x > 1200 && position.y > 900) return 'translate(-5%,-5%)';
+    // bottom
+    if (position.x > 1200) return 'translate(-95%,-105%)';
+    // right
+    if (position.y > 750) return 'translate(-5%,-105%)';
+    // else
+    return 'translate(-5%,5%)'
+  }
   return (
     <Box
       className='project-item'
       sx={{ ...listItemStyle, borderTop: 10, borderColor: project.backgroundColor }}
     >
-      {/* first: {JSON.stringify(project.first)} */}
       {/* past? {JSON.stringify(project.past)} / /
       upcoming? {JSON.stringify(project.upcoming)} / /
       ongoing? {JSON.stringify(project.ongoing)} */}
@@ -91,13 +107,6 @@ export default function DashboardProjectItem({ project, setCreateOpen, setCreate
 
         </Box>
         <Box sx={{ display: 'flex' }}>
-          <IconButton
-            sx={{ width: 20, height: 20 }}
-            onClick={handleStarClick}
-          >
-
-            {project.starred ? <StarIcon sx={{ fill: '#F6F308', width: 16, height: 16 }} /> : <StarBorderIcon sx={{ width: 16, height: 16 }} />}
-          </IconButton>
           {project.owner_id === user.id &&
 
             <>
@@ -116,6 +125,30 @@ export default function DashboardProjectItem({ project, setCreateOpen, setCreate
             </>
 
           }
+
+          {project.owner_id !== user.id && project.accepted &&
+            <IconButton 
+            sx={{ width: 20, height: 20 }}
+            onClick = {handleAcceptClick}            
+            >
+              <TaskAltIcon sx={{ width: 16, height: 16 }} />
+            </IconButton>}
+          {project.owner_id !== user.id && !project.accepted &&
+            <IconButton 
+            sx={{ width: 20, height: 20 }}
+            onClick = {handleAcceptClick}>
+                <RadioButtonUncheckedIcon sx={{ width: 16, height: 16 }} />
+            </IconButton>
+          }
+
+          <IconButton
+            sx={{ width: 20, height: 20 }}
+            onClick={handleStarClick}
+          >
+
+            {project.starred ? <StarIcon sx={{ fill: '#F6F308', width: 16, height: 16 }} /> : <StarBorderIcon sx={{ width: 16, height: 16 }} />}
+          </IconButton>
+
         </Box>
       </Box>
       <Box sx={{ marginLeft: 4 }}>
@@ -146,7 +179,9 @@ export default function DashboardProjectItem({ project, setCreateOpen, setCreate
       <Modal
         open={deleteOpen}
       >
-        <Box sx={{ ...smallModal, top: mousePos.y, left: mousePos.x }}>
+
+
+        <Box sx={{ ...smallModal, top: mousePos.y, left: mousePos.x, transform: getTransform(mousePos) }}>
           <DeleteProjectModal
             setDeleteOpen={setDeleteOpen}
             projectID={project.id}

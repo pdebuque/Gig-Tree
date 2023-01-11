@@ -1,13 +1,15 @@
 import { Container, Typography, Button, Paper, Avatar, Box } from '@mui/material'
+import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 
-export default function CollaboratorItem({ collaborator, searchResults, setSearchResults, invited, setInvited }) {
+import TaskAltIcon from '@mui/icons-material/TaskAlt';
+
+export default function CollaboratorItem({ collaborator, searchResults, setSearchResults, invited, setInvited, }) {
 
   const collabStyle = {
     padding: 1,
     marginY: 1,
     backgroundColor: 'grey.50',
     overflow: 'hidden',
-    overflowX: 'scroll'
   }
 
   // when a collaborator is clicked, move them: if they are remove that user from the 'searchResults array' and put them in the 'invited' array
@@ -35,7 +37,7 @@ export default function CollaboratorItem({ collaborator, searchResults, setSearc
   const stringToValue = (string) => {
     let sumValue = 0
     for (let i = 0; i < 4; i++) {
-      sumValue += string.charCodeAt(string.length-i) || 0
+      sumValue += string.charCodeAt(string.length - i) || 0
     }
     return sumValue
   }
@@ -50,14 +52,26 @@ export default function CollaboratorItem({ collaborator, searchResults, setSearc
       <Box sx={{ display: 'flex', flexDirection: 'row', }}>
         {/* {JSON.stringify([collaborator.first_name, collaborator.last_name, collaborator.instrument_1, collaborator.instrument_2, collaborator.instrument_3])} */}
         {collaborator.prof_pic_path ?
-          <Avatar alt = {`${collaborator.username}'s avatar`}src={collaborator.prof_pic_path} sx={{}}/>
+          <Avatar alt={`${collaborator.username}'s avatar`} src={collaborator.prof_pic_path} sx={{}} />
           :
-          <Avatar sx={{bgcolor: makeRandomColor(collaborator.username)}}>{getInitials(collaborator)}</Avatar>
+          <Avatar sx={{ bgcolor: makeRandomColor(collaborator.username) }}>{getInitials(collaborator)}</Avatar>
         }
 
-        <Box sx={{ marginLeft: 1 }}>
-          <Typography variant='h6'>{collaborator.first_name} {collaborator.last_name}</Typography>
-          <Typography variant='body2'>{collaborator.instrument_1 || 'musician'}{collaborator.instrument_2 && `, ${collaborator.instrument_2}`}{collaborator.instrumet_3 && `, ${collaborator.instrument_3}`}</Typography>
+
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'row' }}>
+          <Box sx={{ marginLeft: 1 }}>
+            <Typography variant='h6'>{collaborator.first_name} {collaborator.last_name}</Typography>
+            <Typography variant='body2'>{collaborator.instrument_1 || 'musician'}{collaborator.instrument_2 && `, ${collaborator.instrument_2}`}{collaborator.instrumet_3 && `, ${collaborator.instrument_3}`}</Typography>
+          </Box>
+
+          {Object.keys(collaborator).includes('accepted') ?
+            collaborator.accepted &&
+              <TaskAltIcon sx={{ ml: 1, width: 16, height: 16, color: "grey"}} />
+            
+            : null
+
+          }
+
         </Box>
       </Box>
     </Paper>

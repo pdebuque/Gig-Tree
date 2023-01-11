@@ -1,13 +1,18 @@
 import { Modal, Box, Typography, IconButton, Button } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux'
+import { useEffect } from 'react'
 
 import { getDate, getTime } from '../../modules/formatTimes'
 
 
-export default function NextEvent({ event }) {
 
+
+export default function NextEvent() {
+
+  const nextDate = useSelector(store => store.nextDate)
   const navigate = useNavigate()
 
   const {
@@ -23,7 +28,7 @@ export default function NextEvent({ event }) {
     ensemble_name,
     backgroundColor,
     color
-  } = event
+  } = nextDate
 
   return (
     <Box>
@@ -39,12 +44,12 @@ export default function NextEvent({ event }) {
           >project page</Button>
         </Box>
       </Box>
-      <Box sx={{ marginX: 2, mt: 1, paddingLeft: 1.5, paddingY: .5, borderRadius: 2, borderLeft: 5, bgcolor: 'grey.100', borderColor: event.backgroundColor }}>
+      <Box sx={{ marginX: 2, mt: 1, paddingLeft: 1.5, paddingY: .5, borderRadius: 2, borderLeft: 8, bgcolor: 'grey.100', borderColor: nextDate.backgroundColor, overflow: 'hidden', }}>
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
 
           <Box>
             <Typography variant='h6'>
-              {name || 'unnamed project'}
+              {name || 'unnamed date'}
             </Typography>
             {project_name || ensemble_name &&
               <Box sx={{ marginLeft: 1 }}>
@@ -56,8 +61,9 @@ export default function NextEvent({ event }) {
           </Box>
         </Box>
         <Box>
+          
           <Typography variant='body2'>
-            {location && `at ${location}.`} {getDate(date)}: {getTime(start)}-{getTime(end)}
+            {location && `at ${location}.`} {date && `${getDate(date)}: ${getTime(start)}-${getTime(end)}`}
           </Typography>
         </Box>
       </Box>

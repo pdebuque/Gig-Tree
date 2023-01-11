@@ -137,13 +137,17 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
   // console.log('getting info for project no. ', req.params.id);
   const queryText = `
-    SELECT project.*, json_agg(piece.*) AS repertoire, json_agg(date.*) AS dates, json_agg("user".*) AS collaborators FROM project
+  WITH collaborators AS (SELECT "user".*, user_project.project_accepted AS accepted FROM "user"
+	INNER JOIN user_project ON user_project.user_id = "user".id)
+	
+    SELECT project.*, json_agg(piece.*) AS repertoire, json_agg(date.*) AS dates, json_agg(collaborators.*) AS collaborators, json_agg(user_project.project_accepted) AS accepted FROM collaborators
+    JOIN user_project ON user_project.user_id = collaborators.id
+    JOIN project ON project.id = user_project.project_id
     LEFT JOIN piece ON piece.project_id = project.id
     LEFT JOIN date ON date.project_id = project.id
-    LEFT JOIN user_project ON user_project.project_id=project.id
-    JOIN "user" ON "user".id = user_project.user_id
     WHERE project.id=$1
     GROUP BY project.id;`
+    
   pool.query(queryText, [req.params.id])
     .then(result => {
       // need to take out duplicates
@@ -352,6 +356,21 @@ router.put('/star/:id', (req, res) => {
     .then(res.sendStatus(201))
     .catch(err => {
       console.log('could not update!', err);
+      res.sendStatus(500)
+    })
+})
+
+// PUT - accept a project
+router.put('/accept/:id', (req,res)=>{
+  const queryText = `
+  UPDATE user_project
+  SET project_accepted = NOT project_accepted
+  WHERE user_id = $1 AND project_id = $2
+  `
+  pool.query(queryText, [req.user.id, req.params.id])
+    .then(res.sendStatus(201))
+    .catch(err=>{
+      console.log('could not accept!', err)
       res.sendStatus(500)
     })
 })

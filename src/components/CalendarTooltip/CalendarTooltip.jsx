@@ -30,7 +30,7 @@ export default function CalendarTooltip({ eventModalOpen, setEventModalOpen, dat
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
         <Box>
           <Typography variant='h6'>
-            {name || 'unnamed project'}
+            {name || 'unnamed date'}
           </Typography>
           {project_name || ensemble_name &&
             <Box sx = {{marginLeft:1}}>

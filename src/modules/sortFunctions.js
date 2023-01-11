@@ -20,13 +20,14 @@
 */
 
 export default function filterAndSortProjects(projects, user, sortCriteria) {
-  // two leves of the sort: first the filter, then the sort by
+  // two leves of the sort: first the sort by, then the filter
   const sorted = sortProjects(projects, user, sortCriteria)
   const filtered = filterProjects(sorted,user,sortCriteria)
 
-  if (sortCriteria.ascending) filtered.reverse()
+  return sortCriteria.ascending ? filtered.reverse(): filtered
+  // if (sortCriteria.ascending) return filtered.reverse()
 
-  return filtered
+  // return filtered
 }
 
 function filterProjects(projects, user, sortCriteria) {
@@ -46,6 +47,12 @@ function filterProjects(projects, user, sortCriteria) {
       break;
     case 'past':
       return projects.filter(project => project.past)
+      break;
+    case 'accepted':
+      return projects.filter(project=>project.accepted && project.owner_id!==user.id);
+      break;
+    case 'pending':
+      return projects.filter(project=>!project.accepted && project.owner_id!==user.id);
       break;
     case 'all':
       return projects

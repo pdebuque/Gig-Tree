@@ -16,13 +16,13 @@ import { useSelector, useDispatch } from 'react-redux'
 export default function Home() {
 
   const dispatch = useDispatch()
-  const user = useSelector(store => store.user)
-  const [editModalOpen, setEditOpen] = useState(false)
+  // const user = useSelector(store => store.user)
+  // const [editModalOpen, setEditOpen] = useState(false)
 
-  // useEffect(()=>{
-  //   console.log('fetching projects');
-  //   // dispatch({type: 'FETCH_PROJECTS})
-  // },[])
+  useEffect(()=>{
+    // console.log('fetching projects');
+    dispatch({type: 'GET_PROJECTS'})
+  },[])
 
 
   /* 
