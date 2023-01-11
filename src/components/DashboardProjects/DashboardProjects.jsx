@@ -97,7 +97,7 @@ export default function DashboardProjects() {
     <Container sx={{ paddingBottom: 2 }} >
       {/* {JSON.stringify(projects)} */}
       {/* first dates: {JSON.stringify(projects.map(project=>project.first))} */}
-      sort: {JSON.stringify(sortMode)}
+      {/* sort: {JSON.stringify(sortMode)} */}
       <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingY: 1 }}>
         <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
           <Typography variant='h5'>

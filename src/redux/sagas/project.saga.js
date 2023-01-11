@@ -104,7 +104,8 @@ function* getCurrentProject(action) {
     console.log('getting project with id', action.payload)
     const currentProject = yield axios.get(`/api/project/${action.payload}`);
     console.log('got current project', currentProject.data)
-    yield put({ type: 'SET_CURRENT_PROJECT', payload: currentProject.data })
+    const currentProjectFixed = {...currentProject.data, backgroundColor: currentProject.data.backgroundcolor}
+    yield put({ type: 'SET_CURRENT_PROJECT', payload: currentProjectFixed })
   }
   catch (err) {
     console.log('could not get current project', err)

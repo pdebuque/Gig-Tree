@@ -62,6 +62,7 @@ function sortProjects(projects,user,sortCriteria) {
   }
 }
 
+
 export function sortByStarred(projectsArr) {
   return projectsArr.sort((a, b) => {
     if (!a.starred) return 1

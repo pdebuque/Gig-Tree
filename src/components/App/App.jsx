@@ -45,28 +45,19 @@ function App() {
       <Nav />
       {/* <main className='main-content'> */}
       <Routes>
-        <Route path='/about' element={<About />}/>
-        <Route path='/' element={<Home />}/>
-        <Route path = '/register' element = {<Register/>}/>
+        <Route path='/about' element={<About />} />
+        <Route path='/' element={<Home />} /> //todo: reroute to dashboard if logged in. if not, route to login page
+        <Route path='/register' element={<Register />} />
 
         {/* protected routes: only dashboard (for now) */}
 
-        <Route path='/dashboard' element={user.id ? <Dashboard /> : <LoginPage />}/>
+        <Route path='/dashboard' element={user.id ? <Dashboard /> : <LoginPage />} />
+        <Route path='project/:projectId' element={user.id ? <ProjectPage /> : <LoginPage />} />
 
-        <Route path = 'project/:projectId' element = {<ProjectPage />} />
-        {/* create use profiles
-        //todo: use route params instead of map to get the user info
-        */}
-        {/* {users.map(user => {
-          return (
-            <Route key={user.id} path={`/${user.name.toLowerCase().split(' ').join('-')}`} element={<Profile user={user} />}/>
-          )
-        })} */}
-        {/* <Route path = '/profile' element = {<Profile />}></Route>  */}
-        <Route path='/create' element={<CreateProject />}/> 
-        <Route path='/display' element={<DisplayProjects />}/>
-        <Route path='/login' element={<LoginPage />}/>
-        <Route element={<h1>404</h1>}/>
+        {/* <Route path='/create' element={<CreateProject />}/> 
+        <Route path='/display' element={<DisplayProjects />}/> */}
+        <Route path='/login' element={<LoginPage />} />
+        <Route element={<h1>404</h1>} />
       </Routes>
       {/* 
       //todo: make a <Footer/> element
