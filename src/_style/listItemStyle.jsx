@@ -1,5 +1,5 @@
 export const listItemStyle = {
-  m: .5,
+  marginY: 1,
   paddingX: 1,
   paddingTop: .5,
   paddingBottom: 1,

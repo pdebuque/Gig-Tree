@@ -70,9 +70,10 @@ export default function DashboardProjectItem({ project, setCreateOpen, setCreate
       className='project-item'
       sx={{ ...listItemStyle, borderTop: 10, borderColor: project.backgroundColor }}
     >
-      past? {JSON.stringify(project.past)} / /
+      first: {JSON.stringify(project.first)}
+      {/* past? {JSON.stringify(project.past)} / /
       upcoming? {JSON.stringify(project.upcoming)} / /
-      ongoing? {JSON.stringify(project.ongoing)}
+      ongoing? {JSON.stringify(project.ongoing)} */}
       <Box sx={{ ml: 0, display: 'flex', justifyContent: 'space-between' }}>
         <Box sx={{ display: 'flex', flexDirection: 'row' }}>
           <IconButton
