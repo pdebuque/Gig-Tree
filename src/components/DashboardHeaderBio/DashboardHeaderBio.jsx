@@ -17,21 +17,21 @@ export default function DashboardHeaderBio() {
   return (
     <Grid container spacing={1}>
 
-      <Grid item xs={2}>
+      <Grid item xs={1}>
         <WorkOutlineOutlinedIcon style={{ color: 'grey', fontSize: 'medium' }} />
       </Grid>
 
-      <Grid item xs={10}>
+      <Grid item xs={11}>
         <Typography>{user.job_1 ? `${user.job_1} ${user.job_1_location && `at ${user.job_1_location}`}` : 'no jobs yet!'}
         </Typography>
       </Grid>
 
       {user.job_2 &&
         <>
-          <Grid item xs={2}>
+          <Grid item xs={1}>
             <WorkOutlineOutlinedIcon style={{ color: 'grey', fontSize: 'medium' }} />
           </Grid>
-          <Grid item xs={10}>
+          <Grid item xs={11}>
             <Typography>
               {user.job_2} {user.job_2_location && `at ${user.job_2_location}`}
             </Typography>

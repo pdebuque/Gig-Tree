@@ -21,7 +21,7 @@ export default function Nav() {
         <Toolbar>
 
           <Typography variant="h4" color="inherit" sx={{ textDecoration: 'none', flexGrow: 1 }}>
-            Gig Tree
+            gig tree
           </Typography>
           <Button color="inherit" onClick={() => navigate('/about')}>About</Button>
           <Button color="inherit" onClick={handleLogout}>Logout</Button>
