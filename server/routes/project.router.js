@@ -4,6 +4,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 const pool = require('../modules/pool');
 const bodyParser = require('body-parser');
 const prepareDates = require('../modules/prepareDates')
+const removeDupById = require('../modules/removeDup')
 
 // routes
 
@@ -23,10 +24,12 @@ projects = [
   },
 ]
 */
+
+
 router.get('/', async (req, res) => {
-  console.log('in test GET space')
+  // console.log('in test GET space')
   const client = await pool.connect();
-  console.log('req.user: ', req.user);
+  // console.log('req.user: ', req.user);
 
   try {
     await client.query('BEGIN');
@@ -35,9 +38,10 @@ router.get('/', async (req, res) => {
 
     // 1. general info
     const generalInfoResults = await client.query(`
-      SELECT project.* FROM project
+      SELECT user_project.project_accepted AS accepted, project.id, project.name, project.ensemble_name, project.owner_id, project.description, project.backgroundcolor AS "backgroundColor", project.color, user_project.starred FROM project
       JOIN user_project ON user_project.project_id = project.id
       WHERE user_project.user_id = $1
+      ORDER BY project.id
     `, [req.user.id]);
 
     allProjects = [...generalInfoResults.rows];
@@ -50,14 +54,14 @@ router.get('/', async (req, res) => {
       GROUP BY project.id; 
     `)
 
-    console.log('projects', allProjects)
-    console.log('collaborator results: ', collaboratorResults.rows)
+    // console.log('projects', allProjects)
+    // console.log('collaborator results: ', collaboratorResults.rows)
 
     // attach collaborator arrays to corresponding project object by matching project id
     for (let project of allProjects) {
-      console.log('matching collaborators for project id:', project.id)
+      // console.log('matching collaborators for project id:', project.id)
       for (let result of collaboratorResults.rows) {
-        console.log('collaborators for project: ', result.id)
+        // console.log('collaborators for project: ', result.id)
         if (project.id === result.id) {
           project.collaborators = result.collaborators
         }
@@ -86,11 +90,14 @@ router.get('/', async (req, res) => {
 
     // 4. dates
     const datesResults = await client.query(`
-      SELECT project.id, json_agg("date".*) AS dates FROM project
-      JOIN user_project ON user_project.project_id = project.id
-      JOIN "date" ON "date".project_id = project.id
-      WHERE user_project.user_id = $1
-      GROUP BY project.id;
+    WITH dates AS
+    (SELECT "date".*, project."name" AS project_name, project.ensemble_name, project.backgroundcolor AS "backgroundColor", project.color AS color FROM project
+        JOIN "date" ON "date".project_id = project.id)      	
+        SELECT project.id, json_agg("dates".*) AS dates FROM dates
+        JOIN project ON project.id=dates.project_id
+        JOIN user_project ON user_project.project_id= project.id
+        WHERE user_project.user_id = $1
+        GROUP BY project.id;
     `, [req.user.id])
 
     // attach dates to corresponding projects by matching project id
@@ -103,43 +110,61 @@ router.get('/', async (req, res) => {
       if (!project.dates) project.dates = []
     }
     await client.query('COMMIT')
+
+    console.log('all projects before adding dates:', allProjects)
+    console.log('sample date:', allProjects[0].dates)
+
     for (let project of allProjects) {
-      for (let date of project.dates) {
-        date.title = date.name || 'unnamed date'
+      if (project.dates) {
+        for (let date of project.dates) {
+          date.title = date.name || 'unnamed date'
+        }
       }
     }
-    // console.log('projects parsed:', prepareDates.parseDatesFromDB(allProjects))
-
-    // console.log('project dates', (prepareDates.parseDatesFromDB(allProjects))[0]?.dates)
-
-    // console.log('test type of a date: ', typeof prepareDates.parseDatesFromDB(allProjects)[0].dates[0].date)
-
-    // res.send(prepareDates.parseDatesFromDB(allProjects)||[])
-
     res.send(allProjects)
   }
   catch (error) {
     await client.query('ROLLBACK')
-    console.log('Error GET /api/project/test', error);
+    console.log('Error GET /api/project', error);
     res.sendStatus(500);
   } finally {
     client.release()
   }
 })
 
-
-
-
-
 // GET - get all info for a specific project
 
-// router.get('/:id', (req, res) => {
-//   // console.log('getting info for project no. ', req.params.id);
-//   res.sendStatus(200)
-// })
+router.get('/:id', async (req, res) => {
+  // console.log('getting info for project no. ', req.params.id);
+  const queryText = `
+  WITH collaborators AS (SELECT "user".*, user_project.project_accepted AS accepted FROM "user"
+	INNER JOIN user_project ON user_project.user_id = "user".id)
+	
+    SELECT project.*, json_agg(piece.*) AS repertoire, json_agg(date.*) AS dates, json_agg(collaborators.*) AS collaborators, json_agg(user_project.project_accepted) AS accepted FROM collaborators
+    JOIN user_project ON user_project.user_id = collaborators.id
+    JOIN project ON project.id = user_project.project_id
+    LEFT JOIN piece ON piece.project_id = project.id
+    LEFT JOIN date ON date.project_id = project.id
+    WHERE project.id=$1
+    GROUP BY project.id;`
+    
+  pool.query(queryText, [req.params.id])
+    .then(result => {
+      // need to take out duplicates
+      const project = result.rows[0];
+      // console.log('project with duplicates:',project)
+      const projectNoDup = { ...project, dates: removeDupById(project.dates), repertoire: removeDupById(project.repertoire), collaborators: removeDupById(project.collaborators) }
+      // console.log('got current project', projectNoDup)
+      res.send(projectNoDup)
+    })
+    .catch(err => console.log('could not get current project', err))
+
+})
+
+// POST a new project to the database
 
 router.post('/', async (req, res) => {
-  console.log('req.body: ', req.body)
+  // console.log('req.body: ', req.body)
   const client = await pool.connect();
   // const bodyDatesPrepped = prepareDates.prepareDatesForDB(req.body)
 
@@ -151,6 +176,8 @@ router.post('/', async (req, res) => {
       name,
       ensemble_name,
       description,
+      backgroundColor,
+      color,
       repertoire,
       dates,
       collaborators,
@@ -159,9 +186,9 @@ router.post('/', async (req, res) => {
     await client.query('BEGIN')
 
     // create project in project table
-    const projectInsertResults = await client.query(`INSERT INTO "project" ("name", "ensemble_name", "owner_id", "description")
-      VALUES ($1, $2, $3, $4)
-      RETURNING id;`, [name, ensemble_name, req.user.id, description]);
+    const projectInsertResults = await client.query(`INSERT INTO "project" ("name", "ensemble_name", "owner_id", "description", "backgroundcolor", "color")
+      VALUES ($1, $2, $3, $4, $5, $6)
+      RETURNING id;`, [name, ensemble_name, req.user.id, description, backgroundColor, color]);
     console.log(projectInsertResults)
     const projectId = projectInsertResults.rows[0].id;
 
@@ -185,6 +212,12 @@ router.post('/', async (req, res) => {
       const insertCollabValues = [collaborator.id, projectId];
       return client.query(insertCollabText, insertCollabValues);
     }));
+
+    // insert user into the user_project table if not already added; set project accepted true
+    const userIds = collaborators.map(collaborator => collaborator.id);
+    if (!(userIds.includes(req.user.id))) {
+      await client.query(`INSERT INTO "user_project" ("user_id", "project_id", "project_accepted") VALUES ($1, $2, TRUE)`, [req.user.id, projectId]);
+    }
 
     await client.query('COMMIT')
     res.sendStatus(201);
@@ -212,6 +245,8 @@ router.put('/:id', async (req, res) => {
       name,
       ensemble_name,
       description,
+      backgroundColor,
+      color,
       repertoire,
       dates,
       collaborators,
@@ -242,9 +277,9 @@ router.put('/:id', async (req, res) => {
 
     await client.query(`
       UPDATE project
-      SET "name" = $1, ensemble_name = $2, description = $3
+      SET "name" = $1, ensemble_name = $2, description = $3, backgroundcolor = $5, color = $6
       WHERE id = $4
-    `, [name, ensemble_name, description, req.params.id])
+    `, [name, ensemble_name, description, req.params.id, backgroundColor, color])
 
     /* 
     const [[repertoire],[dates]]
@@ -306,6 +341,38 @@ router.put('/:id', async (req, res) => {
   } finally {
     client.release()
   }
+})
+
+// PUT - star a project
+
+router.put('/star/:id', (req, res) => {
+  console.log('starring project number', req.params.id)
+  const queryText = `
+    UPDATE user_project
+    SET starred = $1
+    WHERE project_id = $2 AND user_id = $3
+  `
+  pool.query(queryText, [req.body.starred, req.params.id, req.user.id])
+    .then(res.sendStatus(201))
+    .catch(err => {
+      console.log('could not update!', err);
+      res.sendStatus(500)
+    })
+})
+
+// PUT - accept a project
+router.put('/accept/:id', (req,res)=>{
+  const queryText = `
+  UPDATE user_project
+  SET project_accepted = NOT project_accepted
+  WHERE user_id = $1 AND project_id = $2
+  `
+  pool.query(queryText, [req.user.id, req.params.id])
+    .then(res.sendStatus(201))
+    .catch(err=>{
+      console.log('could not accept!', err)
+      res.sendStatus(500)
+    })
 })
 
 // DELETE - delete existing project

@@ -5,4 +5,9 @@ const dateReducer = (state=[],action) => {
   return state
 }
 
+const nextDateReducer = (state={}, action) => {
+  if (action.type === 'SET_NEXT_DATE') return action.payload
+  return state
+}
+
 export default dateReducer

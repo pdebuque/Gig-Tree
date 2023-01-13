@@ -5,8 +5,6 @@ import DateDisplay from '../DateDisplay/DateDisplay'
 
 export default function DateInputContainer({ dates, setDates }) {
 
-
-
   return (
     <Container disableGutters>
       {/* {JSON.stringify(dates)} */}

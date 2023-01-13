@@ -6,10 +6,12 @@ import { Typography, Container, Button, TextField, Stack, Box, Grid } from '@mui
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createContainerStyle } from '../../_style/modalStyle'
+import { SketchPicker } from 'react-color';
+import ColorPicker from '../ColorPicker/ColorPicker'
 
 import RepertoireContainer from '../RepertoireContainer/RepertoireContainer';
 
-export default function CreateReview({ setTab, generalInfo, setGeneral }) {
+export default function CreateReview({ generalInfo, setGeneral }) {
 
   const dispatch = useDispatch();
 
@@ -19,20 +21,40 @@ export default function CreateReview({ setTab, generalInfo, setGeneral }) {
 
   const newProject = useSelector(store => store.newProject)
 
-  // on submit, save the current state data into newProject. Then, if a user navigates back to the tab their data will be saved
+  //todo: figure out color picker functions
+  //todo: initialize colors in newProject
+  //todo: logic to determine text color based on background color
 
+  //todo: adjust POST to include colors
 
+  const autofill = () => {
+    setGeneral({
+      name: 'R&B/Hip Hop Showcase',
+      ensemble_name: 'various',
+      description: 'A classical twist on modern r&b and hip hop',
+      repertoire: [
+        {
+          name: '',
+          composer: ''
+        },
+      ],
+      backgroundColor: '#5f7f81',
+      color: '#ffffff'
+    })
+  }
 
   return (
     <Container sx={{ display: 'flex', flexDirection: 'column', paddingY: 2 }}>
-      {/* General: {JSON.stringify(generalInfo)} */}
+      General: {JSON.stringify(generalInfo)}
       <Grid container spacing={1}>
         <Grid item xs={2}>
           <Typography>general</Typography>
         </Grid>
         <Grid item xs={10}>
           <Stack direction='column' spacing={2} sx={{ marginBottom: 1 }}>
-            <Box sx={{ display: 'flex', flexDirection: 'row', width: '100%', }}>
+
+            <Stack direction='row' spacing={2} sx={{ display: 'flex', flexDirection: 'row', width: '100%', }}>
+              <ColorPicker generalInfo={generalInfo} setGeneral={setGeneral} />
               <TextField
                 name='title-input'
                 width='45%'
@@ -49,7 +71,10 @@ export default function CreateReview({ setTab, generalInfo, setGeneral }) {
                 value={generalInfo.ensemble_name}
                 onChange={e => setGeneral({ ...generalInfo, ensemble_name: e.target.value })}
               />
-            </Box>
+              {/* <Box sx = {{border: 1, borderColor: 'primary', height: 24, width: 24, backgroundColor: '#fff', borderRadius: '50%', margin: 1}}>
+                
+              </Box> */}
+            </Stack>
             <TextField
               name='description-input'
               label='project description'
@@ -70,6 +95,7 @@ export default function CreateReview({ setTab, generalInfo, setGeneral }) {
         </Grid>
 
       </Grid>
+      <Button onClick={autofill}>autofill</Button>
     </Container>
   )
 }

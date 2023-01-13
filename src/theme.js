@@ -22,6 +22,7 @@ export const theme= createTheme({
     },
     body1: {
       fontFamily: 'Merriweather Sans',
+      fontSize: 14,
       fontWeight: 100,
     },
     body2: {

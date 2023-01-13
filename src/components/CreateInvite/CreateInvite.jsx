@@ -32,7 +32,7 @@ export default function CreateInvite({ setTab, invited, setInvited }) {
   },[searchTerm])
 
   const filter = (searchTerm) => {
-    console.log('filtering results by term: ', searchTerm)
+    // console.log('filtering results by term: ', searchTerm)
 
     setSearchResults(availableUsers.filter(collaborator => {
       const searchLC = searchTerm.toLowerCase()

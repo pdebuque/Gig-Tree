@@ -2,7 +2,7 @@
 import { useEffect } from 'react'
 
 // react router
-import { Routes, Route, redirect } from 'react-router-dom';
+import { Routes, Route, redirect, Navigate } from 'react-router-dom';
 
 // redux stuff
 import { useDispatch, useSelector } from 'react-redux'
@@ -16,7 +16,8 @@ import Profile from '../Profile/Profile';
 import LoginPage from '../LoginPage/LoginPage';
 import About from '../About/About';
 import Dashboard from '../Dashboard/Dashboard';
-import Register from '../Register/Register'
+import Register from '../Register/Register';
+import ProjectPage from '../ProjectPage/ProjectPage'
 
 
 import './App.css';
@@ -26,7 +27,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import { theme } from '../../theme';
 
 // temporary info
-import { users } from '../../temp-info'
+// import { users } from '../../temp-info'
 
 function App() {
 
@@ -44,28 +45,19 @@ function App() {
       <Nav />
       {/* <main className='main-content'> */}
       <Routes>
-        <Route path='/about' element={<About />}/>
-        <Route path='/' element={<Home />}/>
-        <Route path = '/register' element = {<Register/>}/>
+        <Route path='/about' element={<About />} />
+        <Route path='/' element={user.id ? <Navigate replace to="/dashboard" /> : <LoginPage/>} /> //todo: reroute to dashboard if logged in. if not, route to login page
+        <Route path='/register' element={<Register />} />
 
         {/* protected routes: only dashboard (for now) */}
 
-        <Route path='/dashboard' element={user.id ? <Dashboard /> : <LoginPage />}/>
+        <Route path='/dashboard' element={user.id ? <Dashboard /> : <LoginPage />} />
+        <Route path='project/:projectId' element={user.id ? <ProjectPage /> : <LoginPage />} />
 
-
-        {/* create use profiles
-        //todo: use route params instead of map to get the user info
-        */}
-        {users.map(user => {
-          return (
-            <Route key={user.id} path={`/${user.name.toLowerCase().split(' ').join('-')}`} element={<Profile user={user} />}/>
-          )
-        })}
-        {/* <Route path = '/profile' element = {<Profile />}></Route>  */}
-        <Route path='/create' element={<CreateProject />}/> 
-        <Route path='/display' element={<DisplayProjects />}/>
-        <Route path='/login' element={<LoginPage />}/>
-        <Route element={<h1>404</h1>}/>
+        {/* <Route path='/create' element={<CreateProject />}/> 
+        <Route path='/display' element={<DisplayProjects />}/> */}
+        <Route path='/login' element={<LoginPage />} />
+        <Route element={<h1>404</h1>} />
       </Routes>
       {/* 
       //todo: make a <Footer/> element

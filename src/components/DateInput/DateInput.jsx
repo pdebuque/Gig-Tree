@@ -8,7 +8,7 @@ import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 
 import { convertTime } from '../../modules/convertTime'
 
-export default function DateInput({ dates, setDates }) {
+export default function DateInput({ dates, setDates, dateTemp, setDateTemp }) {
 
   /* 
   three sources of state:
@@ -24,25 +24,25 @@ export default function DateInput({ dates, setDates }) {
   // 
 
   // little function for pre-setting end date
-  const setTwoHoursLater = (date) => {
-    const twoHoursInMillis = 1000 * 60 * 120
-    const newDate = new Date();
-    newDate.setTime(date.getTime())
-    newDate.setTime(newDate.getTime() + twoHoursInMillis)
-    return newDate
-  }
+  // const setTwoHoursLater = (date) => {
+  //   const twoHoursInMillis = 1000 * 60 * 120
+  //   const newDate = new Date();
+  //   newDate.setTime(date.getTime())
+  //   newDate.setTime(newDate.getTime() + twoHoursInMillis)
+  //   return newDate
+  // }
 
-  const [dateTemp, setDateTemp] =
-    useState({
-      tempID: null,
-      name: '',
-      date: new Date(),
-      start: new Date(),
-      end: new Date(),
-      location: '',
-      type: '',
-      notes: '',
-    })
+  // const [dateTemp, setDateTemp] =
+  //   useState({
+  //     tempID: null,
+  //     name: '',
+  //     date: new Date(),
+  //     start: new Date(),
+  //     end: new Date(),
+  //     location: '',
+  //     type: '',
+  //     notes: '',
+  //   })
 
   const handleSubmit = (e) => {
 
@@ -161,6 +161,7 @@ export default function DateInput({ dates, setDates }) {
           rows={3}
         />
         <Button type='submit'>add</Button>
+
       </Stack>
     </Container>
   )

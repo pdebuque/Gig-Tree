@@ -1,4 +1,4 @@
-import { TextField, Container, Button, IconButton } from '@mui/material';
+import { TextField, Container, Stack, IconButton } from '@mui/material';
 import { useState } from 'react'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
@@ -8,8 +8,9 @@ export default function RepertoireItem({ setGeneral, generalInfo }) {
   const [thisPiece, setThisPiece] = useState({ name: '', composer: '' })
 
   return (
-    <Container disableGutters>
+    <Stack direction="row" spacing = {2}>
       {/* {JSON.stringify(thisPiece)} */}
+    
       <TextField
         name='title-input'
         label='title'
@@ -31,6 +32,6 @@ export default function RepertoireItem({ setGeneral, generalInfo }) {
       }}>
         <AddCircleOutlineIcon />
       </IconButton>
-    </Container>
+    </Stack>
   )
 }
