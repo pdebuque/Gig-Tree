@@ -2,17 +2,11 @@
 This component is a single project displayed within the dashboard projects sidebar
 */
 
-//todo: item colors
-//todo: background colors conditional on date: past-grey; upcoming: light yellow; current: light green
-
-//todo: avatars
-
-//todo: sort by date
 
 
 import './DashboardProjectItem.css';
 import { listItemStyle, listItemStylePast, listItemStyleUpcoming } from '../../_style/listItemStyle.jsx'
-import { Box, Typography, Collapse, Button, IconButton, Modal, Avatar, AvatarGroup, Badge } from '@mui/material';
+import { Box, Typography, Collapse, Button, IconButton, Modal, Avatar, AvatarGroup, Badge, Tooltip } from '@mui/material';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
@@ -55,8 +49,8 @@ export default function DashboardProjectItem({ project, setCreateOpen, setCreate
     setDeleteOpen(true)
   }
 
-  const handleAcceptClick = () =>{
-    dispatch({type: 'ACCEPT_PROJECT', payload: project.id})
+  const handleAcceptClick = () => {
+    dispatch({ type: 'ACCEPT_PROJECT', payload: project.id })
   }
 
   // delete onclick: confirmation modal
@@ -82,6 +76,10 @@ export default function DashboardProjectItem({ project, setCreateOpen, setCreate
     // else
     return 'translate(-5%,5%)'
   }
+
+  const owner = project.collaborators.filter((person) => person.id === project.owner_id)
+  const notOwner4 = project.collaborators.filter((person) => person.id !== project.owner_id).slice(0, 4)
+
   return (
     <Box
       className='project-item'
@@ -127,17 +125,17 @@ export default function DashboardProjectItem({ project, setCreateOpen, setCreate
           }
 
           {project.owner_id !== user.id && project.accepted &&
-            <IconButton 
-            sx={{ width: 20, height: 20 }}
-            onClick = {handleAcceptClick}            
+            <IconButton
+              sx={{ width: 20, height: 20 }}
+              onClick={handleAcceptClick}
             >
               <TaskAltIcon sx={{ width: 16, height: 16 }} />
             </IconButton>}
           {project.owner_id !== user.id && !project.accepted &&
-            <IconButton 
-            sx={{ width: 20, height: 20 }}
-            onClick = {handleAcceptClick}>
-                <RadioButtonUncheckedIcon sx={{ width: 16, height: 16 }} />
+            <IconButton
+              sx={{ width: 20, height: 20 }}
+              onClick={handleAcceptClick}>
+              <RadioButtonUncheckedIcon sx={{ width: 16, height: 16 }} />
             </IconButton>
           }
 
@@ -162,11 +160,46 @@ export default function DashboardProjectItem({ project, setCreateOpen, setCreate
         <Box sx={{ ml: 5, pl: 1, marginY: 1, typography: 'body2', borderLeft: 3, borderColor: 'grey.300', backgroundColor: 'grey.50' }}>
           {project.description}
         </Box>
-        <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+          <Box sx={{ ml: 2 }}>
+            <AvatarGroup spacing='medium'  >
+              <Tooltip
+                PopperProps={{
+                  modifiers: [
+                    {
+                      name: "offset",
+                      options: {
+                        offset: [0, -12],
+                      },
+                    },
+                  ],
+                }}
+                title={`project owner: ${owner[0]?.first_name} ${owner[0]?.last_name}`}>
 
-          <AvatarGroup >
-            {/* bring in avatars from all collaborators, with owner largest */}
-          </AvatarGroup>
+                <Avatar src={owner[0]?.prof_pic_path} size='small' sx={{ height: 36, width: 36 }} />
+              </Tooltip>
+              {notOwner4.map(person => {
+                return (
+                <Tooltip
+                  key={person.id}
+                  PopperProps={{
+                    modifiers: [
+                      {
+                        name: "offset",
+                        options: {
+                          offset: [0, -12],
+                        },
+                      },
+                    ],
+                  }}
+                  title={`${person?.first_name} ${person?.last_name}`}>
+                <Avatar src={person?.prof_pic_path} sx={{ height: 24, width: 24 }} />
+                </Tooltip>
+                )
+              })}
+              {/* bring in avatars from all collaborators, with owner largest */}
+            </AvatarGroup>
+          </Box>
           <Button
             size='small'
             color='inherit'
@@ -178,10 +211,12 @@ export default function DashboardProjectItem({ project, setCreateOpen, setCreate
       </Collapse>
       <Modal
         open={deleteOpen}
+        hideBackdrop={true}
+        onClose={() => setDeleteOpen(false)}
       >
 
 
-        <Box sx={{ ...smallModal, top: mousePos.y, left: mousePos.x, transform: getTransform(mousePos) }}>
+        <Box sx={{ ...smallModal, top: mousePos.y, left: mousePos.x, boxShadow: 5, transform: getTransform(mousePos) }}>
           <DeleteProjectModal
             setDeleteOpen={setDeleteOpen}
             projectID={project.id}

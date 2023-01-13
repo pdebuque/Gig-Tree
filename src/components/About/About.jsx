@@ -4,42 +4,58 @@ import Grid from '@mui/material/Unstable_Grid2'
 
 export default function About() {
 
-    const technologies = ['html/css/js', 'react', 'Material.ui', 'node.js', 'express.js', 'PostgreSQL']
+  const technologies = ['html/css/js', 'react', 'Material.ui', 'moment', 'react-big-calendar', 'node.js', 'express.js', 'PostgreSQL'];
+  const future = ['user profile pages', 'ensemble pages', 'resource upload (scores, images, documents, etc.)', 'email integration', 'Typescript', 'responsive design']
 
-    return (
-        <Paper
-            sx={{ paddingY: 2, paddingX: 4, maxWidth: 1000, m: 'auto' }}
-        >
-            <h2>about this project</h2>
-            <Grid container spacing={2}>
-                <Grid item>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat maiores quas natus doloremque esse, dolorem saepe omnis repellendus odit odio sunt atque vitae totam dignissimos a blanditiis nemo est quisquam?
-                    Reprehenderit adipisci optio dolorum quod iste distinctio atque, iure nostrum temporibus pariatur, esse ea soluta totam perferendis quisquam porro maiores incidunt repellendus. Optio sint eligendi modi maxime, ad debitis. Explicabo.
-                    Fugiat porro temporibus deserunt iste officia ab inventore eligendi natus quo incidunt, praesentium adipisci, vero aliquid illum nisi! Nam dolorum esse numquam asperiores, sunt quo expedita natus architecto nulla unde.</Grid>
-                <Grid item xs={4}>
-                    <Box sx={{ ml: 2 }}>
-                        <h3>technologies</h3>
-                        <List>
-                            {technologies.map(item => {
-                                return (
-                                    <ListItem key = {item} sx={{ paddingY: 0 }}>
-                                        <ListItemText primary={item} />
-                                    </ListItem>
-                                )
-                            }
-                            )}
-                        </List>
+  return (
+    <Paper
+      sx={{ mt: 4, paddingY: 4, paddingX: 4, maxWidth: 600, marginX: 'auto' }}
+    >
+      <Typography variant='h4'>about this project</Typography>
 
-                    </Box>
-                </Grid>
-                <Grid item xs={8}>
-                    <Box>
-                        <h3>acknowledgements</h3>
-                        Many thanks to Prime for the instruction, support, and structure for learning all these skills. Special thanks (obviously) to our instructors, Liz, Dane, and Kris, as well as to the Shawl cohort.<strong> Sh'all ready for this??</strong>
+      <Grid container spacing={2} sx={{ mt: .5 }}>
+        <Grid item xs={12}>
+          <Typography variant='body1'>Gig Tree was created with love to simplify the lives of freelance musicians juggling multiple projects at any one time through an unending variety of technologies (email, text, messaging apps, the list goes on and on). Hopefully this app can give these musicians an elegant one-stop shop for their scheduling and project management needs.</Typography>
+        {/* </Grid><Grid item xs={2}> */}
 
-                        <h3>let's connect!</h3>
-                    </Box>
-                </Grid>
-            </Grid>
-        </Paper>
-    )
+        </Grid>
+        <Grid item xs={6}>
+          <Typography variant='h5' sx={{ mt: 2 }}>future developments</Typography>
+          <List>
+            {future.map(item => {
+              return (
+                <ListItem key={item} sx={{ paddingY: 0 }}>
+                  <ListItemText primary={item} />
+                </ListItem>
+              )
+            }
+            )}
+          </List>
+        </Grid>
+        <Grid item xs={6} >
+          <Box sx={{ ml: 2 }}>
+            <Typography variant='h5' sx={{ mt: 2 }}>technologies</Typography>
+            <List>
+              {technologies.map(item => {
+                return (
+                  <ListItem key={item} sx={{ paddingY: 0 }}>
+                    <ListItemText primary={item} />
+                  </ListItem>
+                )
+              }
+              )}
+            </List>
+
+          </Box>
+        </Grid>
+      <Grid item xs={12}>
+        <Box>
+        <Typography variant='h5' sx={{  }}>acknowledgements</Typography>
+        <Typography variant='body1' sx={{ mt: 2 }}>Many thanks to Prime for the instruction, support, and structure for learning all these skills. Thanks to our instructors, Liz, Dane, Key, and Kris, as well as to the Shawl cohort. And thanks to my family and friends for their support throughout this program.</Typography>
+
+        </Box>
+      </Grid>
+    </Grid>
+    </Paper >
+  )
 }

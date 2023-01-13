@@ -28,13 +28,60 @@ export default function CreateSchedule({ setTab, dates, setDates }) {
       notes: '',
     })
 
+  const autofill = () => {
+    setDates([
+      {
+        "name": "rehearsal 1",
+        "location": "Unity Church Unitarian",
+        "date": "1/26/2023, 4:53:28 PM",
+        "start": "1/26/2023, 6:00:28 PM",
+        "end": "1/26/2023, 10:00:28 PM",
+        "type": "rehearsal",
+        "notes": "",
+        "project_name": "Carol Barnett Recording Project",
+        "ensemble_name": "Border CrosSing",
+        "backgroundColor": "#25369e",
+        "color": "#ffffff",
+        "title": "rehearsal 1"
+      },
+      {
+        "name": "rehearsal 2",
+        "location": "Unity Church Unitarian",
+        "date": "1/27/2023, 4:53:50 PM",
+        "start": "1/27/2023, 6:00:50 PM",
+        "end": "1/27/2023, 10:00:50 PM",
+        "type": "rehearsal",
+        "notes": "",
+        "project_name": "Carol Barnett Recording Project",
+        "ensemble_name": "Border CrosSing",
+        "backgroundColor": "#25369e",
+        "color": "#ffffff",
+        "title": "rehearsal 2"
+      },
+      {
+        "name": "recording",
+        "location": "Unity Church Unitarian",
+        "date": "1/28/2023, 4:53:50 PM",
+        "start": "1/28/2023, 8:00:50 PM",
+        "end": "1/28/2023, 11:00:50 PM",
+        "type": "rehearsal",
+        "notes": "",
+        "project_name": "Carol Barnett Recording Project",
+        "ensemble_name": "Border CrosSing",
+        "backgroundColor": "#25369e",
+        "color": "#ffffff",
+        "title": "rehearsal 2"
+      },
+
+    ])
+  }
   return (
     <Container>
       {/* 
       <Typography variant='h6'>add dates</Typography> */}
       <Container disableGutters>
         {/* {JSON.stringify(dates)} */}
-        <Grid container spacing={1} sx = {{paddingTop: 1}}>
+        <Grid container spacing={1} sx={{ paddingTop: 1 }}>
           <Grid item xs={5}>
             <Paper sx={{ paddingTop: 3 }}>
               <Typography variant='h6' textAlign='center' sx={{ marginBottom: 1 }}>create date</Typography>
@@ -42,9 +89,9 @@ export default function CreateSchedule({ setTab, dates, setDates }) {
             </Paper>
           </Grid>
           <Grid item xs={1}>
-            <Box sx ={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '100%'}}>
-              <KeyboardDoubleArrowRightIcon color = 'grey.800'/>
-              <KeyboardDoubleArrowRightIcon color = 'grey.800'/>
+            <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+              <KeyboardDoubleArrowRightIcon color='grey.800' />
+              <KeyboardDoubleArrowRightIcon color='grey.800' />
             </Box>
           </Grid>
           <Grid item xs={6} sx={{ ...largeBoxStyle, height: 450, paddingTop: 10 }}>
@@ -59,6 +106,7 @@ export default function CreateSchedule({ setTab, dates, setDates }) {
             </Stack>
           </Grid>
         </Grid>
+        <Button onClick = {autofill}>autofill</Button>
       </Container>
     </Container>
   )

@@ -15,14 +15,13 @@ export default function DashboardHeaderBio() {
   // 
 
   return (
-    <Grid container spacing={1}>
-
+    <Grid container spacing={1} sx ={{}}>
+{/* {JSON.stringify(user)} */}
       <Grid item xs={1}>
         <WorkOutlineOutlinedIcon style={{ color: 'grey', fontSize: 'medium' }} />
       </Grid>
-
       <Grid item xs={11}>
-        <Typography>{user.job_1 ? `${user.job_1} ${user.job_1_location && `at ${user.job_1_location}`}` : 'no jobs yet!'}
+        <Typography>{user.job_1 ? `${user.job_1}  ${user.job_1_location && `at ${user.job_1_location}`}` : 'no jobs yet!'}
         </Typography>
       </Grid>
 
@@ -38,6 +37,16 @@ export default function DashboardHeaderBio() {
           </Grid>
         </>
       }
+
+      <Grid item xs={1}>
+        <LocationOnOutlinedIcon style={{ color: 'grey', fontSize: 'medium' }}/>
+      </Grid>
+
+      <Grid item xs={11}>
+        <Typography>
+          {user.location ? user.location : 'no location yet!'}
+        </Typography>
+      </Grid>
 
     </Grid>
   )

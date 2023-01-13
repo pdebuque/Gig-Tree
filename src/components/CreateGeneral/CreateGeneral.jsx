@@ -27,10 +27,25 @@ export default function CreateReview({ generalInfo, setGeneral }) {
 
   //todo: adjust POST to include colors
 
+  const autofill = () => {
+    setGeneral({
+      name: 'R&B/Hip Hop Showcase',
+      ensemble_name: 'various',
+      description: 'A classical twist on modern r&b and hip hop',
+      repertoire: [
+        {
+          name: '',
+          composer: ''
+        },
+      ],
+      backgroundColor: '#5f7f81',
+      color: '#ffffff'
+    })
+  }
 
   return (
     <Container sx={{ display: 'flex', flexDirection: 'column', paddingY: 2 }}>
-      {/* General: {JSON.stringify(generalInfo)} */}
+      General: {JSON.stringify(generalInfo)}
       <Grid container spacing={1}>
         <Grid item xs={2}>
           <Typography>general</Typography>
@@ -38,7 +53,7 @@ export default function CreateReview({ generalInfo, setGeneral }) {
         <Grid item xs={10}>
           <Stack direction='column' spacing={2} sx={{ marginBottom: 1 }}>
 
-            <Stack direction = 'row' spacing = {2} sx={{ display: 'flex', flexDirection: 'row', width: '100%', }}>
+            <Stack direction='row' spacing={2} sx={{ display: 'flex', flexDirection: 'row', width: '100%', }}>
               <ColorPicker generalInfo={generalInfo} setGeneral={setGeneral} />
               <TextField
                 name='title-input'
@@ -80,6 +95,7 @@ export default function CreateReview({ generalInfo, setGeneral }) {
         </Grid>
 
       </Grid>
+      <Button onClick={autofill}>autofill</Button>
     </Container>
   )
 }

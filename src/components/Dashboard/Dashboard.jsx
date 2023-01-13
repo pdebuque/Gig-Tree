@@ -40,12 +40,12 @@ export default function Home() {
       <DashboardHeader />
       <Grid container spacing={1} sx={{ height: 600 }}>
         <Grid item xs={4}>
-          <Paper sx={{}}>
+          <Paper sx={{ p: 2, height: 600}}>
             <DashboardProjects />
           </Paper>
         </Grid>
         <Grid item xs={8}>
-          <Paper sx={{ p: 2, mY: 1 }}>
+          <Paper sx={{ p: 2, mY: 1, height: 600 }}>
             <DashboardCalendar />
           </Paper>
         </Grid></Grid>

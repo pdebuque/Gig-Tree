@@ -33,7 +33,7 @@ export default function DashboardCalendar() {
   // extract dates from projects
   const [dates, setDates] = useState(initialDates)
   const [eventModalOpen, setEventModalOpen] = useState(false)
-  const [mousePos, setMousePos] = useState({x: 200, y: 200})
+  const [mousePos, setMousePos] = useState({ x: 200, y: 200 })
   const [dateClicked, setDateClicked] = useState({})
 
   useEffect(() => {
@@ -47,11 +47,12 @@ export default function DashboardCalendar() {
     (date, event) => {
       console.log(`selected event: clientX: ${event.clientX}, clientY: ${event.clientY}`)
       // console.log('hello')
-      setMousePos({x: event.clientX, y: event.clientY});
-      
+      setMousePos({ x: event.clientX, y: event.clientY });
+
       setDateClicked(date);
       setEventModalOpen(true);
     }, [])
+
 
   const getEventStyles = (event) => {
 
@@ -108,7 +109,7 @@ export default function DashboardCalendar() {
       <Typography variant='h5' sx={{ mb: 2 }}>Upcoming</Typography>
       {/* dates: {JSON.stringify(dates)} */}
       {/* projects: {JSON.stringify(projects)} */}
-      <Box sx={{ height: 600 }}>
+      <Box sx={{ height: 560 }}>
         <DnDCalendar
           localizer={localizer}
           events={dates}
@@ -122,19 +123,20 @@ export default function DashboardCalendar() {
         />
       </Box>
       <Modal
-      open = {eventModalOpen}
-      hideBackdrop={true}
+        open={eventModalOpen}
+        hideBackdrop={true}
+        onClose={()=>setEventModalOpen(false)}
       >
-        <Box sx = {calendarModalStyle}>
-        <CalendarTooltip 
-        eventModalOpen = {eventModalOpen} 
-        setEventModalOpen={setEventModalOpen} 
-        dateClicked={dateClicked}
-        mousePos={mousePos}
-        />
+        <Box sx={calendarModalStyle}>
+          <CalendarTooltip
+            eventModalOpen={eventModalOpen}
+            setEventModalOpen={setEventModalOpen}
+            dateClicked={dateClicked}
+            mousePos={mousePos}
+          />
         </Box>
       </Modal>
-      
+
     </Box>
   )
 }

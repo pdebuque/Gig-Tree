@@ -49,7 +49,7 @@ export default function CreateReview() {
         <Grid item xs={10}>
           <Box sx={greyBoxStyle}>
             {newProject.repertoire.length ?
-              <Grid container sx={1}>
+              <Grid container spacing={1}>
                 {newProject.repertoire.map(piece => {
                   return (
                     <Grid item key = {piece.id} xs = {4}>

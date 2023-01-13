@@ -3,15 +3,16 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate } from 'react-router-dom';
 import Sidebar from '../Sidebar/Sidebar';
 import { useState } from 'react';
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 export default function Nav() {
 
+  const dispatch = useDispatch()
   const navigate = useNavigate();
   const user = useSelector(store => store.user)
 
   const handleLogout = () => {
-    console.log('logout here');         //todo: modal popout for logout information
+    dispatch({type: 'LOGOUT'})
     navigate('/login');
   }
 
@@ -23,8 +24,8 @@ export default function Nav() {
           <Typography variant="h4" color="inherit" sx={{ textDecoration: 'none', flexGrow: 1 }}>
             gig tree
           </Typography>
-          <Button color="inherit" onClick={() => navigate('/about')}>About</Button>
-          <Button color="inherit" onClick={handleLogout}>Logout</Button>
+          <Button color="inherit" onClick={() => navigate('/about')} sx ={{textTransform: 'none'}}>about</Button>
+          <Button sx = {{textTransform: 'none'}} color="inherit" onClick={handleLogout}>logout</Button>
 
           {/* //todo: icon destination and source come from database, depending on user */}
           <IconButton onClick={() => navigate('/dashboard')}>

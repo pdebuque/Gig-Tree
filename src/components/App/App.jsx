@@ -2,7 +2,7 @@
 import { useEffect } from 'react'
 
 // react router
-import { Routes, Route, redirect } from 'react-router-dom';
+import { Routes, Route, redirect, Navigate } from 'react-router-dom';
 
 // redux stuff
 import { useDispatch, useSelector } from 'react-redux'
@@ -46,7 +46,7 @@ function App() {
       {/* <main className='main-content'> */}
       <Routes>
         <Route path='/about' element={<About />} />
-        <Route path='/' element={<Home />} /> //todo: reroute to dashboard if logged in. if not, route to login page
+        <Route path='/' element={user.id ? <Navigate replace to="/dashboard" /> : <LoginPage/>} /> //todo: reroute to dashboard if logged in. if not, route to login page
         <Route path='/register' element={<Register />} />
 
         {/* protected routes: only dashboard (for now) */}

@@ -73,8 +73,8 @@ export default function DashboardProjects() {
 let projectsDisplayed = sortProjects(projects, user, sortMode);
 
   return (
-    <Container sx={{ paddingBottom: 2 }} >
-      <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingY: 1 }}>
+    <Container sx={{ paddingBottom: 2, }} >
+      <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
         <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
           <Typography variant='h5'>
             Projects
@@ -135,7 +135,7 @@ let projectsDisplayed = sortProjects(projects, user, sortMode);
           })}
         </Menu>
       </Box>
-      <Box sx={{ ...greyBoxStyle, height: 550 }}>
+      <Box sx={{ ...greyBoxStyle, height: 540 }}>
         {projectsDisplayed.map(project => {
           return (
             <DashboardProjectItem
