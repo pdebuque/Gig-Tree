@@ -39,7 +39,7 @@ export default function CreateReview() {
               </Typography>
             }
           </Box>
-          <Box sx={{ borderLeft: 2, borderColor: 'grey.700', paddingX: 1, marginTop: 1, marginLeft: 2 }}>
+          <Box sx={{ borderLeft: 2, borderColor: 'grey.700', paddingX: 1, marginTop: 1, marginLeft: 2, bgcolor: 'grey.50' }}>
             {newProject.description ? <Typography variant='body1'>{newProject.description}</Typography> : <Typography variant='body1' sx={placeholderText}> -- no description added -- </Typography>}
           </Box>
         </Grid>

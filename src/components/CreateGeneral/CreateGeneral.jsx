@@ -29,13 +29,61 @@ export default function CreateReview({ generalInfo, setGeneral }) {
 
   const autofill = () => {
     setGeneral({
-      name: 'R&B/Hip Hop Showcase',
-      ensemble_name: 'various',
-      description: 'A classical twist on modern r&b and hip hop',
+      name: 'MASS',
+      ensemble_name: 'meridian vocal ensemble',
+      description: 'A contemporary take on sacred music from throughout the ages, presented by a professional vocal octet',
       repertoire: [
         {
-          name: '',
-          composer: ''
+          name: 'MLK',
+          composer: 'Bono, arr. Bob Chilcott'
+        },
+        {
+          name: 'Hear my prayer, O Lord',
+          composer: 'Henry Purcell'
+        },
+        {
+          name: 'Prayers',
+          composer: 'Joseph Gregorio'
+        },
+        {
+          name: 'Precious Lord',
+          composer: 'Thomas Dorsey'
+        },
+        {
+          name: 'Earth Song',
+          composer: 'Frank Ticheli'
+        },
+        {
+          name: '...the hard-won miles',
+          composer: 'Aaron Hendrix'
+        },
+        {
+          name: 'Ain\'a that Good News!',
+          composer: 'William Dawson'
+        },
+        {
+          name: 'Kyrie',
+          composer: 'Duarte Lobo'
+        },
+        {
+          name: 'Gloria',
+          composer: 'William Sefton'
+        },
+        {
+          name: 'Credo',
+          composer: 'Hans Leo Hassler'
+        },
+        {
+          name: 'Sanctus and Benedictus',
+          composer: 'Josef Rheinberger'
+        },
+        {
+          name: 'Agnus Dei',
+          composer: 'Grey Grant'
+        },
+        {
+          name: 'Alleluia',
+          composer: 'Jake Runestad'
         },
       ],
       backgroundColor: '#5f7f81',
@@ -45,7 +93,7 @@ export default function CreateReview({ generalInfo, setGeneral }) {
 
   return (
     <Container sx={{ display: 'flex', flexDirection: 'column', paddingY: 2 }}>
-      General: {JSON.stringify(generalInfo)}
+      {/* General: {JSON.stringify(generalInfo)} */}
       <Grid container spacing={1}>
         <Grid item xs={2}>
           <Typography>general</Typography>

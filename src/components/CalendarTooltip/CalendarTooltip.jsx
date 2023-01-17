@@ -46,7 +46,7 @@ export default function CalendarTooltip({ eventModalOpen, setEventModalOpen, dat
       </Box>
       <Box sx={{ marginLeft: .5 }}>
         <Typography variant='body2'>
-          {location && `at ${location}.`} {getDate(date)}: {getTime(start)}-{getTime(end)}
+          {location && `at ${location}.`} <br/>{getDate(date)}: {getTime(start)}-{getTime(end)}
         </Typography>
       </Box>
       <Box sx={{ display: 'flex', justifyContent: 'flex-end', marginTop: .5 }}>
