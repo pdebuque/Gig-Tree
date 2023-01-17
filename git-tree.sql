@@ -1,11 +1,13 @@
 -- primary tables: user, project, ensemble, date, piece
 
 CREATE TABLE "user" (
-    id SERIAL PRIMARY KEY,
-    first_name TEXT NOT NULL,
-    last_name TEXT NOT NULL,
+    "id" SERIAL PRIMARY KEY,
+    "username" VARCHAR (80) UNIQUE NOT NULL,
+    "password" VARCHAR (1000) NOT NULL,
     bio TEXT,
     "location" TEXT,
+    first_name TEXT NOT NULL,
+    last_name TEXT NOT NULL,
     join_date DATE,
     available TEXT,
     instrument_1 TEXT,
@@ -19,66 +21,48 @@ CREATE TABLE "user" (
     cover_pic_path TEXT
 );
 
-CREATE TABLE ensemble (
-    id SERIAL PRIMARY KEY,
-    director TEXT,
-    about TEXT,
-    website TEXT,
-    logo_path TEXT
-);
-
 CREATE TABLE project (
     id SERIAL PRIMARY KEY,
     "name" TEXT NOT NULL,
-    ensemble_id INTEGER REFERENCES ensemble,
-    owner_id INTEGER references "user",
-    about TEXT
+    ensemble_name TEXT,
+    owner_id INTEGER REFERENCES "user" NOT NULL,
+    description TEXT
+    backgroundColor TEXT DEFAULT '#ffffff'
+    color TEXT DEFAULT '#fb8500'
 );
 
 -- all events (rehearsals and performances)
-CREATE TABLE "event" (
+CREATE TABLE "date" (
     id SERIAL PRIMARY KEY,
-    project_id INTEGER REFERENCES project,
+    "name" TEXT,
+    project_id INTEGER REFERENCES project ON DELETE CASCADE,
     "location" TEXT,
-    "date" DATE NOT NULL,
-    "time" TIME NOT NULL,
-    rehearsal BOOLEAN
+    "date" TEXT NOT NULL,
+    "start" TEXT NOT NULL,
+    "end" TEXT NOT NULL,
+    "type" TEXT,
+    notes TEXT
 );
 
 CREATE TABLE piece (
     id SERIAL PRIMARY KEY,
     "name" TEXT NOT NULL,
-    composer_first TEXT,
-    composer_last TEXT,
-    arranger_first TEXT,
-    arranger_last TEXT,
-    "year" INTEGER,
-    project_id INTEGER REFERENCES project,
-    notes TEXT
+    composer TEXT,
+    project_id INTEGER REFERENCES project ON DELETE CASCADE
 );
 
 -- junction tables: collaboration (user/user), user_project, user_ensemble(?)
 
-CREATE TABLE collaboration (
+CREATE TABLE starred (
     id SERIAL PRIMARY KEY,
-    "user1_id" INTEGER REFERENCES "user",
-    "user2_id" INTEGER REFERENCES "user"
+    "user1_id" INTEGER REFERENCES "user" ON DELETE CASCADE,
+    "user2_id" INTEGER REFERENCES "user" ON DELETE CASCADE
 );
 
 CREATE TABLE user_project (
     id SERIAL PRIMARY KEY,
-    "user_id" INTEGER REFERENCES "user",
-    project_id INTEGER REFERENCES project
-);
-
-CREATE TABLE project_piece (
-    id SERIAL PRIMARY KEY,
-    project_id INTEGER REFERENCES project,
-    piece_id INTEGER REFERENCES piece
-);
-
-CREATE TABLE user_ensemble (
-    id SERIAL PRIMARY KEY,
-    "user_id" INTEGER REFERENCES "user",
-    ensemble_id INTEGER REFERENCES ensemble
+    "user_id" INTEGER REFERENCES "user" ON DELETE CASCADE,
+    project_id INTEGER REFERENCES project ON DELETE CASCADE,
+    project_accepted BOOLEAN DEFAULT FALSE,
+    starred BOOLEAN DEFAULT FALSE
 );
