@@ -111,8 +111,8 @@ router.get('/', async (req, res) => {
     }
     await client.query('COMMIT')
 
-    console.log('all projects before adding dates:', allProjects)
-    console.log('sample date:', allProjects[0].dates)
+    // console.log('all projects before adding dates:', allProjects)
+    // console.log('sample date:', allProjects[0]?.dates)
 
     for (let project of allProjects) {
       if (project.dates) {
@@ -186,7 +186,7 @@ router.post('/', async (req, res) => {
     await client.query('BEGIN')
 
     // create project in project table
-    const projectInsertResults = await client.query(`INSERT INTO "project" ("name", "ensemble_name", "owner_id", "description", "backgroundcolor", "color")
+    const projectInsertResults = await client.query(`INSERT INTO "project" ("name", "ensemble_name", "owner_id", "description", "backgroundColor", "color")
       VALUES ($1, $2, $3, $4, $5, $6)
       RETURNING id;`, [name, ensemble_name, req.user.id, description, backgroundColor, color]);
     console.log(projectInsertResults)
@@ -277,7 +277,7 @@ router.put('/:id', async (req, res) => {
 
     await client.query(`
       UPDATE project
-      SET "name" = $1, ensemble_name = $2, description = $3, backgroundcolor = $5, color = $6
+      SET "name" = $1, ensemble_name = $2, description = $3, backgroundColor = $5, color = $6
       WHERE id = $4
     `, [name, ensemble_name, description, req.params.id, backgroundColor, color])
 
