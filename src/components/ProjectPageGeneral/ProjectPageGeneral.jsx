@@ -15,11 +15,11 @@ export default function ProjectPageGeneral() {
   return (
     <Paper sx={{ p: 2, marginTop: 0, height: 600}}>
       
-
       <Typography variant='h5' sx = {{marginBottom: 2}}>
         General
       </Typography>
       <Stack spacing={1} sx = {{marginLeft: 1}}>
+
         <Typography variant='h6'>
           About
         </Typography>
@@ -36,7 +36,7 @@ export default function ProjectPageGeneral() {
           Repertoire
         </Typography>
       </Stack>
-      <Grid container spacing = {1} sx = {{ marginTop: 1, borderRadius: 2, padding: 1, bgcolor: 'grey.100'}}>
+      <Grid container spacing = {1} sx = {{ marginTop: 1, borderRadius: 2, padding: 1, bgcolor: 'grey.100', overflow: 'hidden', maxHeight: 360, overflowY: 'scroll'}}>
         {!project.repertoire.length && 
         <RepertoireItem piece = {{name: 'no piece', composer: 'no composer'}} gridWidth = {12}/>
         }

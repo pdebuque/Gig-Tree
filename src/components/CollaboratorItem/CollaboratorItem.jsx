@@ -49,6 +49,7 @@ export default function CollaboratorItem({ collaborator, searchResults, setSearc
 
   return (
     <Paper sx={collabStyle} onClick={handleClick}>
+      {/* {JSON.stringify(collaborator.accepted)} */}
       <Box sx={{ display: 'flex', flexDirection: 'row', }}>
         {/* {JSON.stringify([collaborator.first_name, collaborator.last_name, collaborator.instrument_1, collaborator.instrument_2, collaborator.instrument_3])} */}
         {collaborator.prof_pic_path ?
@@ -64,12 +65,11 @@ export default function CollaboratorItem({ collaborator, searchResults, setSearc
             <Typography variant='body2'>{collaborator.instrument_1 || 'musician'}{collaborator.instrument_2 && `, ${collaborator.instrument_2}`}{collaborator.instrumet_3 && `, ${collaborator.instrument_3}`}</Typography>
           </Box>
 
-          {Object.keys(collaborator).includes('accepted') ?
-            collaborator.accepted &&
+          {Object.keys(collaborator)?.includes('accepted') ?
+            collaborator?.accepted &&
               <TaskAltIcon sx={{ ml: 1, width: 16, height: 16, color: "grey"}} />
-            
-            : null
-
+            : 
+            null
           }
 
         </Box>

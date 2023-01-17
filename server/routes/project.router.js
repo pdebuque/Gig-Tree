@@ -138,8 +138,8 @@ router.get('/:id', async (req, res) => {
   // console.log('getting info for project no. ', req.params.id);
   const queryText = `
   WITH collaborators AS (SELECT "user".*, user_project.project_accepted AS accepted FROM "user"
-	INNER JOIN user_project ON user_project.user_id = "user".id)
-	
+	JOIN user_project ON user_project.user_id = "user".id
+  WHERE user_project.project_id=$1)
     SELECT project.*, json_agg(piece.*) AS repertoire, json_agg(date.*) AS dates, json_agg(collaborators.*) AS collaborators, json_agg(user_project.project_accepted) AS accepted FROM collaborators
     JOIN user_project ON user_project.user_id = collaborators.id
     JOIN project ON project.id = user_project.project_id

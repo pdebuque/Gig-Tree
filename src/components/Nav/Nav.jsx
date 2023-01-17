@@ -29,7 +29,7 @@ export default function Nav() {
 
           {/* //todo: icon destination and source come from database, depending on user */}
           <IconButton onClick={() => navigate('/dashboard')}>
-            <Avatar size={16} alt="Paolo's profile picture" src="images/prof-pics/Paolo-prof-pic.png" />
+            <Avatar size={16} alt={`${user.first_name}'sprofile picture`} src={user.prof_pic_path} />
           </IconButton>
           {/* <Button component = "avatar" src='images/prof-pics/Paolo-prof-pic.png' color="inherit" onClick={() => navigate('/login')}/> */}
         </Toolbar>

@@ -5,7 +5,7 @@ import Grid from '@mui/material/Unstable_Grid2'
 export default function About() {
 
   const technologies = ['html/css/js', 'react', 'Material.ui', 'moment', 'react-big-calendar', 'node.js', 'express.js', 'PostgreSQL'];
-  const future = ['user profile pages', 'ensemble pages', 'resource upload (scores, images, documents, etc.)', 'email integration', 'Typescript', 'responsive design']
+  const future = ['notifications', 'messaging service', 'user profile pages', 'ensemble pages', 'resource upload (scores, images, documents, etc.)', 'email integration', 'Typescript', 'responsive design']
 
   return (
     <Paper
