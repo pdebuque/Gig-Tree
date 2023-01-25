@@ -1,70 +1,276 @@
-# Getting Started with Create React App
+<a name="readme-top"></a>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<!-- PROJECT SHIELDS -->
+<!--
+*** I'm using markdown "reference style" links for readability.
+*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
+*** See the bottom of this document for the declaration of the reference variables
+*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
+*** https://www.markdownguide.org/basic-syntax/#reference-style-links
+-->
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![MIT License][license-shield]][license-url]
+[![LinkedIn][linkedin-shield]][linkedin-url]
 
-## Available Scripts
 
-In the project directory, you can run:
 
-### `npm start`
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://github.com/pdebuque/Gig-Tree">
+    <img src="public/apple-touch-icon.png" alt="Logo" width="80" height="80">
+  </a>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+<h3 align="center">gig tree</h3>
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+  <p align="center">
+    A desktop web application to create, organize, and manage classical music projects.
+    <br />
+    <a href="https://github.com/pdebuque/Gig-Tree/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/pdebuque/Gig-Tree/issues">Request Feature</a>
+  </p>
+</div>
 
-### `npm test`
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#acknowledgments">Acknowledgments</a></li>
+  </ol>
+</details>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<!-- ABOUT THE PROJECT -->
+## About The Project
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+I created gig tree in response to a problem I've encountered throughout my time as a freelance classical conductor and singer: the sheer number of overlapping projects I'm involved with, and the lack of a standard of communication and scheduling platform. I long ago lost track of the number of emails, texts, facebook messages, etc. etc. I've sent and received to wrangle my gig schedule.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Enter gig tree!
 
-### `npm run eject`
+<div align="center">
+<img src="./readme-images/dashboard-screenshot.png" height="500" style="margin-right: 20px" />
+</div>
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+The central functionality of this first prototype is the process of creating, editing, and deleting projects, and the development of a dashboard UI that seamlessly centralizes and organizes the user's calendar.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+gig tree was my capstone solo project at [Prime Digital Academy](https://www.primeacademy.io/). A deployed version can be accessed [here](https://flyby-events.herokuapp.com/).
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Built With
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+[![React][React.js]][React-url]
+[![Node][Node.js]][Node-url]
+[![Express][Expres.js]]
+[![MUI]][MUI-url]
+[![Postgresql]][Postgresql-url]
+[![Redux-Saga]][Redux-saga-url]
+[![Redux]][Redux-url]
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
+<!-- GETTING STARTED -->
+## Getting Started
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Prerequisites
 
-### Making a Progressive Web App
+This app was developed with node 19.0.0 and Chrome 109. Future updates may expand browser and version functionality.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Installation
 
-### Advanced Configuration
+1. Clone the repo
+   ```sh
+   git clone https://github.com/pdebuque/Gig-Tree.git
+   ```
+2. Install NPM packages
+   ```sh
+   npm i
+   ```
+3. Create a `.env` file and enter a randomized session key
+   ```
+   SERVER_SESSION_SECRET = << RANDOM SESSION KEY HERE >>
+   ```
+4. Using `gig-tree.sql`, create the database `gig-tree` on localhost, port 5432.
+6. Run server
+    ```sh
+    npm run server
+    ```
+7. Run client and open browser at `localhost:3000`
+    ```sh
+    npm run client
+    ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-### `npm run build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<!-- USAGE EXAMPLES -->
+## Usage
+
+**⚠️ This app is only functional when viewed in a mobile-style browser under 600px in width. ⚠️** 
+
+If this is your first time using the app, register with a username and password.
+
+<div align="center">
+  <img src="./documentation/images/menu-screenshot.png" height="500">
+</div>
+  
+Create an event by filling out the required fields and confirm the details.
+
+<div align="center">
+  <img src="./documentation/images/createEvent-screenshot.png" height="500" >
+  <img src="./documentation/images/previewEvent-screenshot.png" height="500" >
+</div>
+
+You can edit and delete the event, and invite guests, from the event detail page. If your event is marked as public, the URL will be accessible to anyone, whether they have a FlyBy account or not. Visibility of private events is limited to the host and any invited guests.
+
+<div align="center">
+  <img src="documentation/images/eventDetail-screenshot.png" height="400">
+</div>
+
+Guests can add events, as well as *subscribe* to events. This is functionality for a future subscription feature, which will allow guests to receive text/email updates when event details change.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- ROADMAP -->
+## Roadmap
+
+Future updates will include:
+- User profile pages
+- Ensemble profile pages
+- Dropbox/Google Docs integration
+- Messaging platform
+- Typescript
+- Further fleshed-out project pages
+- Responsive frontend design
+- Expanded browser support
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+<!-- CONTRIBUTING -->
+## Contributing
+
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**, with the understanding that I am a student and this was mainly created as a learning opportunity for myself.
+
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
+Don't forget to give the project a star! Thanks again!
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- LICENSE -->
+## License
+
+Distributed under the MIT License. See `LICENSE.txt` for more information.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- CONTACT -->
+## Contact
+
+Paolo Debuque - pdebuque@gmail.com
+
+Project Link: [https://github.com/pdebuque/gig-tree](https://github.com/pdebuque/gig-tree)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- ACKNOWLEDGMENTS -->
+## Acknowledgments
+
+Thank you to:
+* The Shawl cohort at Prime Coding Academy
+* My instructors Dane, Key, Liz, and Kris
+* My family, friends, and partner
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[contributors-shield]: https://img.shields.io/github/contributors/pdebuque/gig-tree.svg?style=for-the-badge
+[contributors-url]: https://github.com/pdebuque/Gig-Tree/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/ozzythecoder/flyby-events-solo-project.svg?style=for-the-badge
+[forks-url]: https://github.com/ozzythecoder/flyby-events-solo-project/network/members
+[stars-shield]: https://img.shields.io/github/stars/ozzythecoder/flyby-events-solo-project.svg?style=for-the-badge
+[stars-url]: https://github.com/ozzythecoder/flyby-events-solo-project/stargazers
+[issues-shield]: https://img.shields.io/github/issues/ozzythecoder/flyby-events-solo-project.svg?style=for-the-badge
+[issues-url]: https://github.com/ozzythecoder/flyby-events-solo-project/issues
+[license-shield]: https://img.shields.io/github/license/ozzythecoder/flyby-events-solo-project.svg?style=for-the-badge
+[license-url]: https://github.com/ozzythecoder/flyby-events-solo-project/blob/master/LICENSE.txt
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url]: https://linkedin.com/in/august-mcallister
+[product-screenshot]: ./documentation/images/login-screenshot.png
+[Node.js]: https://img.shields.io/badge/Node.JS-20232A?style=for-the-badge&logo=node.js&logoColor=61DAFB
+[Node-url]: https://nodejs.org/en/
+[Express.js]: 
+[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[React-url]: https://reactjs.org/
+[Postgresql]: https://img.shields.io/badge/PostgreSQL-20232A?style=for-the-badge&logo=postgresql&logoColor=61DAFB
+[Postgresql-url]: https://www.postgresql.org/
+[Redux]: https://img.shields.io/badge/Redux-20232A?style=for-the-badge&logo=redux&logoColor=61DAFB
+[Redux-url]: https://redux.js.org/
+[Redux-Saga]: https://img.shields.io/badge/Redux/Saga-20232A?style=for-the-badge&logo=reduxsaga&logoColor=61DAFB
+[Redux-saga-url]: https://redux-saga.js.org/
+[MUI]: https://img.shields.io/badge/MUI%20&%20Material%20Design-20232A?style=for-the-badge&logo=materialdesign&logoColor=61DAFB
+[MUI-url]: https://mui.com/core/
+[Swal2]: https://img.shields.io/badge/SweetAlert2-20232A?style=for-the-badge
+[Swal2-url]: https://sweetalert2.github.io/
+[Luxon.js]: https://img.shields.io/badge/Luxon.js-20232A?style=for-the-badge
+[Luxon-url]: https://moment.github.io/luxon/#/
+Footer
+© 2023 GitHub, Inc.
+Footer navigation
+Terms
+Privacy
+Security
+Status
+Docs
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
+flyby-events-solo-project/README.md at main · ozzythecoder/flyby-events-solo-project

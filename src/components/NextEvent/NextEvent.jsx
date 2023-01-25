@@ -32,7 +32,7 @@ export default function NextEvent() {
 
   return (
     <Box>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', overflow: 'hidden' }}>
         <Typography variant='h5'>next event</Typography>
         <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
           <Button
@@ -44,7 +44,7 @@ export default function NextEvent() {
           >project page</Button>
         </Box>
       </Box>
-      <Box sx={{ marginX: 2, mt: 1, paddingLeft: 1.5, paddingY: .5, borderRadius: 2, borderLeft: 8, bgcolor: 'grey.100', borderColor: nextDate.backgroundColor, overflow: 'hidden', }}>
+      <Box sx={{height: 60,  marginX: 2, mt: 1, paddingLeft: 1.5, paddingY: .5, borderRadius: 2, borderLeft: 8, bgcolor: 'grey.100', borderColor: nextDate.backgroundColor, overflow: 'hidden', }}>
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
 
           <Box>

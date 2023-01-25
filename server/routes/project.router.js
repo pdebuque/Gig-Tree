@@ -277,7 +277,7 @@ router.put('/:id', async (req, res) => {
 
     await client.query(`
       UPDATE project
-      SET "name" = $1, ensemble_name = $2, description = $3, backgroundColor = $5, color = $6
+      SET "name" = $1, ensemble_name = $2, description = $3, "backgroundColor" = $5, color = $6
       WHERE id = $4
     `, [name, ensemble_name, description, req.params.id, backgroundColor, color])
 
