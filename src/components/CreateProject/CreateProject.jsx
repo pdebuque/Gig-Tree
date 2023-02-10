@@ -20,17 +20,24 @@ save all into redux store as newProject
 */
 
 import { useState, useEffect } from 'react'
-import Calendar from 'react-calendar';
-import { Box, Tabs, Tab, Grid, Paper, Typography, Container, Button, IconButton } from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close';
-import './calendar.css';
+
+// library - functions
 import { useDispatch, useSelector } from 'react-redux';
 
+// library - components
+import { Box, Tabs, Tab, Typography, Container, Button, IconButton } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
+
+// internal - components
 import TabPanel from '../_Assets/TabPanel/TabPanel'
 import CreateGeneral from '../CreateGeneral/CreateGeneral';
 import CreateSchedule from '../CreateSchedule/CreateSchedule';
 import CreateInvite from '../CreateInvite/CreateInvite';
 import CreateReview from '../CreateReview/CreateReview';
+
+// internal - other
+import './calendar.css';
+
 
 export default function CreateProject({ createMode, setCreateOpen }) {
 
@@ -148,10 +155,10 @@ export default function CreateProject({ createMode, setCreateOpen }) {
             <Box id={`${step.name}-container`} sx={{ height: 500, padding: 0, overflow: 'hidden', overflowY: 'scroll' }}>
               {step.tabComponent}
             </Box>
-            <Box sx = {{display: 'flex', flexDirection: 'row', justifyContent: 'flex-end'}}>
-            <Button textAlign='right' onClick={step.buttonFunction}>
-              {step.buttonText}
-            </Button>
+            <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end' }}>
+              <Button textAlign='right' onClick={step.buttonFunction}>
+                {step.buttonText}
+              </Button>
             </Box>
           </TabPanel>
         )

@@ -2,14 +2,14 @@
 each step of the create project dialogue sends info to the store
 */
 
-import { Typography, Container, Button, TextField, Stack, Box, Grid } from '@mui/material';
-import { useState, useEffect } from 'react';
+// library - functions
 import { useDispatch, useSelector } from 'react-redux';
-import { createContainerStyle } from '../../_style/modalStyle'
-import { SketchPicker } from 'react-color';
-import ColorPicker from '../ColorPicker/ColorPicker'
+import { Typography, Container, Button, TextField, Stack, Box, Grid } from '@mui/material';
 
+// internal - components
+import ColorPicker from '../_Assets/ColorPicker/ColorPicker'
 import RepertoireContainer from '../RepertoireContainer/RepertoireContainer';
+
 
 export default function CreateReview({ generalInfo, setGeneral }) {
 

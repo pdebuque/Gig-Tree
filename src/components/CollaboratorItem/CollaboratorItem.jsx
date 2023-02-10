@@ -1,6 +1,8 @@
-import { Container, Typography, Button, Paper, Avatar, Box } from '@mui/material'
-import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 
+// library - functions
+
+// library - components
+import { Typography, Paper, Avatar, Box } from '@mui/material'
 import TaskAltIcon from '@mui/icons-material/TaskAlt';
 
 export default function CollaboratorItem({ collaborator, searchResults, setSearchResults, invited, setInvited, }) {

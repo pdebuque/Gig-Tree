@@ -2,10 +2,10 @@ import { Box, Typography, Container, Paper, Grid, Modal, IconButton } from '@mui
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import ProjectPageGeneral from '../ProjectPageGeneral/ProjectPageGeneral';
-import ProjectDatesPeople from '../ProjectDatesPeople/ProjectDatesPeople';
-import { largeModal } from '../../_style/modalStyle'
-import CreateProject from '../CreateProject/CreateProject'
+import ProjectPageGeneral from '../../ProjectPageGeneral/ProjectPageGeneral';
+import ProjectDatesPeople from '../../ProjectDatesPeople/ProjectDatesPeople';
+import { largeModal } from '../../../_style/modalStyle'
+import CreateProject from '../../CreateProject/CreateProject'
 import EditIcon from '@mui/icons-material/Edit'
 
 export default function ProjectPage() {
@@ -23,9 +23,9 @@ export default function ProjectPage() {
   const project = useSelector(store => store.currentProject);
   const user = useSelector(store => store.user)
 
-  const handleClickEdit = () =>{
+  const handleClickEdit = () => {
     setCreateOpen(true);
-    dispatch({type: 'SET_NEW_PROJECT', payload: project})
+    dispatch({ type: 'SET_NEW_PROJECT', payload: project })
   }
 
   return (
@@ -33,7 +33,7 @@ export default function ProjectPage() {
 
       <Paper sx={{ p: 2, marginY: 1 }}>
 
-        <Box sx ={{display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start'}}>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
           <Box>
             <Typography variant='h4'>
               {project.name}

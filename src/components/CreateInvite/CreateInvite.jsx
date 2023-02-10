@@ -1,7 +1,13 @@
-import { Typography, Button, Container, Grid, TextField, InputAdornment, Stack, Box } from '@mui/material'
 import { useState, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+
+// library - functions
+import {  useSelector } from 'react-redux'
+
+// library - components
+import { Typography, Container, Grid, TextField, InputAdornment, Stack, Box } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search';
+
+// internal - components
 import CollaboratorItem from '../CollaboratorItem/CollaboratorItem';
 
 export default function CreateInvite({ setTab, invited, setInvited }) {

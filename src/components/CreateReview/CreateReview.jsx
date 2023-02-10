@@ -1,9 +1,18 @@
-import { Typography, Button, Container, Grid, Box } from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux';
+// libraries - functions
+import { useSelector } from 'react-redux';
+
+// libraries - components
+import { Typography, Container, Grid, Box } from '@mui/material';
+
+// internal - components
 import RepertoireItem from '../RepertoireItem/RepertoireItem';
 import CollaboratorItem from '../CollaboratorItem/CollaboratorItem';
 import DateDisplay from '../DateDisplay/DateDisplay';
+
+// internal - other 
 import { greyBoxStyle } from '../../_style/greyBoxStyle'
+
+
 
 export default function CreateReview() {
 

@@ -66,7 +66,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-I created gig tree in response to a problem I've encountered throughout my time as a freelance classical conductor and singer: the sheer number of overlapping projects I'm involved with, and the lack of a standard of communication and scheduling platform. I long ago lost track of the number of emails, texts, facebook messages, etc. etc. I've sent and received to wrangle my gig schedule.
+I created gig tree in response to a problem I've encountered throughout my time as a freelance classical conductor and singer: the sheer number of overlapping projects I'm involved with, and the lack of a standard communication and scheduling platform. I long ago lost track of the number of emails, texts, facebook messages, etc. etc. I've sent and received to wrangle my gig schedule.
 
 Enter gig tree!
 
@@ -86,7 +86,7 @@ gig tree was my capstone solo project at [Prime Digital Academy](https://www.pri
 
 [![React][React.js]][React-url]
 [![Node][Node.js]][Node-url]
-[![Express][Expres.js]]
+[![Express][Express.js]]
 [![MUI]][MUI-url]
 [![Postgresql]][Postgresql-url]
 [![Redux-Saga]][Redux-saga-url]
@@ -273,4 +273,4 @@ API
 Training
 Blog
 About
-flyby-events-solo-project/README.md at main · ozzythecoder/flyby-events-solo-project
+gig-tree/README.md at main · pdebuque

@@ -1,8 +1,12 @@
-import SketchPicker from 'react-color';
-import {useState} from 'react';
-import {Box } from '@mui/material'
+import { useState } from 'react';
 
-export default function ColorPicker({generalInfo, setGeneral}) {
+// libraries
+import SketchPicker from 'react-color';
+
+// components
+import { Box } from '@mui/material'
+
+export default function ColorPicker({ generalInfo, setGeneral }) {
 
   const [displayPicker, setDisplayPicker] = useState(false);
   // const [color, setColor]= useState(generalInfo.color)
@@ -14,12 +18,12 @@ export default function ColorPicker({generalInfo, setGeneral}) {
     const c_b = parseInt(hex.substr(4, 2), 16);
     const brightness = ((c_r * 299) + (c_g * 587) + (c_b * 114)) / 1000;
     return brightness > 155;
-}
+  }
 
   const handleColorChange = (color) => {
     // console.log('changing color to ', color)
-    setGeneral({...generalInfo, backgroundColor: color.hex, color: isTooLight(color.hex) ? '#212121' : '#ffffff'})
-    
+    setGeneral({ ...generalInfo, backgroundColor: color.hex, color: isTooLight(color.hex) ? '#212121' : '#ffffff' })
+
   };
 
   const styles = {
@@ -51,22 +55,22 @@ export default function ColorPicker({generalInfo, setGeneral}) {
     },
   };
 
-//todo: module to determine text color (generalInfo.color) based on background color
+  //todo: module to determine text color (generalInfo.color) based on background color
   // if it is past a certain darkness threshold, white. else black (grey?)
 
   return (
     <Box>
       {/* color: {generalInfo.backgroundColor} */}
-      <Box sx={styles.swatch} onClick={()=>setDisplayPicker(true)}>
+      <Box sx={styles.swatch} onClick={() => setDisplayPicker(true)}>
         <Box sx={styles.color} />
       </Box>
       {displayPicker ? <Box sx={styles.popover}>
-        <Box sx={styles.cover} onClick={()=>setDisplayPicker(false)} />
-        <SketchPicker 
-          sx={generalInfo.backgroundColor} 
-          onChange={handleColorChange} 
+        <Box sx={styles.cover} onClick={() => setDisplayPicker(false)} />
+        <SketchPicker
+          sx={generalInfo.backgroundColor}
+          onChange={handleColorChange}
           color={generalInfo.backgroundColor}
-          />
+        />
       </Box> : null}
 
     </Box>

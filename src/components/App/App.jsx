@@ -1,33 +1,24 @@
-// react stuff
 import { useEffect } from 'react'
 
-// react router
-import { Routes, Route, redirect, Navigate } from 'react-router-dom';
-
-// redux stuff
+// library - functions
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
 
-// component import
-import Home from '../Home/Home'
-import CreateProject from '../CreateProject/CreateProject';
-import DisplayProjects from '../DisplayProjects/DisplayProjects';
+// library - components
+import { ThemeProvider } from '@mui/material/styles';
+
+// internal - componenets
 import Nav from '../Nav/Nav';
-import Profile from '../Profile/Profile';
 import LoginPage from '../LoginPage/LoginPage';
-import About from '../About/About';
+import About from '../pages/About/About';
 import Dashboard from '../Dashboard/Dashboard';
 import Register from '../Register/Register';
-import ProjectPage from '../ProjectPage/ProjectPage'
+import ProjectPage from '../pages/ProjectPage/ProjectPage'
 
-
+// internal - other
 import './App.css';
-
-//styles
-import { ThemeProvider } from '@mui/material/styles';
 import { theme } from '../../theme';
 
-// temporary info
-// import { users } from '../../temp-info'
 
 function App() {
 
@@ -46,7 +37,7 @@ function App() {
       {/* <main className='main-content'> */}
       <Routes>
         <Route path='/about' element={<About />} />
-        <Route path='/' element={user.id ? <Navigate replace to="/dashboard" /> : <LoginPage/>} /> //todo: reroute to dashboard if logged in. if not, route to login page
+        <Route path='/' element={user.id ? <Navigate replace to="/dashboard" /> : <LoginPage />} /> //todo: reroute to dashboard if logged in. if not, route to login page
         <Route path='/register' element={<Register />} />
 
         {/* protected routes: only dashboard (for now) */}
