@@ -2,26 +2,32 @@
 This component is a single project displayed within the dashboard projects sidebar
 */
 
-
-
-import './DashboardProjectItem.css';
-import { listItemStyle, listItemStylePast, listItemStyleUpcoming } from '../../_style/listItemStyle.jsx'
-import { Box, Typography, Collapse, Button, IconButton, Modal, Avatar, AvatarGroup, Badge, Tooltip } from '@mui/material';
+// library - functions
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
+
+// library - components
+import { Box, Typography, Collapse, Button, IconButton, Modal, Avatar, AvatarGroup, Badge, Tooltip } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import StarIcon from '@mui/icons-material/Star';
+import TaskAltIcon from '@mui/icons-material/TaskAlt';
+
+// internal - components
+import DeleteProjectModal from '../DeleteProjectModal/DeleteProjectModal';
+import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
+
+// internal - other
+import { listItemStyle } from '../../_style/listItemStyle.jsx'
+import './DashboardProjectItem.css';
 import { smallModal } from '../../_style/modalStyle';
 import { placeholderText } from '../../_style/textStyle';
 
-import DeleteProjectModal from '../DeleteProjectModal/DeleteProjectModal';
-import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
-import TaskAltIcon from '@mui/icons-material/TaskAlt';
+
 
 
 export default function DashboardProjectItem({ project, setCreateOpen, setCreateMode }) {

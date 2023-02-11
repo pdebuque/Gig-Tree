@@ -16,7 +16,7 @@ import modalStyle from '../../_style/modalStyle'
 //redux
 import { useSelector, useDispatch } from 'react-redux';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 export default function EditUserModal({ setEditOpen }) {
 

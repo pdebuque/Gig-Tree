@@ -1,5 +1,4 @@
-import { Box, Grid, Typography } from '@mui/material'
-import EditIcon from '@mui/icons-material/Edit';
+import { Grid, Typography } from '@mui/material'
 import { useSelector } from 'react-redux'
 import WorkOutlineOutlinedIcon from '@mui/icons-material/WorkOutlineOutlined';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';

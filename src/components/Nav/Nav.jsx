@@ -1,8 +1,5 @@
-import { Button, AppBar, Box, Toolbar, Link, Typography, IconButton, Avatar } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
+import { Button, AppBar, Box, Toolbar, Typography, IconButton, Avatar } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import Sidebar from '../Sidebar/Sidebar';
-import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 
 export default function Nav() {

@@ -3,22 +3,27 @@ this component is the projects sidebar in the dashboard.
 
 it will get all of the projects that user is on and that user owns from the server and map them into individual project components
 */
-import { insetStyle } from '../../_style/projectStyle'
-import DashboardProjectItem from '../DashboardProjectItem/DashboardProjectItem';
-import DeleteProjectModal from '../DeleteProjectModal/DeleteProjectModal'
-import CreateProject from '../CreateProject/CreateProject';
 
+// library - functions
 import { useSelector, useDispatch } from 'react-redux';
-import { Box, Typography, IconButton, Modal, Container, Button, Switch, Menu, MenuItem } from '@mui/material';
-import ControlPointIcon from '@mui/icons-material/ControlPoint';
-import { useEffect, useState } from 'react';
-import { largeModal } from '../../_style/modalStyle'
-import { sortByStarred, sortByFirstAsc, sortByFirstDesc } from '../../modules/sortFunctions';
-import { greyBoxStyle } from '../../_style/greyBoxStyle';
+import { useState } from 'react';
+
+// library - components
 import FilterListIcon from '@mui/icons-material/FilterList';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import { Box, Typography, IconButton, Modal, Container, Button, Menu, MenuItem } from '@mui/material';
+import ControlPointIcon from '@mui/icons-material/ControlPoint';
+
+// internal - components
+import DashboardProjectItem from '../DashboardProjectItem/DashboardProjectItem';
+import CreateProject from '../CreateProject/CreateProject';
+
+// internal - other
 import sortProjects from '../../modules/sortFunctions'
+import { largeModal } from '../../_style/modalStyle'
+import { greyBoxStyle } from '../../_style/greyBoxStyle';
+
 
 export default function DashboardProjects() {
 

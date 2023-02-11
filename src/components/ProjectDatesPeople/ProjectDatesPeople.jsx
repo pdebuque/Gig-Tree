@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { Box, Typography, Paper, Tabs, Tab } from '@mui/material'
+import { Box, Paper, Tabs, Tab } from '@mui/material'
 import TabPanel from '../_Assets/TabPanel/TabPanel';
 import { useState } from 'react'
 import ProjectPageDates from '../ProjectPageDates/ProjectPageDates';

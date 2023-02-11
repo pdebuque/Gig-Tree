@@ -1,10 +1,7 @@
 import RepertoireInput from '../RepertoireInput/RepertoireInput';
-import { useSelector } from 'react-redux'
 import { Container, Grid } from '@mui/material';
-import { useState } from 'react';
 import RepertoireItem from '../RepertoireItem/RepertoireItem';
 
-import {idGen} from '../../modules/IDGenerators'
 
 
 export default function RepertoireContainer({ generalInfo, setGeneral }) {

@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import {useState} from 'react'
 
-import { Box, Grid, Typography, Stack, Paper, Modal, IconButton } from '@mui/material'
+import { Grid, Typography, Stack, Paper, } from '@mui/material'
 import RepertoireItem from '../RepertoireItem/RepertoireItem'
 
 

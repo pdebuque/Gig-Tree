@@ -4,14 +4,13 @@ import DashboardCalendar from '../../DashboardCalendar/DashboardCalendar'
 import DashboardHeader from '../../DashboardHeader/DashboardHeader'
 
 import './Dashboard.css';
-import { Grid, Typography, Paper, Avatar, Box, Modal, IconButton } from '@mui/material';
-import EditIcon from '@mui/icons-material/Edit';
+import { Grid,  Paper,  Box, } from '@mui/material';
 
 //react stuff
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
 // react-redux
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 export default function Home() {
 

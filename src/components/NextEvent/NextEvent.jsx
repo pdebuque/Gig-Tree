@@ -1,9 +1,7 @@
-import { Modal, Box, Typography, IconButton, Button } from '@mui/material'
-import CloseIcon from '@mui/icons-material/Close';
+import { Box, Typography, Button } from '@mui/material'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux'
-import { useEffect } from 'react'
 
 import { getDate, getTime } from '../../modules/formatTimes'
 
