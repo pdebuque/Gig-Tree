@@ -147,7 +147,7 @@ router.get('/:id', async (req, res) => {
     LEFT JOIN date ON date.project_id = project.id
     WHERE project.id=$1
     GROUP BY project.id;`
-    
+
   pool.query(queryText, [req.params.id])
     .then(result => {
       // need to take out duplicates
@@ -161,7 +161,7 @@ router.get('/:id', async (req, res) => {
 
 })
 
-// POST a new project to the database
+//* ============= POST a new project to the database ================
 
 router.post('/', async (req, res) => {
   // console.log('req.body: ', req.body)
@@ -186,7 +186,7 @@ router.post('/', async (req, res) => {
     await client.query('BEGIN')
 
     // create project in project table
-    const projectInsertResults = await client.query(`INSERT INTO "project" ("name", "ensemble_name", "owner_id", "description", "backgroundColor", "color")
+    const projectInsertResults = await client.query(`INSERT INTO "project" ("name", "ensemble_name", "owner_id", "description", "backgroundcolor", "color")
       VALUES ($1, $2, $3, $4, $5, $6)
       RETURNING id;`, [name, ensemble_name, req.user.id, description, backgroundColor, color]);
     console.log(projectInsertResults)
@@ -231,7 +231,7 @@ router.post('/', async (req, res) => {
 });
 
 
-// PUT - edit existing project
+//* ============= PUT - edit existing project =============
 // this will only be allowed by the project owner.
 
 router.put('/:id', async (req, res) => {
@@ -277,7 +277,7 @@ router.put('/:id', async (req, res) => {
 
     await client.query(`
       UPDATE project
-      SET "name" = $1, ensemble_name = $2, description = $3, "backgroundColor" = $5, color = $6
+      SET "name" = $1, ensemble_name = $2, description = $3, "backgroundcolor" = $5, color = $6
       WHERE id = $4
     `, [name, ensemble_name, description, req.params.id, backgroundColor, color])
 
@@ -361,7 +361,7 @@ router.put('/star/:id', (req, res) => {
 })
 
 // PUT - accept a project
-router.put('/accept/:id', (req,res)=>{
+router.put('/accept/:id', (req, res) => {
   const queryText = `
   UPDATE user_project
   SET project_accepted = NOT project_accepted
@@ -369,7 +369,7 @@ router.put('/accept/:id', (req,res)=>{
   `
   pool.query(queryText, [req.user.id, req.params.id])
     .then(res.sendStatus(201))
-    .catch(err=>{
+    .catch(err => {
       console.log('could not accept!', err)
       res.sendStatus(500)
     })

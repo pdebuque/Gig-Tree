@@ -1,7 +1,7 @@
 
-import DashboardProjects from '../DashboardProjects/DashboardProjects';
-import DashboardCalendar from '../DashboardCalendar/DashboardCalendar'
-import DashboardHeader from '../DashboardHeader/DashboardHeader'
+import DashboardProjects from '../../DashboardProjects/DashboardProjects';
+import DashboardCalendar from '../../DashboardCalendar/DashboardCalendar'
+import DashboardHeader from '../../DashboardHeader/DashboardHeader'
 
 import './Dashboard.css';
 import { Grid, Typography, Paper, Avatar, Box, Modal, IconButton } from '@mui/material';

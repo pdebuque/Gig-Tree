@@ -86,7 +86,7 @@ gig tree was my capstone solo project at [Prime Digital Academy](https://www.pri
 
 [![React][React.js]][React-url]
 [![Node][Node.js]][Node-url]
-[![Express][Express.js]]
+[![Express][Express.js]][Express-url]
 [![MUI]][MUI-url]
 [![Postgresql]][Postgresql-url]
 [![Redux-Saga]][Redux-saga-url]
@@ -132,30 +132,50 @@ This app was developed with node 19.0.0 and Chrome 109. Future updates may expan
 
 
 <!-- USAGE EXAMPLES -->
-## Usage
+# Usage
 
-**⚠️ This app is only functional when viewed in a mobile-style browser under 600px in width. ⚠️** 
-
-If this is your first time using the app, register with a username and password.
 
 <div align="center">
-  <img src="./documentation/images/menu-screenshot.png" height="500">
+  <img src="./readme-images/dashboard-full.png">
 </div>
-  
-Create an event by filling out the required fields and confirm the details.
+
+Currently, all of the main functionality of the application can be found in the landing page dashboard. Here, the user can update personal information, view, organize, and edit their existing projects, and create new ones.
+
+## Dashboard header
+<div align="center">
+  <img src="./readme-images/dashboard-header.png">
+</div>
+
+Here, you can see and edit your personal information, as well as view your next event at a glance.
+
+
+## project list
 
 <div align="center">
-  <img src="./documentation/images/createEvent-screenshot.png" height="500" >
-  <img src="./documentation/images/previewEvent-screenshot.png" height="500" >
+  <img src="./readme-images/project-list.png" height="500">
 </div>
 
-You can edit and delete the event, and invite guests, from the event detail page. If your event is marked as public, the URL will be accessible to anyone, whether they have a FlyBy account or not. Visibility of private events is limited to the host and any invited guests.
+In the bottom left corner of the dashboard is a list of all projects the user is associated with, whether as owner or participant. Owned projects have edit and delete functionality, while participant projects have a checkin icon for users to confirm their participation. All projects can be starred and filtered accordingly.
+
+Users can easily create projects by clicking the plus icon in the header, opening a robust multi-step project creation modal.
+
+## project list item
+Clicking the three dots expands a project list item, showing more information, including other invited users and a link to the project's page.
 
 <div align="center">
-  <img src="documentation/images/eventDetail-screenshot.png" height="400">
+  <img src="./readme-images/project-open.png">
 </div>
 
-Guests can add events, as well as *subscribe* to events. This is functionality for a future subscription feature, which will allow guests to receive text/email updates when event details change.
+## calendar
+The final piece of the dashboard, the calendar, displays all events from the user's projects, color-coded. Clicking an event opens event-relevant info.
+
+<div align="center">
+  <img src="./readme-images/dashboard-calendar.png">
+</div>
+
+## additional
+In addition to this feature-rich dashboard, each project has its own associated page, to be developed further in future iterations.
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -240,25 +260,22 @@ Thank you to:
 [license-shield]: https://img.shields.io/github/license/ozzythecoder/flyby-events-solo-project.svg?style=for-the-badge
 [license-url]: https://github.com/ozzythecoder/flyby-events-solo-project/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/august-mcallister
+[linkedin-url]: https://linkedin.com/in/pdebuque
 [product-screenshot]: ./documentation/images/login-screenshot.png
 [Node.js]: https://img.shields.io/badge/Node.JS-20232A?style=for-the-badge&logo=node.js&logoColor=61DAFB
 [Node-url]: https://nodejs.org/en/
-[Express.js]: 
+[Express.js]: https://img.shields.io/badge/Express-20232A?style=for-the-badge&logo=express&logoColor=61DAFB
+[Express-url]: https://expressjs.com/
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [React-url]: https://reactjs.org/
 [Postgresql]: https://img.shields.io/badge/PostgreSQL-20232A?style=for-the-badge&logo=postgresql&logoColor=61DAFB
 [Postgresql-url]: https://www.postgresql.org/
 [Redux]: https://img.shields.io/badge/Redux-20232A?style=for-the-badge&logo=redux&logoColor=61DAFB
 [Redux-url]: https://redux.js.org/
-[Redux-Saga]: https://img.shields.io/badge/Redux/Saga-20232A?style=for-the-badge&logo=reduxsaga&logoColor=61DAFB
+[Redux-Saga]: https://img.shields.io/badge/Redux/Saga-20232A?style=for-the-badge&logo=redux-saga&logoColor=61DAFB
 [Redux-saga-url]: https://redux-saga.js.org/
 [MUI]: https://img.shields.io/badge/MUI%20&%20Material%20Design-20232A?style=for-the-badge&logo=materialdesign&logoColor=61DAFB
 [MUI-url]: https://mui.com/core/
-[Swal2]: https://img.shields.io/badge/SweetAlert2-20232A?style=for-the-badge
-[Swal2-url]: https://sweetalert2.github.io/
-[Luxon.js]: https://img.shields.io/badge/Luxon.js-20232A?style=for-the-badge
-[Luxon-url]: https://moment.github.io/luxon/#/
 Footer
 © 2023 GitHub, Inc.
 Footer navigation

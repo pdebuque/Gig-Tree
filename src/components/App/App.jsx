@@ -9,9 +9,9 @@ import { ThemeProvider } from '@mui/material/styles';
 
 // internal - componenets
 import Nav from '../Nav/Nav';
-import LoginPage from '../LoginPage/LoginPage';
+import LoginPage from '../pages/LoginPage/LoginPage';
 import About from '../pages/About/About';
-import Dashboard from '../Dashboard/Dashboard';
+import Dashboard from '../pages/Dashboard/Dashboard.jsx';
 import Register from '../Register/Register';
 import ProjectPage from '../pages/ProjectPage/ProjectPage'
 
