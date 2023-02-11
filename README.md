@@ -132,7 +132,7 @@ This app was developed with node 19.0.0 and Chrome 109. Future updates may expan
 
 
 <!-- USAGE EXAMPLES -->
-# Usage
+## Usage
 
 
 <div align="center">
@@ -141,7 +141,7 @@ This app was developed with node 19.0.0 and Chrome 109. Future updates may expan
 
 Currently, all of the main functionality of the application can be found in the landing page dashboard. Here, the user can update personal information, view, organize, and edit their existing projects, and create new ones.
 
-## Dashboard header
+### Dashboard header
 <div align="center">
   <img src="./readme-images/dashboard-header.png">
 </div>
@@ -149,7 +149,7 @@ Currently, all of the main functionality of the application can be found in the 
 Here, you can see and edit your personal information, as well as view your next event at a glance.
 
 
-## project list
+### project list
 
 <div align="center">
   <img src="./readme-images/project-list.png" height="500">
@@ -159,21 +159,21 @@ In the bottom left corner of the dashboard is a list of all projects the user is
 
 Users can easily create projects by clicking the plus icon in the header, opening a robust multi-step project creation modal.
 
-## project list item
+### project list item
 Clicking the three dots expands a project list item, showing more information, including other invited users and a link to the project's page.
 
 <div align="center">
   <img src="./readme-images/project-open.png">
 </div>
 
-## calendar
+### calendar
 The final piece of the dashboard, the calendar, displays all events from the user's projects, color-coded. Clicking an event opens event-relevant info.
 
 <div align="center">
   <img src="./readme-images/dashboard-calendar.png">
 </div>
 
-## additional
+### additional
 In addition to this feature-rich dashboard, each project has its own associated page, to be developed further in future iterations.
 
 
@@ -182,7 +182,7 @@ In addition to this feature-rich dashboard, each project has its own associated 
 
 
 <!-- ROADMAP -->
-## Roadmap
+### Roadmap
 
 Future updates will include:
 - User profile pages
@@ -251,14 +251,14 @@ Thank you to:
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [contributors-shield]: https://img.shields.io/github/contributors/pdebuque/gig-tree.svg?style=for-the-badge
 [contributors-url]: https://github.com/pdebuque/Gig-Tree/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/ozzythecoder/flyby-events-solo-project.svg?style=for-the-badge
-[forks-url]: https://github.com/ozzythecoder/flyby-events-solo-project/network/members
-[stars-shield]: https://img.shields.io/github/stars/ozzythecoder/flyby-events-solo-project.svg?style=for-the-badge
-[stars-url]: https://github.com/ozzythecoder/flyby-events-solo-project/stargazers
-[issues-shield]: https://img.shields.io/github/issues/ozzythecoder/flyby-events-solo-project.svg?style=for-the-badge
-[issues-url]: https://github.com/ozzythecoder/flyby-events-solo-project/issues
-[license-shield]: https://img.shields.io/github/license/ozzythecoder/flyby-events-solo-project.svg?style=for-the-badge
-[license-url]: https://github.com/ozzythecoder/flyby-events-solo-project/blob/master/LICENSE.txt
+[forks-shield]: https://img.shields.io/github/forks/pdebuque/gig-tree.svg?style=for-the-badge
+[forks-url]: https://github.com/pdebuque/flyby-events-solo-project/network/members
+[stars-shield]: https://img.shields.io/github/stars/pdebuque/gig-tree.svg?style=for-the-badge
+[stars-url]: https://github.com/pdebuque/flyby-events-solo-project/stargazers
+[issues-shield]: https://img.shields.io/github/issues/pdebuque/gig-tree.svg?style=for-the-badge
+[issues-url]: https://github.com/pdebuque/flyby-events-solo-project/issues
+[license-shield]: https://img.shields.io/github/license/pdebuque/gig-tree.svg?style=for-the-badge
+[license-url]: https://github.com/pdebuque/Gig-Tree/blob/main/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/pdebuque
 [product-screenshot]: ./documentation/images/login-screenshot.png
