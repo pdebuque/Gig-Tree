@@ -21,75 +21,6 @@ export default function CreateReview({ generalInfo, setGeneral }) {
 
   const newProject = useSelector(store => store.newProject)
 
-  //todo: figure out color picker functions
-  //todo: initialize colors in newProject
-  //todo: logic to determine text color based on background color
-
-  //todo: adjust POST to include colors
-
-  const autofill = () => {
-    setGeneral({
-      name: 'MASS',
-      ensemble_name: 'meridian vocal ensemble',
-      description: 'A contemporary take on sacred music from throughout the ages, presented by a professional vocal octet',
-      repertoire: [
-        {
-          name: 'MLK',
-          composer: 'Bono, arr. Bob Chilcott'
-        },
-        {
-          name: 'Hear my prayer, O Lord',
-          composer: 'Henry Purcell'
-        },
-        {
-          name: 'Prayers',
-          composer: 'Joseph Gregorio'
-        },
-        {
-          name: 'Precious Lord',
-          composer: 'Thomas Dorsey'
-        },
-        {
-          name: 'Earth Song',
-          composer: 'Frank Ticheli'
-        },
-        {
-          name: '...the hard-won miles',
-          composer: 'Aaron Hendrix'
-        },
-        {
-          name: 'Ain\'a that Good News!',
-          composer: 'William Dawson'
-        },
-        {
-          name: 'Kyrie',
-          composer: 'Duarte Lobo'
-        },
-        {
-          name: 'Gloria',
-          composer: 'William Sefton'
-        },
-        {
-          name: 'Credo',
-          composer: 'Hans Leo Hassler'
-        },
-        {
-          name: 'Sanctus and Benedictus',
-          composer: 'Josef Rheinberger'
-        },
-        {
-          name: 'Agnus Dei',
-          composer: 'Grey Grant'
-        },
-        {
-          name: 'Alleluia',
-          composer: 'Jake Runestad'
-        },
-      ],
-      backgroundColor: '#5f7f81',
-      color: '#ffffff'
-    })
-  }
 
   return (
     <Container sx={{ display: 'flex', flexDirection: 'column', paddingY: 2 }}>
@@ -143,7 +74,6 @@ export default function CreateReview({ generalInfo, setGeneral }) {
         </Grid>
 
       </Grid>
-      <Button onClick={autofill}>autofill</Button>
     </Container>
   )
 }

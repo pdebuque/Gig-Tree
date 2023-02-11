@@ -5,6 +5,7 @@ import EditUserModal from '../EditUserModal/EditUserModal';
 import EditIcon from '@mui/icons-material/Edit';
 import NextEvent from '../NextEvent/NextEvent';
 import DashboardHeaderBio from '../DashboardHeaderBio/DashboardHeaderBio';
+import UserAvatar from '../../components/_Assets/UserAvatar'
 
 export default function DashboardHeader() {
   const user = useSelector(store => store.user)
@@ -33,7 +34,10 @@ export default function DashboardHeader() {
               {/* <Grid item xs={.5}>
           </Grid> */}
               <Box sx={{ ml: 2, display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                <Avatar src={user.prof_pic_path} alt={`${user.first_name}'s profile picture`} sx={{ width: 100, height: 100 }} />
+<UserAvatar height={100} width={100} user={user} tooltipText ={`${user.first_name}'s avatar`} />
+
+
+                {/* <Avatar src={user.prof_pic_path} alt={`${user.first_name}'s profile picture`} sx={{ width: 100, height: 100 }} /> */}
                 <Box sx={{ ml: 4 }}>
                   <Typography variant='h3'>{user.first_name} {user.last_name}</Typography>
                   <Typography variant='body1'>{user.instrument_1}{user.instrument_2 && `, ${user.instrument_2}`}{user.instrument_3 && `, ${user.instrument_3}`}</Typography>

@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react'
 
 // library - functions
-import {  useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 // library - components
-import { Typography, Container, Grid, TextField, InputAdornment, Stack, Box } from '@mui/material'
+import { Typography, Grid, TextField, InputAdornment, Box } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search';
 
 // internal - components
@@ -33,9 +33,9 @@ export default function CreateInvite({ setTab, invited, setInvited }) {
   const [searchTerm, setSearchTerm] = useState('');
 
   // execute filter whenever the search term changes
-  useEffect(()=>{
+  useEffect(() => {
     filter(searchTerm)
-  },[searchTerm])
+  }, [searchTerm])
 
   const filter = (searchTerm) => {
     // console.log('filtering results by term: ', searchTerm)
@@ -44,7 +44,7 @@ export default function CreateInvite({ setTab, invited, setInvited }) {
       const searchLC = searchTerm.toLowerCase()
 
       const searchInfo = [
-        `${collaborator.first_name || ''} ${collaborator.last_name ||''}`,
+        `${collaborator.first_name || ''} ${collaborator.last_name || ''}`,
         collaborator.instrument_1 || '',
         collaborator.instrument_2 || '',
         collaborator.instrument_3 || ''
@@ -59,36 +59,49 @@ export default function CreateInvite({ setTab, invited, setInvited }) {
   }
 
   const containerStyle = {
+    height: 450,
     overflow: 'hidden',
     overflowY: 'scroll',
+    bgcolor: 'grey.50',
+    borderRadius: 2
   }
 
   return (
-    <Container disableGutters>
-      <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-        <Typography variant='h5'>Invite Collaborators</Typography>
-        search term: {JSON.stringify(searchTerm)}
-        <TextField
-          size='small'
-          id="search-collab"
-          placeholder="search by name or instrument"
-          variant='outlined'
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <SearchIcon />
-              </InputAdornment>
-            ),
-          }}
-          value={searchTerm}
-          onChange={(e) => {
-            setSearchTerm(e.target.value);
-          }}
-        />
+    <Box disableGutters>
+      <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginBottom: 2 }}>
+        <Grid container spacing={1}>
+          <Grid item xs={8}>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', marginX: 2 }}>
+              <Typography variant='h5'>Invite Collaborators</Typography>
+              {/* search term: {JSON.stringify(searchTerm)} */}
+              <TextField
+                size='small'
+                id="search-collab"
+                placeholder="search by name or instrument"
+                variant='outlined'
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <SearchIcon />
+                    </InputAdornment>
+                  ),
+                }}
+                value={searchTerm}
+                onChange={(e) => {
+                  setSearchTerm(e.target.value);
+                }}
+              />
+            </Box>
+          </Grid>
+          <Grid item xs={4}>
+            <Typography variant='h5' sx={{ marginX: 2 }}>invited</Typography>
+
+          </Grid>
+        </Grid>
       </Box>
       <Grid container spacing={1}>
         <Grid item xs={8}>
-          <Grid container spacing={1} sx={containerStyle} >
+          <Grid container spacing={1} sx={{ ...containerStyle, paddingRight: 1 }} >
             {/* all collaborators here */}
             {/* {JSON.stringify(searchResults.map(result=>result.id))} */}
             {searchResults.map(result => {
@@ -106,7 +119,7 @@ export default function CreateInvite({ setTab, invited, setInvited }) {
             })}
           </Grid>
         </Grid>
-        <Grid item xs={4} sx={containerStyle}>
+        <Grid item xs={4} sx={{ ...containerStyle, bgcolor: 'white' }}>
           {/* invited collaborators here */}
           {/* {JSON.stringify(invited.map(result=>result.id))} */}
           {invited.map(collaborator => {
@@ -121,6 +134,6 @@ export default function CreateInvite({ setTab, invited, setInvited }) {
           })}
         </Grid>
       </Grid>
-    </Container>
+    </Box>
   )
 }

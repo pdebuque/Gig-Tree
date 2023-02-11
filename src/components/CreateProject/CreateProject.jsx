@@ -152,7 +152,7 @@ export default function CreateProject({ createMode, setCreateOpen }) {
       {steps.map((step) => {
         return (
           <TabPanel key={step.tabValue} value={tabValue} index={step.tabValue}>
-            <Box id={`${step.name}-container`} sx={{ height: 500, padding: 0, overflow: 'hidden', overflowY: 'scroll' }}>
+            <Box id={`${step.name}-container`} sx={{ height: 500, padding: 0, }}>
               {step.tabComponent}
             </Box>
             <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end' }}>

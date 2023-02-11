@@ -26,81 +26,8 @@ export default function CreateSchedule({ setTab, dates, setDates }) {
       notes: '',
     })
 
-  const autofill = () => {
-    setDates([
-      {
-        "name": "rehearsal 1",
-        "location": "Unity Church Unitarian",
-        "date": "1/25/2023, 4:53:28 PM",
-        "start": "1/25/2023, 6:00:28 PM",
-        "end": "1/25/2023, 10:00:28 PM",
-        "type": "rehearsal",
-        "notes": "",
-        "project_name": "Carol Barnett Recording Project",
-        "ensemble_name": "Border CrosSing",
-        "backgroundColor": "#25369e",
-        "color": "#ffffff",
-        "title": "rehearsal 1"
-      },
-      {
-        "name": "rehearsal 2",
-        "location": "Unity Church Unitarian",
-        "date": "1/26/2023, 4:53:50 PM",
-        "start": "1/26/2023, 6:00:50 PM",
-        "end": "1/26/2023, 10:00:50 PM",
-        "type": "rehearsal",
-        "notes": "",
-        "project_name": "MASS",
-        "ensemble_name": "meridian vocal ensemble",
-        "backgroundColor": "#25369e",
-        "color": "#ffffff",
-        "title": "rehearsal 2"
-      },
-      {
-        "name": "rehearsal 3",
-        "location": "Unity Church Unitarian",
-        "date": "1/27/2023, 4:53:50 PM",
-        "start": "1/27/2023, 6:00:50 PM",
-        "end": "1/27/2023, 10:00:50 PM",
-        "type": "rehearsal",
-        "notes": "",
-        "project_name": "MASS",
-        "ensemble_name": "meridian vocal ensemble",
-        "backgroundColor": "#25369e",
-        "color": "#ffffff",
-        "title": "rehearsal 2"
-      },
-      {
-        "name": "concert",
-        "location": "Unity Church Unitarian",
-        "date": "1/28/2023, 4:53:50 PM",
-        "start": "1/28/2023, 6:00:50 PM",
-        "end": "1/28/2023, 7:30:50 PM",
-        "type": "rehearsal",
-        "notes": "",
-        "project_name": "MASS",
-        "ensemble_name": "meridian vocal ensemble",
-        "backgroundColor": "#25369e",
-        "color": "#ffffff",
-        "title": "rehearsal 2"
-      },
-      {
-        "name": "recording",
-        "location": "Unity Church Unitarian",
-        "date": "1/28/2023, 4:53:50 PM",
-        "start": "1/28/2023, 8:00:50 PM",
-        "end": "1/28/2023, 11:00:50 PM",
-        "type": "rehearsal",
-        "notes": "",
-        "project_name": "MASS",
-        "ensemble_name": "meridian vocal ensemble",
-        "backgroundColor": "#25369e",
-        "color": "#ffffff",
-        "title": "rehearsal 2"
-      },
-
-    ])
-  }
+  
+  
   return (
     <Container>
       {/* 
@@ -132,7 +59,6 @@ export default function CreateSchedule({ setTab, dates, setDates }) {
             </Stack>
           </Grid>
         </Grid>
-        <Button onClick = {autofill}>autofill</Button>
       </Container>
     </Container>
   )
