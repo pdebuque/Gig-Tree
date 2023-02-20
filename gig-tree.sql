@@ -6,8 +6,8 @@ CREATE TABLE "user" (
     "password" VARCHAR (1000) NOT NULL,
     bio TEXT,
     "location" TEXT,
-    first_name TEXT NOT NULL,
-    last_name TEXT NOT NULL,
+    first_name TEXT,
+    last_name TEXT,
     join_date DATE,
     available TEXT,
     instrument_1 TEXT,
@@ -25,9 +25,9 @@ CREATE TABLE project (
     id SERIAL PRIMARY KEY,
     "name" TEXT NOT NULL,
     ensemble_name TEXT,
-    owner_id INTEGER REFERENCES "user" NOT NULL,
-    description TEXT
-    backgroundColor TEXT DEFAULT '#ffffff'
+    owner_id INTEGER REFERENCES "user" ON DELETE CASCADE,
+    description TEXT,
+    backgroundcolor TEXT DEFAULT '#ffffff',
     color TEXT DEFAULT '#fb8500'
 );
 

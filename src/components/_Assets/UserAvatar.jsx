@@ -34,7 +34,7 @@ export default function UserAvatar(props) {
 
   //* =========== avatar styling functions ===============
 
-  const getInitials = (user) => user.first_name[0].toUpperCase() + user.last_name[0].toUpperCase();
+  const getInitials = (user) => user?.first_name[0].toUpperCase() + user?.last_name[0].toUpperCase();
 
   const stringToValue = (string) => {
     let sumValue = 0;
@@ -45,7 +45,7 @@ export default function UserAvatar(props) {
   }
 
   const makeRandomColor = (user) => {
-    const index = Math.floor((stringToValue(user.username) / 500) * 16777215).toString(16);
+    const index = Math.floor((stringToValue(user?.username) / 500) * 16777215).toString(16);
     return '#' + index
   }
 
@@ -97,7 +97,7 @@ export default function UserAvatar(props) {
         <Button
           sx={{ padding: 0 }}
           onClick={handleAvatarClick}>
-          {user.prof_pic_path ?
+          {user?.prof_pic_path ?
             <Avatar
               alt={`${user.username}'s avatar`}
               src={user.prof_pic_path}
