@@ -4,7 +4,7 @@ each step of the create project dialogue sends info to the store
 
 // library - functions
 import { useDispatch, useSelector } from 'react-redux';
-import { Typography, Container, Button, TextField, Stack, Box, Grid } from '@mui/material';
+import { Typography, Container, TextField, Stack, Grid } from '@mui/material';
 
 // internal - components
 import ColorPicker from '../_Assets/ColorPicker/ColorPicker'

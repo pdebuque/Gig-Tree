@@ -2,8 +2,6 @@ import RepertoireInput from '../RepertoireInput/RepertoireInput';
 import { Container, Grid } from '@mui/material';
 import RepertoireItem from '../RepertoireItem/RepertoireItem';
 
-
-
 export default function RepertoireContainer({ generalInfo, setGeneral }) {
 
   generalInfo?.repertoire.map((piece,i)=>{

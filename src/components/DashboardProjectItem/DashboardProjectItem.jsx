@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
 
 // library - components
-import { Box, Typography, Collapse, Button, IconButton, Modal, Avatar, AvatarGroup, Badge, Tooltip } from '@mui/material';
+import { Box, Typography, Collapse, Button, IconButton, Modal, Avatar, AvatarGroup, Tooltip } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';

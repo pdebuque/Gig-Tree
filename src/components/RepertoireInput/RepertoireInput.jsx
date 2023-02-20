@@ -2,7 +2,6 @@ import { TextField, Stack, IconButton } from '@mui/material';
 import { useState } from 'react'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
-
 export default function RepertoireItem({ setGeneral, generalInfo }) {
 
   const [thisPiece, setThisPiece] = useState({ name: '', composer: '' })
