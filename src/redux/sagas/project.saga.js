@@ -35,7 +35,7 @@ function insertFirstAndLastDates(projects) {
 
 function* getProjects(action) {
   try {
-    // console.log('getting projects in project reducer')
+    console.log('getting projects in project reducer')
     const projects = yield axios.get('/api/project')
     console.log('projects from server;', projects.data)
 
