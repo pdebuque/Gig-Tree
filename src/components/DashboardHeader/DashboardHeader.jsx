@@ -1,4 +1,4 @@
-import { Paper, Grid, Avatar, Typography, IconButton, Modal, Box } from '@mui/material'
+import { Paper, Grid, Typography, IconButton, Modal, Box } from '@mui/material'
 import { useSelector } from 'react-redux'
 import { useState } from 'react'
 import EditUserModal from '../EditUserModal/EditUserModal';
@@ -34,7 +34,7 @@ export default function DashboardHeader() {
               {/* <Grid item xs={.5}>
           </Grid> */}
               <Box sx={{ ml: 2, display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-<UserAvatar height={100} width={100} user={user} tooltipText ={`${user.first_name}'s avatar`} />
+                <UserAvatar height={100} width={100} user={user} tooltipText={`${user.first_name}'s avatar`} />
 
 
                 {/* <Avatar src={user.prof_pic_path} alt={`${user.first_name}'s profile picture`} sx={{ width: 100, height: 100 }} /> */}

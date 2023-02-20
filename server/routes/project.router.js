@@ -1,11 +1,11 @@
 const express = require('express');
-const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware')
 const pool = require('../modules/pool');
 const bodyParser = require('body-parser');
 const prepareDates = require('../modules/prepareDates')
 const removeDupById = require('../modules/removeDup')
 
+const router = express.Router();
 // routes
 
 // GET - get all projects associated with the user.
@@ -26,8 +26,8 @@ projects = [
 */
 
 
-router.get('/', async (req, res) => {
-  // console.log('in test GET space')
+router.get('/', rejectUnauthenticated, async (req, res) => {
+  console.log('in project GET')
   const client = await pool.connect();
   // console.log('req.user: ', req.user);
 
@@ -121,6 +121,7 @@ router.get('/', async (req, res) => {
         }
       }
     }
+    console.log('sending all projects from server')
     res.send(allProjects)
   }
   catch (error) {

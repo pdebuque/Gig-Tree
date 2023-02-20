@@ -97,7 +97,6 @@ export default function UserAvatar(props) {
         <Button
           sx={{ padding: 0 }}
           onClick={handleAvatarClick}>
-          <pre>{JSON.stringify(mousePos, null, 2)}</pre>
           {user.prof_pic_path ?
             <Avatar
               alt={`${user.username}'s avatar`}

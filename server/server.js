@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+// const proxy = require('http-proxy-middleware')
 require('dotenv').config();
 
 const app = express();

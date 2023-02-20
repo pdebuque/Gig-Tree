@@ -37,7 +37,7 @@ function App() {
       {/* <main className='main-content'> */}
       <Routes>
         <Route path='/about' element={<About />} />
-        <Route path='/' element={user.id ? <Navigate replace to="/dashboard" /> : <LoginPage />} /> //todo: reroute to dashboard if logged in. if not, route to login page
+        <Route path='/' element={user.id ? <Navigate replace to="/dashboard" /> : <LoginPage />} />
         <Route path='/register' element={<Register />} />
 
         {/* protected routes: only dashboard (for now) */}
