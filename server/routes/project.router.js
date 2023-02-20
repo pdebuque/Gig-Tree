@@ -38,7 +38,7 @@ router.get('/', rejectUnauthenticated, async (req, res) => {
 
     // 1. general info
     const generalInfoResults = await client.query(`
-      SELECT user_project.project_accepted AS accepted, project.id, project.name, project.ensemble_name, project.owner_id, project.description, project.'backgroundColor' AS "backgroundColor", project.color, user_project.starred FROM project
+      SELECT user_project.project_accepted AS accepted, project.id, project.name, project.ensemble_name, project.owner_id, project.description, project.backgroundColor AS "backgroundColor", project.color, user_project.starred FROM project
       JOIN user_project ON user_project.project_id = project.id
       WHERE user_project.user_id = $1
       ORDER BY project.id
@@ -91,7 +91,7 @@ router.get('/', rejectUnauthenticated, async (req, res) => {
     // 4. dates
     const datesResults = await client.query(`
     WITH dates AS
-    (SELECT "date".*, project."name" AS project_name, project.ensemble_name, project.'backgroundColor' AS "backgroundColor", project.color AS color FROM project
+    (SELECT "date".*, project."name" AS project_name, project.ensemble_name, project.backgroundColor AS "backgroundColor", project.color AS color FROM project
         JOIN "date" ON "date".project_id = project.id)      	
         SELECT project.id, json_agg("dates".*) AS dates FROM dates
         JOIN project ON project.id=dates.project_id
@@ -278,7 +278,7 @@ router.put('/:id', async (req, res) => {
 
     await client.query(`
       UPDATE project
-      SET "name" = $1, ensemble_name = $2, description = $3, "backgroundColor" = $5, color = $6
+      SET "name" = $1, ensemble_name = $2, description = $3, backgroundColor = $5, color = $6
       WHERE id = $4
     `, [name, ensemble_name, description, req.params.id, backgroundColor, color])
 
