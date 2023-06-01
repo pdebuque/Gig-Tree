@@ -99,6 +99,7 @@ export default function DashboardProjectItem({ project, setCreateOpen, setCreate
           <IconButton
             sx={{ width: 24, height: 24, mr: 1 }}
             onClick={() => setCollapsed(!isCollapsed)}
+            aria-label='view more'
           >
             <MoreVertIcon sx={{ width: 20, height: 20 }} />
           </IconButton>
@@ -117,12 +118,14 @@ export default function DashboardProjectItem({ project, setCreateOpen, setCreate
               <IconButton
                 sx={{ width: 20, height: 20 }}
                 onClick={handleEditClick}
-
+                aria-label = "edit project"
               >
                 <EditIcon sx={{ width: 16, height: 16 }} />
               </IconButton>
-              <IconButton sx={{ width: 20, height: 20 }}
+              <IconButton 
+                sx={{ width: 20, height: 20 }}
                 onClick={handleDeleteClick}
+                aria-label = "delete project"
               >
                 <DeleteIcon sx={{ width: 16, height: 16 }} />
               </IconButton>
@@ -130,24 +133,25 @@ export default function DashboardProjectItem({ project, setCreateOpen, setCreate
 
           }
 
-          {project.owner_id !== user.id && project.accepted &&
+          {project.owner_id !== user.id &&
+
             <IconButton
               sx={{ width: 20, height: 20 }}
               onClick={handleAcceptClick}
+              aria-label={project.accepted?"turn down project":"accept project"}
             >
-              <TaskAltIcon sx={{ width: 16, height: 16 }} />
+              {/* this pattern is more accessible: the button remains the same; its contents just differ */}
+              {project.accepted ?
+                <TaskAltIcon sx={{ width: 16, height: 16 }} />
+                :
+                <RadioButtonUncheckedIcon sx={{ width: 16, height: 16 }} />
+              }
             </IconButton>}
-          {project.owner_id !== user.id && !project.accepted &&
-            <IconButton
-              sx={{ width: 20, height: 20 }}
-              onClick={handleAcceptClick}>
-              <RadioButtonUncheckedIcon sx={{ width: 16, height: 16 }} />
-            </IconButton>
-          }
 
           <IconButton
             sx={{ width: 20, height: 20 }}
             onClick={handleStarClick}
+            aria-label = {project.starred ? "un-star project": "star project"}
           >
 
             {project.starred ? <StarIcon sx={{ fill: '#F6F308', width: 16, height: 16 }} /> : <StarBorderIcon sx={{ width: 16, height: 16 }} />}
@@ -186,21 +190,21 @@ export default function DashboardProjectItem({ project, setCreateOpen, setCreate
               </Tooltip>
               {notOwner4.map(person => {
                 return (
-                <Tooltip
-                  key={person.id}
-                  PopperProps={{
-                    modifiers: [
-                      {
-                        name: "offset",
-                        options: {
-                          offset: [0, -12],
+                  <Tooltip
+                    key={person.id}
+                    PopperProps={{
+                      modifiers: [
+                        {
+                          name: "offset",
+                          options: {
+                            offset: [0, -12],
+                          },
                         },
-                      },
-                    ],
-                  }}
-                  title={`${person?.first_name} ${person?.last_name}`}>
-                <Avatar src={person?.prof_pic_path} sx={{ height: 24, width: 24 }} />
-                </Tooltip>
+                      ],
+                    }}
+                    title={`${person?.first_name} ${person?.last_name}`}>
+                    <Avatar src={person?.prof_pic_path} sx={{ height: 24, width: 24 }} />
+                  </Tooltip>
                 )
               })}
               {/* bring in avatars from all collaborators, with owner largest */}

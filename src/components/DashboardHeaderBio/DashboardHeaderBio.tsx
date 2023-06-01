@@ -3,9 +3,13 @@ import { useSelector } from 'react-redux'
 import WorkOutlineOutlinedIcon from '@mui/icons-material/WorkOutlineOutlined';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 
+
+// model
+import { RootState } from '../../redux/reducers/_root.reducer'
+
 export default function DashboardHeaderBio() {
 
-  const user = useSelector(store => store.user)
+  const user = useSelector((store: RootState) => store.user)
 
   // jobs
 

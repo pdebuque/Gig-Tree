@@ -10,8 +10,15 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 // internal - other
 import { getDate, getTime } from '../../modules/formatTimes'
 
+//model
+import {DateT} from '../../model'
 
-export default function CalendarTooltip({ eventModalOpen, setEventModalOpen, dateClicked, mousePos }) {
+// type Props = {
+//   setEventModalOpen: (boolean) => void,
+//   dateClicked: DateT
+// }
+
+const CalendarTooltip= ({ setEventModalOpen, dateClicked}) => {
 
   const navigate = useNavigate()
 
@@ -70,3 +77,5 @@ export default function CalendarTooltip({ eventModalOpen, setEventModalOpen, dat
     </Box>
   )
 }
+
+export default CalendarTooltip

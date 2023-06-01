@@ -19,11 +19,12 @@ import ProjectPage from '../pages/ProjectPage/ProjectPage'
 import './App.css';
 import { theme } from '../../theme';
 
+import {RootState} from '../../redux/reducers/_root.reducer'
 
 function App() {
 
   const dispatch = useDispatch();
-  const user = useSelector(store => store.user);
+  const user = useSelector((store: RootState) => store.user);
 
   useEffect(() => {
     console.log('fetching user from app.jsx')

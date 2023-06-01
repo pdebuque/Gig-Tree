@@ -20,7 +20,21 @@ goal: fully accessibility-enabled avatar component
 
 */
 
-export default function UserAvatar(props) {
+// model
+import {UserT} from '../../model'
+
+type Props = {
+  user: UserT,
+  height: string,
+  width: string,
+  tooltipText: string
+}
+
+type Position = {
+  x: number,
+  y: number
+}
+export default function UserAvatar(props:Props) {
 
   const {
     user,
@@ -29,14 +43,14 @@ export default function UserAvatar(props) {
     tooltipText
   } = props;
 
-  const [mousePos, setMousePos] = useState({ x: '', y: '' })
+  const [mousePos, setMousePos] = useState<Position>({ x: 0, y: 0 })
   const [modalOpen, setModalOpen] = useState(false)
 
   //* =========== avatar styling functions ===============
 
-  const getInitials = (user) => user?.first_name[0].toUpperCase() + user?.last_name[0].toUpperCase();
+  const getInitials = (user:UserT) => user.first_name[0].toUpperCase() + user.last_name[0].toUpperCase() || '??';
 
-  const stringToValue = (string) => {
+  const stringToValue = (string:string) => {
     let sumValue = 0;
     for (let i = 0; i < 4; i++) {
       sumValue += string.charCodeAt(string.length - 1) || 0
@@ -44,8 +58,8 @@ export default function UserAvatar(props) {
     return sumValue
   }
 
-  const makeRandomColor = (user) => {
-    const index = Math.floor((stringToValue(user?.username) / 500) * 16777215).toString(16);
+  const makeRandomColor = (user: UserT) => {
+    const index = Math.floor((stringToValue(user.username) / 500) * 16777215).toString(16);
     return '#' + index
   }
 
@@ -55,11 +69,9 @@ export default function UserAvatar(props) {
     bgcolor: makeRandomColor(user)
   }
 
-
-
   //* ================= modal styling functions ================
 
-  const getTransform = (position) => {
+  const getTransform = (position:Position) => {
     // mousePos: [x,y]
     // bottom right corner
     if (position.x > 1200 && position.y > 900) return 'translate(-5%,-5%)';
@@ -85,7 +97,7 @@ export default function UserAvatar(props) {
 
   //* ================== component functions =================
 
-  const handleAvatarClick = (e) => {
+  const handleAvatarClick = (e: React.MouseEvent) => {
     setMousePos({ x: e.clientX, y: e.clientY });
     console.log(mousePos)
     setModalOpen(true);

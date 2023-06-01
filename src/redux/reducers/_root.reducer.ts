@@ -27,4 +27,6 @@ const rootReducer = combineReducers({
   nextDate
 });
 
+export type RootState = ReturnType<typeof rootReducer>;
+
 export default rootReducer;

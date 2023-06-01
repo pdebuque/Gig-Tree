@@ -35,6 +35,25 @@ export default function Login() {
     }
   }
 
+  const demoLogin = (e) => {
+    e.preventDefault();
+
+    try {
+      dispatch({
+        type: 'LOGIN',
+        payload: {
+          username: 'demo',
+          password: 'password',
+        }
+      });
+
+      navigate('/dashboard')
+    } catch (error) {
+      dispatch({ type: 'LOGIN_INPUT_ERROR' })
+    }
+
+  }
+
   return (
     <Paper sx={loginStyle}>
       {errors.loginMessage && (
@@ -46,9 +65,9 @@ export default function Login() {
         component='form'
         className='login-form'
         onSubmit={login}
-        sx = {formStyle}
+        sx={formStyle}
       >
-        <Typography style={{textAlign: 'center', width: 300}} variant='h3' sx={{ mb: 2 }}>Welcome to Gig Tree</Typography>
+        <Typography style={{ textAlign: 'center', width: 300 }} variant='h3' sx={{ mb: 2 }}>Welcome to Gig Tree</Typography>
         <Box>
           <TextField
             size="small"
@@ -69,6 +88,9 @@ export default function Login() {
         <Box sx={{ mt: 2 }}>
           <Button onClick={() => navigate('/register')}>register</Button>
           <Button type='submit'>log in</Button>
+        </Box>
+        <Box>
+          <Button onClick={demoLogin}>demo (no login)</Button>
         </Box>
       </Box>
     </Paper>

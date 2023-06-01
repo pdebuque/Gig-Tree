@@ -76,11 +76,9 @@ Enter gig tree!
 
 The central functionality of this first prototype is the process of creating, editing, and deleting projects, and the development of a dashboard UI that seamlessly centralizes and organizes the user's calendar.
 
-gig tree was my capstone solo project at [Prime Digital Academy](https://www.primeacademy.io/). A deployed version can be accessed [here](https://flyby-events.herokuapp.com/).
+gig tree was my capstone solo project at [Prime Digital Academy](https://www.primeacademy.io/). A deployed version can be accessed [here](https://gig-tree.herokuapp.com/).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
 
 ### Built With
 

@@ -1,8 +1,13 @@
-import { Paper, Grid, Typography, IconButton, Modal, Box } from '@mui/material'
+// library - functions
 import { useSelector } from 'react-redux'
 import { useState } from 'react'
-import EditUserModal from '../EditUserModal/EditUserModal';
+
+// library - components
+import { Paper, Grid, Typography, IconButton, Modal, Box } from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit';
+
+// internal - components
+import EditUserModal from '../EditUserModal/EditUserModal';
 import NextEvent from '../NextEvent/NextEvent';
 import DashboardHeaderBio from '../DashboardHeaderBio/DashboardHeaderBio';
 import UserAvatar from '../../components/_Assets/UserAvatar'

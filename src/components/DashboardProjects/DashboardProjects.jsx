@@ -94,7 +94,9 @@ let projectsDisplayed = sortProjects(projects, user, sortMode);
           </IconButton>
         </Box>
         <Box>
-          <Button sx={{ textTransform: 'none', color: 'grey.700' }} endIcon={sortMode.ascending ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+          <Button 
+            sx={{ textTransform: 'none', color: 'grey.700' }} 
+            endIcon={sortMode.ascending ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
             onClick={() => {
               console.log('changing ascending')
               sortMode.ascending ?
@@ -102,6 +104,7 @@ let projectsDisplayed = sortProjects(projects, user, sortMode);
               :
               setSortMode({...sortMode, ascending: true})
             }}
+            aria-label="sort mode"
           >
             {sortMode.sortBy}
           </Button>

@@ -5,12 +5,14 @@ import { useSelector } from 'react-redux'
 
 import { getDate, getTime } from '../../modules/formatTimes'
 
-
+// model
+import { DateT } from '../../model'
+import { RootState } from '../../redux/reducers/_root.reducer'
 
 
 export default function NextEvent() {
 
-  const nextDate = useSelector(store => store.nextDate)
+  const nextDate: DateT = useSelector((store: RootState) => store.nextDate)
   const navigate = useNavigate()
 
   const {
@@ -42,7 +44,7 @@ export default function NextEvent() {
           >project page</Button>
         </Box>
       </Box>
-      <Box sx={{height: 60,  marginX: 2, mt: 1, paddingLeft: 1.5, paddingY: .5, borderRadius: 2, borderLeft: 8, bgcolor: 'grey.100', borderColor: nextDate.backgroundColor, overflow: 'hidden', }}>
+      <Box sx={{ height: 60, marginX: 2, mt: 1, paddingLeft: 1.5, paddingY: .5, borderRadius: 2, borderLeft: 8, bgcolor: 'grey.100', borderColor: nextDate.backgroundColor, overflow: 'hidden', }}>
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
 
           <Box>
@@ -59,7 +61,7 @@ export default function NextEvent() {
           </Box>
         </Box>
         <Box>
-          
+
           <Typography variant='body2'>
             {location && `at ${location}.`} {date && `${getDate(date)}: ${getTime(start)}-${getTime(end)}`}
           </Typography>

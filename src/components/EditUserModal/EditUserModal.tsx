@@ -18,15 +18,24 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { useState } from 'react';
 
-export default function EditUserModal({ setEditOpen }) {
+// model
 
-  const user = useSelector(store => store.user)
+import { RootState } from '../../redux/reducers/_root.reducer'
+
+
+type Props = {
+  setEditOpen: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+export default function EditUserModal({ setEditOpen }: Props) {
+
+  const user = useSelector((store: RootState) => store.user)
   const [newInfo, setNewInfo] = useState(user)
   const textInputs = ['first name', 'last name', 'location', 'instrument 1', 'instrument 2', 'instrument 3', 'job 1', 'job 1 location', 'job 2', 'job 2 location']
 
   const dispatch = useDispatch();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log('user info to send: ', newInfo)
     dispatch({ type: 'EDIT_USER_INFO', payload: newInfo });
@@ -56,7 +65,7 @@ export default function EditUserModal({ setEditOpen }) {
         </Grid>
         <Grid item xs={10}>
           <Stack direction='row' spacing={2}>
-            
+
           </Stack>
         </Grid>
 

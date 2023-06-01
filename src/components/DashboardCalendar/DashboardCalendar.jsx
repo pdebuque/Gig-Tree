@@ -21,6 +21,9 @@ import { Box, Typography, Modal } from '@mui/material';
 import CalendarTooltip from '../CalendarTooltip/CalendarTooltip';
 
 
+// model
+// import DateT from '../../model'
+
 // import events from '../../events';
 
 export default function DashboardCalendar() {
@@ -37,7 +40,8 @@ export default function DashboardCalendar() {
   const [dates, setDates] = useState(initialDates)
   const [eventModalOpen, setEventModalOpen] = useState(false)
   const [mousePos, setMousePos] = useState({ x: 200, y: 200 })
-  const [dateClicked, setDateClicked] = useState({})
+  const [dateClicked, setDateClicked] = useState({
+  })
 
   useEffect(() => {
     setDates(initialDates)
