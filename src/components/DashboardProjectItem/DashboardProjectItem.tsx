@@ -6,6 +6,7 @@ This component is a single project displayed within the dashboard projects sideb
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
+import { DateTime } from 'luxon'
 
 // library - components
 import { Box, Typography, Collapse, Button, IconButton, Modal, Avatar, AvatarGroup, Tooltip } from '@mui/material';
@@ -16,29 +17,42 @@ import StarBorderIcon from '@mui/icons-material/StarBorder';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import StarIcon from '@mui/icons-material/Star';
 import TaskAltIcon from '@mui/icons-material/TaskAlt';
+import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 
 // internal - components
 import DeleteProjectModal from '../DeleteProjectModal/DeleteProjectModal';
-import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 
 // internal - other
-import { listItemStyle } from '../../_style/listItemStyle.jsx'
+import { listItemStyle } from '../../_style/listItemStyle'
 import './DashboardProjectItem.css';
 import { smallModal } from '../../_style/modalStyle';
 import { placeholderText } from '../../_style/textStyle';
 
+// model
+import { RootState } from '../../redux/reducers/_root.reducer'
+import { ProjectT } from '../../model'
+
+type Props = {
+  project: ProjectT,
+  setCreateOpen: React.Dispatch<React.SetStateAction<boolean>>,
+  setCreateMode: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+type Position = {
+  x: number,
+  y: number
+}
 
 
+export default function DashboardProjectItem({ project, setCreateOpen, setCreateMode }: Props) {
 
-export default function DashboardProjectItem({ project, setCreateOpen, setCreateMode }) {
-
-  const user = useSelector(store => store.user)
+  const user = useSelector((store: RootState) => store.user)
 
   const [deleteOpen, setDeleteOpen] = useState(false)
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isCollapsed, setCollapsed] = useState(false)
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
+  const [mousePos, setMousePos] = useState<Position>({ x: 0, y: 0 })
 
   // upon clicking edit, load current project info into create project modal
   // dispatch: set the redux new project equal to project
@@ -50,7 +64,7 @@ export default function DashboardProjectItem({ project, setCreateOpen, setCreate
     setCreateOpen(true);
   }
 
-  const handleDeleteClick = (event) => {
+  const handleDeleteClick = (event: React.MouseEvent) => {
     setMousePos({ x: event.clientX, y: event.clientY })
     setDeleteOpen(true)
   }
@@ -60,18 +74,18 @@ export default function DashboardProjectItem({ project, setCreateOpen, setCreate
   }
 
   // delete onclick: confirmation modal
-  const handleStarClick = (event) => {
+  const handleStarClick = (event: React.MouseEvent) => {
     console.log('handling star click')
     if (project.starred) dispatch({ type: 'SET_PROJECT_STARRED', payload: { id: project.id, starred: false } })
     else dispatch({ type: 'SET_PROJECT_STARRED', payload: { id: project.id, starred: true } })
   }
 
-  const now = new Date()
+  const now = DateTime.now()
   project.past = now > project.last
   project.upcoming = now < project.first
   project.ongoing = now < project.last && now > project.first
 
-  const getTransform = (position) => {
+  const getTransform = (position: Position) => {
     // mousePos: [x,y]
     // bottom right corner
     if (position.x > 1200 && position.y > 900) return 'translate(-5%,-5%)';
@@ -118,14 +132,14 @@ export default function DashboardProjectItem({ project, setCreateOpen, setCreate
               <IconButton
                 sx={{ width: 20, height: 20 }}
                 onClick={handleEditClick}
-                aria-label = "edit project"
+                aria-label="edit project"
               >
                 <EditIcon sx={{ width: 16, height: 16 }} />
               </IconButton>
-              <IconButton 
+              <IconButton
                 sx={{ width: 20, height: 20 }}
                 onClick={handleDeleteClick}
-                aria-label = "delete project"
+                aria-label="delete project"
               >
                 <DeleteIcon sx={{ width: 16, height: 16 }} />
               </IconButton>
@@ -138,7 +152,7 @@ export default function DashboardProjectItem({ project, setCreateOpen, setCreate
             <IconButton
               sx={{ width: 20, height: 20 }}
               onClick={handleAcceptClick}
-              aria-label={project.accepted?"turn down project":"accept project"}
+              aria-label={project.accepted ? "turn down project" : "accept project"}
             >
               {/* this pattern is more accessible: the button remains the same; its contents just differ */}
               {project.accepted ?
@@ -151,7 +165,7 @@ export default function DashboardProjectItem({ project, setCreateOpen, setCreate
           <IconButton
             sx={{ width: 20, height: 20 }}
             onClick={handleStarClick}
-            aria-label = {project.starred ? "un-star project": "star project"}
+            aria-label={project.starred ? "un-star project" : "star project"}
           >
 
             {project.starred ? <StarIcon sx={{ fill: '#F6F308', width: 16, height: 16 }} /> : <StarBorderIcon sx={{ width: 16, height: 16 }} />}
@@ -186,7 +200,7 @@ export default function DashboardProjectItem({ project, setCreateOpen, setCreate
                 }}
                 title={`project owner: ${owner[0]?.first_name} ${owner[0]?.last_name}`}>
 
-                <Avatar src={owner[0]?.prof_pic_path} size='small' sx={{ height: 36, width: 36 }} />
+                <Avatar component= 'div' src={owner[0].prof_pic_path} sx={{ height: 36, width: 36 }} />
               </Tooltip>
               {notOwner4.map(person => {
                 return (

@@ -5,7 +5,19 @@
 import { Typography, Paper, Avatar, Box } from '@mui/material'
 import TaskAltIcon from '@mui/icons-material/TaskAlt';
 
-export default function CollaboratorItem({ collaborator, searchResults, setSearchResults, invited, setInvited, }) {
+// model
+import { UserT } from '../../model'
+
+type Props = {
+  collaborator: UserT,
+  searchResults?: UserT[],
+  setSearchResults?: React.Dispatch<React.SetStateAction<UserT[]>>,
+  invited?: UserT[],
+  setInvited?: React.Dispatch<React.SetStateAction<UserT[]>>,
+}
+
+
+const CollaboratorItem: React.FC<Props> = ({ collaborator, searchResults, setSearchResults, invited, setInvited, }) => {
 
   const collabStyle = {
     padding: 1,
@@ -17,17 +29,19 @@ export default function CollaboratorItem({ collaborator, searchResults, setSearc
   // when a collaborator is clicked, move them: if they are remove that user from the 'searchResults array' and put them in the 'invited' array
   const handleClick = () => {
     console.log('clicked collaborator');
-    if (searchResults.includes(collaborator)) {
-      setInvited([...invited, collaborator]);
-      setSearchResults([...searchResults].filter(result => result.id !== collaborator.id))
-    }
-    else {
-      setSearchResults([...searchResults, collaborator]);
-      setInvited([...invited].filter(result => result.id !== collaborator.id))
+    if (searchResults && invited && setSearchResults && setInvited) {
+      if (searchResults.includes(collaborator)) {
+        setInvited([...invited, collaborator]);
+        setSearchResults([...searchResults].filter(result => result.id !== collaborator.id))
+      }
+      else {
+        setSearchResults([...searchResults, collaborator]);
+        setInvited([...invited].filter(result => result.id !== collaborator.id))
+      }
     }
   }
 
-  const getInitials = (collaborator) => {
+  const getInitials = (collaborator: UserT) => {
     if (!collaborator.last_name && !collaborator.first_name) return '??'
     if (!collaborator.last_name) return collaborator.first_name[0].toUpperCase()
     if (!collaborator.first_name) return collaborator.last_name[0].toUpperCase()
@@ -36,7 +50,7 @@ export default function CollaboratorItem({ collaborator, searchResults, setSearc
 
   // given a username, make a random color associated with it
 
-  const stringToValue = (string) => {
+  const stringToValue = (string: string) => {
     let sumValue = 0
     for (let i = 0; i < 4; i++) {
       sumValue += string.charCodeAt(string.length - i) || 0
@@ -44,7 +58,7 @@ export default function CollaboratorItem({ collaborator, searchResults, setSearc
     return sumValue
   }
 
-  const makeRandomColor = (username) => {
+  const makeRandomColor = (username: string) => {
     const index = Math.floor((stringToValue(username) / 500) * 16777215).toString(16);
     return '#' + index
   }
@@ -64,13 +78,13 @@ export default function CollaboratorItem({ collaborator, searchResults, setSearc
         <Box sx={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'row' }}>
           <Box sx={{ marginLeft: 1 }}>
             <Typography variant='h6'>{collaborator.first_name} {collaborator.last_name}</Typography>
-            <Typography variant='body2'>{collaborator.instrument_1 || 'musician'}{collaborator.instrument_2 && `, ${collaborator.instrument_2}`}{collaborator.instrumet_3 && `, ${collaborator.instrument_3}`}</Typography>
+            <Typography variant='body2'>{collaborator.instrument_1 || 'musician'}{collaborator.instrument_2 && `, ${collaborator.instrument_2}`}{collaborator.instrument_3 && `, ${collaborator.instrument_3}`}</Typography>
           </Box>
 
           {Object.keys(collaborator)?.includes('accepted') ?
             collaborator?.accepted &&
-              <TaskAltIcon sx={{ ml: 1, width: 16, height: 16, color: "grey"}} />
-            : 
+            <TaskAltIcon sx={{ ml: 1, width: 16, height: 16, color: "grey" }} />
+            :
             null
           }
 
@@ -79,3 +93,5 @@ export default function CollaboratorItem({ collaborator, searchResults, setSearc
     </Paper>
   )
 }
+
+export default CollaboratorItem

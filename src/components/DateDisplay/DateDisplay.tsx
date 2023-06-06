@@ -4,13 +4,29 @@ import EditIcon from '@mui/icons-material/Edit';
 import { useState } from 'react';
 import { getDate, getTime } from '../../modules/formatTimes'
 
-export default function DateDisplay({ date, dates, setDates, dateTemp, setDateTemp }) {
+
+// model
+import { DateT } from '../../model'
+
+
+type Props = {
+  date: DateT,
+  dates?: DateT[],
+  setDates?: React.Dispatch<React.SetStateAction<DateT[]>>,
+  dateTemp?: DateT,
+  setDateTemp?: React.Dispatch<React.SetStateAction<DateT>>
+}
+
+export default function DateDisplay({ date, dates, setDates, dateTemp, setDateTemp }: Props) {
 
   //todo: logic for default name if not specified
   //todo: formatting
+  let handleDelete;
 
-  const handleDelete = () => {
-    setDates(dates.filter(element => element.tempId != date.tempId))
+  if (dates && setDates) {
+    handleDelete = () => {
+      setDates(dates.filter(element => element.tempId != date.tempId))
+    }
   }
 
   const handleEdit = () => {

@@ -1,7 +1,14 @@
 import { Container, Typography, Button, Box } from '@mui/material'
 import { useDispatch } from 'react-redux'
 
-export default function DeleteProjectModal({ setDeleteOpen, projectID }) {
+// model
+
+type Props = {
+  setDeleteOpen: React.Dispatch<React.SetStateAction<boolean>>,
+  projectID: number;
+}
+
+export default function DeleteProjectModal({ setDeleteOpen, projectID }: Props) {
 
   const dispatch = useDispatch();
 

@@ -12,11 +12,13 @@ import DateDisplay from '../DateDisplay/DateDisplay';
 // internal - other 
 import { greyBoxStyle } from '../../_style/greyBoxStyle'
 
-
+// model
+import { RootState } from '../../redux/reducers/_root.reducer'
+import { UserT, PieceT, DateT, } from '../../model'
 
 export default function CreateReview() {
 
-  const newProject = useSelector(store => store.newProject)
+  const newProject = useSelector((store: RootState) => store.newProject)
 
   const placeholderText = {
     color: 'grey.700',
@@ -59,11 +61,11 @@ export default function CreateReview() {
           <Box sx={greyBoxStyle}>
             {newProject.repertoire.length ?
               <Grid container spacing={1}>
-                {newProject.repertoire.map(piece => {
+                {newProject.repertoire.map((piece: PieceT) => {
                   return (
-                    <Grid item key = {piece.id} xs = {4}>
-                      <RepertoireItem piece = {piece}/>
-                      </Grid>
+                    <Grid item key={piece.id} xs={4}>
+                      <RepertoireItem piece={piece} />
+                    </Grid>
                   )
                 })}
               </Grid>
@@ -81,14 +83,14 @@ export default function CreateReview() {
         <Grid item xs={10}>
           <Box sx={greyBoxStyle}>
             {newProject.dates.length ?
-            <Grid container spacing = {1}>
-              {newProject.dates.map(date=>{
-                return(
-                  <Grid item key = {date.id} xs= {6}>
-                    <DateDisplay date = {date}/>
+              <Grid container spacing={1}>
+                {newProject.dates.map((date: DateT) => {
+                  return (
+                    <Grid item key={date.id} xs={6}>
+                      <DateDisplay date={date} />
                     </Grid>
-                )
-              })}
+                  )
+                })}
               </Grid>
               :
               <Typography variant='body1' sx={placeholderText}>
@@ -104,14 +106,14 @@ export default function CreateReview() {
         <Grid item xs={10}>
           <Box sx={greyBoxStyle}>
             {newProject.collaborators.length ?
-              <Grid container spacing = {1}>
-              {newProject.collaborators.map(collaborator=>{
-                return(
-                  <Grid item xs= {4} key = {collaborator.id}>
-                    <CollaboratorItem collaborator = {collaborator}/>
+              <Grid container spacing={1}>
+                {newProject.collaborators.map((collaborator:UserT) => {
+                  return (
+                    <Grid item xs={4} key={collaborator.id}>
+                      <CollaboratorItem collaborator={collaborator} />
                     </Grid>
-                )
-              })}
+                  )
+                })}
               </Grid>
               :
               <Typography variant='body1' sx={placeholderText}>

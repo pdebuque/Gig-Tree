@@ -1,13 +1,23 @@
 import { IconButton, Paper, Typography, Grid, Box } from '@mui/material';
 import { Delete } from '@mui/icons-material';
 
+// model
+import { PieceT, GeneralInfoT } from '../../model'
 
+type Props = {
+  piece: PieceT,
+  gridWidth?: number,
+  generalInfo?: GeneralInfoT,
+  setGeneral?: React.Dispatch<React.SetStateAction<GeneralInfoT>>
+}
 
-export default function RepertoireItem({ piece, gridWidth, generalInfo, setGeneral }) {
+const RepertoireItem: React.FC<Props> = ({ piece, gridWidth, generalInfo, setGeneral }) => {
 
   const handleDelete = () => {
     console.log('deleting this piece');
+    if (setGeneral) {
     setGeneral({ ...generalInfo, repertoire: generalInfo.repertoire.filter(el => el.tempId != piece.tempId) })
+  }
   }
 
   return (
@@ -30,3 +40,6 @@ export default function RepertoireItem({ piece, gridWidth, generalInfo, setGener
     </Grid>
   )
 }
+
+
+export default RepertoireItem;
