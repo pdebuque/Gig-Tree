@@ -6,27 +6,35 @@ it will get all of the user's project dates from the server and render a react-b
 import { useState, useCallback, useEffect } from 'react';
 
 // library - functions
-import moment from 'moment';
+import moment, {Moment} from 'moment';
+import {DateTime} from 'luxon';
 import { useSelector, useDispatch } from 'react-redux'
 import 'react-big-calendar/lib/addons/dragAndDrop/styles.css'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 
 // library - components
 import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop'
-import { luxonLocalizer } from 'react-big-calendar';
+import { momentLocalizer } from 'react-big-calendar';
 import { Calendar } from 'react-big-calendar'
 import { Box, Typography, Modal } from '@mui/material';
 
 // internal - components
 import CalendarTooltip from '../CalendarTooltip/CalendarTooltip';
 
-
 // model
+import { RootState } from '../../redux/reducers/_root.reducer'
+import { DateT } from '../../model'
+
+type Position = {
+  x: number,
+  y: number
+}
+
 // import DateT from '../../model'
 
 // import events from '../../events';
 
-export default function DashboardCalendar() {
+const DashboardCalendar = () => {
 
   const dispatch = useDispatch();
 
@@ -34,13 +42,27 @@ export default function DashboardCalendar() {
     dispatch({ type: 'GET_PROJECTS' })
   }, [])
 
-  const initialDates = useSelector(store => store.dates)
+  const initialDates = useSelector((store:RootState) => store.dates)
 
   // extract dates from projects
-  const [dates, setDates] = useState(initialDates)
-  const [eventModalOpen, setEventModalOpen] = useState(false)
-  const [mousePos, setMousePos] = useState({ x: 200, y: 200 })
-  const [dateClicked, setDateClicked] = useState({
+  const [dates, setDates] = useState<DateT[]>(initialDates)
+  const [eventModalOpen, setEventModalOpen] = useState<boolean>(false)
+  const [mousePos, setMousePos] = useState<Position>({ x: 200, y: 200 })
+  const [dateClicked, setDateClicked] = useState<DateT>({
+    id: 0,
+    name: '',
+    tempId: 0,
+    location: '',
+    date: DateTime.now(),
+    start: DateTime.now(),
+    end: DateTime.now(),
+    project_id: 0,
+    type: '',
+    notes: '',
+    project_name: '',
+    ensemble_name: '',
+    backgroundColor: '',
+    color: ''
   })
 
   useEffect(() => {
@@ -50,18 +72,25 @@ export default function DashboardCalendar() {
   const DnDCalendar = withDragAndDrop(Calendar);
   const localizer = momentLocalizer(moment);
 
+  const convertToLuxon = (date:Moment) => {
+  
+  
+  }
+
   const handleSelectEvent = useCallback(
-    (date, event) => {
+    (date:any, event:any) => {
       console.log(`selected event:`, date)
       // console.log('hello')
       setMousePos({ x: event.clientX, y: event.clientY });
 
-      setDateClicked(date);
+      // setDateClicked(date);
       setEventModalOpen(true);
     }, [])
 
 
-  const getEventStyles = (event) => {
+  const getEventStyles = (event:any) => {
+
+    console.log('getting event styles. event:', event)
 
     const style = {
       backgroundColor: event.backgroundColor,
@@ -76,7 +105,7 @@ export default function DashboardCalendar() {
     };
   }
 
-  const getTransform = (position) => {
+  const getTransform = (position:Position) => {
     // mousePos: [x,y]
     // bottom right corner
     if (position.x > 1200 && position.y > 900) return 'translate(-5%,-5%)';
@@ -136,10 +165,8 @@ export default function DashboardCalendar() {
       >
         <Box sx={calendarModalStyle}>
           <CalendarTooltip
-            eventModalOpen={eventModalOpen}
             setEventModalOpen={setEventModalOpen}
             dateClicked={dateClicked}
-            mousePos={mousePos}
           />
         </Box>
       </Modal>
@@ -147,3 +174,5 @@ export default function DashboardCalendar() {
     </Box>
   )
 }
+
+export default DashboardCalendar;
