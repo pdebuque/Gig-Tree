@@ -1,17 +1,27 @@
 import { useState } from 'react';
 
 // libraries
-import SketchPicker from 'react-color';
+import { SketchPicker } from 'react-color';
 
 // components
 import { Box } from '@mui/material'
 
-export default function ColorPicker({ generalInfo, setGeneral }) {
+// model
+import { GeneralInfoT } from '../../../model';
+
+
+type Props = {
+  generalInfo: GeneralInfoT,
+  setGeneral: React.Dispatch<React.SetStateAction<GeneralInfoT>>
+}
+
+const ColorPicker = ({ generalInfo, setGeneral }: Props) => {
 
   const [displayPicker, setDisplayPicker] = useState(false);
   // const [color, setColor]= useState(generalInfo.color)
 
-  function isTooLight(hexColor) {
+  // returns true if color is too light
+  function isTooLight(hexColor: string) {
     const hex = hexColor.replace('#', '');
     const c_r = parseInt(hex.substr(0, 2), 16);
     const c_g = parseInt(hex.substr(2, 2), 16);
@@ -20,7 +30,8 @@ export default function ColorPicker({ generalInfo, setGeneral }) {
     return brightness > 155;
   }
 
-  const handleColorChange = (color) => {
+  const handleColorChange = (color:any) => {
+    console.log(color)
     // console.log('changing color to ', color)
     setGeneral({ ...generalInfo, backgroundColor: color.hex, color: isTooLight(color.hex) ? '#212121' : '#ffffff' })
 
@@ -67,7 +78,7 @@ export default function ColorPicker({ generalInfo, setGeneral }) {
       {displayPicker ? <Box sx={styles.popover}>
         <Box sx={styles.cover} onClick={() => setDisplayPicker(false)} />
         <SketchPicker
-          sx={generalInfo.backgroundColor}
+          // sx={generalInfo.backgroundColor}
           onChange={handleColorChange}
           color={generalInfo.backgroundColor}
         />
@@ -77,3 +88,5 @@ export default function ColorPicker({ generalInfo, setGeneral }) {
   )
 
 }
+
+export default ColorPicker;

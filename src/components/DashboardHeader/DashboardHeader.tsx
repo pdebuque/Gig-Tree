@@ -10,10 +10,14 @@ import EditIcon from '@mui/icons-material/Edit';
 import EditUserModal from '../EditUserModal/EditUserModal';
 import NextEvent from '../NextEvent/NextEvent';
 import DashboardHeaderBio from '../DashboardHeaderBio/DashboardHeaderBio';
-import UserAvatar from '../../components/_Assets/UserAvatar'
+import UserAvatar from '../_Assets/UserAvatar'
+
+// model
+import { RootState } from '../../redux/reducers/_root.reducer'
+
 
 export default function DashboardHeader() {
-  const user = useSelector(store => store.user)
+  const user = useSelector((store:RootState) => store.user)
   const [editModalOpen, setEditOpen] = useState(false)
 
 
@@ -39,7 +43,7 @@ export default function DashboardHeader() {
               {/* <Grid item xs={.5}>
           </Grid> */}
               <Box sx={{ ml: 2, display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                <UserAvatar height={100} width={100} user={user} tooltipText={`${user.first_name}'s avatar`} />
+                <UserAvatar height='300' width='300' user={user} tooltipText={`${user.first_name}'s avatar`} />
 
 
                 {/* <Avatar src={user.prof_pic_path} alt={`${user.first_name}'s profile picture`} sx={{ width: 100, height: 100 }} /> */}

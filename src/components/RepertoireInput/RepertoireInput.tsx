@@ -2,14 +2,29 @@ import { TextField, Stack, IconButton } from '@mui/material';
 import { useState } from 'react'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
-export default function RepertoireItem({ setGeneral, generalInfo }) {
+// model
 
-  const [thisPiece, setThisPiece] = useState({ name: '', composer: '' })
+import { GeneralInfoT, PieceT } from '../../model';
+
+type Props = {
+  setGeneral: React.Dispatch<React.SetStateAction<GeneralInfoT>>,
+  generalInfo: GeneralInfoT
+}
+
+
+const RepertoireItem = ({ setGeneral, generalInfo }: Props) => {
+
+  const [thisPiece, setThisPiece] = useState<PieceT>({
+    id: 0,
+    name: '',
+    composer: '',
+    projectId: 0,
+  })
 
   return (
-    <Stack direction="row" spacing = {2}>
+    <Stack direction="row" spacing={2}>
       {/* {JSON.stringify(thisPiece)} */}
-    
+
       <TextField
         name='title-input'
         label='title'
@@ -27,10 +42,17 @@ export default function RepertoireItem({ setGeneral, generalInfo }) {
       {/* on clicking this button, send this piece info into the generalInfo state held locally in create general */}
       <IconButton onClick={() => {
         setGeneral({ ...generalInfo, repertoire: [...generalInfo.repertoire, thisPiece] });
-        setThisPiece({name: '', composer: ''});
+        setThisPiece({
+          id: 0,
+          name: '',
+          composer: '',
+          projectId: 0,
+        });
       }}>
         <AddCircleOutlineIcon />
       </IconButton>
     </Stack>
   )
 }
+
+export default RepertoireItem;
