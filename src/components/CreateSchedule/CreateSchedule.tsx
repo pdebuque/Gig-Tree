@@ -16,12 +16,11 @@ import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArro
 import { DateT } from '../../model'
 
 type Props = {
-  setTab: React.Dispatch<React.SetStateAction<number>>,
   dates: DateT[],
   setDates: React.Dispatch<React.SetStateAction<DateT[]>>,
 }
 
-const CreateSchedule =({ setTab, dates, setDates }:Props) =>{
+const CreateSchedule =({dates, setDates }:Props) =>{
 
   // dates is an array of objects. submitting date on the left pushes into the array, which then renders on the right hand side
 

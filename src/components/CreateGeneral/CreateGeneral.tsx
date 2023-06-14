@@ -10,8 +10,17 @@ import { Typography, Container, TextField, Stack, Grid } from '@mui/material';
 import ColorPicker from '../_Assets/ColorPicker/ColorPicker'
 import RepertoireContainer from '../RepertoireContainer/RepertoireContainer';
 
+// model
+import { RootState } from '../../redux/reducers/_root.reducer'
+import { GeneralInfoT } from '../../model'
 
-export default function CreateReview({ generalInfo, setGeneral }) {
+type Props = {
+  // setTab: React.Dispatch<React.SetStateAction<number>>,
+  generalInfo: GeneralInfoT,
+  setGeneral: React.Dispatch<React.SetStateAction<GeneralInfoT>>
+}
+
+const CreateGeneral = ({generalInfo, setGeneral }: Props) => {
 
   const dispatch = useDispatch();
 
@@ -19,7 +28,7 @@ export default function CreateReview({ generalInfo, setGeneral }) {
 
   // saga will be necessary on the last page to send the info to the server. reducer will then receive an action to clear the state
 
-  const newProject = useSelector(store => store.newProject)
+  const newProject = useSelector((store: RootState) => store.newProject)
 
 
   return (
@@ -35,16 +44,16 @@ export default function CreateReview({ generalInfo, setGeneral }) {
             <Stack direction='row' spacing={2} sx={{ display: 'flex', flexDirection: 'row', width: '100%', }}>
               <ColorPicker generalInfo={generalInfo} setGeneral={setGeneral} />
               <TextField
+                sx={{ width: '45%' }}
                 name='title-input'
-                width='45%'
                 label='project name'
                 size='small'
                 value={generalInfo.name}
                 onChange={e => setGeneral({ ...generalInfo, name: e.target.value })}
               />
               <TextField
+                sx={{ width: '45%' }}
                 name='ensemble-input'
-                width='45%'
                 label='ensemble name'
                 size='small'
                 value={generalInfo.ensemble_name}
@@ -77,3 +86,5 @@ export default function CreateReview({ generalInfo, setGeneral }) {
     </Container>
   )
 }
+
+export default CreateGeneral;

@@ -38,11 +38,18 @@ import CreateReview from '../CreateReview/CreateReview';
 // internal - other
 import './calendar.css';
 
+// model
+import { RootState } from '../../redux/reducers/_root.reducer';
 
-export default function CreateProject({ createMode, setCreateOpen }) {
+type Props = {
+  createMode: boolean,
+  setCreateOpen: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const CreateProject = ({ createMode, setCreateOpen }: Props) => {
 
   const dispatch = useDispatch();
-  const newProject = useSelector(store => store.newProject)
+  const newProject = useSelector((store: RootState) => store.newProject)
 
   useEffect(() => {
     console.log('useEffect: dispatch all users')
@@ -55,10 +62,10 @@ export default function CreateProject({ createMode, setCreateOpen }) {
   // const [newProject, setProject] = useState({});
   // const [date, setDate] = useState('');
 
-  const handleClick = (value) => {
-    console.log(value)
-    // setDate(value)
-  }
+  // const handleClick = (value) => {
+  //   console.log(value)
+  //   // setDate(value)
+  // }
 
   const handleClose = () => {
     setCreateOpen(false);
@@ -78,7 +85,7 @@ export default function CreateProject({ createMode, setCreateOpen }) {
   const steps = [{
     name: 'create-general',
     tabValue: 0,
-    tabComponent: <CreateGeneral setTab={setTab} generalInfo={generalInfo} setGeneral={setGeneral} />,
+    tabComponent: <CreateGeneral generalInfo={generalInfo} setGeneral={setGeneral} />,
     buttonText: 'save and create schedule',
     buttonFunction: () => {
       dispatch({ type: 'SET_GENERAL', payload: generalInfo })
@@ -88,7 +95,7 @@ export default function CreateProject({ createMode, setCreateOpen }) {
   {
     name: 'create-schedule',
     tabValue: 1,
-    tabComponent: <CreateSchedule setTab={setTab} dates={dates} setDates={setDates} />,
+    tabComponent: <CreateSchedule dates={dates} setDates={setDates} />,
     buttonText: 'save and invite collaborators',
     buttonFunction: () => {
       console.log('submitting dates to redux')
@@ -99,7 +106,7 @@ export default function CreateProject({ createMode, setCreateOpen }) {
   {
     name: 'create-invite',
     tabValue: 2,
-    tabComponent: <CreateInvite setTab={setTab} invited={invited} setInvited={setInvited} />,
+    tabComponent: <CreateInvite invited={invited} setInvited={setInvited} />,
     buttonText: 'save and review',
     buttonFunction: () => {
       console.log('sending collaborators to redux');
@@ -110,7 +117,7 @@ export default function CreateProject({ createMode, setCreateOpen }) {
   {
     name: 'create-review',
     tabValue: 3,
-    tabComponent: <CreateReview setTab={setTab} />,
+    tabComponent: <CreateReview />,
     buttonText: 'submit project',
     buttonFunction: () => {
       // console.log('submitting project');
@@ -137,9 +144,9 @@ export default function CreateProject({ createMode, setCreateOpen }) {
       <Box sx={{ paddingX: 3, mt: 0 }}>
 
         <Tabs
+          sx={{ size: 'small' }}
           value={tabValue}
           onChange={(e, value) => setTab(value)}
-          size='small'
           centered
         >
           <Tab label="general" />
@@ -156,7 +163,9 @@ export default function CreateProject({ createMode, setCreateOpen }) {
               {step.tabComponent}
             </Box>
             <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end' }}>
-              <Button textAlign='right' onClick={step.buttonFunction}>
+              <Button
+                sx={{ textAlign: 'right' }}
+                onClick={step.buttonFunction}>
                 {step.buttonText}
               </Button>
             </Box>
@@ -167,3 +176,5 @@ export default function CreateProject({ createMode, setCreateOpen }) {
     </Container>
   )
 }
+
+export default CreateProject

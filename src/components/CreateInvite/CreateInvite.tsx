@@ -15,14 +15,13 @@ import { RootState } from '../../redux/reducers/_root.reducer'
 import { UserT } from '../../model'
 
 type Props = {
-  setTab: React.Dispatch<React.SetStateAction<number>>,
   invited: UserT[],
   setInvited: React.Dispatch<React.SetStateAction<UserT[]>>,
 
 }
 
 
-const CreateInvite:React.FC<Props> = ({ setTab, invited, setInvited }) => {
+const CreateInvite:React.FC<Props> = ({invited, setInvited }) => {
 
   // newProject is temporary holding place for the current project
   const newProject = useSelector((store:RootState) => store.newProject);

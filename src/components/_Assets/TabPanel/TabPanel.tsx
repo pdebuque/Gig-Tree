@@ -1,6 +1,12 @@
 import { Box } from '@mui/material'
 
-export default function TabPanel({ children, value, index }) {
+type Props = {
+  children: React.ReactNode,
+  value: number,
+  index: number
+}
+
+const TabPanel = ({ children, value, index }:Props) => {
   return (
     <div
       role="tabpanel"
@@ -15,3 +21,5 @@ export default function TabPanel({ children, value, index }) {
     </div>
   );
 }
+
+export default TabPanel;

@@ -2,7 +2,15 @@ import RepertoireInput from '../RepertoireInput/RepertoireInput';
 import { Container, Grid } from '@mui/material';
 import RepertoireItem from '../RepertoireItem/RepertoireItem';
 
-export default function RepertoireContainer({ generalInfo, setGeneral }) {
+// model
+import { GeneralInfoT } from '../../model';
+
+type Props = {
+  generalInfo: GeneralInfoT,
+  setGeneral: React.Dispatch<React.SetStateAction<GeneralInfoT>>
+}
+
+const RepertoireContainer = ({ generalInfo, setGeneral }:Props) => {
 
   generalInfo?.repertoire.map((piece,i)=>{
     piece.tempId=i
@@ -22,3 +30,5 @@ export default function RepertoireContainer({ generalInfo, setGeneral }) {
     </Container>
   )
 }
+
+export default RepertoireContainer;
