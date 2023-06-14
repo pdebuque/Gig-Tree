@@ -20,7 +20,7 @@ import { useState, useCallback } from 'react'
 
 */
 
-import events from '../../events'
+import events from '../../events_'
 
 export default function DisplayProjects() {
 
