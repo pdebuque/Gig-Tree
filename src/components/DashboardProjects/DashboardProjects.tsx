@@ -24,22 +24,25 @@ import sortProjects from '../../modules/sortFunctions'
 import { largeModal } from '../../_style/modalStyle'
 import { greyBoxStyle } from '../../_style/greyBoxStyle';
 
+// model
+import { ProjectT } from '../../model'
+import { RootState } from '../../redux/reducers/_root.reducer';
 
 export default function DashboardProjects() {
 
-  const user = useSelector(store => store.user)
+  const user = useSelector((store: RootState) => store.user)
 
   // get the user's projects from the store
-  const projects = useSelector(store => store.project);
+  const projects = useSelector((store: RootState) => store.project);
 
-// for menu open/close
-  const [createOpen, setCreateOpen] = useState(false)
+  // for menu open/close
+  const [createOpen, setCreateOpen] = useState<boolean>(false)
   const dispatch = useDispatch();
 
-  const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
   const open = Boolean(anchorEl);
 
-  const openFilterMenu = (event) => {
+  const openFilterMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -72,10 +75,10 @@ export default function DashboardProjects() {
     {
       type: 'pending',
     },
-    
+
   ]
 
-let projectsDisplayed = sortProjects(projects, user, sortMode);
+  let projectsDisplayed = sortProjects(projects, user, sortMode);
 
   return (
     <Container sx={{ paddingBottom: 2, }} >
@@ -94,15 +97,15 @@ let projectsDisplayed = sortProjects(projects, user, sortMode);
           </IconButton>
         </Box>
         <Box>
-          <Button 
-            sx={{ textTransform: 'none', color: 'grey.700' }} 
+          <Button
+            sx={{ textTransform: 'none', color: 'grey.700' }}
             endIcon={sortMode.ascending ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
             onClick={() => {
               console.log('changing ascending')
               sortMode.ascending ?
-              setSortMode({ ...sortMode, ascending: false })
-              :
-              setSortMode({...sortMode, ascending: true})
+                setSortMode({ ...sortMode, ascending: false })
+                :
+                setSortMode({ ...sortMode, ascending: true })
             }}
             aria-label="sort mode"
           >
@@ -112,14 +115,14 @@ let projectsDisplayed = sortProjects(projects, user, sortMode);
           <Button
             sx={{ textTransform: 'none', color: 'grey.700' }}
             endIcon={<FilterListIcon />}
-            onClick={(e)=>{
+            onClick={(e) => {
               openFilterMenu(e)
             }}
           >
             {sortMode.filter}
           </Button>
         </Box>
-    
+
         <Menu
           anchorEl={anchorEl}
           open={open}
@@ -144,7 +147,7 @@ let projectsDisplayed = sortProjects(projects, user, sortMode);
         </Menu>
       </Box>
       <Box sx={{ ...greyBoxStyle, height: 540 }}>
-        {projectsDisplayed.map(project => {
+        {projectsDisplayed.map((project: ProjectT) => {
           return (
             <DashboardProjectItem
               key={project.id}
@@ -154,7 +157,7 @@ let projectsDisplayed = sortProjects(projects, user, sortMode);
             />
           )
         })}
-        
+
       </Box>
       <Modal
         open={createOpen}
