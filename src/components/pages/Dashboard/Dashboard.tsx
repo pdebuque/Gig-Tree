@@ -12,7 +12,7 @@ import { useEffect } from 'react';
 // react-redux
 import { useDispatch } from 'react-redux'
 
-export default function Home() {
+export default function Dashboard() {
 
   const dispatch = useDispatch()
   // const user = useSelector(store => store.user)
