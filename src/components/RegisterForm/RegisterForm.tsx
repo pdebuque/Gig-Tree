@@ -5,13 +5,16 @@ import { loginStyle, formStyle } from '../../_style/loginStyle'
 
 //todo: feedback for successful register
 
+// model
+import { RootState } from '../../redux/reducers/_root.reducer';
+
 function RegisterForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const errors = useSelector((store) => store.errors);
+  const errors = useSelector((store:RootState) => store.errors);
   const dispatch = useDispatch();
 
-  const registerUser = (event) => {
+  const registerUser = (event:React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log('registering user: ', username, password)
 

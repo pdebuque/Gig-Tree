@@ -7,7 +7,7 @@ import { PieceT, GeneralInfoT } from '../../model'
 type Props = {
   piece: PieceT,
   gridWidth?: number,
-  generalInfo: GeneralInfoT,
+  generalInfo?: GeneralInfoT,
   setGeneral?: React.Dispatch<React.SetStateAction<GeneralInfoT>>
 }
 
@@ -15,7 +15,7 @@ const RepertoireItem: React.FC<Props> = ({ piece, gridWidth, generalInfo, setGen
 
   const handleDelete = () => {
     console.log('deleting this piece');
-    if (setGeneral) {
+    if (setGeneral && generalInfo) {
     setGeneral({ ...generalInfo, repertoire: generalInfo.repertoire.filter(el => el.tempId != piece.tempId) })
   }
   }

@@ -8,6 +8,10 @@ import { largeModal } from '../../../_style/modalStyle'
 import CreateProject from '../../CreateProject/CreateProject'
 import EditIcon from '@mui/icons-material/Edit'
 
+//model
+import { RootState } from '../../../redux/reducers/_root.reducer';
+
+
 export default function ProjectPage() {
 
   const { projectId } = useParams()
@@ -20,8 +24,8 @@ export default function ProjectPage() {
 
   const [createOpen, setCreateOpen] = useState(false);
   const [createMode, setCreateMode] = useState(false);
-  const project = useSelector(store => store.currentProject);
-  const user = useSelector(store => store.user)
+  const project = useSelector((store:RootState) => store.currentProject);
+  const user = useSelector((store:RootState) => store.user)
 
   const handleClickEdit = () => {
     setCreateOpen(true);
@@ -38,7 +42,7 @@ export default function ProjectPage() {
             <Typography variant='h4'>
               {project.name}
             </Typography>
-            <Typography variant='body'>
+            <Typography variant='body1'>
               {project.ensemble_name}
             </Typography>
           </Box>

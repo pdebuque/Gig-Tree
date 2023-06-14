@@ -5,12 +5,16 @@ import { Grid, Typography, Stack, Paper, } from '@mui/material'
 import RepertoireItem from '../RepertoireItem/RepertoireItem'
 
 
+// model
+import { RootState } from '../../redux/reducers/_root.reducer';
+import { PieceT } from '../../model';
+
 export default function ProjectPageGeneral() {
 
-  const user = useSelector (store=>store.user)
-  const project = useSelector(store => store.currentProject)
-  const [createOpen, setCreateOpen] = useState(false)
-  const [createMode, setCreateMode] = useState(false)
+  const user = useSelector ((store:RootState)=>store.user)
+  const project = useSelector((store:RootState) => store.currentProject)
+  // const [createOpen, setCreateOpen] = useState(false)
+  // const [createMode, setCreateMode] = useState(false)
 
   return (
     <Paper sx={{ p: 2, marginTop: 0, height: 600}}>
@@ -38,9 +42,12 @@ export default function ProjectPageGeneral() {
       </Stack>
       <Grid container spacing = {1} sx = {{ marginTop: 1, borderRadius: 2, padding: 1, bgcolor: 'grey.100', overflow: 'hidden', maxHeight: 360, overflowY: 'scroll'}}>
         {!project.repertoire.length && 
-        <RepertoireItem piece = {{name: 'no piece', composer: 'no composer'}} gridWidth = {12}/>
+        <RepertoireItem 
+        piece = {{id: 0, name: 'no piece', composer: 'no composer', projectId: 0}} 
+        gridWidth = {12}
+        />
         }
-        {project.repertoire.map(piece => {
+        {project.repertoire.map((piece:PieceT) => {
           return (
             <RepertoireItem piece={piece} gridWidth = {6} />
           )

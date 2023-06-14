@@ -3,9 +3,12 @@ import { loginStyle, formStyle, } from '../../../_style/loginStyle';
 
 import { useNavigate } from 'react-router-dom'
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+
+// model
+import { RootState } from '../../../redux/reducers/_root.reducer';
 
 export default function Login() {
 
@@ -13,10 +16,10 @@ export default function Login() {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const errors = useSelector(store => store.errors);
+  const errors = useSelector((store:RootState) => store.errors);
   const dispatch = useDispatch();
 
-  const login = (e) => {
+  const login = (e:React.FormEvent<HTMLFormElement>) => {
     console.log('logging in user: ', username)
     e.preventDefault();
 
@@ -35,7 +38,7 @@ export default function Login() {
     }
   }
 
-  const demoLogin = (e) => {
+  const demoLogin = (e:React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     try {

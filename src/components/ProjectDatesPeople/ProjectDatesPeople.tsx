@@ -5,9 +5,13 @@ import { useState } from 'react'
 import ProjectPageDates from '../ProjectPageDates/ProjectPageDates';
 import ProjectPagePeople from '../ProjectPagePeople/ProjectPagePeople'
 
+// model
+// import { RootState } from '../../redux/reducers/_root.reducer';
+
+
 export default function ProjectDatesPeople() {
 
-  const project = useSelector(store => store.currentProject)
+  // const project = useSelector((store:RootState) => store.currentProject)
 
   const [tabValue, setTab] = useState(0)
 
@@ -16,9 +20,9 @@ export default function ProjectDatesPeople() {
       <Box sx={{ paddingX: 3, mt: 0 }}>
 
         <Tabs
+          sx = {{size: 'small'}}
           value={tabValue}
           onChange={(e, value) => setTab(value)}
-          size='small'
           centered
         >
           <Tab label="dates" />

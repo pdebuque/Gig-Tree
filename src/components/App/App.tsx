@@ -11,7 +11,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import Nav from '../Nav/Nav';
 import LoginPage from '../pages/LoginPage/LoginPage';
 import About from '../pages/About/About';
-import Dashboard from '../pages/Dashboard/Dashboard.jsx';
+import Dashboard from '../pages/Dashboard/Dashboard';
 import Register from '../Register/Register';
 import ProjectPage from '../pages/ProjectPage/ProjectPage'
 
