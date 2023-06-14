@@ -14,12 +14,12 @@ import { getDate, getTime } from '../../modules/formatTimes'
 //model
 import {DateT} from '../../model'
 
-// type Props = {
-//   setEventModalOpen: (boolean) => void,
-//   dateClicked: DateT
-// }
+type Props = {
+  setEventModalOpen: React.Dispatch<React.SetStateAction<boolean>>,
+  dateClicked: DateT
+}
 
-const CalendarTooltip= ({ setEventModalOpen, dateClicked}) => {
+const CalendarTooltip = ({ setEventModalOpen, dateClicked}:Props) => {
 
   const navigate = useNavigate()
 
@@ -54,12 +54,12 @@ const CalendarTooltip= ({ setEventModalOpen, dateClicked}) => {
           }
         </Box>
         <IconButton sx={{ paddingTop: 0 }} onClick={() => setEventModalOpen(false)}>
-          <CloseIcon color={dateClicked.backgroundColor} />
+          <CloseIcon sx = {{color:dateClicked.backgroundColor}} />
         </IconButton>
       </Box>
       <Box sx={{ marginLeft: .5 }}>
         <Typography variant='body2'>
-          {location && `at ${location}.`} <br/>{getDate(date)}: {getTime(start)}-{getTime(end)}
+          {location && `at ${location}.`} <br/>{date.toFormat('MMMM dd, yyyy')}: {start.toFormat('HH:mm')}-{end.toFormat('HH:mm')}
         </Typography>
       </Box>
       <Box sx={{ display: 'flex', justifyContent: 'flex-end', marginTop: .5 }}>

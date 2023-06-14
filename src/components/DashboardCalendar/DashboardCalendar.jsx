@@ -13,7 +13,7 @@ import 'react-big-calendar/lib/css/react-big-calendar.css'
 
 // library - components
 import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop'
-import { momentLocalizer } from 'react-big-calendar';
+import { luxonLocalizer } from 'react-big-calendar';
 import { Calendar } from 'react-big-calendar'
 import { Box, Typography, Modal } from '@mui/material';
 
@@ -52,7 +52,7 @@ export default function DashboardCalendar() {
 
   const handleSelectEvent = useCallback(
     (date, event) => {
-      console.log(`selected event: clientX: ${event.clientX}, clientY: ${event.clientY}`)
+      console.log(`selected event:`, date)
       // console.log('hello')
       setMousePos({ x: event.clientX, y: event.clientY });
 

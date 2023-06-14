@@ -2,6 +2,8 @@ import { Button, Typography, Container, Grid, Paper, Stack, Box } from '@mui/mat
 import { useState } from 'react'
 import {DateTime} from 'luxon'
 
+import {grey} from '@mui/material/colors'
+
 // internal - components
 import DateInput from '../DateInput/DateInput'
 import DateDisplay from '../DateDisplay/DateDisplay';
@@ -9,7 +11,17 @@ import DateDisplay from '../DateDisplay/DateDisplay';
 import { largeBoxStyle } from '../../_style/greyBoxStyle';
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 
-export default function CreateSchedule({ setTab, dates, setDates }) {
+// model
+
+import { DateT } from '../../model'
+
+type Props = {
+  setTab: React.Dispatch<React.SetStateAction<number>>,
+  dates: DateT[],
+  setDates: React.Dispatch<React.SetStateAction<DateT[]>>,
+}
+
+const CreateSchedule =({ setTab, dates, setDates }:Props) =>{
 
   // dates is an array of objects. submitting date on the left pushes into the array, which then renders on the right hand side
 
@@ -19,18 +31,23 @@ export default function CreateSchedule({ setTab, dates, setDates }) {
 
   // temporary date holding place for inputs
   const [dateTemp, setDateTemp] =
-    useState({
-      tempID: null,
+    useState<DateT>({
+      id: 0,
       name: '',
+      tempId: 0,
+      location: '',
       date: DateTime.now(),
       start: DateTime.now(),
       end: DateTime.now(),
-      location: '',
+      project_id: 0,
       type: '',
       notes: '',
+      project_name: '',
+      ensemble_name: '',
+      backgroundColor:'',
+      color: ''
     })
 
-  
   
   return (
     <Container>
@@ -47,8 +64,8 @@ export default function CreateSchedule({ setTab, dates, setDates }) {
           </Grid>
           <Grid item xs={1}>
             <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
-              <KeyboardDoubleArrowRightIcon color='grey.800' />
-              <KeyboardDoubleArrowRightIcon color='grey.800' />
+              <KeyboardDoubleArrowRightIcon sx = {{color: grey[600]}} />
+              <KeyboardDoubleArrowRightIcon sx = {{color: grey[600]}} />
             </Box>
           </Grid>
           <Grid item xs={6} sx={{ ...largeBoxStyle, height: 450, paddingTop: 10 }}>
@@ -67,3 +84,5 @@ export default function CreateSchedule({ setTab, dates, setDates }) {
     </Container>
   )
 }
+
+export default CreateSchedule
