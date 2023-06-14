@@ -64,7 +64,7 @@ export default function CreateReview() {
                 {newProject.repertoire.map((piece: PieceT) => {
                   return (
                     <Grid item key={piece.id} xs={4}>
-                      <RepertoireItem piece={piece} />
+                      <RepertoireItem piece={piece} generalInfo= {{name: '', ensemble_name: '', description:'', repertoire: [], backgroundColor:'', color: ''}} />
                     </Grid>
                   )
                 })}

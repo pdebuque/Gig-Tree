@@ -2,7 +2,7 @@ import { Paper, Container, Typography, IconButton, Box } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { useState } from 'react';
-import { getDate, getTime } from '../../modules/formatTimes'
+// import { getDate, getTime } from '../../modules/formatTimes'
 
 
 // model
@@ -36,6 +36,10 @@ export default function DateDisplay({ date, dates, setDates, dateTemp, setDateTe
 
   const [editMode, setEditMode] = useState(false);
 
+  // const dateString = date.date.toString();
+  // const startString = date.start.toString();
+  // const endString = date.end.toString();
+
   return (
     <Container>
       {/* {JSON.stringify(date)} */}
@@ -54,7 +58,7 @@ export default function DateDisplay({ date, dates, setDates, dateTemp, setDateTe
               </IconButton>
             </Box>}
         </Box>
-        <Typography variant='body1'>{getDate(date.date)}: {getTime(date.start)}-{getTime(date.end)}</Typography>
+        <Typography variant='body1'>{date.date.toFormat('MMMM dd, yyyy')}: {date.start.toFormat('HH:mm')}-{date.end.toFormat('HH:mm')}</Typography>
         <Typography variant='body2'>{date.notes}</Typography>
       </Paper>
     </Container>

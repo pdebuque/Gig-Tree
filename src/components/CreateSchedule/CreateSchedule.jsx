@@ -1,6 +1,6 @@
 import { Button, Typography, Container, Grid, Paper, Stack, Box } from '@mui/material'
 import { useState } from 'react'
-
+import {DateTime} from 'luxon'
 
 // internal - components
 import DateInput from '../DateInput/DateInput'
@@ -22,9 +22,9 @@ export default function CreateSchedule({ setTab, dates, setDates }) {
     useState({
       tempID: null,
       name: '',
-      date: new Date(),
-      start: new Date(),
-      end: new Date(),
+      date: DateTime.now(),
+      start: DateTime.now(),
+      end: DateTime.now(),
       location: '',
       type: '',
       notes: '',

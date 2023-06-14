@@ -2,6 +2,7 @@ import { Box, Typography, Button } from '@mui/material'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux'
+import {DateTime } from 'luxon'
 
 import { getDate, getTime } from '../../modules/formatTimes'
 
@@ -63,7 +64,7 @@ export default function NextEvent() {
         <Box>
 
           <Typography variant='body2'>
-            {location && `at ${location}.`} {date && `${getDate(date)}: ${getTime(start)}-${getTime(end)}`}
+            {location && `at ${location}.`} {date && `${date.toFormat('MMMM dd, yyyy')}: ${start.toFormat('HH:mm')}-${end.toFormat('HH:mm')}`}
           </Typography>
         </Box>
       </Box>
