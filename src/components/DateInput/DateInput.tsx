@@ -1,13 +1,27 @@
 import { Container, TextField, Button, Stack, FormControl, Select, InputLabel, MenuItem } from '@mui/material'
 
-import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
+import { AdapterLuxon } from '@mui/x-date-pickers/AdapterLuxon';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 
 import { convertTime } from '../../modules/convertTime'
 
-export default function DateInput({ dates, setDates, dateTemp, setDateTemp }) {
+import {DateTime} from 'luxon'
+
+// model
+
+import { DateT } from '../../model'
+
+
+type Props = {
+  dates: DateT[],
+  setDates: React.Dispatch<React.SetStateAction<DateT[]>>,
+  dateTemp: DateT,
+  setDateTemp: React.Dispatch<React.SetStateAction<DateT>>
+}
+
+const DateInput: React.FC<Props> = ({ dates, setDates, dateTemp, setDateTemp }) => {
 
   /* 
   three sources of state:
@@ -22,15 +36,6 @@ export default function DateInput({ dates, setDates, dateTemp, setDateTemp }) {
   // dateTemp is local staging area (only in this component). it holds dates as objects for proper MUI usage.
   // 
 
-  // little function for pre-setting end date
-  // const setTwoHoursLater = (date) => {
-  //   const twoHoursInMillis = 1000 * 60 * 120
-  //   const newDate = new Date();
-  //   newDate.setTime(date.getTime())
-  //   newDate.setTime(newDate.getTime() + twoHoursInMillis)
-  //   return newDate
-  // }
-
   // const [dateTemp, setDateTemp] =
   //   useState({
   //     tempID: null,
@@ -43,7 +48,7 @@ export default function DateInput({ dates, setDates, dateTemp, setDateTemp }) {
   //     notes: '',
   //   })
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e:React.FormEvent<HTMLFormElement>) => {
 
     // submit moves the date info from the very local staging area (dateTemp) to the dates staging area, dates. This will be pushed to newProject when user clicks save and invite button.
 
@@ -54,21 +59,29 @@ export default function DateInput({ dates, setDates, dateTemp, setDateTemp }) {
     console.log('adding date info to array: ', dateTemp)
     const dateFormatted = {
       ...dateTemp,
-      date: dateTemp.date.toLocaleString(),
-      start: dateTemp.start.toLocaleString(),
-      end: dateTemp.end.toLocaleString()
+      date: dateTemp.date,
+      start: dateTemp.start,
+      end: dateTemp.end
     }
     setDates([...dates, dateFormatted])
+    // reset dateTemp to empty
     setDateTemp({
-      tempID: null,
+      id: 0,
+      tempId: 0,
       name: '',
-      date: new Date(),
-      start: new Date(),
-      end: new Date(),
       location: '',
+      date: DateTime.now(),
+      start: DateTime.now(),
+      end: DateTime.now(),
+      project_id: 0,
       type: '',
       notes: '',
+      project_name: '',
+      ensemble_name:'',
+      backgroundColor: "",
+      color: '',
     })
+    
   }
 
   // hold time info here: helps input fields, need a repository before converting them to data usable by calendar
@@ -89,13 +102,13 @@ export default function DateInput({ dates, setDates, dateTemp, setDateTemp }) {
           onChange={e => { setDateTemp({ ...dateTemp, name: e.target.value }) }}
         />
 
-        <LocalizationProvider dateAdapter={AdapterMoment} >
+        <LocalizationProvider dateAdapter={AdapterLuxon} >
           <DatePicker
-            name='date-input'
+            // name='date-input'
             label='date'
             value={dateTemp.date || null}
             onChange={value => {
-              if (value) setDateTemp({ ...dateTemp, date: value._d })
+              if (value) setDateTemp({ ...dateTemp, date: value })
             }}
             renderInput={(params) => <TextField size='small' {...params} />}
           />
@@ -108,13 +121,13 @@ export default function DateInput({ dates, setDates, dateTemp, setDateTemp }) {
               if (value) {
                 setDateTemp({
                   ...dateTemp,
-                  start: convertTime(dateTemp.date, value._d)
-                })
+                  start: value})
+                }
                 // setDateTemp({
                 //   ...dateTemp,
                 //   end: setTwoHoursLater(dateTemp.start)
                 // })
-              }
+              
             }}
             renderInput={(params) => <TextField size='small' {...params} />}
           />
@@ -123,7 +136,7 @@ export default function DateInput({ dates, setDates, dateTemp, setDateTemp }) {
             label="end"
             value={dateTemp.end || null}
             onChange={value => {
-              if (value) setDateTemp({ ...dateTemp, end: convertTime(dateTemp.date, value._d) })
+              if (value) setDateTemp({ ...dateTemp, end: value })
             }}
             renderInput={(params) => <TextField size='small' {...params} />}
           />
@@ -165,3 +178,5 @@ export default function DateInput({ dates, setDates, dateTemp, setDateTemp }) {
     </Container>
   )
 }
+
+export default DateInput

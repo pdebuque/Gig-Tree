@@ -10,10 +10,22 @@ import SearchIcon from '@mui/icons-material/Search';
 // internal - components
 import CollaboratorItem from '../CollaboratorItem/CollaboratorItem';
 
-export default function CreateInvite({ setTab, invited, setInvited }) {
+// model
+import { RootState } from '../../redux/reducers/_root.reducer'
+import { UserT } from '../../model'
+
+type Props = {
+  setTab: React.Dispatch<React.SetStateAction<number>>,
+  invited: UserT[],
+  setInvited: React.Dispatch<React.SetStateAction<UserT[]>>,
+
+}
+
+
+const CreateInvite:React.FC<Props> = ({ setTab, invited, setInvited }) => {
 
   // newProject is temporary holding place for the current project
-  const newProject = useSelector(store => store.newProject);
+  const newProject = useSelector((store:RootState) => store.newProject);
 
   const invitedIds = invited.map(user => user.id)
   // console.log('invited ids: ', invitedIds)
@@ -22,25 +34,25 @@ export default function CreateInvite({ setTab, invited, setInvited }) {
   //! invited: all users already invited to the project
 
   //! available users is all users who have not been invited
-  const availableUsers = useSelector(store => store.allUsers).filter(user => !invitedIds.includes(user.id))
+  const availableUsers = useSelector((store:RootState) => store.allUsers).filter((user:UserT) => !invitedIds.includes(user.id))
 
   //! searchResults is available users filtered by the search term (see filter())
-  const [searchResults, setSearchResults] = useState(availableUsers);
+  const [searchResults, setSearchResults] = useState<UserT[]>(availableUsers);
   // console.log('search results: ', searchResults)
   // console.log('allUsers: ', useSelector(store => store.allUsers))
 
   //! search term is harvested from search field
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState<string>('');
 
   // execute filter whenever the search term changes
   useEffect(() => {
     filter(searchTerm)
   }, [searchTerm])
 
-  const filter = (searchTerm) => {
+  const filter = (searchTerm:string) => {
     // console.log('filtering results by term: ', searchTerm)
 
-    setSearchResults(availableUsers.filter(collaborator => {
+    setSearchResults(availableUsers.filter((collaborator:UserT) => {
       const searchLC = searchTerm.toLowerCase()
 
       const searchInfo = [
@@ -67,7 +79,7 @@ export default function CreateInvite({ setTab, invited, setInvited }) {
   }
 
   return (
-    <Box disableGutters>
+    <Box>
       <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginBottom: 2 }}>
         <Grid container spacing={1}>
           <Grid item xs={8}>
@@ -137,3 +149,5 @@ export default function CreateInvite({ setTab, invited, setInvited }) {
     </Box>
   )
 }
+
+export default CreateInvite

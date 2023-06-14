@@ -39,7 +39,7 @@ export type ProjectT = {
 }
 
 export type DateT = {
-  id: number;
+  id?: number;
   name: string;
   tempId?: number;
   location: string;

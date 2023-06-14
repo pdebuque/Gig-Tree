@@ -7,7 +7,7 @@ import { PieceT, GeneralInfoT } from '../../model'
 type Props = {
   piece: PieceT,
   gridWidth?: number,
-  generalInfo?: GeneralInfoT,
+  generalInfo: GeneralInfoT,
   setGeneral?: React.Dispatch<React.SetStateAction<GeneralInfoT>>
 }
 
